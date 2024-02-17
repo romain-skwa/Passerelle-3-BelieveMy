@@ -1,6 +1,7 @@
 import CoDeco from "./pages/CoDeco";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
+import Zut from "./pages/gdfg";
 import Inscription from "./pages/Inscription";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([// va nous retourner un routeur
       {
         path: "/inscription",
         element: <Inscription />
+      },
+      {
+        path: "/gdfg",
+        element: <Zut />
       },
     ]
   },

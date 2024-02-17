@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 
-export default function Inscription(){
-
+export default function Zut(){
+ 
     // Les refs
     const email = useRef("");
     const password = useRef("");
