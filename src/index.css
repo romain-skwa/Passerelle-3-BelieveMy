@@ -1,6 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .codeco{
     border: 1px red solid;
     display: flex;
     justify-content: space-between;
     margin: 0 2rem;
+}
+.tweetFrame{
+    background-color: aquamarine;
+    width: 40vw;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+.contentTweet{
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 10px;
+    background-color: antiquewhite;
+}
+.authorTweet{
+    border: 1px red solid;
+    display: flex;
+    justify-content: end;
+}
+.formulaire{
+    width: 30vw;
+    background-color: antiquewhite;
+    margin: 0 auto;
+}
+.prochain{
+    background-color: burlywood;
 }
