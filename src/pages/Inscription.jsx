@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { toast } from "react-toastify";
 
 export default function Home() {
+  // Variables
+
   // States
   const {
     register,
@@ -14,7 +17,7 @@ export default function Home() {
   // register sert enregistrer le champ du formulaire
   // handleSubmit sert à envoyer le contenu du formulaire
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
 /*
   Dans create..., on utilise l'argument auth, puis l'email, puis le mot de passe. Firebase va créer notre utilisateur.
   Ensuite, userCredential va récupérer le fait que l'utilisateur est bien connecté.
@@ -28,12 +31,15 @@ export default function Home() {
     await createUserWithEmailAndPassword(auth, data.email, data.password).then(
       (userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         setLoading(false);
+        navigate("/?success=true");// Quand l'utilisateur a bien été inscrit.
       })
       .catch(error => {
-        const {errorCode, errorMessage} = error;
-        console.log(errorCode, errorMessage);
+        const { code, message} = error;
+        if(code == "auth/email-already-in-use"){
+          toast.error("Cet email est utilisé.")
+        }
+        else{toast.error(message);}        
         setLoading(false);
       })
     ;
@@ -94,5 +100,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  );
+  )
 }

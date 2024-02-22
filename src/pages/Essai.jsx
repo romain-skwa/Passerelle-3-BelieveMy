@@ -15,7 +15,8 @@ export default function Home() {
   // handleSubmit sert à envoyer le contenu du formulaire
   const [loading, setLoading] = useState(false);
 
-  /* Dans create..., on utilise l'argument auth, puis l'email, puis le mot de passe. Firebase va créer notre utilisateur.
+/*
+  Dans create..., on utilise l'argument auth, puis l'email, puis le mot de passe. Firebase va créer notre utilisateur.
   Ensuite, userCredential va récupérer le fait que l'utilisateur est bien connecté.
   Dans user, on stocke l'utilisateur.
 */

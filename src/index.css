@@ -33,3 +33,8 @@
 .prochain{
     background-color: burlywood;
 }
+.centrons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
