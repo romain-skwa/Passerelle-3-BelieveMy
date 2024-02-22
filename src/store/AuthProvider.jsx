@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 
@@ -15,9 +15,21 @@ const AuthProvider = ({children}) => {
         })
     }, [])
 
+    // Function
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    };
+
+    const loginUser = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+
     const authValue = {
         user,
         loading,
+        logOut,// pour déconnecter notre utilisateur de n'importe où
+        loginUser,
     }
     // On retourne authContext. Il faut utiliser une valeur qui pourra être utiliser dans children
     return <AuthContext.Provider value={authValue}>
