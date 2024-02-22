@@ -1,26 +1,14 @@
-import { useRef, useState } from "react";
-import { AffichageTweet } from "../components/Tweet";
+import { useRef} from "react";
 
 
 export default function FormWriteTweet() {
-  // StateFormulaire
-  const [newTweetTitle, setNewTweetTitle] = useState("On est censé avoir le nouveau titre");
-  const [newTweetContent, setNewTweetContent] = useState("On est censé avoir le nouveau contenu du tweet");
-  const [newAuthorTweet, setNewAuthorTweet] = useState("Nom de l'auteur du tweet")
 
   // Variables
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
   const inputNewAuthorTweet = useRef();
   
-  // Fonction 
-    
-    const showNewTweet =  () => {
-    console.log(inputNewTweetTitle.current.value,inputNewTweetContent.current.value)
-    setNewTweetTitle(inputNewTweetTitle.current.value);
-    setNewTweetContent(inputNewTweetContent.current.value);
-    setNewAuthorTweet(inputNewAuthorTweet.current.value);
-    }
+
     
 
   // Création nouveau tweet

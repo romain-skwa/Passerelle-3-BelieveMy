@@ -70,7 +70,7 @@ export default function Inscription() {
           className="input-inscription"
           ref={password}
         />
-        <button disabled={loading}>S&apos;inscrire</button>
+        <button>S&apos;inscrire</button>
         <div>
           <div>
             <Link to="/codeco">Déjà un compte ?</Link>

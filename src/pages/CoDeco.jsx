@@ -4,11 +4,7 @@ import { useForm } from "react-hook-form";
 
 export default function CoDeco() {
   // Variables
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const {    register,    handleSubmit,    formState: { errors },  } = useForm();
 
   // Function
   const boxData = (data) => {
@@ -25,34 +21,32 @@ export default function CoDeco() {
         <input
           type="email"
           placeholder="Adresse e-mail"
-          className="input-inscription"
           {...register("email", {
             required: true,
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "Renseignez une adresse email valide.",
+              message: "Renseignez une adresse email valide. Il y a un problème",
             },
           })}
         />
         {errors.email && (
-          <p className="text-red-400 mb-10">{errors.email.message}</p>
+          <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>{errors.email.message}</p>
         )}
 
         <input
           type="password"
           placeholder="Mot de passe"
-          className="input-inscription"
           {...register("password", {
             required: true,
             minLength: {
-              value: 8,
-              message: "Le mot de passe doit contenir au moins 8 caractères.",
+              value: 5,
+              message: "Le mot de passe doit contenir au moins 5 caractères.",
             },
           })}
         />
 
-        {errors.email && (
-          <p className="text-red-400 mb-10">{errors.email.message}</p>
+        {errors.password && (
+          <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>{errors.password.message}</p>
         )}
         <button>Se connecter</button>
 
