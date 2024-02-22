@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 export default function CoDeco() {
   // Variables
-  const {    register,    handleSubmit,    formState: { errors },  } = useForm();
+  const { register, handleSubmit, formState: { errors },} = useForm();
 
   // Function
   const boxData = (data) => {
