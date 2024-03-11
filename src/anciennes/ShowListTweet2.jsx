@@ -13,7 +13,7 @@ export default function ListTweet(){
         setLoading(true);
         toast("Chargement...");
 
-        const donneesRecueillies = await fetch(
+        const voyons = await fetch(
             `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json`,
             {
                 method: "GET",
@@ -23,33 +23,23 @@ export default function ListTweet(){
               }
             );
 
-        if(!donneesRecueillies.ok) {
+        if(!voyons.ok) {
             toast.error("Une erreur est survenue");
             }
 
 
-        const donnees = await donneesRecueillies.json();
-        console.log("Les données recueillies devraient être affichées en dessous ", donnees);
-        //const donneesTransformees = Object.values(donnees);
-        const donneesTransformees = [];
-        for (const key in donnees ) {
-          const newTweet = {
-            id: key,
-            ...donnees[key],
-          }
-          donneesTransformees.push(newTweet);
-        }
-        console.log( "donnees transformees : ",  donneesTransformees);
-        
+        const donnéesRecueillies = await voyons.json();
+        console.log("Les données recueillies devraient être affichées en dessous");
+        console.log(donnéesRecueillies);
        // const tmp = Object.values(donnéesRecueillies);
        // console.log("tmp = ", tmp);
        // setListeTweet(Object.values(donnéesRecueillies));
         // Object.values sert à transformer les objets en tableaux.
 
-        // Les détails
-        const promises = donneesTransformees.map(async (tweetAAficher) => {
+        // Pour chaque pokémon, récupérer les détails
+    const promises = donnéesRecueillies.results.map(async (tweetAAficher) => {
         const otherResponse = await fetch(
-          `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweetAAficher.id}.json`,
+          `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweetAAficher.name}`,
           {
             method: "GET",
             headers: {
@@ -61,7 +51,6 @@ export default function ListTweet(){
       });
   
       const tweetData = await Promise.all(promises);
-      console.log("tweetData : ", tweetData);
       setListeTweet([...tweetData]);
         setLoading(false);
     }
@@ -85,7 +74,6 @@ export default function ListTweet(){
                     <li key={tweet.title}>{tweet.title}</li>
                 ))}
             </ul>
-
 
                 {listeTweet && listeTweet.map((tweet) => (
                     <div key={tweet.title} className="cadreTweet">

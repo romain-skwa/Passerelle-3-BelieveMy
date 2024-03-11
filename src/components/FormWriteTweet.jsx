@@ -34,6 +34,8 @@ export default function FormWriteTweet() {
       if(!response.ok) {
         return  "Une erreur est survenue. Impossible d'afficher la base de données.";        
     }
+    const {name: idRandom} = await response.json();
+    console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
 }
 
 

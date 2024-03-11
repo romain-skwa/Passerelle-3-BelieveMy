@@ -1,8 +1,9 @@
 import Title from "../components/Title";
 import FormWriteTweet from "../components/FormWriteTweet";
-import ShowListTweet from "../components/ShowListTweet";
+import ListTweet from "../components/ShowListTweet";
 import { CoDecoLink } from "../components/NavBar";
 import { SayHello } from "../components/Hello";
+import ImageUploader from '../components/ImageUploader';
 
 function Home() {
   return (
@@ -11,7 +12,9 @@ function Home() {
       <CoDecoLink />
       <SayHello />
       <FormWriteTweet />
-      <ShowListTweet />
+      <ListTweet />
+      {/*<ImageUploader />*/}
+
     </div>
   );
 }

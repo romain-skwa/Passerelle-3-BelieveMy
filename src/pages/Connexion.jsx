@@ -35,6 +35,9 @@ export default function CoDeco() {
       if(code == "auth/user-not-found"){
         toast.error("Cet email n'existe pas dans notre base de données.")
       }
+      else if(code == "auth/invalid-credential"){
+        toast.error("Cet email est incorrect.")
+      }
       else{toast.error(message);}        
       setLoading(false);
     })

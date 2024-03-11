@@ -38,3 +38,21 @@
     justify-content: center;
     align-items: center;
 }
+/*************************** ShowListTweet ****************************************/
+.affichageListeTweet{
+    width: 30vw;
+    margin: 0 auto;
+    border: 1px red solid;
+}
+.cadreTweet{
+    width: 30vw;
+    min-height: 100px;
+    background-color: bisque;
+    box-sizing: border-box;
+    margin: 15px 0;
+    padding: 10px;
+}
+.cadreTweetContent{
+    border: grey 1px dashed;
+    margin: 12px 0;
+}
