@@ -28,7 +28,7 @@ export default function Home() {
     if (loading) return;
     setLoading(true);
 
-    await createUserWithEmailAndPassword(auth, data.email, data.password).then(
+    await createUserWithEmailAndPassword(auth, data.email, data.password, data.name).then(
       (userCredential) => {
         const user = userCredential.user;
         setLoading(false);
@@ -71,6 +71,7 @@ export default function Home() {
                 {errors.email.message}
               </p>
             )}
+
             <input
               type="password"
               placeholder="Mot de passe"

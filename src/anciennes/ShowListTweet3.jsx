@@ -47,6 +47,31 @@ export default function ListTweet(){
        // setListeTweet(Object.values(donnéesRecueillies));
         // Object.values sert à transformer les objets en tableaux.
 
+        // Les détails
+        const promises = donneesTransformees.map(async (tweetAAficher) => {
+          const otherResponse = await fetch(
+            `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweetAAficher.id}.json`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log(`Contenu de otherResponse : `, otherResponse);
+
+          const data = otherResponse.json();
+
+          if(isNaN(tweetAAficher)){
+            data.id = tweetAAficher;
+          }
+          console.log(`Contenu de data : `, data);
+
+          return data;
+        });
+  
+      const tweetData = await Promise.all(promises);
+      console.log("tweetData : ", tweetData);
       
       setListeTweet([...donneesTransformees]);
         setLoading(false);
@@ -74,14 +99,12 @@ export default function ListTweet(){
 
 
                 {listeTweet && listeTweet.map((tweet) => (
-                  <div key={tweet.title} className="cadreTweet">
-                      <Link to={`tweetList/${tweet.id}`}>
+                    <div key={tweet.title} className="cadreTweet">
                         <div>{tweet.author}</div>
                         <div className="cadreTweetContent">{tweet.content}</div>
                         <div>L'id de ce tweet : {tweet.id} </div>
                        {/* <Link to={`/tweetList/${listeTweet.iddutweet}`}>Modifier</Link> */}
-                       </Link>
-                  </div>
+                    </div>
                 ))}
     </div>
     )
