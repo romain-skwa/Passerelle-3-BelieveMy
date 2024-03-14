@@ -64,6 +64,7 @@ export default function FormWriteTweet() {
             name="inputNewTweetContent" 
             id="inputNewTweetContent" 
             ref={inputNewTweetContent}
+            placeholder="Écrivez votre nouveau tweet ici."
             style={{ margin: "15px auto", padding: "5px", display : "block" }}
             />
           </div>

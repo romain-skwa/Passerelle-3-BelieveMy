@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
@@ -75,12 +75,12 @@ export default function ListTweet(){
 
                 {listeTweet && listeTweet.map((tweet) => (
                   <div key={tweet.title} className="cadreTweet">
-                      <Link to={`tweetList/${tweet.id}`}>
+                      <div>
                         <div>{tweet.author}</div>
                         <div className="cadreTweetContent">{tweet.content}</div>
                         <div>L'id de ce tweet : {tweet.id} </div>
-                       {/* <Link to={`/tweetList/${listeTweet.iddutweet}`}>Modifier</Link> */}
-                       </Link>
+                        <Link to={`tweetList/${tweet.id}`}>Modifier</Link> 
+                       </div>
                   </div>
                 ))}
     </div>

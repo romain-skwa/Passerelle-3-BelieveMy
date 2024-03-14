@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"; // On récupère les données grace à l'adresse
 import { toast } from "react-toastify";
 
@@ -8,8 +8,12 @@ export default function UnTweet(){
         console.log(`Paramètres récupérés avec useParams`, id);
     
     const [loading, setLoading] = useState(false);
-    const [theTweet, setTheTweet] = useState();
+    const [theTweet, setTheTweet] = useState({});
     console.log(`theTweet `, theTweet);
+    
+    const newContentRef = useRef(theTweet.content);
+
+    //Cycle
     useEffect(() =>{
         fetchTheTweet();
     }, [])
@@ -28,7 +32,9 @@ export default function UnTweet(){
                 }
             });
 
-            const data = await response.json(); console.log(data);
+            const data = await response.json(); 
+            console.log(data);
+
             setTheTweet(data);
             setLoading(false);
         }
@@ -38,11 +44,46 @@ export default function UnTweet(){
         }
     };
 
+    // Modification du contenu du tweet
+    const updateTweet = async () => {
+        const newTweet = {
+            title : theTweet.title,
+            content :newContentRef.current.value,
+            author: theTweet.author,            
+        }
+
+        const change = await fetch(
+            `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${id}.json`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(newTweet),
+            }
+          );
+            // Error
+        if (!change.ok) {
+        toast.error("Erreur !");        
+        return;
+      }
+    }
+
     // Ici le paramètre récupéré est l'identifiant affiché après http://localhost:5173/tweetList/ (paramètre récupéré)
     return (
         <>
-        {theTweet.author}
-        {theTweet.content}
+            <p>{theTweet.author}</p>
+            <p>{theTweet.content}</p>
+            <textarea 
+                name="contentTweet" 
+                id="contentTweet" 
+                cols="50" rows="5" 
+                defaultValue={theTweet.content}
+                ref={newContentRef}
+            ></textarea>
+            <div onClick={updateTweet} >
+                Modifier
+            </div>
         </>
     )
 }
