@@ -1,16 +1,15 @@
 import { useRef} from "react";
 
+// Ce composant est l'enfant du parent Home.
+// Il est lié à ListTweet, qui est lui-même aussi un enfant de Home
 
-export default function FormWriteTweet() {
+export default function FormWriteTweet(props) {
 
   // Variables
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
   const inputNewAuthorTweet = useRef();
   
-
-    
-
   // Création nouveau tweet
   const createNewTweet = async () => {
     const newTweet = {
@@ -18,6 +17,7 @@ export default function FormWriteTweet() {
       content :inputNewTweetContent.current.value,
       author: inputNewAuthorTweet.current.value,
     }
+
   // Ajouter dans firebase
   const response = await fetch(
     "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json",
@@ -34,9 +34,17 @@ export default function FormWriteTweet() {
       if(!response.ok) {
         return  "Une erreur est survenue. Impossible d'afficher la base de données.";        
     }
+
     const {name: idRandom} = await response.json();
     console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
-}
+
+    // Appeler la fonction updateListeTweet pour mettre à jour l'état local listeTweet dans le composant parent Home.jsx
+      // On exécute, dans l'élément Home, la fonction updateListeTweet avec newTweet en tant  que paramètre
+      // Cette fonction va ajouter le nouveau tweet (newTweet) à ce qu'il y avait déjà dans listeTweet. Voir le composant Home.
+        // Ensuite, la nouvelle liste maintenant composée va remplacer la précédente après l'actualisation du state listeTweet
+    props.updateListeTweet(newTweet);
+    
+  };
 
 
   return (

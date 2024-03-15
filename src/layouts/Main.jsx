@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { AuthContext } from "../store/AuthProvider";
 import  GridLoader  from "react-spinners/GridLoader";
+import Title from "../components/Title";
+import { CoDecoLink } from "../components/NavBar";
+import { SayHello } from "../components/Hello";
 
 export default function Main() {
     // Variables
@@ -12,6 +15,11 @@ export default function Main() {
     }
 
     return (
-        <div><Outlet /></div>
+        <>
+        <Title />
+        <CoDecoLink />
+        <SayHello />
+        <Outlet />
+        </>
     )
 }
