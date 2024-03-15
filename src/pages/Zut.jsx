@@ -3,15 +3,23 @@ import { useRef, useState } from "react";
 
 export default function Zut() {
   // StateFormulaire
- const [premier, setPremier] = useState(" Il y aura le nouveau mot")
+  const [premier, setPremier] = useState(" Il y aura le nouveau mot");
+  const [deuxieme, setDeuxieme] = useState("Texte deuxième");
 
   // Variables
   const mot = useRef();
+  const texte = useRef();
 
   // Fonction
+  const textavecretour = deuxieme.replace(/\n/g, '<br>');
+
  const envoyer  = ()=> {
   setPremier(mot.current.value);
  }
+ const envoiTexte = () => {
+  setDeuxieme(texte.current.value);
+ }
+ 
   return (
     <div>
             <section>
@@ -27,6 +35,13 @@ export default function Zut() {
             <div>
               On affiche : {premier}
             </div>
+
+            <section>
+              <textarea value={deuxieme} onChange={event => setDeuxieme(event.target.value)} name="texte" id="texte" cols="50" rows="5"></textarea>
+              <button>Nouveau texte</button>
+            </section>
+
+            <div>On affiche le texte : {textavecretour}</div>
     </div>
   );
 }
