@@ -80,6 +80,7 @@ export default function ListTweet(){
                         <div className="cadreTweetContent">{tweet.content}</div>
                         <div>L'id de ce tweet : {tweet.id} </div>
                         <Link to={`tweetList/${tweet.id}`}>Modifier</Link> 
+                        <Link to={`tweetList/${tweet.id}`}>Supprimer</Link> 
                        </div>
                   </div>
                 ))}

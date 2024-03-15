@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom"; // On récupère les données grace à l'adresse
+import { useParams, useNavigate } from "react-router-dom"; // On récupère les données grace à l'adresse
 import { toast } from "react-toastify";
 
 export default function UnTweet(){
@@ -7,6 +7,7 @@ export default function UnTweet(){
     const {id} = useParams(); // Avec useParams, on va chercher les paramètres dans la barre d'adresse
         console.log(`Paramètres récupérés avec useParams`, id);
 
+    const navigate = useNavigate(); // Pour rediriger automatiquement une fois que le tweet est modifié
     
     const [loading, setLoading] = useState(false); // Pour afficher l'icone de chargement
     
@@ -62,7 +63,7 @@ export default function UnTweet(){
         }
     };
 
-    // Modification du contenu du tweet
+    // Modification du contenu du tweet --------------------------------------------------------------------
     const updateTweet = async () => {
         // Le tweet modifié est dans newTweet
             // Le titre et l'auteur restent les mêmes. Seul le contenu va changer. D'où le useRef utilisé.
@@ -88,7 +89,32 @@ export default function UnTweet(){
         toast.error("Erreur !"); // Toast affiche un message d'erreur.
         return;
       }
-    }
+      navigate(`/`); 
+    };
+
+         // Suppression du tweet --------------------------------------------------------------------------
+
+         const onDeleteThisTweet = async () => {
+            // Delete
+            if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) {
+                setLoading(true);
+        
+                // Supprimer cette donnée de la base de données Firebase
+                const response = await fetch (`https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${id}.json`,
+                {
+                    method: "DELETE", // Méthode pour supprimer le tweet sélectionné juste au dessus
+                    headers: {
+                        "Content-type": "application-json"
+                    }
+                })
+        
+                // Erreur
+                if (!response.ok) {
+                    toast.error("Une erreur est intervenue.");
+                }
+            }
+            navigate(`/`);
+        }
 
     return (
         <>
@@ -104,10 +130,12 @@ export default function UnTweet(){
             <button onClick={updateTweet} >
                 Modifier
             </button>
+
+            <button onClick={onDeleteThisTweet}>Supprimer</button>
         </>
     )
 }
 // Dans la const newTweet, ne pas se contenter d'insérer seulement le contenu qui va être changer.
 // Si on ne place que le contenu changé, l'ensemble sera remplacé par ce contenu et les autres données 
 // qui devaient restées identiques seront effacées.
-// Donc toujours remettre le contenu qui doit rester le même en plus de celui qui sera changé.
+// Donc toujours remettre le contenu qui doit rester le même en plus de celui qui sera changé. 
