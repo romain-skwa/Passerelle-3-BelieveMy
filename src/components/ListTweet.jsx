@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import DeleteTweet from "../components/DeleteTweet";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -95,7 +96,8 @@ export default function ListTweet(props) { // props provenant de Home
                         <div className="cadreTweetContent">{tweet.content}</div>
                         <div>L'id de ce tweet : {tweet.id} </div>
                         <Link to={`tweetList/${tweet.id}`}>Modifier</Link> 
-                        <Link to={`tweetList/${tweet.id}`}>Supprimer</Link> 
+                        {/*<Link to={`tweetList/${tweet.id}`}>Supprimer</Link> */}
+                        <DeleteTweet tweet={tweet} />
                        </div>
                   </div>
                 ))}

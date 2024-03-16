@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // On récupère les données grace à l'adresse
 import { toast } from "react-toastify";
+import DeleteTweet from "../components/DeleteTweet";
 
-export default function UnTweet(){
+export default function ChangeTweet(){
     // Variable
     const {id} = useParams(); // Avec useParams, on va chercher les paramètres dans la barre d'adresse
         console.log(`Paramètres récupérés avec useParams`, id);
@@ -92,29 +93,9 @@ export default function UnTweet(){
       navigate(`/`); 
     };
 
-         // Suppression du tweet --------------------------------------------------------------------------
+        // Suppression du tweet --------------------------------------------------------------------------
 
-         const onDeleteThisTweet = async () => {
-            // Delete
-            if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) {
-                setLoading(true);
-        
-                // Supprimer cette donnée de la base de données Firebase
-                const response = await fetch (`https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${id}.json`,
-                {
-                    method: "DELETE", // Méthode pour supprimer le tweet sélectionné juste au dessus
-                    headers: {
-                        "Content-type": "application-json"
-                    }
-                })
-        
-                // Erreur
-                if (!response.ok) {
-                    toast.error("Une erreur est intervenue.");
-                }
-            }
-            navigate(`/`);
-        }
+
 
     return (
         <>
@@ -131,7 +112,7 @@ export default function UnTweet(){
                 Modifier
             </button>
 
-            <button onClick={onDeleteThisTweet}>Supprimer</button>
+            <DeleteTweet />
         </>
     )
 }

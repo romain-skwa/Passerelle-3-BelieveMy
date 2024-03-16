@@ -2,7 +2,7 @@ import Connexion from "./pages/Connexion";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Zut from "./pages/Zut";
-import UnTweet from "./pages/UnTweet";
+import ChangeTweet from "./pages/ChangeTweet";
 import Essai from "./pages/Essai";
 import Inscription from "./pages/Inscription";
 import Main from "./layouts/Main";
@@ -69,7 +69,7 @@ export default function App() {
                     },
                     {
                       path: "/tweetList/:id",
-                      element: <UnTweet />
+                      element: <ChangeTweet />
                     }
                   ],
                 },
