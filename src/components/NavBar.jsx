@@ -11,6 +11,7 @@ export function CoDecoLink() {
       {auth.currentUser ?  null : <Link to="/inscription"> Inscription </Link> }
       <Link to="/zut"> zut </Link>
       <Link to="/essai"> essai </Link>
+      <Link to="/envoi"> envoi </Link>
       {auth.currentUser ?  <div onClick={() => logOut()} to="/disconnexion"> Déconnexion </div> : <Link to="/connexion"> Connexion </Link>} 
     </div>
   );

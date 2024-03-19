@@ -72,7 +72,7 @@ export default function ListTweet(props) { // props provenant de Home
         setLoading(false);
     }
 /******************************** Suppression d'un tweet *************************************************/
-    const onDeleteThisTweet = async (x) => {
+ /*   const onDeleteThisTweet = async (x) => {
       // Delete
       if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) {
           setLoading(true);
@@ -97,10 +97,11 @@ export default function ListTweet(props) { // props provenant de Home
           setDeleteNow(false);
       }
   }
-
+*/
   // La requête qui affiche la liste de tweet sera relancée quand on clique sur le bouton Supprimer un tweet
   useEffect(() => { 
     requete();
+    setDeleteNow(false);
   }, [deleteNow]);
 
       /********************************************************************************** */
@@ -114,23 +115,23 @@ export default function ListTweet(props) { // props provenant de Home
             */}
             <ul>{/* Si listeTweet existe, son contenu est lu par .map*/}
                 {listeTweet && listeTweet.map((tweet) => (
-                    <li key={tweet.title}>{tweet.title}</li>
+                    <li key={tweet.title}>{tweet.title}{" : "}{tweet.content} </li>
                 ))}
             </ul>
 
-
-                {listeTweet && listeTweet.map((tweet) => (
-                  <div key={tweet.title} className="cadreTweet">
-                      <div>
-                        <div>{tweet.author}</div>
-                        <div className="cadreTweetContent">{tweet.content}</div>
-                        <div>L'id de ce tweet : {tweet.id} </div>
-                        <Link to={`tweetList/${tweet.id}`}>Modifier</Link> 
-                        {/*<Link to={`tweetList/${tweet.id}`}>Supprimer</Link> */}
-                        <button onClick={() => onDeleteThisTweet(tweet.id)}>Supprimer {tweet.id}</button>
-                       </div>
+            {listeTweet && listeTweet.map((tweet) => (
+              <div key={tweet.title} className="cadreTweet">
+                  <div>
+                    <div>{tweet.author}</div>
+                    <div className="cadreTweetContent">{tweet.content}</div>
+                    <div>L'id de ce tweet : {tweet.id} </div>
+                    <Link to={`tweetList/${tweet.id}`}>Modifier</Link> 
+                    {/*<Link to={`tweetList/${tweet.id}`}>Supprimer</Link> */}
+                  {/*  <button onClick={() => onDeleteThisTweet(tweet.id)}>Supprimer {tweet.id}</button> */}
+                  <DeleteTweet tweet={tweet} deleteNow={deleteNow} setDeleteNow={setDeleteNow}></DeleteTweet>
                   </div>
-                ))}
-    </div>
+              </div>
+            ))}
+        </div>
     )
 }

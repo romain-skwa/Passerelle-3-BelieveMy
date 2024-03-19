@@ -1,10 +1,15 @@
 
 import { useRef, useState } from "react";
+import { MyContext } from "../context/MyContext";
+import { useContext } from "react";
 
 export default function Zut() {
   // StateFormulaire
-  const [premier, setPremier] = useState(" Il y aura le nouveau mot");
+  const [premier, setPremier] = useState("Il y aura le nouveau mot");
   const [deuxieme, setDeuxieme] = useState("Texte deuxième");
+
+  const { truc } = useContext(MyContext);
+  console.log(`truc dans zut : `, truc);
 
   // Variables
   const mot = useRef();
