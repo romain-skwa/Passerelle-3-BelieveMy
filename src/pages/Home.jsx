@@ -3,11 +3,12 @@ import FormWriteTweet from "../components/FormWriteTweet";
 import ListTweet from "../components/ListTweet";
 
 // Home dans lequel nous sommes est le composant parent de ListTweet et de FormWriteTweet
-// Il les relie
+// Il les contient.
 
 function Home() {
   const [listeTweetUpdated, setListeTweetUpdated] = useState([]);
-// La liste de tweets pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée dans FormWriteTweet
+// La liste de tweets pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée dans FormWriteTweet,
+// Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau tweet.
   const updateListeTweet = (newTweet) => {
     setListeTweetUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);
   };

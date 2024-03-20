@@ -4,7 +4,7 @@ import { useRef} from "react";
 // Ce composant est l'enfant du parent Home.
 // Il est lié à ListTweet, qui est lui-même aussi un enfant de 
 
-/**** Obtenir la date actuelle ******************************************************************** */
+/******************************************************************************************************************* */
 function formatDate(date) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Intl.DateTimeFormat('fr-FR', options).format(date);
@@ -14,7 +14,7 @@ function formatDate(date) {
   const formattedDate = formatDate(today);
   console.log(`La date d'aujourd'hui en français : ${formattedDate}`);
 
-/***** Obtenir l'heure actuelle *************** */
+    /*************************************************** */
 
 function formatTime(date) {
   const options = { hour: '2-digit', minute: '2-digit', hour12: false };
@@ -25,7 +25,7 @@ function formatTime(date) {
   const formattedTime = formatTime(now);
   console.log(`L'heure actuelle en français : ${formattedTime}`);
 
-/****************************** FORMULAIRE ********************************************************** */
+/******************************************************************************************************************* */
 export default function FormWriteTweet(props) {
 
   // Variables
@@ -35,14 +35,20 @@ export default function FormWriteTweet(props) {
  
   // Création nouveau tweet
   const createNewTweet = async () => {
+     
+  //  const now = new Date();
+  //  const formattedDateTime = format(now, 'dd-MM-yyyy HH:mm:ss');
 
-  const newTweet = {
-    title : inputNewTweetTitle.current.value,
-    content :inputNewTweetContent.current.value,
-    author: inputNewAuthorTweet.current.value,
-    datePublication : formattedDate,
-    hourPublication : formattedTime,
-  }
+
+
+    const newTweet = {
+      title : inputNewTweetTitle.current.value,
+      content :inputNewTweetContent.current.value,
+      author: inputNewAuthorTweet.current.value,
+      datePublication : formattedDate,
+      hourPublication : formattedTime,
+      //dateTime : formattedDateTime,
+    }
 
   // Ajouter dans firebase
   const response = await fetch(

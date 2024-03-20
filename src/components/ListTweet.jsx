@@ -96,10 +96,21 @@ export default function ListTweet(props) {
         listeTweet.map((tweet) => (
           <div key={tweet.title} className="cadreTweet">
             <div>
-              <div>{tweet.author}</div>
+              <div>{tweet.title}</div>
               <div className="cadreTweetContent">{tweet.content}</div>
               <div>L'id de ce tweet : {tweet.id} </div>
               <Link to={`tweetList/${tweet.id}`}>Modifier</Link>
+              <div>Écrit par {tweet.author} 
+                {tweet.datePublication ? (
+                    ", le " + tweet.datePublication 
+                ) : (
+                    " Nous n'avons pas de date concernant ce tweet."
+                )} 
+                {tweet.hourPublication ? (
+                  " à " + tweet.hourPublication
+                )  : (null)
+                }.
+              </div>
               {/* J'envoie les props, les propriétés dans ce composant. Ces props permettent d'utiliser les données à l'intérieur de ce composant
 DeleteTweet est le composant faisant office de bouton  "supprimer" */}
               <DeleteTweet
