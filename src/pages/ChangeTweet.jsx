@@ -26,7 +26,7 @@ export default function ChangeTweet(){
                 /******************************************************** */
 
     // Ref    qui va servir à modifier le contenu du tweet. L'étiquette est dans le textarea.
-    const newContentRef = useRef();// J'avais écrit theTweet.content entre les ( ) mais pas vraiement besoin.
+    const newContentRef = useRef();// J'avais écrit theTweet.content entre les ( ) mais pas vraiment besoin.
 
                 /******************************************************** */
 
@@ -55,7 +55,7 @@ export default function ChangeTweet(){
             const data = await response.json(); 
             console.log(data);
 
-            setTheTweet(data);
+            setTheTweet(data); // C'est ici que le contenu du tweet recherché va être chargé
             setLoading(false);
         }
         catch(error){
@@ -99,20 +99,20 @@ export default function ChangeTweet(){
 
     return (
         <>
-            <p>{theTweet.author}</p>
-            <p>{theTweet.content}</p>
+            <p>{theTweet ? theTweet.author : "Chargement..."}</p>
+            <p>{theTweet ? theTweet.content : "Chargement..."}</p>
+
             <textarea 
                 name="contentTweet" 
                 id="contentTweet" 
                 cols="50" rows="5" 
-                defaultValue={theTweet.content} // Le contenu intial est déjà présent à l'affichage et peut maintenant être modifié
+                defaultValue={theTweet ? theTweet.content : "Chargement..."} // Le contenu intial est déjà présent à l'affichage et peut maintenant être modifié
                 ref={newContentRef}
             />
             <button onClick={updateTweet} >
                 Modifier
             </button>
 
-            <DeleteTweet />
         </>
     )
 }

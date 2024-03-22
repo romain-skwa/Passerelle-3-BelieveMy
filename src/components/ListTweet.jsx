@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import DeleteTweet from "../components/DeleteTweet"; // Plus tard
+import  ChangeThisTweet  from "../components/ChangeThisTweet";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -11,7 +12,8 @@ export default function ListTweet(props) {
   // State
   const [listeTweet, setListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
   const [loading, setLoading] = useState(false);
-  const [deleteNow, setDeleteNow] = useState(false); // sera changer quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+  const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+  const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
 
   // Fonction
   const requete = async () => { // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -30,7 +32,7 @@ export default function ListTweet(props) {
     );
 
     if (!donneesRecueillies.ok) {
-      toast.error("Une erreur est survenue");
+      toast.error("Une erreur est survenue dans ListTweet");
       return;
     }
 
@@ -73,6 +75,10 @@ export default function ListTweet(props) {
     setDeleteNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [deleteNow]); // Élément déclencheur : changement d'état de deleteNow
 
+  useEffect(() => {
+    requete(); // Le composant ListTweet dans lequel nous sommes est actualisé quand cette fonction est lancée
+    setChangethisTweetNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
+  }, [changethisTweetNow]);
   /********************************************************************************** */
 
   return (
@@ -97,9 +103,15 @@ export default function ListTweet(props) {
           <div key={tweet.title} className="cadreTweet">
             <div>
               <div>{tweet.title}</div>
+
               <div className="cadreTweetContent">{tweet.content}</div>
+
               <div>L'id de ce tweet : {tweet.id} </div>
-              <Link to={`tweetList/${tweet.id}`}>Modifier</Link>
+
+        
+              <ChangeThisTweet tweet={tweet} changethisTweetNow={changethisTweetNow} setChangethisTweetNow={setChangethisTweetNow} /> 
+              {/*<Link to={`tweetList/${tweet.id}`}>Modifier</Link>*/}
+
               <div>Écrit par {tweet.author} 
                 {tweet.datePublication ? (
                     ", le " + tweet.datePublication 
@@ -111,6 +123,7 @@ export default function ListTweet(props) {
                 )  : (null)
                 }.
               </div>
+
               {/* J'envoie les props, les propriétés dans ce composant. Ces props permettent d'utiliser les données à l'intérieur de ce composant
 DeleteTweet est le composant faisant office de bouton  "supprimer" */}
               <DeleteTweet
@@ -118,6 +131,7 @@ DeleteTweet est le composant faisant office de bouton  "supprimer" */}
                 deleteNow={deleteNow}
                 setDeleteNow={setDeleteNow}
               ></DeleteTweet>
+
             </div>
           </div>
         ))}

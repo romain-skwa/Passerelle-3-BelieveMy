@@ -40,12 +40,11 @@
 }
 /*************************** ShowListTweet ****************************************/
 .affichageListeTweet{
-    width: 30vw;
+    width: 552px;
     margin: 0 auto;
     border: 1px red solid;
 }
 .cadreTweet{
-    width: 30vw;
     min-height: 100px;
     background-color: bisque;
     box-sizing: border-box;
