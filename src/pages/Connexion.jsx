@@ -87,7 +87,7 @@ export default function CoDeco() {
         <button>Se connecter</button>
 
         <div>
-          <Link to="/codeco">Créer un compte</Link>
+          <Link to="/inscription">Créer un compte</Link>
         </div>
       </form>
       <div>

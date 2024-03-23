@@ -2,6 +2,7 @@ import Connexion from "./pages/Connexion";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Zut from "./pages/Zut";
+import Envoi from "./pages/Envoi";
 import ChangeTweet from "./pages/ChangeTweet";
 import Essai from "./pages/Essai";
 import Inscription from "./pages/Inscription";
@@ -66,6 +67,10 @@ export default function App() {
                     {
                       path: "/essai",
                       element: <Essai />,
+                    },
+                    {
+                      path: "/envoi",
+                      element: <Envoi />,
                     },
                     {
                       path: "/tweetList/:id",

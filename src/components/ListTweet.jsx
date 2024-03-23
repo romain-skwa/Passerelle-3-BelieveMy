@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import DeleteTweet from "../components/DeleteTweet"; // Plus tard
@@ -16,9 +16,7 @@ export default function ListTweet(props) {
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   const [frameChangeTweet, setFrameChangeTweet] = useState(false);
   // État pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState(
-    {}
-  ); /* sera changé dansla fonction handleFrameChangeTweet */
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dansla fonction handleFrameChangeTweet */
 
 
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -6,14 +6,9 @@ import { auth } from "../firebase";
 import { toast } from "react-toastify";
 
 export default function Home() {
-  // Variables
-
+ const [errorMessagePasswords, setErrorMessagePasswords] = useState();
   // States
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit,formState: { errors },} = useForm();
   // register sert enregistrer le champ du formulaire
   // handleSubmit sert à envoyer le contenu du formulaire
   const [loading, setLoading] = useState(false);
@@ -24,7 +19,20 @@ export default function Home() {
   Dans user, on stocke l'utilisateur.
 */
   // Function
-  const whenIClick = async (data) => {
+
+
+
+
+  const sendDataToFirebase = async (data) => {
+
+    if (data.password !== data.passwordConfirm) {
+
+      console.log("Les deux champs de mot de passe ne sont pas identiques.");
+      setErrorMessagePasswords("Les deux champs de mot de passe doivent être identiques.")
+      return;
+
+    }
+
     if (loading) return;
     setLoading(true);
 
@@ -52,7 +60,7 @@ export default function Home() {
             S&apos;inscrire
           </div>
           {/* Form */}
-          <form onSubmit={handleSubmit(whenIClick)}>
+          <form onSubmit={handleSubmit(sendDataToFirebase)}>
             <input
               style={errors.email && { background: "red" }}
               type="email"
@@ -72,9 +80,12 @@ export default function Home() {
               </p>
             )}
 
+
             <input
-              type="password"
+            className={errors.password ? "invalid-input" : ""}
+              type="text"
               placeholder="Mot de passe"
+              name="password"
               {...register("password", {
                 required: true,
                 minLength: {
@@ -89,7 +100,31 @@ export default function Home() {
                 {errors.password.message}
               </p>
             )}
+            
+
+            <input
+            className={errors.password ? "invalid-input" : ""}
+              type="text"
+              placeholder="Mot de passe"
+              name="passwordConfirm"
+              {...register("passwordConfirm", {
+                required: true,
+                minLength: {
+                  value: 5,
+                  message:
+                    "Le mot de passe doit contenir au moins 5 caractères",
+                },
+              })}
+            />
+            {errors.password && (
+              <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>
+                {errors.password.message}
+              </p>
+            )}
+
+
             <button>S&apos;inscrire</button>
+            <div style={{ color: "red" }}>{errorMessagePasswords}</div>
           </form>
 
           {/* Pass */}
