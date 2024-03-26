@@ -37,7 +37,7 @@ export default function Home() {
         navigate("/?success=true");// Quand l'utilisateur a bien été inscrit.
       })
       .catch(error => {
-        const { code, message } = error;
+        const { code, message} = error;
         if(code == "auth/email-already-in-use"){
           toast.error("Cet email est utilisé.")
         }
@@ -51,7 +51,7 @@ Ici, les données créées seront envoyées dans RealtimeDatabase.
 On y envoie l'adresse  mail qui servira d'identifiant permanent
 Et le pseudo choici par l'utilisateur. Ce pseudo pourra être changer n'importe quand. C'est pour cette raison qu'il ne servira pas d'identifiant.
 */
-      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email}
+      const userData = {pseudonymUser : data.pseudonymUser, idUser : data.email}
 
       const newUser = await fetch(// Une nouvelle section  dans realtime database : userList.
         "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json",

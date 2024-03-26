@@ -2,6 +2,8 @@
 import { useRef, useState } from "react";
 import { MyContext } from "../context/MyContext";
 import { useContext } from "react";
+import { GetAllIdUser } from "../components/GetAllIdUser";
+import { GetOneIdUser } from "../components/GetOneIdUser";
 
 export default function Zut() {
   // StateFormulaire
@@ -47,6 +49,8 @@ export default function Zut() {
             </section>
 
             <div>On affiche le texte : {textavecretour}</div>
+            <GetAllIdUser />
+            <GetOneIdUser />
     </div>
   );
 }
