@@ -145,7 +145,7 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                     setChangethisTweetNow={setChangethisTweetNow}
                   />
                   <button onClick={() => handleFrameChangeTweet(tweet.id)}>
-                    Ne pas modifier
+                    Retour
                   </button>
                 </>
               ) : (
@@ -160,6 +160,7 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                   ? ", le " + tweet.datePublication
                   : " Nous n'avons pas de date concernant ce tweet."}
                 {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
+                {tweet.modified}
               </div>
 
 {/* J'envoie les props, les propriétés dans ce composant.

@@ -45,6 +45,7 @@ export default function FormWriteTweet(props) {
     author: user.email,
     datePublication : formattedDate,
     hourPublication : formattedTime,
+    modified : "",
   }
 
   // Ajouter dans firebase

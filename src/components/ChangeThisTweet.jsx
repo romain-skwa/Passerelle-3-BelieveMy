@@ -16,7 +16,8 @@ export default function ChangeThisTweet(props) {
                 content : newContentRef.current.value, // Le nouveau contenu sera ce qui est écrit dans le textarea
                 author  : theTweet.author,
                 datePublication : theTweet.datePublication,
-                hourPublication : theTweet.hourPublication,          
+                hourPublication : theTweet.hourPublication,
+                modified : "  (Modifié)",      
             }
     
             const change = await fetch(
