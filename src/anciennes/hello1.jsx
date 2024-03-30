@@ -2,7 +2,6 @@ import { auth } from "../firebase";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { onAuthStateChanged } from "firebase/auth";
-import { GetOneIdUser } from "./GetOneIdUser";
 
 export function SayHello() {
     // Variable
@@ -16,7 +15,7 @@ export function SayHello() {
     }})
     return (
       <div className="codeco">
-        {user ?  <div> Bonjour <GetOneIdUser /> </div> : <div>Bonjour</div>}
+        {user ?  <div> Bonjour . Votre adresse mail est  {user.email}</div> : <div>Bonjour</div>}
       </div>
     );
   }

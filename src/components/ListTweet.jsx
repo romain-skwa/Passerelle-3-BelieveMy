@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import DeleteTweet from "../components/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../components/ChangeThisTweet";
+import { GetAuthorTweet } from "./GetAuthorTweet";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -154,7 +155,7 @@ Sinon c'est le bouton Modifier qui sera affiché */}
               )}
 
               <div>
-                Écrit par {tweet.author}
+                Écrit par <GetAuthorTweet tweet={tweet} />
                 {tweet.datePublication
                   ? ", le " + tweet.datePublication
                   : " Nous n'avons pas de date concernant ce tweet."}

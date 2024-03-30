@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
+import { auth } from "../firebase";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
+import { onAuthStateChanged } from "firebase/auth";
 
 export function GetOneIdUser(){
     // Variable
@@ -60,17 +62,17 @@ export function GetOneIdUser(){
             return userList.map((dataUser, index) => {    
                 if (user && user.email === dataUser.mailUser) {    
                     return (    
-                      <span key={index} style={{ textTransform: 'capitalize' }}>
-                        {dataUser.pseudonymUser}.
-                      </span>    
+                        <div key={index}>    
+                            <p>C'est ici que l'identifiant est censé être affiché ici : {dataUser.mailUser}. Et son pseudonyme est : {dataUser.pseudonymUser}.</p>
+                        </div>    
                     );    
                 }    
             });    
         };
 
 return (
-    <>
+    <div>
         {renderUserList()}
-    </>
+    </div>
 )
 }

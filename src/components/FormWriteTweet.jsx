@@ -1,5 +1,7 @@
 import { useRef} from "react";
-// import { format } from 'date-fns'; impossible de l'installer pour le moment
+import { useContext } from "react";
+import { AuthContext } from "../store/AuthProvider";
+
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à ListTweet, qui est lui-même aussi un enfant de 
@@ -28,10 +30,11 @@ function formatTime(date) {
 /****************************** FORMULAIRE ********************************************************** */
 export default function FormWriteTweet(props) {
 
+  const { user } = useContext(AuthContext);
+
   // Variables
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
-  const inputNewAuthorTweet = useRef();
  
   // Création nouveau tweet
   const createNewTweet = async () => {
@@ -39,7 +42,7 @@ export default function FormWriteTweet(props) {
   const newTweet = {
     title : inputNewTweetTitle.current.value,
     content :inputNewTweetContent.current.value,
-    author: inputNewAuthorTweet.current.value,
+    author: user.email,
     datePublication : formattedDate,
     hourPublication : formattedTime,
   }
@@ -75,6 +78,7 @@ export default function FormWriteTweet(props) {
 
   return (
     <div>
+    { user ? // Si un utilisateur est connecté, on affiche la section ci-dessous
 
         <section className="formulaire">{/* pourquoi ça ne marche pas quand j'écris form ? */}
           <h3 style={{ textAlign: "center" }}>Ecrire un nouveau tweet</h3>
@@ -103,16 +107,6 @@ export default function FormWriteTweet(props) {
             />
           </div>
 
-          <div>
-            <input
-              type="text"
-              name="inputNewAuthorTweet"
-              id="inputNewAuthorTweet"
-              ref={inputNewAuthorTweet}
-              placeholder="Nom de l'auteur"
-              />
-            </div>
-
             <div style={{// On ajoute ce bouton pour envoyer les infos seulement quand on clique
               display: "flex",
               justifyContent: "end"
@@ -123,6 +117,7 @@ export default function FormWriteTweet(props) {
           </div>                
         </section>
 
+    :  null }
     </div>
   )
 }
