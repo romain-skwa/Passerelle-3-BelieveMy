@@ -1,23 +1,28 @@
+// Ce composant est la liste des tweets écrits par l'utilisateur connecté
+// MyTweets est l'enfant du composant MyPage.jsx
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import DeleteTweet from "../components/DeleteTweet"; // Plus tard
-import ChangeThisTweet from "../components/ChangeThisTweet";
+import DeleteTweet from "./DeleteTweet";
+import ChangeThisTweet from "./ChangeThisTweet";
 import { GetAuthorTweet } from "./GetAuthorTweet";
 import { CheckUserAuthor } from "./CheckUserAuthor";
+import { useContext } from "react";
+import { AuthContext } from "../store/AuthProvider";
+
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
 
 export default function ListTweet(props) {
   // props provenant de Home
   // State
-  const [listeTweet, setListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
+  const [myListeTweet, setMyListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
-  const [frameChangeTweet, setFrameChangeTweet] = useState(false);
   // État pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
+  // Variable
+  const { user } = useContext(AuthContext);
 
 
 
@@ -44,7 +49,10 @@ export default function ListTweet(props) {
     }
 
     const donnees = await donneesRecueillies.json();
-    //console.log("Les données recueillies devraient être affichées ici ", donnees);
+    console.log(
+      "Les données recueillies devraient être affichées ici ",
+      donnees
+    );
 
     // Dans la console, on peut voir que donnees contient une liste d'objets.
     // Chacun représentant un tweet. Chaque objet contient les clefs et leurs valeurs.
@@ -56,7 +64,7 @@ export default function ListTweet(props) {
     // Je crée une const qui va stocker l'id ET newTweet qui contient déjà : auteur, titre, contenu.
     // Pour la création, on se contente de laisser un tableau vide au début. Il sera le contenant.
     const donneesTransformees = [];
-    // Avec cette boucle for in ... aye aye Je n'ai pas encore compris exactement comment ça marche
+    // Avec cette boucle for in 
     for (const key in donnees) {
       const newTweet = {
         id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
@@ -65,9 +73,9 @@ export default function ListTweet(props) {
       // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
       donneesTransformees.push(newTweet);
     }
-    //console.log("donnees transformees : ", donneesTransformees);
+    console.log("donnees transformees : ", donneesTransformees);
 
-    setListeTweet([...donneesTransformees]); // Mise à jour du state de listeTweet
+    setMyListeTweet([...donneesTransformees]); // Mise à jour du state de myListeTweet
     setLoading(false);
   };
 
@@ -101,29 +109,19 @@ export default function ListTweet(props) {
 
   useEffect(() => { // Quand un des tweets est modifié :
     requete(); // Le composant ListTweet dans lequel nous sommes est actualisé quand cette fonction est lancée
-    setChangethisTweetNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
+    setChangethisTweetNow(false); // Le state changethisTweetNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [changethisTweetNow]);
   /********************************************************************************** */
 
   return (
     <div className="affichageListeTweet">
-      <h3>Liste des tweets</h3>
+      <h3>Liste des tweets de l'utilisateur connecté</h3>
 
-      {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
-      <ul>
-        {/* Si listeTweet existe, son contenu est lu par .map*/}
-        {listeTweet &&
-          listeTweet.map((tweet) => (
-            <li key={tweet.title}>
-              {tweet.title}
-              {" : "}
-              {tweet.content}{" "}
-            </li>
-          ))}
-      </ul>
-
-      {listeTweet &&
-        listeTweet.map((tweet) => (
+      {myListeTweet && 
+      // filter est une fonction qui filtre selon l'auteur du tweet.
+      // Ici, quand l'identifiant de l'auteur du tweet est le même que celui de l'utilisateur connecté
+      // les tweets s'affichent. Seulement ceux de l'utisateur connecté.
+        myListeTweet.filter((tweet) => tweet.author === user.email).map((tweet) => (
           <div key={tweet.title} className="cadreTweet">
             <div>
               <div>{tweet.title}</div>

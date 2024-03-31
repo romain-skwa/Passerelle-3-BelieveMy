@@ -3,9 +3,9 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Zut from "./pages/Zut";
 import Envoi from "./pages/Envoi";
-import ChangeTweet from "./pages/ChangeTweet";
 import Essai from "./pages/Essai";
 import Inscription from "./pages/Inscription";
+import MyPage from "./pages/MyPage";
 import Main from "./layouts/Main";
 import { onAuthStateChanged } from "firebase/auth"; // on vérifie si l'état de l'utilisateur change
 import { auth } from "./firebase";
@@ -73,9 +73,9 @@ export default function App() {
                       element: <Envoi />,
                     },
                     {
-                      path: "/tweetList/:id",
-                      element: <ChangeTweet />
-                    }
+                      path: "/mypage",
+                      element: <MyPage />,
+                    },
                   ],
                 },
               ]

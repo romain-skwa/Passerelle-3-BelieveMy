@@ -12,6 +12,7 @@ export function CoDecoLink() {
       <Link to="/zut"> zut </Link>
       <Link to="/essai"> essai </Link>
       <Link to="/envoi"> envoi </Link>
+      <Link to="/mypage"> Ma liste de tweet personnelle </Link>
       {auth.currentUser ?  <div onClick={() => logOut()} to="/disconnexion"> Déconnexion </div> : <Link to="/connexion"> Connexion </Link>} 
     </div>
   );
