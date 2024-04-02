@@ -8,7 +8,7 @@ export function GetOneIdUser(){
     // Variable
     const { user } = useContext(AuthContext);
     const [userList, setUserList] = useState();
-    console.log(`userList ici : `, userList);
+    //console.log(`userList ici dans getOneUser : `, userList);
 
     const requete = async () => {
     // Dans la variable const userlist, on va stocker le contenu récupéré sur Firebase

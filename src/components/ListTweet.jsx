@@ -5,11 +5,12 @@ import DeleteTweet from "../components/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../components/ChangeThisTweet";
 import { GetAuthorTweet } from "./GetAuthorTweet";
 import { CheckUserAuthor } from "./CheckUserAuthor";
+import { useContext } from "react";
+import { AuthContext } from "../store/AuthProvider";
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
 
-export default function ListTweet(props) {
-  // props provenant de Home
+export default function ListTweet(props) { // props provenant de Home
   // State
   const [listeTweet, setListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,8 @@ export default function ListTweet(props) {
   const [frameChangeTweet, setFrameChangeTweet] = useState(false);
   // État pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
+  const { user } = useContext(AuthContext);
+
 
 
 
@@ -149,6 +152,13 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                 <CheckUserAuthor tweet={tweet} handleFrameChangeTweet={handleFrameChangeTweet}/>
               )}
 
+
+              <div>
+                {user ?
+                  "Bouton pour suivre l'auteur de ce tweet"
+                  : null 
+                }                
+              </div>
 
               <div>
                 Écrit par <GetAuthorTweet tweet={tweet} />

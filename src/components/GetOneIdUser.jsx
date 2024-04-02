@@ -1,12 +1,13 @@
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
+// Cet élément est utilisé pour afficher le pseudonyme de l'utilisateur connecté, dans l'élément Hello.
 
 export function GetOneIdUser(){
     // Variable
     const { user } = useContext(AuthContext);
     const [userList, setUserList] = useState();
-    console.log(`userList ici : `, userList);
+    //console.log(`userList dans GetOneIdUser : `, userList);
 
     const requete = async () => {
     // Dans la variable const userlist, on va stocker le contenu récupéré sur Firebase
@@ -27,10 +28,7 @@ export function GetOneIdUser(){
   
       const userListData  = await getUserlist.json();
 
-      console.log(
-        "Les données recueillies dans la partie userList devraient être affichées ici ",
-        userListData 
-      );     
+    //  console.log("Les données recueillies dans la partie userList devraient être affichées ici ", userListData );
 
       const donneesTransformees = [];
       // Avec cette boucle for in ... aye aye Je n'ai pas encore compris exactement comment ça marche
@@ -42,7 +40,7 @@ export function GetOneIdUser(){
         // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
         donneesTransformees.push(dataUserProfile);
       }
-      console.log("donnees transformees : ", donneesTransformees);
+    //  console.log("donnees transformees dans GetOnIdUser : ", donneesTransformees);
       setUserList([...donneesTransformees]);
     }
 

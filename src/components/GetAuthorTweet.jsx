@@ -5,7 +5,7 @@ export function GetAuthorTweet(props){
     // Variable
     const { tweet } = props;
     const [userList, setUserList] = useState();
-    console.log(`userList depuis GetAuthorTweet ici : `, userList);
+  //  console.log(`userList depuis GetAuthorTweet ici : `, userList);
 
     const requete = async () => {
     // Dans la variable const userlist, on va stocker le contenu récupéré sur Firebase
@@ -26,7 +26,7 @@ export function GetAuthorTweet(props){
   
       const userListData  = await getUserlist.json();
 
-console.log("Les données mailUser et pseudonymUser depuis GetAuthorTweet sont affichées ici ", userListData );     
+//console.log("Les données mailUser et pseudonymUser depuis GetAuthorTweet sont affichées ici ", userListData );     
 
       const donneesTransformees = [];
       // Avec cette boucle for in 
@@ -38,7 +38,7 @@ console.log("Les données mailUser et pseudonymUser depuis GetAuthorTweet sont a
         // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
         donneesTransformees.push(dataUserProfile);
       }
-      console.log("donnees transformees GetAuthorTweet : ", donneesTransformees);
+      //console.log("donnees transformees GetAuthorTweet : ", donneesTransformees);
       setUserList([...donneesTransformees]);
     }
 

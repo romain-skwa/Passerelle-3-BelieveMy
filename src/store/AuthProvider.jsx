@@ -5,7 +5,7 @@ import { auth } from "../firebase";
 export const AuthContext =  createContext(null);
 
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null); //console.log(`Dans le contexte, le contenu de user : `, user)
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

@@ -33,7 +33,7 @@ export default function Home() {
     await createUserWithEmailAndPassword(auth, data.email, data.password).then(
       (userCredential) => {
         const user = userCredential.user;
-        setLoading(false);
+        setLoading(false);        
         navigate("/?success=true");// Quand l'utilisateur a bien été inscrit.
       })
       .catch(error => {
@@ -45,13 +45,14 @@ export default function Home() {
         setLoading(false);
       });
 
-/*************************Création d'un pseudonyme dans Realtime Database ********************************************************/
+
+/************************* Création d'un pseudonyme dans Realtime Database ********************************************************/
 /*
 Ici, les données créées seront envoyées dans RealtimeDatabase.
 On y envoie l'adresse  mail qui servira d'identifiant permanent
-Et le pseudo choici par l'utilisateur. Ce pseudo pourra être changer n'importe quand. C'est pour cette raison qu'il ne servira pas d'identifiant.
+Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe quand. C'est pour cette raison qu'il ne servira pas d'identifiant.
 */
-      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email}
+      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email, followList : []}
 
       const newUser = await fetch(// Une nouvelle section  dans realtime database : userList.
         "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json",
