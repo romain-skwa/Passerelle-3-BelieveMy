@@ -21,6 +21,6 @@ function Home() {
 }
 export default Home;
 
-// J'ai volontairement marqué de noms différents listeTweetParent, listeTweetUpdated et listeTweet
+// J'ai volontairement marqué des noms différents listeTweetParent, listeTweetUpdated et listeTweet
 // pour être certain d'avoir bien compris et pour les distinguer facilement quand je lirai le code plus tard
 // Sans quoi, je me retrouvais avec des listeTweet partout !
