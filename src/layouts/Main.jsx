@@ -20,7 +20,6 @@ export default function Main() {
         <Title />
         <CoDecoLink />
         <SayHello />
-        <AboutThisUser />
         <Outlet />
         </>
     )
