@@ -7,10 +7,18 @@ export default function AboutThisUser(){
     const { user } = useContext(AuthContext);
     const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser } = useContext(AuthContext);
 
-    const [newPseudoUser, setNewPseudoUser ]= useState(pseudonymConnectedUser); // Par défaut le champ contient le nom actuel 
-    console.log(`Le nouveau Pseudo qui vient d'être entré `, newPseudoUser); 
+    const [newPseudoUser, setNewPseudoUser ]= useState(""); // Par défaut le champ contient le nom actuel 
     const saveContent = pseudonymConnectedUser; // Pour sauvegarder une copie du pseudo de l'utilisateur.
   
+    useEffect(() => {
+      setNewPseudoUser(pseudonymConnectedUser || "");/*  Cette ligne met à jour l'état newPseudoUser avec la 
+      valeur de pseudonymConnectedUser ou une chaîne de caractères vide si pseudonymConnectedUser est null ou undefined.
+      Cela permet de s'assurer que newPseudoUser a toujours une valeur définie, même si pseudonymConnectedUser change soudainement.*/
+      return () => setNewPseudoUser("");/* return () => setNewPseudoUser(""); : Cette ligne définit une fonction de nettoyage qui 
+      sera exécutée avant le prochain rendu du composant AboutThisUser. Cette fonction met à jour l'état newPseudoUser avec 
+      une chaîne de caractères vide, ce qui permet de s'assurer que newPseudoUser est toujours initialisé à une valeur définie, 
+      même si le composant se démonte ou se met à jour pour une raison quelconque.*/
+    }, [pseudonymConnectedUser]);
 
 /*******************************************************************************************************************************/
 
@@ -63,7 +71,8 @@ export default function AboutThisUser(){
     const handleInputChange = (event) => {
         setNewPseudoUser(event.target.value);
       }
-    
+      console.log(`Le nouveau Pseudo qui vient d'être entré `, newPseudoUser); 
+
 return (
     <> 
       <p>
