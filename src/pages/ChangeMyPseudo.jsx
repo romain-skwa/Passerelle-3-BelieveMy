@@ -5,9 +5,9 @@ import { AuthContext } from "../store/AuthProvider";
 export default function AboutThisUser(){
     // Variable
     const { user } = useContext(AuthContext);
-    const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser } = useContext(AuthContext);
+    const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser, followListOfConnectedUser } = useContext(AuthContext);
 
-    const [newPseudoUser, setNewPseudoUser ]= useState(""); // Par défaut le champ contient le nom actuel 
+    const [newPseudoUser, setNewPseudoUser ] = useState(""); // Par défaut le champ contient le nom actuel 
     const saveContent = pseudonymConnectedUser; // Pour sauvegarder une copie du pseudo de l'utilisateur.
   
     useEffect(() => {
@@ -47,6 +47,7 @@ export default function AboutThisUser(){
         const newDataPseudo = {
             mailUser : mailOfConnectedUser,
             pseudonymUser : newPseudoUser,
+            followList : followListOfConnectedUser,
         }
 
         const change = await fetch(
@@ -61,11 +62,11 @@ export default function AboutThisUser(){
         );
           // Error
       if (!change.ok) {// En cas d'erreur pendant l'envoi des données sur firebase
-        setNewPseudoUser(saveContent);// on rétablit les valeurs d'origine grace à la sauvegarde faite avant les modifications
+        setNewPseudoUser(saveContent); // on rétablit les valeurs d'origine grace à la sauvegarde faite avant les modifications
       toast.error("Erreur !"); // Toast affiche un message d'erreur.
       return;
     }
-    console.log( "ça devrait mettre à jour le pseudo de l'utilisateur connecté en remplaçant " + pseudonymConnectedUser + " par " + newPseudoUser);
+    console.log( "Cela devrait mettre à jour le pseudo de l'utilisateur connecté en remplaçant " + pseudonymConnectedUser + " par " + newPseudoUser);
   }
 
     const handleInputChange = (event) => {

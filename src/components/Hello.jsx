@@ -10,7 +10,7 @@ export function SayHello() {
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            console.log("L'utilisateur est connecté " + user.email);
+          //  console.log("L'utilisateur est connecté " + user.email);
         }else{
             console.log("euhhhhhhhhhhhhhhhhhh... pas connecté")
     }})

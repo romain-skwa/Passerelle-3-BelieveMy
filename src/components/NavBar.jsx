@@ -11,6 +11,7 @@ export function CoDecoLink() {
   return (
     <div className="codeco">
       {auth.currentUser ?  null : <Link to="/inscription"> Inscription </Link> }
+      <Link to="/">Page d'accueil</Link>
       <Link to="/zut"> zut </Link>
       <Link to="/essai"> essai </Link>
       <Link to="/envoi"> envoi </Link>

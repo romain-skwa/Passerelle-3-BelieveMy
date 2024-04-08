@@ -13,6 +13,7 @@ const AuthProvider = ({children}) => {
     const [idOfConnectedUser, setIdOfConnectedUser] = useState(null);
     const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
+    const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
 
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
@@ -26,7 +27,6 @@ const AuthProvider = ({children}) => {
 
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
-            console.log(`L'état de l'utilisateur a changé. Voici la nouvelle valeur de user :`, user);    
         setUser(user);    
         setLoading(false);    
       });
@@ -79,7 +79,8 @@ useEffect(() => {
         console.log(`Est-ce que userConnectedData existe ? `, userConnectedData);  
         setIdOfConnectedUser(userConnectedData.id);  
         setPseudonymConnectedUser(userConnectedData.pseudonymUser);  
-        setMailOfConnectedUser(userConnectedData.mailUser);  
+        setMailOfConnectedUser(userConnectedData.mailUser);
+        setFollowListOfConnectedUser(userConnectedData.followList)  
       } else {  
         console.log(`La variable userConnectedData n'est pas définie. Voici les valeurs de user et userList :`, { user, userList });  
       }  
@@ -113,6 +114,7 @@ useEffect(() => {
         idOfConnectedUser,
         pseudonymConnectedUser,
         mailOfConnectedUser,
+        followListOfConnectedUser,
         logOut,// pour déconnecter notre utilisateur de n'importe où
         loginUser,
     }
