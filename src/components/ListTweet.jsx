@@ -5,6 +5,7 @@ import DeleteTweet from "../components/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../components/ChangeThisTweet";
 import { GetAuthorTweet } from "./GetAuthorTweet";
 import { CheckUserAuthor } from "./CheckUserAuthor";
+import  FollowThisUser  from "../components/FollowThisUser";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 // Ce composant est l'enfant du parent Home.
@@ -106,6 +107,7 @@ export default function ListTweet(props) { // props provenant de Home
     requete(); // Le composant ListTweet dans lequel nous sommes est actualisé quand cette fonction est lancée
     setChangethisTweetNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [changethisTweetNow]);
+
   /********************************************************************************** */
 
   return (
@@ -155,9 +157,9 @@ Sinon c'est le bouton Modifier qui sera affiché */}
 
               <div>
                 {user ?
-                  "Bouton pour suivre l'auteur de ce tweet"
+                  <FollowThisUser tweet={tweet} />
                   : null 
-                }                
+                }   
               </div>
 
               <div>

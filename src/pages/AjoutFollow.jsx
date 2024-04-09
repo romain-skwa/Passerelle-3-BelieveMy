@@ -38,7 +38,7 @@ export default function FollowThisUser(){
 
 
         // Les données qui seront envoyées afin de modifier le profil de l'utilisateur. En l'occurrence : sa liste d'abonnement
-        const newDataPseudo = {
+        const newDataFollowList = {
             mailUser : mailOfConnectedUser,
             pseudonymUser : pseudonymConnectedUser,
             followList : newFollowList, // Sérialise newFollowList en JSON avant de l'envoyer à Firebase
@@ -51,7 +51,7 @@ export default function FollowThisUser(){
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(newDataPseudo), // stringify pour mettre sous forme de caractère un objet javascript
+            body: JSON.stringify(newDataFollowList), // stringify pour mettre sous forme de caractère un objet javascript
           }
         );
           // Error

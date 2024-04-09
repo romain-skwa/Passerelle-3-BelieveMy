@@ -9,7 +9,7 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null); //console.log(`Dans le contexte, le contenu de user : `, user)
     const [loading, setLoading] = useState(true);
 
-    const [userList, setUserList] = useState(null);
+    const [userList, setUserList] = useState(null); //informations concernant TOUS les utilisateurs 
     const [idOfConnectedUser, setIdOfConnectedUser] = useState(null);
     const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
@@ -35,6 +35,7 @@ const AuthProvider = ({children}) => {
       return () => unsubscribe();    
     }, []);
 /*************************************************************************************************************/
+/*            Recherchons les informations concernant tous les utilisateurs                  */
 useEffect(() => {
     const requete = async () => {
       const getUserlist = await fetch(
@@ -70,13 +71,15 @@ useEffect(() => {
   }, []);
 
   useEffect(() => {
-    if (userList && userList.length > 0 && user) {  
-      const userConnectedData = userList.find(  
-        (dataUser) => user.email === dataUser.mailUser  
-      );
+    if (userList && userList.length > 0 && user) {
+      /* Dans userConnectedData, on stocke les données de l'utilisateur connecté en ce moment 
+      On trouve les données parmi lesquelles le mail inclus est le même que celui de la personne connectée.
+      user.mail est celui de l'utilisateur connecté
+      On cherche dans userList, le dataUser avec le mail qui sera le même que que user.mail */
+      const userConnectedData = userList.find((dataUser) => user.email === dataUser.mailUser);
   
       if (userConnectedData) {  
-        console.log(`Est-ce que userConnectedData existe ? `, userConnectedData);  
+        console.log(`Est-ce que userConnectedData existe dans authProvider ? `, userConnectedData);  
         setIdOfConnectedUser(userConnectedData.id);  
         setPseudonymConnectedUser(userConnectedData.pseudonymUser);  
         setMailOfConnectedUser(userConnectedData.mailUser);
