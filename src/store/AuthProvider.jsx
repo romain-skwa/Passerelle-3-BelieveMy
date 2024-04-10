@@ -10,6 +10,7 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     const [userList, setUserList] = useState(null); //informations concernant TOUS les utilisateurs 
+    // Données concernant l'utilisateur connecté
     const [idOfConnectedUser, setIdOfConnectedUser] = useState(null);
     const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
@@ -26,6 +27,7 @@ const actualiserListFollow = (x) => {
   setFollowListOfConnectedUser(x);
 }
 /*---------------------------------------------------------------------------------------------- */
+// Équivalent dans le fichier Liked.jsx
 const actualiserLikedList = (y) => {
   setLikedListOfConnectedUser(y);
 }
@@ -124,7 +126,7 @@ useEffect(() => {
     };
 
     const loginUser = (email, password) => {
-      console.log(`Appel de la fonction loginUser avec les valeurs suivantes : email = ${email}, password = ${password}`);    
+      console.log(`Appel de la fonction loginUser avec les valeurs suivantes : email = ${email}`);    
         return signInWithEmailAndPassword(auth, email, password);
     };
 

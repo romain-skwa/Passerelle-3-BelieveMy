@@ -7,7 +7,7 @@ export default function FollowThisUser(props) {
   // Variable
   const { user } = useContext(AuthContext);
   const { tweet, } = props;
-  const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser, followListOfConnectedUser } = useContext(AuthContext);
+  const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser, followListOfConnectedUser, likedListOfConnectedUser } = useContext(AuthContext);
   const [preventFollowList, setpreventFollowList] = useState(followListOfConnectedUser || []);
 
   const { actualiserListFollow } = useContext(AuthContext); // vient du contexte.
@@ -27,6 +27,7 @@ export default function FollowThisUser(props) {
         mailUser: mailOfConnectedUser,
         pseudonymUser: pseudonymConnectedUser,
         followList: [...preventFollowList, tweet.author], // contenu précédent + auteur du tweet actuel
+        likedList: likedListOfConnectedUser,
       };
       console.log("Données à envoyer à Firebase :", newDataFollowList);
 
