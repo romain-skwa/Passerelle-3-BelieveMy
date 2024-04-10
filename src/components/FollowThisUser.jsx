@@ -10,6 +10,8 @@ export default function FollowThisUser(props) {
   const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser, followListOfConnectedUser } = useContext(AuthContext);
   const [preventFollowList, setpreventFollowList] = useState(followListOfConnectedUser || []);
 
+  const { actualiserListFollow } = useContext(AuthContext); // vient du contexte.
+
   const saveContent = followListOfConnectedUser; // Pour sauvegarder une copie de la liste d'abonnement de l'utilisateur.
 
   useEffect(() => {
@@ -46,6 +48,8 @@ export default function FollowThisUser(props) {
       }
 
       setpreventFollowList([...preventFollowList, tweet.author]);
+      actualiserListFollow(newDataFollowList.followList);// Mettre à jour la liste dans le contexte
+      props.requete();
       toast.success("Utilisateur ajouté à la liste d'abonnement avec succès !");
     } else {
       toast.info("Cet utilisateur est déjà dans votre liste d'abonnement.");
@@ -53,8 +57,10 @@ export default function FollowThisUser(props) {
   };
 
   return (
-    <>
-      <button onClick={updateFollowList}>Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste</button>
+    <>{preventFollowList.includes(tweet.author) ? 
+      <p style={{ color: "green" }}>Déjà suivi</p> :
+      <button onClick={updateFollowList}>Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste d'abonnement</button> 
+    }
     </>
   );
 }

@@ -14,6 +14,17 @@ const AuthProvider = ({children}) => {
     const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
     const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
+    console.log(`followListOfConnectedUser `, followListOfConnectedUser);
+/* ----------------------------------------------------------------------------------------------
+actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
+Grace au contexte, cette fonction sera exécutée dans le composant FollowThisUser
+A chaque fois que l'utilisateur cliquera sur le bouton "Suivre", la liste des auteurs suivis présente dans firebase
+sera actualiser ici dans le contexte.
+Et à chaque fois, la liste des tweets sera réafficher avec les éventuels changements.
+---------------------------------------------------------------------------------------------- */
+const actualiserListFollow = (x) => {
+  setFollowListOfConnectedUser(x);
+}
 
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
@@ -118,6 +129,7 @@ useEffect(() => {
         pseudonymConnectedUser,
         mailOfConnectedUser,
         followListOfConnectedUser,
+        actualiserListFollow,
         logOut,// pour déconnecter notre utilisateur de n'importe où
         loginUser,
     }

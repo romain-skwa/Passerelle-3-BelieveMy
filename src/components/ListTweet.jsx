@@ -17,7 +17,6 @@ export default function ListTweet(props) { // props provenant de Home
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
-  const [frameChangeTweet, setFrameChangeTweet] = useState(false);
   // État pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
@@ -114,6 +113,7 @@ export default function ListTweet(props) { // props provenant de Home
     <div className="affichageListeTweet">
       <h3>Liste des tweets</h3>
 
+      <button onClick={() => requete()}>Actualiser</button>
       {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
       <ul>
         {/* Si listeTweet existe, son contenu est lu par .map*/}
@@ -157,7 +157,7 @@ Sinon c'est le bouton Modifier qui sera affiché */}
 
               <div>
                 {user ?
-                  <FollowThisUser tweet={tweet} />
+                  <FollowThisUser tweet={tweet} requete={requete} />
                   : null 
                 }   
               </div>
