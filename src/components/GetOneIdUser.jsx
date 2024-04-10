@@ -54,7 +54,6 @@ export function GetOneIdUser(){
             if (!userList) {    
                 return <div>Chargement...</div>;    
             }    
-    console.log(`Dans getoneidUser , user.email : `, user.email)
             return userList.map((dataUser, index) => {    
                 if (user && user.email === dataUser.mailUser) {    
                     return (    

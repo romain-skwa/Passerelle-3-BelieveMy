@@ -20,7 +20,7 @@ export default function ListTweet(props) {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // État pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet à la ligne 89 */
   // Variable
   const { user } = useContext(AuthContext);
 
@@ -82,7 +82,7 @@ export default function ListTweet(props) {
   // Fonction pour mettre à jour l'état de frameChangeTweetState pour un tweet spécifique
   // L'id est l'argument qui va cibler quel tweet verra son frameChangeTweetState passer de false à true ou inversement
   // Sans ce ciblage, tous les frameChangeTweetState de la page changeraient.
-  // Donc, tous les tweets laisseraient apparaitre un textarea pour une éventuelle modification.
+  // Donc, tous les tweets laisseraient apparaitre un textarea pour une éventuelle modification dès qu'on clique sur le bouton "modifier" présent dans CheckUserAuthor.jsx
 
   // prevState est déconstruit en utilisant l'opérateur de propagation... pour créer une nouvelle copie du tableau frameChangeTweetState.
   // Ensuite, l'élément de frameChangeTweetState avec l'ID du tweet en argument est mis à jour en inversant sa valeur actuelle en utilisant le négaire !.

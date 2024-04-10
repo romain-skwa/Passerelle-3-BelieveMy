@@ -6,6 +6,7 @@ import ChangeThisTweet from "../components/ChangeThisTweet";
 import { GetAuthorTweet } from "./GetAuthorTweet";
 import { CheckUserAuthor } from "./CheckUserAuthor";
 import  FollowThisUser  from "../components/FollowThisUser";
+import  Liked  from "../components/Liked";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 // Ce composant est l'enfant du parent Home.
@@ -17,7 +18,7 @@ export default function ListTweet(props) { // props provenant de Home
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
-  // État pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
+  // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
 
@@ -160,6 +161,10 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                   <FollowThisUser tweet={tweet} requete={requete} />
                   : null 
                 }   
+              </div>
+
+              <div>
+                <Liked tweet={tweet}/>
               </div>
 
               <div>

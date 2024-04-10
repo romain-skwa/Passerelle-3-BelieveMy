@@ -14,17 +14,22 @@ const AuthProvider = ({children}) => {
     const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
     const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
-    console.log(`followListOfConnectedUser `, followListOfConnectedUser);
+    const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
+
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
 Grace au contexte, cette fonction sera exécutée dans le composant FollowThisUser
 A chaque fois que l'utilisateur cliquera sur le bouton "Suivre", la liste des auteurs suivis présente dans firebase
-sera actualiser ici dans le contexte.
-Et à chaque fois, la liste des tweets sera réafficher avec les éventuels changements.
----------------------------------------------------------------------------------------------- */
+sera actualisée ici dans le contexte.
+Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels changements.*/
 const actualiserListFollow = (x) => {
   setFollowListOfConnectedUser(x);
 }
+/*---------------------------------------------------------------------------------------------- */
+const actualiserLikedList = (y) => {
+  setLikedListOfConnectedUser(y);
+}
+/*---------------------------------------------------------------------------------------------- */
 
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
@@ -89,12 +94,13 @@ useEffect(() => {
       On cherche dans userList, le dataUser avec le mail qui sera le même que que user.mail */
       const userConnectedData = userList.find((dataUser) => user.email === dataUser.mailUser);
   
-      if (userConnectedData) {  
+      if (userConnectedData) {
         console.log(`Est-ce que userConnectedData existe dans authProvider ? `, userConnectedData);  
         setIdOfConnectedUser(userConnectedData.id);  
         setPseudonymConnectedUser(userConnectedData.pseudonymUser);  
         setMailOfConnectedUser(userConnectedData.mailUser);
-        setFollowListOfConnectedUser(userConnectedData.followList)  
+        setFollowListOfConnectedUser(userConnectedData.followList);
+        setLikedListOfConnectedUser(userConnectedData.likedList);
       } else {  
         console.log(`La variable userConnectedData n'est pas définie. Voici les valeurs de user et userList :`, { user, userList });  
       }  
@@ -129,7 +135,9 @@ useEffect(() => {
         pseudonymConnectedUser,
         mailOfConnectedUser,
         followListOfConnectedUser,
+        likedListOfConnectedUser,
         actualiserListFollow,
+        actualiserLikedList,
         logOut,// pour déconnecter notre utilisateur de n'importe où
         loginUser,
     }

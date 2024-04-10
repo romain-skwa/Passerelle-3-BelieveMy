@@ -4,7 +4,6 @@ import { AuthContext } from "../store/AuthProvider";
 
 export default function FollowThisUser(){
     // Variable
-    const { user } = useContext(AuthContext);
     const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser, followListOfConnectedUser } = useContext(AuthContext);
     const [newFollowList, setNewFollowList] = useState([]);
     //console.log(`Voici le contenu de newFollowList : `, newFollowList)

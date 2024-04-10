@@ -4,7 +4,6 @@ import Error from "./pages/Error";
 import Zut from "./pages/Zut";
 import Envoi from "./pages/Envoi";
 import Essai from "./pages/Essai";
-import AjoutFollow from "./pages/AjoutFollow";
 import Inscription from "./pages/Inscription";
 import ChangeMyPseudo from "./pages/ChangeMyPseudo";
 import Main from "./layouts/Main";
@@ -76,10 +75,6 @@ export default function App() {
                     {
                       path: "/ChangeMyPseudo",
                       element: <ChangeMyPseudo />,
-                    },
-                    {
-                      path: "/AjoutFollow",
-                      element: <AjoutFollow />,
                     },
                   ],
                 },

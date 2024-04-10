@@ -21,9 +21,8 @@ export default function FollowThisUser(props) {
 
 /*useEffect(() => {console.log(`Voici le contenu de preventFollowList : `, preventFollowList);}, [preventFollowList]);*/
 
-  const updateFollowList = async () => {
-    // Vérifier que l'auteur du tweet n'est pas déjà présent dans preventFollowList
-    if (!preventFollowList.includes(tweet.author)) {
+  const updateFollowList = async () => {    
+    if (!preventFollowList.includes(tweet.author)) { // Vérifier que l'auteur du tweet n'est pas déjà présent dans preventFollowList
       const newDataFollowList = {
         mailUser: mailOfConnectedUser,
         pseudonymUser: pseudonymConnectedUser,
@@ -44,17 +43,18 @@ export default function FollowThisUser(props) {
 
       if (!change.ok) {
         toast.error("Erreur !"); // Toast affiche un message d'erreur.
+        setpreventFollowList(saveContent);
         return;
       }
 
-      setpreventFollowList([...preventFollowList, tweet.author]);
+      setpreventFollowList([...preventFollowList, tweet.author]); // pas sûr que cette soit utile finalement
       actualiserListFollow(newDataFollowList.followList);// Mettre à jour la liste dans le contexte
       props.requete();
       toast.success("Utilisateur ajouté à la liste d'abonnement avec succès !");
     } else {
       toast.info("Cet utilisateur est déjà dans votre liste d'abonnement.");
     }
-  };console.log(`mailOfConnectedUser `+ mailOfConnectedUser + " tweet.author " + tweet.author)
+  };
 
   return (
     <>
