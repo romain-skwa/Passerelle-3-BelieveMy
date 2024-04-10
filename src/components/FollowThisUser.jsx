@@ -54,13 +54,25 @@ export default function FollowThisUser(props) {
     } else {
       toast.info("Cet utilisateur est déjà dans votre liste d'abonnement.");
     }
-  };
+  };console.log(`mailOfConnectedUser `+ mailOfConnectedUser + " tweet.author " + tweet.author)
 
   return (
-    <>{preventFollowList.includes(tweet.author) ? 
-      <p style={{ color: "green" }}>Déjà suivi</p> :
-      <button onClick={updateFollowList}>Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste d'abonnement</button> 
-    }
-    </>
+    <>
+        { // Pour s'assurer que le bouton "suivre" ne s'affichera pas  sous un tweet écrit par l'utilisateur connecté
+        // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur est différent du mail de l'auteur du tweet
+        // alors, on affiche le bouton "suivre" ou la mention "Déjà suivi"
+        user && mailOfConnectedUser !== tweet.author ? (
+          <>
+            {preventFollowList.includes(tweet.author) ? (
+              <p style={{ color: "green" }}>Déjà suivi</p>
+            ) : (
+              <button onClick={updateFollowList}>
+                Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste d'abonnement
+              </button>
+            )}
+          </>
+          ) : (null)
+        }
+    </> 
   );
 }

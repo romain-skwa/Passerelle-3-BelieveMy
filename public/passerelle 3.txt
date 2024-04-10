@@ -1,0 +1,77 @@
+14 mars:
+La modification de tweet est réussie mais elle se fait sur une autre page pour l'instant.
+
+15 mars:
+Suppression d'un tweet réussi. Mais l'actualisation automatique de la liste n'est pas encore faite.
+
+15 mars:
+Mise à jour automatique de la liste des tweet quand on en écrit un nouveau. Merci Chat Blackbox. 
+J'ai du apporter des changements à trois fichiers : dans le composant home et dans ses deux composants enfants (les composants qu'il contient) FormWriteTweet et ListTweet.
+Dans le formulaire, une fois que les champs sont remplis ; la fonction (FormWriteTweet) qui va envoyer les données à Firebase va en même temps lancer l'exécution d'une fonction (updateListeTweet) qui se trouve dans son composant parent (Home).
+Cette fonction updateListeTweet va mettre à jour une variable appelée listeTweetUpdated.
+Attention, ceci ne change pas la liste envoyée à Firebase. Le changement de la liste se fait dans le fichier qui contient le formulaire, en envoyant le nouveau tweet.
+La fonction updateListeTweet va changer le l'état d'une variable listeTweetUpdated dans Home.
+Et comme Home est relié par une props à son enfant ListTweet, ce changement de variable va être l'élément déclencheur (grace à un useEffect) de l'exécution de la requête qui va chercher la liste sur le serveur Firebase.
+Et la liste est bien mise à jour dès qu'un nouveau tweet est créé.
+
+16 mars:
+Suppression qui actualise toute la page automatiquement avec une fonction appelée useNavigate. Et je cherche à actualiser seulement le composant qui contient la liste de tweet : ListTweet.
+
+18 mars:
+Je suis obligé de placer le code de mon bouton "Supprimer" dans le composant ListTweet pour que la liste soit automatiquement mise à jour quand un tweet est supprimée.
+
+19 mars:
+J'ai enfin réussi à mettre à jour la liste des tweets affichés quand je supprime un tweet. Et cette fois, le composant bouton "Supprimer" est dans son propre ficher.
+J'ai utilisé un props pour faire le lien entre listTweet et le composant bouton "supprimer".
+Dans ce composant enfant, je peux maintenant changer l'état d'une variable constante appelée deleteNow. Ce changement lance l'exécution de la requête grace à un useEffect.
+
+20 mars:
+J'ai réussi à stocker la date et l'heure auxquelles est envoyé le tweet. Et j'arrive à l'afficher. J'ai même fait en sorte que message d'erreur s'affiche pour les premiers
+tweets qui n'ont pas dans leurs données les informations concernant la date et l'heure.
+Je voulais d'abord utiliser une librairie externe appelée date-fns. Mais il était impossible de l'installer. J'ai dù m'en passer. En fin de compte, ce n'était pas plus difficile.
+
+22 mars :
+Afin de changer le contenu des tweets, j'ai d'abord réussi à afficher un champ de texte (textarea) à l'intérieur de chaque tweet. Ce champ contient le texte des tweets et c'est ici qu'il peut être changé.
+Étant donné que j'avais déjà créé une page consacré au changement de contenu des tweets. Je n'ai pas mis longtemps à adapter mon code à cette nouvelle partie servant au changement de contenu.
+Je ne pouvais pas simplement copier / coller puisque je travaillais sur la même page maintenant. Donc l'accès aux tweets se faisait différemment.
+J'ai ensuite fait en sorte que ce champ ne soit visible que lorqu'on clique sur un bouton "modifier". Mais j'ai dù faire face à un imprévu. Quand je cliquais sur un seul bouton "modifier", l'ensemble des textarea
+s'affichaient dans toute la page. J'ai fais appel à l'intelligence artificielle de blackbox pour que seul le champ ciblé s'affiche. Son code me semblait tellement complexe que je lui ai demandé de l'expliquer en détail.
+Et ça marche.
+
+23 mars : 
+Toutes ces heures que j'ai passé avec blackbox pour tenter je ne sais combien de code avec des useRefs. Je voulais vérifier que les champs de formulaire de mot de passe étaient identiques avant de procéder
+à l'enregistrement du nouvel utilisateur. Finalement, c'était tellement facile en utilisant les données déjà disponibles de useForm que je ne comprends pas pourquoi je n'y ai pas pensé en premier.
+
+24 mars :
+J'ai ajouté un champ de formulaire dans lequel l'utilisateur s'inscrivant devra choisir un pseudonyme. Comme souvent, je me suis compliqué la tache inutilement. Je cherchais à utiliser le hook UseRef.
+Ce qui était inutile car, dans ce fichier, j'utilisais déjà un gestionnaire d'évènement qui me permettait de manipuler des données. Comme par exemple l'adresse mail, les mots de passe etc.
+Dès le premier essai, j'avais réussi à entrer dans firebase la donnée créée pour le getionnaire d'évènement. Mais pas celle du hook useRef. J'ai fini par effacer ce useRef pour me servir de la donnée "pseudonym"
+du gestionnaire d'évènement. Finalement, c'était beaucoup plus facile que prévu. J'ai réussi.
+
+30 mars :
+Dans l'encadré Hello, c'est maintenant le pseudonyme de l'utilisateur connecté qui s'affiche. C'est n'est pas le véritable identifiant unique : l'adresse mail.
+Et à partir de maintenant, le pseudonyme des auteurs des tweet sera affiché sous chaque tweet sans que l'on ait besoin d'écrire manuellement le nom de l'auteur comme avant.
+Si l'utilsateur change son pseudo, celui-ci sera mis à jour automatiquement.
+Le formulaire de création de nouveaux tweet ne s'affiche que si l'utilisateur est connecté dorénavant.
+Ajout de la notification "(Modifié)" quand le tweet a été modifié.
+Le bouton pour modifier un tweet n'est maintenant visible seulement pour son auteur quand il est connecté.
+
+2 avril :
+Dans le fichier AboutThisUser, je peux récupérer les données stockées dans userList dans RealTime DataBase concernant l'utisateur connecté. C'était finalement très facile de les récupérer.
+Une fois de plus, il y a eu beaucoup de temps perdu parce que je me compliquais la tache. Par contre, il a été plus difficile de stocker une de ces données afin de l'utiliser plus tard.
+En l'occurrence, l'identifiant généré aléatoirement lors de la création d'un utilisateur dans RealTime DataBase.
+
+6 avril :
+L'identifiant généré par firebase m'est indispensable dans la requête pour modifier les données de l'utilisateur connecté.
+Pour une meilleure optimisation, j'ai intégré avec l'aide de blackbox les informations recuillies de l'utisilateur dans le contexte. Son identifiant de la partie realtime database, son adresse mail, son pseudonyme et sa liste d'abonnement.
+Maintenant que les informations le concernant sont stockées dans le contexte, la requête pour les obtenir est faite une seule fois à la connection. Cela évite de la refaire des dizaines de fois à chaque tweet affiché.
+
+10 avril :
+J'ai enfin réussi à faire en sorte que l'utilisateur puisse en suivre d'autres en créant une liste d'abonnés.
+J'ai d'abord procéder avec deux boutons. Un premier pour ajouter un nom dans une liste. Et un 2e pour envoyer cette nouvelle liste à la base de donnée. Faire le tout en un seul bouton a été compliqué.
+Ensuite, le problème étant que lorsque je cliquais sur le bouton "suivre", la première fois l'auteur était correctement ajouté à la base de donnée. Mais quand je cliquais sur un autre auteur, ce dernier remplaçait l'auteur ajouté précédent
+au lieu de s'additionner. Il fallait que j'actualise manuellement la page pour palier au problème.
+De plus, quand l'auteur ajouté avait publié plusieurs tweets, la mention "auteur suivi" n'était lisible qu'en dessous du tweet où je venais de cliquer alors qu'il aurait fallu que cette mention soit visible sous chaque tweet écrit par 
+cet auteur suivi.
+Grace aux possibilité proposées par le contexte, j'ai pu actualiser la liste des abonnements à chaque fois que je cliquais sur le bouton "suivre". Cette liste étant mise à jour à chaque fois, l'ensemble des tweets réapparaissent avec les 
+changements éventuels enfin.
