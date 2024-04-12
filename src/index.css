@@ -57,7 +57,12 @@
 }
 
 .invalid-input {
-
-    border: 1px solid red;
-  
+    border: 1px solid red;  
   }
+
+.frameAuthorTweet{
+    background-color: beige;
+    margin: 1rem;
+    padding: 0.5rem;
+    width: 40vw;
+}

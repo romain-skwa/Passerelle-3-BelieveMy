@@ -1,11 +1,13 @@
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function GetAuthorTweet(props){
     // Variable
     const { tweet } = props;
     const [userList, setUserList] = useState();
   //  console.log(`userList depuis GetAuthorTweet ici : `, userList);
+/***************************************************************************************************** */
 
     const requete = async () => {
     // Dans la variable const userlist, on va stocker le contenu récupéré sur Firebase
@@ -55,13 +57,13 @@ export function GetAuthorTweet(props){
     
             return userList.map((dataUser, index) => {    
                 if (tweet.author === dataUser.mailUser) {    
-                    return (    
-                      <span key={index} style={{ textTransform: 'capitalize' }}>
-                        {dataUser.pseudonymUser}
-                      </span>    
-                    );    
-                }    
-            });    
+                    return (
+                      <Link to={`/AuthorPage/${dataUser.mailUser}`} key={dataUser.id}>
+                      <span key={index} style={{ textTransform: 'capitalize' }}>{dataUser.pseudonymUser}</span>
+                      </Link>
+                    );
+                }
+            });
         };
 
 return (

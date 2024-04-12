@@ -52,6 +52,7 @@ const actualiserLikedList = (y) => {
       // Nettoyer l'effet en désinscrivant l'observateur lorsque le composant est démonté    
       return () => unsubscribe();    
     }, []);
+    
 /*************************************************************************************************************/
 /*            Recherchons les informations concernant tous les utilisateurs                  */
 useEffect(() => {

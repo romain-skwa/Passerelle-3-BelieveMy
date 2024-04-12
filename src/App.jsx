@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useContext } from "react";
 import { AuthContext } from "./store/AuthProvider";
 
+import AuthorPage from "./pages/AuthorPage";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -75,6 +76,10 @@ export default function App() {
                     {
                       path: "/ChangeMyPseudo",
                       element: <ChangeMyPseudo />,
+                    },
+                    {
+                      path: "/AuthorPage/:authorId",
+                      element: <AuthorPage />,
                     },
                   ],
                 },

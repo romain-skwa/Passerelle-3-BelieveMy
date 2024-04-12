@@ -64,7 +64,7 @@ export default function AboutThisUser(){
     // Fonction pour récupérer les données de notre utilisateur connecté.
     const renderUserList = () => {
         if (!userList) {    
-            return <div>Chargement...</div>;    
+            return <div>Chargement...</div>;  
         }
 
     const userConnectedData = userList.find((dataUser) => user && user.email === dataUser.mailUser);
