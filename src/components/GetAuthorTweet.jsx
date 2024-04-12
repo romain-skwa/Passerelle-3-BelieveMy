@@ -58,7 +58,7 @@ export function GetAuthorTweet(props){
             return userList.map((dataUser, index) => {    
                 if (tweet.author === dataUser.mailUser) {    
                     return (
-                      <Link to={`/AuthorPage/${dataUser.mailUser}`} key={dataUser.id}>
+                      <Link to={`/AuthorPage/${dataUser.id}`} key={dataUser.id}>
                       <span key={index} style={{ textTransform: 'capitalize' }}>{dataUser.pseudonymUser}</span>
                       </Link>
                     );

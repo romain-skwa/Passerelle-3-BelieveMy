@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+// Ce composant fait partie de la page AuthorPage.
+// C'est sur la page AuthorPage que va être affiché les tweets d'un utilisateur après que l'on ait cliqué sur son nom
 
 export default function AuthorTweets({ authorId }) {
-  //const [authorTweets, setAuthorTweets] = useState([]);
-  const [listeTweet, setListeTweet] = useState(); // Liste des tweets provenant de Home grace au props
+  const [listeTweet, setListeTweet] = useState(); // Liste de tous les tweets de tous les utilisateurs.
   const [loading, setLoading] = useState(false);
 
   //----------- Fonction -----------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ export default function AuthorTweets({ authorId }) {
     // Je crée une const qui va stocker l'id ET newTweet qui contient déjà : auteur, titre, contenu.
     // Pour la création, on se contente de laisser un tableau vide au début. Il sera le contenant.
     const donneesTransformees = [];
-    // Avec cette boucle for in ... aye aye Je n'ai pas encore compris exactement comment ça marche
+    // Avec cette boucle for in ...
     for (const key in donnees) {
       const newTweet = {
         id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
@@ -56,17 +56,18 @@ export default function AuthorTweets({ authorId }) {
     setListeTweet([...donneesTransformees]); // Mise à jour du state de listeTweet
     setLoading(false);
   };
-  console.log("donnees transformees dans AuthorTweets censé être ListTweet : ", listeTweet);
+  //console.log("Donnees transformees dans ListTweet. L'ensemble des tweets du site : ", listeTweet);
+
   const authorTweets = listeTweet ? listeTweet.filter((tweet) => tweet.author === authorId) : [];
+  // Pour obtenir authorTweets, on filtre listeTweet et on stocke tous les tweets ce l'auteur ciblé
 
   useEffect(() => {
     requete();
   }, []);
   return (
     <div>
-      <h3>Tweets de l'auteur {authorId}</h3>
       <ul>
-        {authorTweets.map((tweet) => (
+        {authorTweets.map((tweet) => (// pour afficher un par un chaque tweet
           <li key={tweet.id}>
             <section className="frameAuthorTweet">
               <p>{tweet.title}</p>
