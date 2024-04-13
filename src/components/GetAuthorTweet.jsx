@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+// Ce composant affiche le pseudonyme des utilisateurs à la place de leur identifiant unique ou leur mail.
+// par exemple : "Alice" à la place de -NtuK2i7W-JGNcnr_fkY ou "alice@yahoo.fr"
 
 export function GetAuthorTweet(props){
     // Variable

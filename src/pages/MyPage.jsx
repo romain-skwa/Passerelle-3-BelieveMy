@@ -1,21 +1,22 @@
 import { useState } from "react";
-import FormWriteTweet from "../components/FormWriteTweet";
-import MyTweets from "../components/MyTweets";
+import FormWriteTweet from "../components/Middle/FormWriteTweet";
+import MyTweets from "../components/Middle/MyTweets";
 
 // MyPage dans lequel nous sommes est le composant parent de MyTweets et de FormWriteTweet
 // Il les contient.
 
 function Home() {
   const [listeTweetUpdated, setListeTweetUpdated] = useState([]);
-// La liste de tweets pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée dans FormWriteTweet,
-// Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau tweet.
+  // La liste de tweets pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée dans FormWriteTweet,
+  // Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau tweet.
   const updateListeTweet = (newTweet) => {
     setListeTweetUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);
   };
   return (
     <div>
       <FormWriteTweet updateListeTweet={updateListeTweet} />
-      <MyTweets listeTweetParent={listeTweetUpdated} /> {/* Les tweets écrits par l'utilisateur connecté */}
+      <MyTweets listeTweetParent={listeTweetUpdated} />{" "}
+      {/* Les tweets écrits par l'utilisateur connecté */}
     </div>
   );
 }

@@ -1,14 +1,22 @@
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../store/AuthProvider";
-import { GetAuthorTweet } from "./GetAuthorTweet";
+import { AuthContext } from "../../store/AuthProvider";
+import { GetAuthorTweet } from "../GetAuthorTweet";
 
 export default function FollowThisUser(props) {
   // Variable
   const { user } = useContext(AuthContext);
-  const { tweet, } = props;
-  const { idOfConnectedUser, pseudonymConnectedUser, mailOfConnectedUser, followListOfConnectedUser, likedListOfConnectedUser } = useContext(AuthContext);
-  const [preventFollowList, setpreventFollowList] = useState(followListOfConnectedUser || []);
+  const { tweet } = props;
+  const {
+    idOfConnectedUser,
+    pseudonymConnectedUser,
+    mailOfConnectedUser,
+    followListOfConnectedUser,
+    likedListOfConnectedUser,
+  } = useContext(AuthContext);
+  const [preventFollowList, setpreventFollowList] = useState(
+    followListOfConnectedUser || []
+  );
 
   const { actualiserListFollow } = useContext(AuthContext); // vient du contexte.
 
@@ -19,10 +27,11 @@ export default function FollowThisUser(props) {
     return () => setpreventFollowList([]);
   }, [followListOfConnectedUser]);
 
-/*useEffect(() => {console.log(`Voici le contenu de preventFollowList : `, preventFollowList);}, [preventFollowList]);*/
+  /*useEffect(() => {console.log(`Voici le contenu de preventFollowList : `, preventFollowList);}, [preventFollowList]);*/
 
-  const updateFollowList = async () => {    
-    if (!preventFollowList.includes(tweet.author)) { // Vérifier que l'auteur du tweet n'est pas déjà présent dans preventFollowList
+  const updateFollowList = async () => {
+    if (!preventFollowList.includes(tweet.author)) {
+      // Vérifier que l'auteur du tweet n'est pas déjà présent dans preventFollowList
       const newDataFollowList = {
         mailUser: mailOfConnectedUser,
         pseudonymUser: pseudonymConnectedUser,
@@ -49,7 +58,7 @@ export default function FollowThisUser(props) {
       }
 
       setpreventFollowList([...preventFollowList, tweet.author]); // pas sûr que cette soit utile finalement
-      actualiserListFollow(newDataFollowList.followList);// Mettre à jour la liste dans le contexte
+      actualiserListFollow(newDataFollowList.followList); // Mettre à jour la liste dans le contexte
       props.requete();
       toast.success("Utilisateur ajouté à la liste d'abonnement avec succès !");
     } else {
@@ -59,7 +68,8 @@ export default function FollowThisUser(props) {
 
   return (
     <>
-        { // Pour s'assurer que le bouton "suivre" ne s'affichera pas  sous un tweet écrit par l'utilisateur connecté
+      {
+        // Pour s'assurer que le bouton "suivre" ne s'affichera pas  sous un tweet écrit par l'utilisateur connecté
         // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur est différent du mail de l'auteur du tweet
         // alors, on affiche le bouton "suivre" ou la mention "Déjà suivi"
         user && mailOfConnectedUser !== tweet.author ? (
@@ -68,12 +78,13 @@ export default function FollowThisUser(props) {
               <p style={{ color: "green" }}>Déjà suivi</p>
             ) : (
               <button onClick={updateFollowList}>
-                Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste d'abonnement
+                Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste
+                d'abonnement
               </button>
             )}
           </>
-          ) : (null)
-        }
-    </> 
+        ) : null
+      }
+    </>
   );
 }

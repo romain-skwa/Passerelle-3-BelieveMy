@@ -17,7 +17,8 @@ export default function AboutThisUser(){
       return () => setNewPseudoUser("");/* return () => setNewPseudoUser(""); : Cette ligne définit une fonction de nettoyage qui 
       sera exécutée avant le prochain rendu du composant AboutThisUser. Cette fonction met à jour l'état newPseudoUser avec 
       une chaîne de caractères vide, ce qui permet de s'assurer que newPseudoUser est toujours initialisé à une valeur définie, 
-      même si le composant se démonte ou se met à jour pour une raison quelconque.*/
+      même si le composant se démonte ou se met à jour pour une raison quelconque.
+      Je n'ai pas tout compris. */
     }, [pseudonymConnectedUser]);
 
 /*******************************************************************************************************************************/
@@ -82,7 +83,7 @@ return (
         <input type="text" value={newPseudoUser} onChange={handleInputChange}  style={{ width: "200px" }} />
         <button onClick={updatePseudo}>Mettre à jour le pseudo</button>
       <p>
-        Identifiant unique de l'utilisateur dans realtime database : {idOfConnectedUser}
+        Identifiant unique de l&apos;utilisateur dans realtime database : {idOfConnectedUser}
       </p>
     </>
 )

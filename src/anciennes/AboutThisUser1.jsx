@@ -73,7 +73,7 @@ export default function AboutThisUser(){
     // et on stocke les informations de cet utilisateur dans la variable userConnectedData
     console.log(` 4 ---- Le userConnectedData. Les informations stockées dans Realtime Database concernant 
     l'utilisateur connecté en ce moment  : `, userConnectedData);
-        return userConnectedData.followList //Cette fonction retourne la liste d'abonnement de notre utilisateur
+        return userConnectedData.followList // Cette fonction retourne la liste d'abonnement de notre utilisateur
     };
 
 
@@ -93,7 +93,8 @@ export default function AboutThisUser(){
 
 return (
     <> 
-        {user && renderUserList() /* Si un utilisateur est connecté, alors renderUserList est exécutée. */} 
+        {user && renderUserList() /* Si un utilisateur est connecté, alors renderUserList est exécutée. 
+        // Cette fonction retourne la liste d'abonnement de notre utilisateur */} 
     </>
 )
 }

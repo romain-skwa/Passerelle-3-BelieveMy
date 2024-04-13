@@ -17,6 +17,7 @@ import { useEffect, useContext } from "react";
 import { AuthContext } from "./store/AuthProvider";
 
 import AuthorPage from "./pages/AuthorPage";
+import MyPage from "./pages/MyPage";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -76,6 +77,10 @@ export default function App() {
                     {
                       path: "/ChangeMyPseudo",
                       element: <ChangeMyPseudo />,
+                    },
+                    {
+                      path: "/MyPage",
+                      element: <MyPage />,
                     },
                     {
                       path: "/AuthorPage/:authorId",
