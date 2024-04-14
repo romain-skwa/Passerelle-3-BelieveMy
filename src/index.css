@@ -66,3 +66,17 @@
     padding: 0.5rem;
     width: 40vw;
 }
+
+.divAuthorFollowed{
+    display: inline-block;
+    border: 1px brown solid;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.divTweetFollowed{
+    border: 1px red dashed;
+    margin: 1rem;
+    padding: 0.5rem;
+    list-style-type: none; /* Pour enlever les gros points noirs */
+}

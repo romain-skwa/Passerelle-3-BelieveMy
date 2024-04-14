@@ -18,6 +18,7 @@ import { AuthContext } from "./store/AuthProvider";
 
 import AuthorPage from "./pages/AuthorPage";
 import MyPage from "./pages/MyPage";
+import MyFollowedAuthors from "./pages/MyFollowedAuthors";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -85,6 +86,10 @@ export default function App() {
                     {
                       path: "/AuthorPage/:authorId",
                       element: <AuthorPage />,
+                    },
+                    {
+                      path: "/MyFollowedAuthors",
+                      element: <MyFollowedAuthors />,
                     },
                   ],
                 },

@@ -57,7 +57,7 @@ export function GetOneIdUser() {
       if (user && user.email === dataUser.mailUser) {
         return (
           <span key={index} style={{ textTransform: "capitalize" }}>
-            {dataUser.pseudonymUser}.
+            {dataUser.pseudonymUser}
           </span>
         );
       }

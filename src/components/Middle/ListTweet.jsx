@@ -113,7 +113,6 @@ export default function ListTweet(props) {
     <div className="affichageListeTweet">
       <h3>Liste des tweets</h3>
 
-      <button onClick={() => requete()}>Actualiser</button>
       {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
       <ul>
         {/* Si listeTweet existe, son contenu est lu par .map*/}
