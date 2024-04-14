@@ -11,9 +11,6 @@ export default function MyFollowedAuthors() {
   const [loading, setLoading] = useState(false);
 
   const {
-    idOfConnectedUser,
-    pseudonymConnectedUser,
-    mailOfConnectedUser,
     followListOfConnectedUser,
   } = useContext(AuthContext);
 
@@ -76,7 +73,7 @@ export default function MyFollowedAuthors() {
 
   // Filtre les tweets écrits par les auteurs suivis
   const tweetsSuivis = listeTweet.filter((tweet) =>
-    followListOfConnectedUser.includes(tweet.author)
+    followListOfConnectedUser ? followListOfConnectedUser.includes(tweet.author) : false
   );
 
   return (
@@ -106,12 +103,12 @@ export default function MyFollowedAuthors() {
               <h3>{tweet.title}</h3>
 
               <p>{tweet.content}</p>
-              <p>Écrit par <GetAuthorTweet tweet={tweet} /> </p>
+              <div>Écrit par <GetAuthorTweet tweet={tweet} /> </div>
             </li>
           ))}
         </ul>
       ) : (
-        <p>Vous n'êtes en train de suivre aucun auteur.</p>
+        <p>Les tweets écrits par les auteurs que vous suivrez seront affichés ici</p>
       )}
     </div>
   );
