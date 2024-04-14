@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { GetAuthorTweet } from "../GetAuthorTweet";
+import  UnfollowThisUser  from "../InsideTweet/UnfollowThisUser";
 
 export default function FollowThisUser(props) {
   // Variable
@@ -59,7 +60,7 @@ export default function FollowThisUser(props) {
 
       setpreventFollowList([...preventFollowList, tweet.author]); // pas sûr que cette soit utile finalement
       actualiserListFollow(newDataFollowList.followList); // Mettre à jour la liste dans le contexte
-      props.requete();
+      //props.requete(); je crois que cette ne sert à rien
       toast.success("Utilisateur ajouté à la liste d'abonnement avec succès !");
     } else {
       toast.info("Cet utilisateur est déjà dans votre liste d'abonnement.");
@@ -75,7 +76,7 @@ export default function FollowThisUser(props) {
         user && mailOfConnectedUser !== tweet.author ? (
           <>
             {preventFollowList.includes(tweet.author) ? (
-              <p style={{ color: "green" }}>Déjà suivi</p>
+              <p style={{ color: "green" }}>Déjà suivi <UnfollowThisUser tweet={tweet} /></p>
             ) : (
               <button onClick={updateFollowList}>
                 Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste
