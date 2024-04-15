@@ -15,8 +15,8 @@ export function CoDecoLink() {
       <Link to="/zut"> zut </Link>
       <Link to="/essai"> essai </Link>
       <Link to="/envoi"> envoi </Link>
-      <Link to="/MyFollowedAuthors"> MyFollowedAuthors </Link>
-      <Link to="/MyPage"> MyPage </Link>
+      {user && <Link to="/MyFollowedAuthors"> MyFollowedAuthors </Link>}
+      {user && <Link to="/MyPage"> MyPage </Link>}
       {user && <Link to="/ChangeMyPseudo"> ChangeMyPseudo </Link>}
       {auth.currentUser ?  <div onClick={() => logOut()} to="/disconnexion" style={{ cursor: "pointer" }}> Déconnexion </div> : <Link to="/connexion"> Connexion </Link>} 
     </div>
