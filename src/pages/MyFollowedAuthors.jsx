@@ -4,6 +4,7 @@ import { AuthContext } from "../store/AuthProvider";
 import { GetOneIdUser } from "../components/Hello/GetOneIdUser";
 import { GetAuthorTweet } from "../components/GetAuthorTweet";
 import { useNavigate } from 'react-router-dom';
+import ListFollowed from "../components/ListFollowed";
 
 export default function MyFollowedAuthors() {
   // Variable
@@ -83,25 +84,13 @@ export default function MyFollowedAuthors() {
   const tweetsSuivis = listeTweet.filter((tweet) =>
     followListOfConnectedUser ? followListOfConnectedUser.includes(tweet.author) : false
   );
-
+//console.log(`tweetsSuivis `, tweetsSuivis)
   return (
     <div>
       <h2>
         <GetOneIdUser /> Voici la liste des auteurs que vous suivez.{" "}
       </h2>
-        {/* Bloc pour afficher seulement les noms des auteurs suivis */}
-      {followListOfConnectedUser && followListOfConnectedUser.length > 0 ? (
-        <ul>
-          {followListOfConnectedUser.map((author) => (
-            <li className="divAuthorFollowed" key={author}>
-              {author}
-              {/* Ajoutez ici les éléments que vous souhaitez afficher pour chaque auteur */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Vous n'êtes en train de suivre aucun auteur.</p>
-      )}
+      <ListFollowed />
 
       {/* Bloc pour afficher le contenu des tweets, les titres et le noms de leur auteur*/}
       {followListOfConnectedUser && followListOfConnectedUser.length > 0 ? (

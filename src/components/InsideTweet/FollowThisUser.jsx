@@ -76,12 +76,11 @@ export default function FollowThisUser(props) {
         user && mailOfConnectedUser !== tweet.author ? (
           <>
             {preventFollowList.includes(tweet.author) ? (
-              <p style={{ color: "green" }}>Déjà suivi <UnfollowThisUser tweet={tweet} /></p>
+               <UnfollowThisUser tweet={tweet} />
             ) : (
-              <button onClick={updateFollowList}>
-                Ajouter <GetAuthorTweet tweet={tweet} /> dans la liste
-                d'abonnement
-              </button>
+              <div className="addFollow followButon" onClick={updateFollowList}>
+                S'abonner 
+              </div>
             )}
           </>
         ) : null

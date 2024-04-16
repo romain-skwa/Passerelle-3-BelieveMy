@@ -68,15 +68,58 @@
 }
 
 .divAuthorFollowed{
-    display: inline-block;
     border: 1px brown solid;
     margin: 1rem;
     padding: 0.5rem;
+    list-style-type: none;
+    width: 200px;
 }
 
 .divTweetFollowed{
     border: 1px red dashed;
     margin: 1rem;
     padding: 0.5rem;
-    list-style-type: none; /* Pour enlever les gros points noirs */
+    list-style-type: none; /* Pour enlever les gros ronds noirs */
+    width: 552px;
+}
+/************************************************************************************/
+.followButon{
+    cursor: pointer;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 80%;
+}
+.addFollow{
+    background-color: black;
+    color: white;
+    width: 94px;
+}
+.followed{
+    background-color: rgb(138, 218, 145);
+    border: 1px solid black;
+    width: 94px;
+    position: relative;
+    transition: 0.2s;
+}
+.followed:hover{ 
+    width: 110px; /* Augmenter la largeur de l'élément .followed */ 
+    height: 28px; /* Augmenter la hauteur de l'élément .followed  */
+    background-color: rgb(199, 52, 52);
+    transform: translateX(-8px);
+    color: transparent;
+}
+.followed:hover::before{
+    background-color: rgb(199, 52, 52);
+    border-radius: 8px;
+    color: white;
+    content: "Se désabonner";
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

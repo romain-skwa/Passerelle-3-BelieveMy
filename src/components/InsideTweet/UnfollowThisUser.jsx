@@ -65,7 +65,9 @@ export default function UnfollowThisUser(props) {
         }
       };
     return (<>
-<button onClick={deleteFollowList}>Ne plus suivre</button>
+    <div className="followed followButon" onClick={deleteFollowList}>
+      Abonné
+    </div>
     </>
     )
 }
