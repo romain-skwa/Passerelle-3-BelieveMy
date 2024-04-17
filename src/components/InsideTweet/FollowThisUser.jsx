@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/AuthProvider";
-import { GetAuthorTweet } from "../GetAuthorTweet";
 import  UnfollowThisUser  from "../InsideTweet/UnfollowThisUser";
 
 export default function FollowThisUser(props) {
@@ -70,7 +69,7 @@ export default function FollowThisUser(props) {
   return (
     <>
       {
-        // Pour s'assurer que le bouton "suivre" ne s'affichera pas  sous un tweet écrit par l'utilisateur connecté
+        // Pour s'assurer que le bouton "suivre" ne s'affichera pas sous un tweet écrit par l'utilisateur connecté
         // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur est différent du mail de l'auteur du tweet
         // alors, on affiche le bouton "suivre" ou la mention "Déjà suivi"
         user && mailOfConnectedUser !== tweet.author ? (

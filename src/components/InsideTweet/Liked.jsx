@@ -106,13 +106,13 @@ export default function Liked(props) {
       {user ? (
         <>
           {preventLikedList.includes(tweet.id) ? (
-            <p style={{ color: "green" }}>Déjà liké<GetOffLike tweet={tweet} onLike={likeThisTweet} /> </p>
+            <GetOffLike tweet={tweet} likeThisTweet={likeThisTweet} />
           ) : (
-            <button onClick={likeThisTweet}>J&apos;aime ce tweet</button>
+        <img onClick={likeThisTweet} className="grey_like" src="../../../public/icone/img_23992-3824409062.png" />
           )}
         </>
       ) : (
-        <Link to="/connexion">J&apos;aime ce tweet</Link>
+        <Link to="/connexion"><img className="grey_like" src="../../../public/icone/img_23992-3824409062.png" /></Link>
       )}
     </>
   );

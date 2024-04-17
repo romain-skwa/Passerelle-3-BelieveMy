@@ -123,3 +123,20 @@
     align-items: center;
     justify-content: center;
 }
+/************************************************************************************************************/
+.red_like{
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    background-image: url("../public/icone/red_icon.png");
+    background-size: 100%;
+}
+.red_like:hover{
+    background-image: url("../public/icone/grey_icon.png");
+}
+
+.grey_like{
+    height: 30px;
+    width: 30px;
+}

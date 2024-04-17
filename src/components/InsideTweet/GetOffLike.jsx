@@ -15,7 +15,7 @@ La fonction actualiserLikedList va mettre à jour la liste dans la contexte, ce 
 chaque clic.
 */
 export default function Liked(props) {
-  const { tweet, onLike } = props;
+  const { tweet, likeThisTweet } = props;
   const { user } = useContext(AuthContext);
 
   const {
@@ -110,13 +110,13 @@ export default function Liked(props) {
       {user ? (
         <>
           {preventLikedList.includes(tweet.id) ? (
-            <button onClick={unlikeThisTweet}>Je n&apos;aime plus ce tweet</button>
+            <div onClick={unlikeThisTweet} className="red_like"></div>
           ) : (
-            <button onClick={onLike}>J&apos;aime ce tweet</button>
+            <img onClick={likeThisTweet} className="grey_like" src="../../../public/icone/img_23992-3824409062.png" />
           )}
         </>
       ) : (
-        <Link to="/connexion">J&apos;aime ce tweet</Link>
+        <Link to="/connexion"><img className="grey_like" src="../../../public/icone/img_23992-3824409062.png" /></Link>
       )}
     </>
   );

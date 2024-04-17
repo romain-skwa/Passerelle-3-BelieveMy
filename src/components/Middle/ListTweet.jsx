@@ -158,7 +158,7 @@ Sinon c'est le bouton Modifier qui sera affiché */}
 
               <div>
                 {user ? (
-                  <FollowThisUser tweet={tweet} requete={requete} />
+                  <FollowThisUser tweet={tweet} />
                 ) : null}
               </div>
 

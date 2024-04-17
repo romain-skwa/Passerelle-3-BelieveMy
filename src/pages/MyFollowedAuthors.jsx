@@ -5,7 +5,12 @@ import { GetOneIdUser } from "../components/Hello/GetOneIdUser";
 import { GetAuthorTweet } from "../components/GetAuthorTweet";
 import { useNavigate } from 'react-router-dom';
 import ListFollowed from "../components/ListFollowed";
-
+import FollowThisUser from "../components/InsideTweet/FollowThisUser";
+import Liked from "../components/InsideTweet/GetOffLike";
+/*
+  Page dans laquelle on va voir la liste des auteurs suivis par l'utilisateur connecté
+  ainsi que tous les tweets des auteurs suivis.
+*/
 export default function MyFollowedAuthors() {
   // Variable
   const { user } = useContext(AuthContext);
@@ -100,7 +105,28 @@ export default function MyFollowedAuthors() {
               <h3>{tweet.title}</h3>
 
               <p>{tweet.content}</p>
-              <div>Écrit par <GetAuthorTweet tweet={tweet} /> </div>
+
+              <div>L'id de ce tweet : {tweet.id} </div>
+
+              <div>
+                Écrit par <GetAuthorTweet tweet={tweet} />
+                {tweet.datePublication
+                  ? ", le " + tweet.datePublication
+                  : " Nous n'avons pas de date concernant ce tweet."}
+                {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
+                {tweet.modified}
+              </div>
+
+              <div>
+                <Liked tweet={tweet} />
+              </div>
+
+              <div>
+                {user ? (
+                  <FollowThisUser tweet={tweet}  />
+                ) : null}
+              </div>
+
             </li>
           ))}
         </ul>
