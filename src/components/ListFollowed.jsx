@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
-
+import { Link } from "react-router-dom";
 
 export default function ListFollowed(){
   // Variable
@@ -69,7 +69,9 @@ console.log(`Contenu de tweetsAuteursSuivis `, tweetsAuteursSuivis);
             <ul>
                 {tweetsAuteursSuivis.map((author) => (
                 <li className="divAuthorFollowed" key={author.id} style={{ textTransform: 'capitalize' }}>
+                  <Link to={`/AuthorPage/${author.id}`}>
                     {author.pseudonymUser}
+                    </Link>
                     {/* Ajoutez ici les éléments que vous souhaitez afficher pour chaque auteur */}
                 </li>
                 ))}

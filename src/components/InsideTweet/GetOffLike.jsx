@@ -15,7 +15,7 @@ La fonction actualiserLikedList va mettre à jour la liste dans la contexte, ce 
 chaque clic.
 */
 export default function Liked(props) {
-  const { tweet, likeThisTweet } = props;
+  const { tweet, likeThisTweet, requete } = props;
   const { user } = useContext(AuthContext);
 
   const {
@@ -104,6 +104,8 @@ export default function Liked(props) {
     } else {
       console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
     }
+    props.requete();
+
   };
   return (
     <>

@@ -131,6 +131,7 @@
     background-image: url("../public/icone/full_red.png");
     background-size: 100%;
     margin-right: 0.5rem;
+    cursor: pointer;
 }
 .red_like:hover{
     background-image: url("../public/icone/empty_black.png");
@@ -141,15 +142,13 @@
     height: 22px;
     width: 22px;
     margin-right: 0.5rem;
+    cursor: pointer;
 }
 /************************************************************************************************************/
 .like{
     display: inline-flex;
     align-items: center;
     padding: 5px;
-}
-.like:hover{
-    background-color: azure;
 }
 /************************************************************************************************************/
 .lineOfComponents{

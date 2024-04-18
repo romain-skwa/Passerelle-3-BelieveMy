@@ -93,8 +93,9 @@ export default function MyFollowedAuthors() {
   return (
     <div>
       <h2>
-        <GetOneIdUser /> Voici la liste des auteurs que vous suivez.{" "}
+        <GetOneIdUser />
       </h2>
+      Voici la liste des auteurs que vous suivez.
       <ListFollowed />
 
       {/* Bloc pour afficher le contenu des tweets, les titres et le noms de leur auteur*/}
