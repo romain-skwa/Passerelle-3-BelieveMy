@@ -6,7 +6,7 @@ import { GetAuthorTweet } from "../components/GetAuthorTweet";
 import { useNavigate } from 'react-router-dom';
 import ListFollowed from "../components/ListFollowed";
 import FollowThisUser from "../components/InsideTweet/FollowThisUser";
-import Liked from "../components/InsideTweet/GetOffLike";
+import Liked from "../components/InsideTweet/Liked";
 /*
   Page dans laquelle on va voir la liste des auteurs suivis par l'utilisateur connecté
   ainsi que tous les tweets des auteurs suivis.

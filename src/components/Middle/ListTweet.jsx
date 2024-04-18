@@ -20,9 +20,7 @@ export default function ListTweet(props) {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState(
-    {}
-  ); /* sera changé dans la fonction handleFrameChangeTweet */
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
 
   //----------- Fonction -----------------------------------------------------------------------------------
@@ -107,6 +105,7 @@ export default function ListTweet(props) {
     setChangethisTweetNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [changethisTweetNow]);
 
+
   /********************************************************************************** */
 
   return (
@@ -156,14 +155,18 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                 />
               )}
 
-              <div>
-                {user ? (
-                  <FollowThisUser tweet={tweet} />
-                ) : null}
-              </div>
+              <div className="lineOfComponents">
 
-              <div>
-                <Liked tweet={tweet} />
+                <div className="like">
+                  <Liked tweet={tweet}  requete={requete} />
+                  <span>{tweet.likedCounter}</span>
+                </div>
+                
+                <div>
+                  {user ? (
+                    <FollowThisUser tweet={tweet} />
+                  ) : null}
+                </div>
               </div>
 
               <div>
@@ -180,7 +183,6 @@ Ces props permettent d'utiliser les données à l'intérieur de ce composant Del
 de bouton "supprimer" */}
               <DeleteTweet
                 tweet={tweet}
-                deleteNow={deleteNow}
                 setDeleteNow={setDeleteNow}
               ></DeleteTweet>
             </div>

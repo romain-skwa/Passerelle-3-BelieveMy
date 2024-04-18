@@ -91,7 +91,6 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    left: 80%;
 }
 .addFollow{
     background-color: black;
@@ -127,16 +126,34 @@
 .red_like{
     display: inline-block;
     position: relative;
-    height: 30px;
-    width: 30px;
-    background-image: url("../public/icone/red_icon.png");
+    height: 22px;
+    width: 22px;
+    background-image: url("../public/icone/full_red.png");
     background-size: 100%;
+    margin-right: 0.5rem;
 }
 .red_like:hover{
-    background-image: url("../public/icone/grey_icon.png");
+    background-image: url("../public/icone/empty_black.png");
+    margin-right: 0.5rem;
 }
 
-.grey_like{
-    height: 30px;
-    width: 30px;
+.empty_like{
+    height: 22px;
+    width: 22px;
+    margin-right: 0.5rem;
+}
+/************************************************************************************************************/
+.like{
+    display: inline-flex;
+    align-items: center;
+    padding: 5px;
+}
+.like:hover{
+    background-color: azure;
+}
+/************************************************************************************************************/
+.lineOfComponents{
+    display: flex;
+    border: 1px black solid;
+    justify-content: space-between;
 }

@@ -12,7 +12,7 @@ import GetOffLike from "./GetOffLike";
             Si celle-ci est inexistante, elle sera créée automatiquement par la requête.
 */
 export default function Liked(props) {
-  const { tweet } = props;
+  const { tweet, requete } = props;
   const { user } = useContext(AuthContext);
 
   const {
@@ -100,6 +100,11 @@ export default function Liked(props) {
     } else {
       console.log("J'incrémente LikedCounter dans le tweet : " + tweet.title);
     }
+      // Appelle la fonction requete() pour rafraîchir la liste des tweets
+
+      props.requete();
+          console.log( "ça devrait mettre à jour le nombre de cœur.");
+
   };
   return (
     <>
@@ -108,11 +113,11 @@ export default function Liked(props) {
           {preventLikedList.includes(tweet.id) ? (
             <GetOffLike tweet={tweet} likeThisTweet={likeThisTweet} />
           ) : (
-        <img onClick={likeThisTweet} className="grey_like" src="../../../public/icone/img_23992-3824409062.png" />
+        <img onClick={likeThisTweet} className="empty_like" src="../../../public/icone/empty_red.png" />
           )}
         </>
       ) : (
-        <Link to="/connexion"><img className="grey_like" src="../../../public/icone/img_23992-3824409062.png" /></Link>
+        <Link to="/connexion"><img className="empty_like" src="../../../public/icone/empty_red.png" /></Link>
       )}
     </>
   );

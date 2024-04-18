@@ -19,8 +19,8 @@ const AuthProvider = ({children}) => {
 
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
-Grace au contexte, cette fonction sera exécutée dans le composant FollowThisUser
-A chaque fois que l'utilisateur cliquera sur le bouton "Suivre", la liste des auteurs suivis présente dans firebase
+Grace au contexte, cette fonction sera exécutée depuis le composant FollowThisUser
+A chaque fois que l'utilisateur cliquera sur le bouton "S'abonner", la liste des auteurs suivis présente dans firebase
 sera actualisée ici dans le contexte.
 Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels changements.*/
 const actualiserListFollow = (x) => {
