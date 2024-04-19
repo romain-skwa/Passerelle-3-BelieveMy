@@ -1,5 +1,5 @@
 // Ce composant est la liste des tweets écrits par l'utilisateur connecté
-// MyTweets est l'enfant du composant MyPage.jsx
+// MyTweets est l'enfant du composant MyTweets.jsx
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DeleteTweet from "../InsideTweet/DeleteTweet";

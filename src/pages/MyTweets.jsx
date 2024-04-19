@@ -4,7 +4,7 @@ import MyTweets from "../components/Middle/MyTweets";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../store/AuthProvider";
 
-// MyPage dans lequel nous sommes est le composant parent de MyTweets et de FormWriteTweet
+// MyTweets dans lequel nous sommes est le composant parent de MyTweets et de FormWriteTweet
 // Il les contient.
 
 function Home() {
