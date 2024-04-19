@@ -42,5 +42,5 @@ export default function DeleteTweet({ tweet, deleteNow, setDeleteNow }) {
     }
   };
 
-  return <button onClick={onDeleteThisTweet}>Supprimer {tweet.id}</button>;
+  return <button onClick={onDeleteThisTweet}>Supprimer le tweet : {tweet.id}</button>;
 }

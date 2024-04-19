@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import ListFollowed from "../components/ListFollowed";
 import FollowThisUser from "../components/InsideTweet/FollowThisUser";
 import Liked from "../components/InsideTweet/Liked";
+import ChangeThisTweet from "../components/InsideTweet/ChangeThisTweet";
+import { CheckUserAuthor } from "../components/InsideTweet/CheckUserAuthor";
+import DeleteTweet from "../components/InsideTweet/DeleteTweet"; // Plus tard
+
 /*
   Page dans laquelle on va voir la liste des auteurs suivis par l'utilisateur connecté
   ainsi que tous les tweets des auteurs suivis.
@@ -17,14 +21,23 @@ export default function MyFollowedAuthors() {
   const [listeTweet, setListeTweet] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
+  const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
+
 
   const {
     followListOfConnectedUser,
   } = useContext(AuthContext);
-
+  
+  const handleFrameChangeTweet = (id) => {
+    setFrameChangeTweetState((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id], // Ici, on change le state de frameChangeTweetState (true/false) à la ligne 138
+    }));
+  };
   /**************************************************************************************************/
   //----------- Fonction -----------------------------------------------------------------------------------
-  useEffect(() => {
     const requete = async () => {
         // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
         setLoading(true);
@@ -80,8 +93,10 @@ export default function MyFollowedAuthors() {
         setLoading(false);
     };
 
-    requete();
-  }, []);
+    useEffect(() => {
+      requete();
+    }, []);
+
 
   /**************************************************************************************************/
 
@@ -89,44 +104,75 @@ export default function MyFollowedAuthors() {
   const tweetsSuivis = listeTweet.filter((tweet) =>
     followListOfConnectedUser ? followListOfConnectedUser.includes(tweet.author) : false
   );
+
 //console.log(`tweetsSuivis `, tweetsSuivis)
   return (
     <div>
       <h2>
         <GetOneIdUser />
       </h2>
-      Voici la liste des auteurs que vous suivez.
+      La liste des auteurs que vous suivez.
       <ListFollowed />
+
+    <div className="affichageListeTweet">
 
       {/* Bloc pour afficher le contenu des tweets, les titres et le noms de leur auteur*/}
       {followListOfConnectedUser && followListOfConnectedUser.length > 0 ? (
         <ul>
           {tweetsSuivis.map((tweet) => (
-            <li key={tweet.id} className="divTweetFollowed">
-              <h3>{tweet.title}</h3>
+            <li key={tweet.id} className="cadreTweet">
+             <section>
+            
+            <p>{tweet.title/* TITRE */}</p>
+            <div className="cadreTweetContent">{tweet.content /* CONTENU */}</div>
 
-              <p>{tweet.content}</p>
+            {frameChangeTweetState[tweet.id] ? (
+                <>
+                  <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
+                    tweet={tweet}
+                    changethisTweetNow={changethisTweetNow}
+                    setChangethisTweetNow={setChangethisTweetNow}
+                  />
+                  <button onClick={() => handleFrameChangeTweet(tweet.id)}>
+                    Retour
+                  </button>
+                </>
+              ) : (
+                <CheckUserAuthor // BOUTON pour faire apparaitre le textarea et CHANGER le TWEET (seulement le bouton)
+                  tweet={tweet}
+                  handleFrameChangeTweet={handleFrameChangeTweet}
+                />
+              )}
 
-              <div>L'id de ce tweet : {tweet.id} </div>
+              <div className="lineOfComponents">
+
+                <div className="like" /* CONTENANT */>
+                  <Liked tweet={tweet}  requete={requete} /* Cœur */ />
+                  <span>{tweet.likedCounter /* COMPTEUR */ }</span>
+                </div>
+                
+                <div>
+                  {user ? (
+                    <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */  />
+                  ) : null}
+                </div>
+              </div>
 
               <div>
-                Écrit par <GetAuthorTweet tweet={tweet} />
+                Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                 {tweet.datePublication
                   ? ", le " + tweet.datePublication
                   : " Nous n'avons pas de date concernant ce tweet."}
                 {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
-                {tweet.modified}
+                {tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
               </div>
 
-              <div>
-                <Liked tweet={tweet} />
-              </div>
+              <DeleteTweet
+                tweet={tweet}
+                setDeleteNow={setDeleteNow}
+              ></DeleteTweet>
 
-              <div>
-                {user ? (
-                  <FollowThisUser tweet={tweet}  />
-                ) : null}
-              </div>
+            </section>
 
             </li>
           ))}
@@ -134,6 +180,7 @@ export default function MyFollowedAuthors() {
       ) : (
         <p>Les tweets écrits par les auteurs que vous suivrez seront affichés ici</p>
       )}
+    </div>
     </div>
   );
 }

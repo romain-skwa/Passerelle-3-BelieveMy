@@ -49,7 +49,7 @@ const requete = async () => {
 
   return (
     <div>
-      <h1>Tweets de l'auteur {idTarget.pseudonymUser}</h1>
+      <h1>Tweets de l'auteur <span style={{textTransform: 'capitalize'}}>{idTarget.pseudonymUser}</span></h1>
       <AuthorTweets authorId={idTarget.mailUser} /> {/*Ce composant va afficher les tweets */}
     </div>
   );

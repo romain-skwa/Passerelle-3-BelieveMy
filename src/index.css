@@ -50,6 +50,7 @@
     box-sizing: border-box;
     margin: 15px 0;
     padding: 10px;
+    list-style-type: none; /* Pour enlever les gros ronds noirs */
 }
 .cadreTweetContent{
     border: grey 1px dashed;

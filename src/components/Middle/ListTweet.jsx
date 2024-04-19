@@ -129,17 +129,17 @@ export default function ListTweet(props) {
         listeTweet.map((tweet) => (
           <div key={tweet.title} className="cadreTweet">
             <div>
-              <div>{tweet.title}</div>
+              <div>{tweet.title /* TITRE */}</div>
 
-              <div className="cadreTweetContent">{tweet.content}</div>
+              <div className="cadreTweetContent">{tweet.content /* CONTENU */}</div>
 
-              <div>L'id de ce tweet : {tweet.id} </div>
+              <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
 Sinon c'est le bouton Modifier qui sera affiché */}
               {frameChangeTweetState[tweet.id] ? (
                 <>
-                  <ChangeThisTweet
+                  <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
                     tweet={tweet}
                     changethisTweetNow={changethisTweetNow}
                     setChangethisTweetNow={setChangethisTweetNow}
@@ -149,7 +149,7 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                   </button>
                 </>
               ) : (
-                <CheckUserAuthor
+                <CheckUserAuthor // BOUTON pour faire apparaitre le textarea et CHANGER le TWEET (seulement le bouton)
                   tweet={tweet}
                   handleFrameChangeTweet={handleFrameChangeTweet}
                 />
@@ -157,25 +157,25 @@ Sinon c'est le bouton Modifier qui sera affiché */}
 
               <div className="lineOfComponents">
 
-                <div className="like">
-                  <Liked tweet={tweet}  requete={requete} />
-                  <span>{tweet.likedCounter}</span>
+                <div className="like" /* CONTENANT */>
+                  <Liked tweet={tweet}  requete={requete} /* Cœur */ />
+                  <span>{tweet.likedCounter /* COMPTEUR */ }</span>
                 </div>
                 
                 <div>
                   {user ? (
-                    <FollowThisUser tweet={tweet} />
+                    <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
                   ) : null}
                 </div>
               </div>
 
               <div>
-                Écrit par <GetAuthorTweet tweet={tweet} />
+                Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                 {tweet.datePublication
                   ? ", le " + tweet.datePublication
                   : " Nous n'avons pas de date concernant ce tweet."}
                 {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
-                {tweet.modified}
+                {tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
               </div>
 
               {/* J'envoie les props, les propriétés dans ce composant.
