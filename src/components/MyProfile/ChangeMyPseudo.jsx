@@ -8,14 +8,11 @@ export default function AboutThisUser() {
   const {
     idOfConnectedUser,
     pseudonymConnectedUser,
-    mailOfConnectedUser,
-    followListOfConnectedUser,
-    likedListOfConnectedUser,
   } = useContext(AuthContext);
 
   const [newPseudoUser, setNewPseudoUser] = useState(""); // Par défaut le champ contient le nom actuel
   const saveContent = pseudonymConnectedUser; // Pour sauvegarder une copie du pseudo de l'utilisateur.
-
+  console.log(`newPseudoUser `, newPseudoUser )
   useEffect(() => {
     setNewPseudoUser(
       pseudonymConnectedUser || ""
@@ -57,16 +54,13 @@ export default function AboutThisUser() {
 
     // Les données qui seront envoyées afin de modifier le profil de l'utilisateur. En l'occurrence : son pseudonyme
     const newDataPseudo = {
-      mailUser: mailOfConnectedUser,
       pseudonymUser: newPseudoUser,
-      followList: followListOfConnectedUser,
-      likedList: likedListOfConnectedUser,
     };
 
     const change = await fetch(
       `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
       {
-        method: "PUT", // La méthode PUT pour POSER de nouvelles données
+        method: "PATCH", // La méthode PUT pour POSER de nouvelles données
         headers: {
           "Content-Type": "application/json",
         },
