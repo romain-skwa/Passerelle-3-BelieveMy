@@ -16,6 +16,7 @@ const AuthProvider = ({children}) => {
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
     const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
     const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
+    const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState(null);
 
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
@@ -32,6 +33,9 @@ const actualiserLikedList = (y) => {
   setLikedListOfConnectedUser(y);
 }
 /*---------------------------------------------------------------------------------------------- */
+const actualiserAvatar = (z) => {
+  setAvatartOfTheConnectedUser(z);
+}
 
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
@@ -104,6 +108,7 @@ useEffect(() => {
         setMailOfConnectedUser(userConnectedData.mailUser);
         setFollowListOfConnectedUser(userConnectedData.followList);
         setLikedListOfConnectedUser(userConnectedData.likedList);
+        setAvatartOfTheConnectedUser(userConnectedData.avatar);
       } else {  
         console.log(`La variable userConnectedData n'est pas définie. Voici les valeurs de user et userList :`, { user, userList });  
       }  
@@ -139,8 +144,10 @@ useEffect(() => {
         mailOfConnectedUser,
         followListOfConnectedUser,
         likedListOfConnectedUser,
+        avatartOfTheConnectedUser,
         actualiserListFollow,
         actualiserLikedList,
+        actualiserAvatar,
         logOut,// pour déconnecter notre utilisateur de n'importe où
         loginUser,
     }

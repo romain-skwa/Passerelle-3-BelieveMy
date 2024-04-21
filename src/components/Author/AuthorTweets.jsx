@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import DeleteTweet from "../InsideTweet/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
-import { GetAuthorTweet } from "../GetAuthorTweet";
+import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
 import FollowThisUser from "../InsideTweet/FollowThisUser";
 import Liked from "../InsideTweet/Liked";

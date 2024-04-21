@@ -22,10 +22,9 @@ export function CheckUserAuthor(props) {
           <button onClick={() => handleFrameChangeTweet(tweet.id)}>
             Modifier
           </button>
-          "L'utilisateur connecté a bien écrit ce tweet. OUI"
         </>
       ) : (
-        "NON. L'utilisateur connecté n'a pas écrit ce tweet"
+        null
       )}
     </div>
   );

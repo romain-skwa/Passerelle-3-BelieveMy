@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { GetOneIdUser } from "../components/Hello/GetOneIdUser";
-import { GetAuthorTweet } from "../components/GetAuthorTweet";
+import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 import { useNavigate } from 'react-router-dom';
 import ListFollowed from "../components/ListFollowed";
 import FollowThisUser from "../components/InsideTweet/FollowThisUser";

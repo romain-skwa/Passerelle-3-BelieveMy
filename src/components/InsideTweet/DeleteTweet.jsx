@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../store/AuthProvider";
 
 // DeleteTweet est le composant bouton qui se trouve dans le composant ListTweet
 
@@ -8,6 +10,7 @@ import { useState } from "react";
 // props setDeleteNow, on change la valeur de deleteNow ici et ça va déclencher un useEffect dans le composant parent ListTweet
 export default function DeleteTweet({ tweet, deleteNow, setDeleteNow }) {
   const [loading, setLoading] = useState(false); // Pour afficher l'icone de chargement
+  const { user } = useContext(AuthContext);
 
   const onDeleteThisTweet = async () => {
     // Delete
@@ -42,5 +45,12 @@ export default function DeleteTweet({ tweet, deleteNow, setDeleteNow }) {
     }
   };
 
-  return <button onClick={onDeleteThisTweet}>Supprimer le tweet : {tweet.id}</button>;
+  return(
+    <>
+          {user && user.email === tweet.author ? (
+    <button onClick={onDeleteThisTweet}>Supprimer le tweet : {tweet.id}</button>
+           ) : ( null)
+           }
+    </>
+  ) 
 }

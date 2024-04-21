@@ -52,7 +52,7 @@ Ici, les données créées seront envoyées dans RealtimeDatabase.
 On y envoie l'adresse  mail qui servira d'identifiant permanent
 Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe quand. C'est pour cette raison qu'il ne servira pas d'identifiant.
 */
-      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email, followList : []}
+      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email, followList : [], avatar : data.avatar,}
 
       const newUser = await fetch(// Une nouvelle section  dans realtime database : userList.
         "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json",
@@ -160,11 +160,31 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
                 {errors.password.message}
               </p>
             )}
-
+{/*------------- Avatar -----------------------------------------------------------------------------------*/}
+            <input
+              className={errors.avatar ? "invalid-input" : ""}
+              type="text"
+              placeholder="Avatar Facultatif"
+              name="avatar"
+              {...register("avatar", {
+                required: false,
+                minLength: {
+                  value: 10,
+                  message:
+                    "Etes-vous certains d'avoir entré un lien vers l'image correct ?",
+                },
+              })}
+            />
+            {errors.avatar && (
+              <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>
+                {errors.avatar.message}
+              </p>
+            )}
 {/*------------- Bouton Inscription -----------------------------------------------------------------------------------*/}
 
             <button>S&apos;inscrire</button>
             <div style={{ color: "red" }}>{errorMessagePasswords}</div>
+
           </form>
 
           {/* Pass */}

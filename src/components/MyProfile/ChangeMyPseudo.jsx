@@ -10,9 +10,10 @@ export default function AboutThisUser() {
     pseudonymConnectedUser,
   } = useContext(AuthContext);
 
-  const [newPseudoUser, setNewPseudoUser] = useState(""); // Par défaut le champ contient le nom actuel
+  const [newPseudoUser, setNewPseudoUser] = useState(""); // Par défaut le champ contiendra le nom actuel. Voir le useEffect.
   const saveContent = pseudonymConnectedUser; // Pour sauvegarder une copie du pseudo de l'utilisateur.
-  console.log(`newPseudoUser `, newPseudoUser )
+  //console.log(`newPseudoUser `, newPseudoUser )
+
   useEffect(() => {
     setNewPseudoUser(
       pseudonymConnectedUser || ""
@@ -73,13 +74,14 @@ export default function AboutThisUser() {
       setNewPseudoUser(saveContent); // on rétablit les valeurs d'origine grace à la sauvegarde faite avant les modifications
       toast.error("Erreur !"); // Toast affiche un message d'erreur.
       return;
-    }
+    }/*
     console.log(
       "Cela devrait mettre à jour le pseudo de l'utilisateur connecté en remplaçant " +
         pseudonymConnectedUser +
         " par " +
         newPseudoUser
-    );
+      );
+      */
   };
 
   const handleInputChange = (event) => {
@@ -104,8 +106,8 @@ export default function AboutThisUser() {
       />
       <button onClick={updatePseudo}>Mettre à jour le pseudo</button>
       <p>
-        Identifiant unique de l&apos;utilisateur dans realtime database :{" "}
-        {idOfConnectedUser}
+        Votre pseudonyme :{" "}
+        {pseudonymConnectedUser}
       </p>
     </>
   );

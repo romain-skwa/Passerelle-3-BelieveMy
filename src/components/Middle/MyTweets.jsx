@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DeleteTweet from "../InsideTweet/DeleteTweet";
 import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
-import { GetAuthorTweet } from "../GetAuthorTweet";
+import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { GetOneIdUser } from "../Hello/GetOneIdUser";
 import Liked from "../InsideTweet/Liked";
 import FollowThisUser from "../InsideTweet/FollowThisUser";
+import Avatar from "../InsideTweet/Avatar";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -129,15 +130,20 @@ export default function ListTweet(props) {
           .filter((tweet) => tweet.author === user.email)
           .map((tweet) => (
             <div key={tweet.title} className="cadreTweet">
+              <section style={{ display: "flex" }}>
+              <Avatar tweet={tweet} />
+              
               <div>
-                <div>{tweet.title /* TITRE */}</div> 
+                <div>{tweet.title /* TITRE */}</div>
 
-                <div className="cadreTweetContent">{tweet.content /* CONTENU */}</div>
+                <div className="cadreTweetContent">
+                  {tweet.content /* CONTENU */}
+                </div>
 
                 <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
                 {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
-Sinon c'est le bouton Modifier qui sera affiché */}
+  Sinon c'est le bouton Modifier qui sera affiché */}
                 {frameChangeTweetState[tweet.id] ? (
                   <>
                     <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
@@ -156,9 +162,9 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                   />
                 )}
 
-                <div className="lineOfComponents" /* CONTENANT */> 
-                  <div className="like">
-                    <Liked tweet={tweet}  requete={requete} /* Cœur */ />
+                <div className="lineOfComponents">
+                  <div className="like" /* CONTENANT */>
+                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
                     <span>{tweet.likedCounter /* COMPTEUR */}</span>
                   </div>
 
@@ -179,14 +185,14 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                 </div>
 
                 {/* J'envoie les props, les propriétés dans ce composant.
-Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
-de bouton "supprimer" */}
+  Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
+  de bouton "supprimer" */}
                 <DeleteTweet
                   tweet={tweet}
-                  deleteNow={deleteNow}
                   setDeleteNow={setDeleteNow}
                 ></DeleteTweet>
               </div>
+            </section>
             </div>
           ))}
     </div>

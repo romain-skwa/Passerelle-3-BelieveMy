@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import DeleteTweet from "../InsideTweet/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
-import { GetAuthorTweet } from "../GetAuthorTweet";
+import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
 import FollowThisUser from "../InsideTweet/FollowThisUser";
 import Liked from "../InsideTweet/Liked";
+import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 // Ce composant est l'enfant du parent Home.
@@ -20,8 +20,11 @@ export default function ListTweet(props) {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
-  const { user } = useContext(AuthContext);
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState(
+    {}
+  ); /* sera changé dans la fonction handleFrameChangeTweet */
+  const { user } =
+    useContext(AuthContext);
 
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
@@ -105,7 +108,6 @@ export default function ListTweet(props) {
     setChangethisTweetNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [changethisTweetNow]);
 
-
   /********************************************************************************** */
 
   return (
@@ -128,64 +130,69 @@ export default function ListTweet(props) {
       {listeTweet &&
         listeTweet.map((tweet) => (
           <div key={tweet.title} className="cadreTweet">
-            <div>
-              <div>{tweet.title /* TITRE */}</div>
-
-              <div className="cadreTweetContent">{tweet.content /* CONTENU */}</div>
-
-              <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
-
-              {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
-Sinon c'est le bouton Modifier qui sera affiché */}
-              {frameChangeTweetState[tweet.id] ? (
-                <>
-                  <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
-                    tweet={tweet}
-                    changethisTweetNow={changethisTweetNow}
-                    setChangethisTweetNow={setChangethisTweetNow}
-                  />
-                  <button onClick={() => handleFrameChangeTweet(tweet.id)}>
-                    Retour
-                  </button>
-                </>
-              ) : (
-                <CheckUserAuthor // BOUTON pour faire apparaitre le textarea et CHANGER le TWEET (seulement le bouton)
-                  tweet={tweet}
-                  handleFrameChangeTweet={handleFrameChangeTweet}
-                />
-              )}
-
-              <div className="lineOfComponents">
-
-                <div className="like" /* CONTENANT */>
-                  <Liked tweet={tweet}  requete={requete} /* Cœur */ />
-                  <span>{tweet.likedCounter /* COMPTEUR */ }</span>
-                </div>
-                
-                <div>
-                  {user ? (
-                    <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
-                  ) : null}
-                </div>
-              </div>
-
+            <section style={{ display: "flex" }}>
+              <Avatar tweet={tweet} />
+              
               <div>
-                Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
-                {tweet.datePublication
-                  ? ", le " + tweet.datePublication
-                  : " Nous n'avons pas de date concernant ce tweet."}
-                {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
-                {tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
-              </div>
+                <div>{tweet.title /* TITRE */}</div>
 
-              {/* J'envoie les props, les propriétés dans ce composant.
-Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
-de bouton "supprimer" */}
-              <DeleteTweet
-                tweet={tweet}
-                setDeleteNow={setDeleteNow}
-              ></DeleteTweet>
-            </div>
+                <div className="cadreTweetContent">
+                  {tweet.content /* CONTENU */}
+                </div>
+
+                <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
+
+                {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
+  Sinon c'est le bouton Modifier qui sera affiché */}
+                {frameChangeTweetState[tweet.id] ? (
+                  <>
+                    <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
+                      tweet={tweet}
+                      changethisTweetNow={changethisTweetNow}
+                      setChangethisTweetNow={setChangethisTweetNow}
+                    />
+                    <button onClick={() => handleFrameChangeTweet(tweet.id)}>
+                      Retour
+                    </button>
+                  </>
+                ) : (
+                  <CheckUserAuthor // BOUTON pour faire apparaitre le textarea et CHANGER le TWEET (seulement le bouton)
+                    tweet={tweet}
+                    handleFrameChangeTweet={handleFrameChangeTweet}
+                  />
+                )}
+
+                <div className="lineOfComponents">
+                  <div className="like" /* CONTENANT */>
+                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                    <span>{tweet.likedCounter /* COMPTEUR */}</span>
+                  </div>
+
+                  <div>
+                    {user ? (
+                      <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
+                    ) : null}
+                  </div>
+                </div>
+
+                <div>
+                  Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
+                  {tweet.datePublication
+                    ? ", le " + tweet.datePublication
+                    : " Nous n'avons pas de date concernant ce tweet."}
+                  {tweet.hourPublication ? " à " + tweet.hourPublication : null}
+                  .{tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
+                </div>
+
+                {/* J'envoie les props, les propriétés dans ce composant.
+  Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
+  de bouton "supprimer" */}
+                <DeleteTweet
+                  tweet={tweet}
+                  setDeleteNow={setDeleteNow}
+                ></DeleteTweet>
+              </div>
+            </section>
           </div>
         ))}
     </div>

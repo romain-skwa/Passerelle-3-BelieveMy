@@ -4,11 +4,13 @@ import MyTweets from "../components/Middle/MyTweets";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../store/AuthProvider";
 import ChangeMyPseudo from "../components/MyProfile/ChangeMyPseudo";
+import ChangeMyAvatar from "../components/MyProfile/ChangeMyAvatar";
 
 export default function MyProfile() {
     return(
         <>
         <ChangeMyPseudo />
+        <ChangeMyAvatar />
         </>
     )
 }
