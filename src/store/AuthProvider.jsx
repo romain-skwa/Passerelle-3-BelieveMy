@@ -36,7 +36,11 @@ const actualiserLikedList = (y) => {
 const actualiserAvatar = (z) => {
   setAvatartOfTheConnectedUser(z);
 }
-
+/*---------------------------------------------------------------------------------------------- */
+const actualiserPseudo = (p) => {
+  setPseudonymConnectedUser(p);
+}
+/*---------------------------------------------------------------------------------------------- */
     useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -148,6 +152,7 @@ useEffect(() => {
         actualiserListFollow,
         actualiserLikedList,
         actualiserAvatar,
+        actualiserPseudo,
         logOut,// pour déconnecter notre utilisateur de n'importe où
         loginUser,
     }

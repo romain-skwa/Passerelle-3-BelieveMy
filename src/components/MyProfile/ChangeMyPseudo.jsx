@@ -8,6 +8,7 @@ export default function AboutThisUser() {
   const {
     idOfConnectedUser,
     pseudonymConnectedUser,
+    actualiserPseudo,
   } = useContext(AuthContext);
 
   const [newPseudoUser, setNewPseudoUser] = useState(""); // Par défaut le champ contiendra le nom actuel. Voir le useEffect.
@@ -80,15 +81,15 @@ export default function AboutThisUser() {
         pseudonymConnectedUser +
         " par " +
         newPseudoUser
-      );
-      */
+      );*/
+      
+     actualiserPseudo(newPseudoUser); // pour que l'affichage soit mis à jour automatiquement, on se sert du contexte
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event) => {// pour mettre à jour la donnée newPseudoUser à chaque changement
     setNewPseudoUser(event.target.value);
   };
-  console.log(`Le nouveau Pseudo qui vient d'être entré `, newPseudoUser);
-
+  //console.log(`Le nouveau Pseudo qui vient d'être entré `, newPseudoUser);
   return (
     <>
       <p>

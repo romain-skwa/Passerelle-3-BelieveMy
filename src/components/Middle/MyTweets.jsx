@@ -53,10 +53,7 @@ export default function ListTweet(props) {
     }
 
     const donnees = await donneesRecueillies.json();
-    console.log(
-      "Les données recueillies devraient être affichées ici ",
-      donnees
-    );
+    //console.log("Les données recueillies devraient être affichées ici ", donnees);
 
     // Dans la console, on peut voir que donnees contient une liste d'objets.
     // Chacun représentant un tweet. Chaque objet contient les clefs et leurs valeurs.
@@ -77,7 +74,7 @@ export default function ListTweet(props) {
       // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
       donneesTransformees.push(newTweet);
     }
-    console.log("donnees transformees : ", donneesTransformees);
+    //console.log("donnees transformees : ", donneesTransformees);
 
     setMyListeTweet([...donneesTransformees]); // Mise à jour du state de myListeTweet
     setLoading(false);
