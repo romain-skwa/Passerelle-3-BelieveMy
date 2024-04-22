@@ -18,6 +18,7 @@ function FirebaseImageUpload() {
       });
     }
   };
+  
 /*
 
 useEffect pour lancer une fonction quand on le décide. Ici, dès l'ouverture de la page

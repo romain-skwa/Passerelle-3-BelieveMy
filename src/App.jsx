@@ -20,6 +20,7 @@ import AuthorPage from "./pages/AuthorPage";
 import MyTweets from "./pages/MyTweets";
 import MyFollowedAuthors from "./pages/MyFollowedAuthors";
 import MyProfile from "./pages/MyProfile";
+import OneTweet from "./pages/OneTweet";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -96,6 +97,10 @@ export default function App() {
                   {
                     path: "/MyProfile",
                     element: <MyProfile />,
+                  },
+                  {
+                    path: "/OneTweet/:IdTweet",
+                    element: <OneTweet />,
                   },
                 ],
               },

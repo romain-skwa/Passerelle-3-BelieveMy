@@ -5,6 +5,7 @@ import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
 import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
 import FollowThisUser from "../InsideTweet/FollowThisUser";
+import Commentaries from "../InsideTweet/Commentaries";
 import Liked from "../InsideTweet/Liked";
 import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
@@ -23,8 +24,7 @@ export default function ListTweet(props) {
   const [frameChangeTweetState, setFrameChangeTweetState] = useState(
     {}
   ); /* sera changé dans la fonction handleFrameChangeTweet */
-  const { user } =
-    useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
@@ -131,7 +131,7 @@ export default function ListTweet(props) {
         listeTweet.map((tweet) => (
           <div key={tweet.title} className="cadreTweet">
 
-          {/***********Avatar****Titre******************************************************************/}
+          {/*********** Avatar **** Titre ******************************************************************/}
             
             <section style={{ display: "flex", paddingBottom:"1rem" }}>
               <Avatar tweet={tweet} />
@@ -141,10 +141,10 @@ export default function ListTweet(props) {
           {/**** Image **********************************************************************************/}
             
             <section style={{ display: "flex", justifyContent:"center", paddingBottom:"1rem" }}>
-            {tweet.image && tweet.image !== "" ? <img style={{maxWidth: "100%"}} src={tweet.image} alt="Image du tweet" /> : null}
+              {tweet.image && tweet.image !== "" ? <img style={{maxWidth: "100%"}} src={tweet.image} alt="Image du tweet" /> : null}
             </section>
 
-          {/************Contenu****Modifier***Cœur***Like***Date******************************************/}
+          {/******** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
 
               <div className="cadreTweetContent">
                 {tweet.content /* CONTENU */}
@@ -154,7 +154,7 @@ export default function ListTweet(props) {
               <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
-Sinon c'est le bouton Modifier qui sera affiché */}
+                Sinon c'est le bouton Modifier qui sera affiché */}
               {frameChangeTweetState[tweet.id] ? (
                 <>
                   <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
@@ -180,6 +180,10 @@ Sinon c'est le bouton Modifier qui sera affiché */}
                 </div>
 
                 <div>
+                  <Commentaries tweet={tweet} />
+                </div>
+
+                <div>
                   {user ? (
                     <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
                   ) : null}
@@ -196,8 +200,8 @@ Sinon c'est le bouton Modifier qui sera affiché */}
               </div>
 
               {/* J'envoie les props, les propriétés dans ce composant.
-Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
-de bouton "supprimer" */}
+              Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
+              de bouton "supprimer" */}
               <DeleteTweet
                 tweet={tweet}
                 setDeleteNow={setDeleteNow}
