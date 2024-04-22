@@ -113,11 +113,11 @@ export default function Liked(props) {
           {preventLikedList.includes(tweet.id) ? (
             <GetOffLike tweet={tweet} likeThisTweet={likeThisTweet} requete={requete} />
           ) : (
-        <img onClick={likeThisTweet} className="empty_like" src="../../../public/icone/empty_red.png" />
+        <img onClick={likeThisTweet} className="empty_like" src="../../../icone/empty_red.png" />
           )}
         </>
       ) : (
-        <Link to="/connexion"><img className="empty_like" src="../../../public/icone/empty_red.png" /></Link>
+        <Link to="/connexion"><img className="empty_like" src="../../../icone/empty_red.png" /></Link>
       )}
     </>
   );

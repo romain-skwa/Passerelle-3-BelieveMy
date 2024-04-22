@@ -33,7 +33,8 @@ export default function FormWriteTweet(props) {
   // Variables
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
-
+  const inputNewImageContent = useRef();
+  
   // Création nouveau tweet
   const createNewTweet = async () => {
     const newTweet = {
@@ -42,6 +43,7 @@ export default function FormWriteTweet(props) {
       author: user.email,
       datePublication: formattedDate,
       hourPublication: formattedTime,
+      image: inputNewImageContent.current.value,
       modified: "",
     };
 
@@ -95,6 +97,17 @@ export default function FormWriteTweet(props) {
             style={{ margin: "15px auto", display: "block" }}
           />
 
+          <div>
+            <label htmlFor="inputNewImageContent">Image</label><br></br>
+            <input
+             type="text"
+             name="inputNewImageContent"
+             id="inputNewImageContent"
+             ref={inputNewImageContent}
+             size="50"
+             placeholder="Coller le lien d'une image."
+              />
+          </div>
           <div>
             <label htmlFor="inputNewTweetContent">Contenu du tweet</label>
             <textarea

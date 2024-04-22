@@ -130,16 +130,27 @@ export default function ListTweet(props) {
           .filter((tweet) => tweet.author === user.email)
           .map((tweet) => (
             <div key={tweet.title} className="cadreTweet">
-              <section style={{ display: "flex" }}>
-              <Avatar tweet={tweet} />
+
+            {/***********Avatar****Titre******************************************************************/}
               
-              <div>
-                <div>{tweet.title /* TITRE */}</div>
+              <section style={{ display: "flex", paddingBottom:"1rem" }}>
+                <Avatar tweet={tweet} />
+                <div style={{display:"flex", alignItems:"center", fontWeight:"bold",}}>{tweet.title /* TITRE */}</div>
+              </section>
+            
+            {/**** Image **********************************************************************************/}
+              
+              <section style={{ display: "flex", justifyContent:"center", paddingBottom:"1rem" }}>
+              {tweet.image && tweet.image !== "" ? <img style={{maxWidth: "100%"}} src={tweet.image} alt="Image du tweet" /> : null}
+              </section>
+
+            {/************Contenu****Modifier***Cœur***Like***Date******************************************/}
 
                 <div className="cadreTweetContent">
                   {tweet.content /* CONTENU */}
                 </div>
 
+              <div>
                 <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
                 {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
@@ -192,7 +203,6 @@ export default function ListTweet(props) {
                   setDeleteNow={setDeleteNow}
                 ></DeleteTweet>
               </div>
-            </section>
             </div>
           ))}
     </div>

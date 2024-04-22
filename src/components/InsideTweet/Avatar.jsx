@@ -37,7 +37,7 @@ export default function Avatar(props) {
         // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
         donneesTransformees.push(dataUserProfile);
       }
-      console.log("donnees transformees Avatar : ", donneesTransformees);
+      //console.log("donnees transformees Avatar : ", donneesTransformees);
       setUserList([...donneesTransformees]);
     }
 
