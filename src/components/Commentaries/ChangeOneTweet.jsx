@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 export default function ChangeThisTweet(props) {
-    const { tweet } = props;
+    const { tweet, IdTweet } = props;
     const [theTweet, setTheTweet] = useState(tweet);
     const saveContent = theTweet;
 
@@ -24,7 +24,7 @@ export default function ChangeThisTweet(props) {
             }
     
             const change = await fetch(
-                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}.json`,
+                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet}.json`,
                 {
                   method: "PUT", // La méthode PUT pour POSER de nouvelles données
                   headers: {
@@ -52,7 +52,7 @@ export default function ChangeThisTweet(props) {
                 ref={newContentRef}
                 defaultValue={tweet.content} // Le contenu intial est déjà présent à l'affichage et peut maintenant être modifié
             />
-
+        
         <div>
             <label htmlFor="inputNewImageContent">Image</label><br></br>
             <input
@@ -63,8 +63,7 @@ export default function ChangeThisTweet(props) {
              size="50"
              placeholder={theTweet.image}
               />
-          </div>
-
+        </div>
             <button onClick={ updateTweet } >Modifier</button>
         </>
     )

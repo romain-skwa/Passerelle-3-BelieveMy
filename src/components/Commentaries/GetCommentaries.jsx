@@ -11,14 +11,15 @@ import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { Link } from "react-router-dom";
+import ChangeCommentary from "./ChangeCommentary";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
 
-export default function ListTweet(props) {
+export default function GetCommentaries(props) {
   // props provenant de Home
   // State
-  const [listeTweet, setListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
+  const [listCommentary, setListCommentary] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
@@ -27,6 +28,7 @@ export default function ListTweet(props) {
     {}
   ); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
+  const { IdTweet } = props;
 
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
@@ -34,9 +36,9 @@ export default function ListTweet(props) {
     setLoading(true);
     toast("Chargement...");
 
-    // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
-    const donneesRecueillies = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json`,
+    // Dans la variable const donneesRecueilliesCommentaires, on va stocker le contenu récupéré sur Firebase
+    const donneesRecueilliesCommentaires = await fetch(
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,
       {
         method: "GET",
         headers: {
@@ -45,13 +47,13 @@ export default function ListTweet(props) {
       }
     );
 
-    if (!donneesRecueillies.ok) {
+    if (!donneesRecueilliesCommentaires.ok) {
       toast.error("Une erreur est survenue dans ListTweet");
       return;
     }
 
-    const donnees = await donneesRecueillies.json();
-    //console.log("Les données recueillies devraient être affichées ici ", donnees);
+    const donnees = await donneesRecueilliesCommentaires.json();
+    //console.log("Les données recueillies des commentaires devraient être affichées ici ", donnees);
 
     // Dans la console, on peut voir que donnees contient une liste d'objets.
     // Chacun représentant un tweet. Chaque objet contient les clefs et leurs valeurs.
@@ -74,7 +76,7 @@ export default function ListTweet(props) {
     }
     //console.log("donnees transformees : ", donneesTransformees);
 
-    setListeTweet([...donneesTransformees]); // Mise à jour du state de listeTweet
+    setListCommentary([...donneesTransformees]); // Mise à jour du state de listCommentary
     setLoading(false);
   };
 
@@ -111,30 +113,21 @@ export default function ListTweet(props) {
   }, [changethisTweetNow]);
 
   /********************************************************************************** */
-
+console.log(`IdTweet juste avant d'afficher`, IdTweet)
   return (
     <div className="affichageListeTweet">
       <h3>Liste des tweets</h3>
 
       {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
-      <ul>
-        {/* Si listeTweet existe, son contenu est lu par .map*/}
-        {listeTweet &&
-          listeTweet.map((tweet) => (
-            <li key={tweet.title}>
-              {tweet.title}
-              {" : "}
-              {tweet.content}{" "}
-            </li>
-          ))}
-      </ul>
 
-      {listeTweet &&
-        listeTweet.map((tweet) => (
-          <div key={tweet.title} className="cadreTweet">
+      {listCommentary &&
+        listCommentary
+          .filter((tweet) => tweet.commentaryOf && tweet.commentaryOf === IdTweet)
+          .map((tweet) => (
+          <div key={tweet.id} className="cadreTweet">
 
           {/*********** Avatar **** Titre ******************************************************************/}
-            
+            {tweet.commentaryOf}
             <section style={{ display: "flex", paddingBottom:"1rem" }}>
               <Avatar tweet={tweet} />
               <div style={{display:"flex", alignItems:"center", fontWeight:"bold",}}>{tweet.title /* TITRE */}</div>
@@ -153,13 +146,14 @@ export default function ListTweet(props) {
               </div>
 
             <div>
-              <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
+              <div>L'id de ce commentaire : {tweet.id /* ID du TWEET*/} </div>
 
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
                 Sinon c'est le bouton Modifier qui sera affiché */}
               {frameChangeTweetState[tweet.id] ? (
                 <>
-                  <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
+                  <ChangeCommentary // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
+                    IdTweet={IdTweet}
                     tweet={tweet}
                     changethisTweetNow={changethisTweetNow}
                     setChangethisTweetNow={setChangethisTweetNow}

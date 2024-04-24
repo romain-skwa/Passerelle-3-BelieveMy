@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 export default function ChangeThisTweet(props) {
-    const { tweet } = props;
+    const { tweet, IdTweet } = props;
     const [theTweet, setTheTweet] = useState(tweet);
     const saveContent = theTweet;
 
@@ -14,6 +14,7 @@ export default function ChangeThisTweet(props) {
             // Le tweet modifié est dans newTweet
                 // Le titre et l'auteur restent les mêmes. Seul le contenu va changer. D'où le useRef utilisé.
             const newTweet = {
+                commentaryOf: IdTweet,
                 title   : theTweet.title,
                 content : newContentRef.current.value, // Le nouveau contenu sera ce qui est écrit dans le textarea
                 author  : theTweet.author,
@@ -24,7 +25,7 @@ export default function ChangeThisTweet(props) {
             }
     
             const change = await fetch(
-                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}.json`,
+                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
                 {
                   method: "PUT", // La méthode PUT pour POSER de nouvelles données
                   headers: {
@@ -40,11 +41,11 @@ export default function ChangeThisTweet(props) {
             return;
           }
           props.setChangethisTweetNow(true);
-          console.log( "ça devrait mettre à jour la liste des tweets");
+          console.log( "ça devrait mettre à jour la liste des commentaires.");
         };
 
     return(
-        <>on change le tweet
+        <>
             <textarea 
                 name="contentTweet" 
                 id="contentTweet" 
@@ -52,8 +53,7 @@ export default function ChangeThisTweet(props) {
                 ref={newContentRef}
                 defaultValue={tweet.content} // Le contenu intial est déjà présent à l'affichage et peut maintenant être modifié
             />
-
-        <div>
+       <div>
             <label htmlFor="inputNewImageContent">Image</label><br></br>
             <input
              type="text"
@@ -63,7 +63,7 @@ export default function ChangeThisTweet(props) {
              size="50"
              placeholder={theTweet.image}
               />
-          </div>
+        </div>
 
             <button onClick={ updateTweet } >Modifier</button>
         </>

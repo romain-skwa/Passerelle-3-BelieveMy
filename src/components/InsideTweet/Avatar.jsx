@@ -57,7 +57,7 @@ export default function Avatar(props) {
                 <img
                   key={dataUser.id}
                   className="avatar"
-                  src={dataUser.avatar ? dataUser.avatar : "../../../public/unknown/unknown-avatar-icon01.jpg"}          
+                  src={dataUser.avatar ? dataUser.avatar : "../../../icone/unknown-avatar-icon01.jpg"}          
                   alt="Avatar"   
                 />
               );

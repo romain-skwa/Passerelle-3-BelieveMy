@@ -29,6 +29,7 @@ console.log(`L'heure actuelle en français : ${formattedTime}`);
 /****************************** FORMULAIRE ********************************************************** */
 export default function FormWriteTweet(props) {
   const { user } = useContext(AuthContext);
+  const { IdTweet } = props;
 
   // Variables
   const inputNewTweetTitle = useRef();
@@ -36,8 +37,9 @@ export default function FormWriteTweet(props) {
   const inputNewImageContent = useRef();
   
   // Création nouveau tweet
-  const createNewTweet = async () => {
-    const newTweet = {
+  const createNewCommentary = async () => {
+    const commentary = {
+      commentaryOf: IdTweet,
       title: inputNewTweetTitle.current.value,
       content: inputNewTweetContent.current.value,
       author: user.email,
@@ -49,13 +51,13 @@ export default function FormWriteTweet(props) {
 
     // Ajouter dans firebase
     const response = await fetch(
-      "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json",
+      "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newTweet),
+        body: JSON.stringify(commentary),
       }
     );
 
@@ -74,7 +76,7 @@ export default function FormWriteTweet(props) {
     // On exécute, dans l'élément Home, la fonction updateListeTweet avec newTweet en tant que paramètre
     // Cette fonction va ajouter le nouveau tweet (newTweet) à ce qu'il y avait déjà dans listeTweet. Voir le composant Home.
     // Ensuite, la nouvelle liste maintenant composée va remplacer la précédente après l'actualisation du state listeTweet
-    props.updateListeTweet(newTweet);
+    props.updateListeTweet(commentary);
   };
 
   return (
@@ -82,44 +84,41 @@ export default function FormWriteTweet(props) {
       {user ? ( // Si un utilisateur est connecté, on affiche la section ci-dessous
         <section className="formulaire">
           {/* pourquoi ça ne marche pas quand j'écris form ? */}
-          <h3 style={{ textAlign: "center" }}>Ecrire un nouveau tweet</h3>
+          <h3 style={{ textAlign: "center" }}>Commentez ce tweet</h3>
+          
 
-          <label htmlFor="inputNewTweetTitle">
-            Titre<br></br>
-          </label>
           <input // le inputNewTweetTitle de la const style-component. Ici, ça remplace le mot "input" dans la balise de début
             type="text"
             name="inputNewTweetTitle"
             id="inputNewTweetTitle"
             ref={inputNewTweetTitle}
-            size="50"
-            placeholder="Donnez un titre à votre tweet"
+            size="70"
+            placeholder="Donnez un titre à votre commentaire"
             style={{ margin: "15px auto", display: "block" }}
           />
 
           <div>
-            <label htmlFor="inputNewImageContent">Image</label><br></br>
+            <textarea
+              cols="70"
+              rows="5"
+              name="inputNewTweetContent"
+              id="inputNewTweetContent"
+              ref={inputNewTweetContent}
+              placeholder="Écrivez votre nouveau tweet ici."
+              style={{ margin: "10px auto", padding: "5px 0", display: "block" }}
+            />
+          </div>
+
+          <div>
             <input
              type="text"
              name="inputNewImageContent"
              id="inputNewImageContent"
              ref={inputNewImageContent}
-             size="50"
+             size="70"
              placeholder="Coller le lien d'une image."
+             style={{ margin: "10px auto", padding: "5px", display: "block" }}
               />
-          </div>
-          
-          <div>
-            <label htmlFor="inputNewTweetContent">Contenu du tweet</label>
-            <textarea
-              cols="50"
-              rows="10"
-              name="inputNewTweetContent"
-              id="inputNewTweetContent"
-              ref={inputNewTweetContent}
-              placeholder="Écrivez votre nouveau tweet ici."
-              style={{ margin: "15px auto", padding: "5px", display: "block" }}
-            />
           </div>
 
           <div
@@ -128,9 +127,9 @@ export default function FormWriteTweet(props) {
               display: "flex",
               justifyContent: "end",
             }}
-            onClick={createNewTweet} // La fonction s'exécute quand on clique
+            onClick={createNewCommentary} // La fonction s'exécute quand on clique
           >
-            <button>Nouveau tweet</button>
+            <button>Commentez</button>
           </div>
         </section>
       ) : null}
