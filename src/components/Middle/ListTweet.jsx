@@ -184,7 +184,7 @@ export default function ListTweet(props) {
                 <div>
                   {user ? (
                     <Commentaries tweet={tweet} />
-                  ) :         <Link to="/connexion">Commentaire</Link>
+                  ) : <Link to="/connexion">Commentaire</Link>
                 }
                 </div>
 

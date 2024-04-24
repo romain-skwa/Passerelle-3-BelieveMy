@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { Link } from "react-router-dom";
 
-import GetOffLike from "./GetOffLike";
+import GetOffLikeCommentary from "./GetOffLikeCommentary";
 
 /* Ce composant est le bouton "J'aime ce tweet" inclus dans ListTweet. Il comporte deux parties.
   Partie 1 : concernant les données de l'utilisateur qui clique sur le bouton. Elle met à jour la donnée "likedList" dans 
@@ -12,9 +12,8 @@ import GetOffLike from "./GetOffLike";
             Si celle-ci est inexistante, elle sera créée automatiquement par la requête.
 */
 export default function Liked(props) {
-  const { tweet, requete, IdTweet } = props;
+  const { tweet, requete } = props;
   const { user } = useContext(AuthContext);
-//console.log(`Ce que contient le tweet `, tweet)
   const {
     idOfConnectedUser,
     pseudonymConnectedUser,
@@ -37,16 +36,13 @@ export default function Liked(props) {
 
   // PARTIE 1
   const likeThisTweet = async () => {
-    // Quand le tweet est affiché sur la page OneTweet, son identifant sera IdTweet issu du useParams
-    // dans les autres pages, son identifiant sera tweet.id
-    // Dans les deux cas l'identifiant sera le même.
-    if (!preventLikedList.includes(IdTweet ? IdTweet : tweet.id)) {
+    if (!preventLikedList.includes(tweet.id)) {
       // Vérifier que le tweet en question n'est pas déjà présent dans preventLikedList
       const newDataLikedList = {
         mailUser: mailOfConnectedUser,
         pseudonymUser: pseudonymConnectedUser,
         followList: followListOfConnectedUser,
-        likedList: [...preventLikedList, IdTweet ? IdTweet : tweet.id],
+        likedList: [...preventLikedList, tweet.id],
       };
       console.log(
         "Données à envoyer à Firebase depuis le composant Liked : ",
@@ -74,11 +70,11 @@ export default function Liked(props) {
     /* -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- */
     // PARTIE 2
 
-    console.log("Fonction likeThisTweet appelée");
+    console.log("Fonction likeThisCommentary appelée pour le commentaire ", tweet.id);
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet ? IdTweet : tweet.id}/likedCounter.json`
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
     );
     const currentLikedCounter = await response.json();
 
@@ -87,7 +83,7 @@ export default function Liked(props) {
 
     // Envoi de la requête PUT pour remplacer la valeur dans Firebase
     const putResponse = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet ? IdTweet : tweet.id}/likedCounter.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
       {
         method: "PUT",
         headers: {
@@ -106,7 +102,7 @@ export default function Liked(props) {
       // Appelle la fonction requete() pour rafraîchir la liste des tweets
 
       props.requete();
-          console.log( "ça devrait mettre à jour le nombre de cœur.");
+          console.log("ça devrait mettre à jour le nombre de cœur.");
 
   };
   return (
@@ -114,7 +110,7 @@ export default function Liked(props) {
       {user ? (
         <>
           {preventLikedList.includes(tweet.id) ? (
-            <GetOffLike tweet={tweet} likeThisTweet={likeThisTweet} requete={requete} />
+            <GetOffLikeCommentary tweet={tweet} likeThisTweet={likeThisTweet} requete={requete} />
           ) : (
         <img onClick={likeThisTweet} className="empty_like" src="../../../icone/empty_red.png" />
           )}

@@ -11,6 +11,7 @@ import ChangeThisTweet from "../components/InsideTweet/ChangeThisTweet";
 import { CheckUserAuthor } from "../components/InsideTweet/CheckUserAuthor";
 import DeleteTweet from "../components/InsideTweet/DeleteTweet"; // Plus tard
 import Avatar from "../components/InsideTweet/Avatar";
+import Commentaries from "../components/InsideTweet/Commentaries";
 
 /*
   Page dans laquelle on va voir la liste des auteurs suivis par l'utilisateur connecté
@@ -170,6 +171,8 @@ export default function MyFollowedAuthors() {
                     <Liked tweet={tweet} requete={requete} /* Cœur */ />
                     <span>{tweet.likedCounter /* COMPTEUR */}</span>
                   </div>
+
+                  <Commentaries tweet={tweet} />
 
                   <div>
                     {user ? (

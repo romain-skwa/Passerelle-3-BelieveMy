@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import DeleteTweet from "../InsideTweet/DeleteTweet"; // Plus tard
-import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
+import DeleteCommentary from "./DeleteCommentary";
 import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
 import FollowThisUser from "../InsideTweet/FollowThisUser";
@@ -12,6 +11,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { Link } from "react-router-dom";
 import ChangeCommentary from "./ChangeCommentary";
+import LikedCommentary from "./LikedCommentary";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -113,7 +113,7 @@ export default function GetCommentaries(props) {
   }, [changethisTweetNow]);
 
   /********************************************************************************** */
-console.log(`IdTweet juste avant d'afficher`, IdTweet)
+//console.log(`IdTweet juste avant d'afficher`, IdTweet)
   return (
     <div className="affichageListeTweet">
       <h3>Liste des tweets</h3>
@@ -127,7 +127,7 @@ console.log(`IdTweet juste avant d'afficher`, IdTweet)
           <div key={tweet.id} className="cadreTweet">
 
           {/*********** Avatar **** Titre ******************************************************************/}
-            {tweet.commentaryOf}
+            Commentaires du tweet : {tweet.commentaryOf}
             <section style={{ display: "flex", paddingBottom:"1rem" }}>
               <Avatar tweet={tweet} />
               <div style={{display:"flex", alignItems:"center", fontWeight:"bold",}}>{tweet.title /* TITRE */}</div>
@@ -171,15 +171,8 @@ console.log(`IdTweet juste avant d'afficher`, IdTweet)
 
               <div className="lineOfComponents">
                 <div className="like" /* CONTENANT */>
-                  <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                  <LikedCommentary tweet={tweet} requete={requete} /* Cœur */ />
                   <span>{tweet.likedCounter /* COMPTEUR */}</span>
-                </div>
-
-                <div>
-                  {user ? (
-                    <Commentaries tweet={tweet} />
-                  ) :         <Link to="/connexion">Commentaire</Link>
-                }
                 </div>
 
                 <div>
@@ -201,10 +194,10 @@ console.log(`IdTweet juste avant d'afficher`, IdTweet)
               {/* J'envoie les props, les propriétés dans ce composant.
               Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
               de bouton "supprimer" */}
-              <DeleteTweet
+              <DeleteCommentary
                 tweet={tweet}
                 setDeleteNow={setDeleteNow}
-              ></DeleteTweet>
+              ></DeleteCommentary>
             </div>
           </div>
         ))}

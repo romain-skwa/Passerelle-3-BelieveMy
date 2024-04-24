@@ -2,10 +2,9 @@ import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 export default function ChangeThisTweet(props) {
-    const { tweet } = props;
+    const { tweet, IdTweet } = props;
     const [theTweet, setTheTweet] = useState(tweet);
     const saveContent = theTweet;
-
     const newContentRef = useRef();
     const inputNewImageContent = useRef();
 
@@ -22,9 +21,11 @@ export default function ChangeThisTweet(props) {
                 image: inputNewImageContent.current.value,
                 modified : "  (Modifié)",      
             }
-    
+    // Quand le tweet est affiché sur la page OneTweet, son identifant sera IdTweet issu du useParams
+    // dans les autres pages, son identifiant sera tweet.id
+    // Dans les deux cas l'identifiant sera toujours le même. Il s'agit juste d'une façon différente de l'acquérir.
             const change = await fetch(
-                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}.json`,
+                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet ? IdTweet : tweet.id}.json`,
                 {
                   method: "PUT", // La méthode PUT pour POSER de nouvelles données
                   headers: {

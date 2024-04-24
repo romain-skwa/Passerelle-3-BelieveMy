@@ -2,12 +2,11 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DeleteTweet from "../components/InsideTweet/DeleteTweet";
-import ChangeOneTweet from "./../components/Commentaries/ChangeOneTweet";
+import ChangeThisTweet from "../components/InsideTweet/ChangeThisTweet";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../components/InsideTweet/CheckUserAuthor";
 import FollowThisUser from "../components/InsideTweet/FollowThisUser";
-import Commentaries from "../components/InsideTweet/Commentaries";
-import Liked from "../components/InsideTweet/GetOffLike";
+import Liked from "../components/InsideTweet/Liked";
 import Avatar from "../components/InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
@@ -55,8 +54,8 @@ export default function ListTweet(props) {
     const donnees = await donneesRecueillies.json();
 
     //console.log("donnees transformees : ", donneesTransformees);
-    console.log("Les donneesRecueillies ", donneesRecueillies);
-    console.log("Les données  ", donnees);
+    //console.log("Les donneesRecueillies ", donneesRecueillies);
+    //console.log("Les données  ", donnees);
 
     setListeTweet([donnees]); // Mise à jour du state de listeTweet
     setLoading(false);
@@ -77,7 +76,7 @@ export default function ListTweet(props) {
 
   /************************************************************************************************/
   //console.log(`listeTweet `, listeTweet)
-  //console.log(`l'identifiant du tweet généré par firebase`, IdTweet)
+  console.log(`l'identifiant du tweet généré par firebase`, IdTweet)
 
   return(
     <>
@@ -112,7 +111,7 @@ export default function ListTweet(props) {
                   Sinon c'est le bouton Modifier qui sera affiché */}
               {frameChangeTweetState[tweet.id] ? (
                   <>
-                  <ChangeOneTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
+                  <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
                       IdTweet={IdTweet}
                       tweet={tweet}
                       changethisTweetNow={changethisTweetNow}
@@ -130,20 +129,18 @@ export default function ListTweet(props) {
               )}
 
               <div className="lineOfComponents">
-                  <div className="like" /* CONTENANT */>
-                  <Liked tweet={tweet} requete={requete} /* Cœur */ />
+
+                <div className="like" /* CONTENANT */>
+                  <Liked IdTweet={IdTweet} tweet={tweet} requete={requete} /* Cœur */ />
                   <span>{tweet.likedCounter /* COMPTEUR */}</span>
-                  </div>
+                </div>
 
-                  <div>
-                  <Commentaries tweet={tweet} />
-                  </div>
-
-                  <div>
+                <div>
                   {user ? (
                       <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
                   ) : null}
-                  </div>
+                </div>
+
               </div>
 
               <div>
@@ -166,13 +163,13 @@ export default function ListTweet(props) {
           </div>
           ))} 
       </div>
-      <section>
-        {  console.log(`IdTweet  de useParams`, IdTweet)}
-      <GetCommentaries IdTweet={IdTweet}/>
-      </section>
-      <section>
-        <FormCommentary IdTweet={IdTweet} />
-      </section>
+        <section>
+          <GetCommentaries IdTweet={IdTweet}/>
+        </section>
+
+        <section>
+          <FormCommentary IdTweet={IdTweet} />
+        </section>
     </>
   );
 }

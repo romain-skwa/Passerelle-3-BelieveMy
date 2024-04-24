@@ -6,6 +6,7 @@ export default function ChangeThisTweet(props) {
     const [theTweet, setTheTweet] = useState(tweet);
     const saveContent = theTweet;
 
+    const inputNewTweetTitle = useRef();
     const newContentRef = useRef();
     const inputNewImageContent = useRef();
 
@@ -15,7 +16,7 @@ export default function ChangeThisTweet(props) {
                 // Le titre et l'auteur restent les mêmes. Seul le contenu va changer. D'où le useRef utilisé.
             const newTweet = {
                 commentaryOf: IdTweet,
-                title   : theTweet.title,
+                title: inputNewTweetTitle.current.value,
                 content : newContentRef.current.value, // Le nouveau contenu sera ce qui est écrit dans le textarea
                 author  : theTweet.author,
                 datePublication : theTweet.datePublication,
@@ -46,6 +47,16 @@ export default function ChangeThisTweet(props) {
 
     return(
         <>
+            <input // le inputNewTweetTitle de la const style-component. Ici, ça remplace le mot "input" dans la balise de début
+                type="text"
+                name="inputNewTweetTitle"
+                id="inputNewTweetTitle"
+                ref={inputNewTweetTitle}
+                size="70"
+                defaultValue={tweet.title}
+                style={{ margin: "15px auto", display: "block" }}
+            />
+
             <textarea 
                 name="contentTweet" 
                 id="contentTweet" 
