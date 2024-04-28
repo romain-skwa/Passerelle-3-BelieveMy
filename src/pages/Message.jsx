@@ -2,15 +2,21 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../store/AuthProvider";
+
 const MessageBox = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const [inputContentMessage, setInputContentMessage] = useState("");
   const [toTheMail, setToTheMail] = useState("");
-  const [mailOfConnectedUser, setMailOfConnectedUser] = useState("");
-  const [idOfConnectedUser, setIdOfConnectedUser] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const { tweetId } = useParams();
+  const {
+    idOfConnectedUser,
+    pseudonymConnectedUser,
+    mailOfConnectedUser,
+  } = useContext(AuthContext);
 
   useEffect(() => {
     allTheConversations();
@@ -140,9 +146,15 @@ const MessageBox = () => {
         <button onClick={conversation}>Envoyer</button>
       </div>
 
+      <div>Ici on est censé voir l&apos;adresse mail du destinataire :
+          {" " + toTheMail/* Afficher la liste des utilisateurs ici */}
+        </div>
+        <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
+        <div>La date actuelle : {formattedDate}</div>
+        
       <div>
         {conversationSection.map(([id, data]) => (
-          <div key={id}>
+          <div className="petitMessage" key={id}>
             <p>
               De : {data.from} <br />
               Pour : {data.to} <br />
