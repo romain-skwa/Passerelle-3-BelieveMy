@@ -21,6 +21,7 @@ import MyTweets from "./pages/MyTweets";
 import MyFollowedAuthors from "./pages/MyFollowedAuthors";
 import MyProfile from "./pages/MyProfile";
 import OneTweet from "./pages/OneTweet";
+import Message from "./pages/Message";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -102,13 +103,16 @@ export default function App() {
                     path: "/OneTweet/:IdTweet",
                     element: <OneTweet />,
                   },
+                  {
+                    path: "/Message/:tweetId",
+                    element: <Message />,
+                  },
                 ],
               },
             ],
           },
         ])}
       />
-      ;
     </>
   );
 }

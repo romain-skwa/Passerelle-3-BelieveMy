@@ -131,7 +131,7 @@ export default function ListTweet(props) {
 
       {listeTweet &&
         listeTweet.map((tweet) => (
-          <div key={tweet.title} className="cadreTweet">
+          <div key={tweet.id} className="cadreTweet">
 
           {/*********** Avatar **** Titre ******************************************************************/}
             
@@ -175,6 +175,7 @@ export default function ListTweet(props) {
                 />
               )}
 
+              {/* Cœur **** Commentaire **** S'abonner ***** */}
               <div className="lineOfComponents">
                 <div className="like" /* CONTENANT */>
                   <Liked tweet={tweet} requete={requete} /* Cœur */ />

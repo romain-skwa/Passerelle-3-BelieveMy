@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export function GetAuthorTweet(props){
     // Variable
-    const { tweet } = props;
+    const { tweet, cancelLink } = props;
     const [userList, setUserList] = useState();
   //  console.log(`userList depuis GetAuthorTweet ici : `, userList);
 /***************************************************************************************************** */
@@ -60,9 +60,19 @@ export function GetAuthorTweet(props){
             return userList.map((dataUser, index) => {    
                 if (tweet.author === dataUser.mailUser) {    
                     return (
-                      <Link to={`/AuthorPage/${dataUser.id}`} key={dataUser.id}>
-                      <span key={index} style={{ textTransform: 'capitalize' }}>{dataUser.pseudonymUser}</span>
-                      </Link>
+                      <>
+                        {cancelLink ? (                
+                          <span style={{ textTransform: "capitalize" }}>                
+                            {dataUser.pseudonymUser}                
+                          </span>                
+                        ) : (                
+                          <Link to={`/AuthorPage/${dataUser.id}`} key={dataUser.id}>                
+                            <span style={{ textTransform: "capitalize" }}>                
+                              {dataUser.pseudonymUser}                
+                            </span>                
+                          </Link>                
+                        )}                
+                      </>
                     );
                 }
             });
