@@ -22,6 +22,7 @@ export default function Liked(props) {
     followListOfConnectedUser,
     likedListOfConnectedUser,
     actualiserLikedList,
+    avatartOfTheConnectedUser,
   } = useContext(AuthContext);
 
   const [preventLikedList, setPreventLikedList] = useState(
@@ -47,6 +48,7 @@ export default function Liked(props) {
         pseudonymUser: pseudonymConnectedUser,
         followList: followListOfConnectedUser,
         likedList: [...preventLikedList, IdTweet ? IdTweet : tweet.id],
+        avatar: avatartOfTheConnectedUser,
       };
       console.log(
         "Données à envoyer à Firebase depuis le composant Liked : ",

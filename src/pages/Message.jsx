@@ -8,10 +8,10 @@ import { AuthContext } from "../store/AuthProvider";
 const MessageBox = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const [inputContentMessage, setInputContentMessage] = useState("");
-  const [toTheMail, setToTheMail] = useState("");
+  const [toTheMail, setToTheMail] = useState("");// Destinataire
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
-  const { tweetId } = useParams();
+  const { tweetId } = useParams();// Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
   const {
     idOfConnectedUser,
     pseudonymConnectedUser,
@@ -22,7 +22,8 @@ const MessageBox = () => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
-  }, []);
+  }, [toTheMail]);
+
 // On récupère l'adresse mail de l'utilisateur destinataire du message ---------------------------------------------------------
 
     // Contraint de procéder comme ceci afin d'éviter de montrer l'adresse mail (également identifiant) du destinataire dans l'url
@@ -64,14 +65,18 @@ const MessageBox = () => {
           },
         }
       );
-
+  
       if (!getEverything.ok) {
         toast.error("Une erreur est survenue dans userTweet");
         return;
       }
-
+  
       const data = await getEverything.json();
-      setConversationSection(Object.entries(data));
+      // On ne garde que les messages qui ont été envoyés ou reçus par l'utilisateur connecté
+      const filteredData = Object.entries(data).filter(([id, message]) => {
+        return message.from === mailOfConnectedUser && message.to === toTheMail || message.from === toTheMail && message.to === mailOfConnectedUser;
+      });
+      setConversationSection(filteredData);
     } catch (error) {
       console.error("Erreur dans allTheConversations : ", error);
     }
@@ -141,16 +146,16 @@ const MessageBox = () => {
         style={{
           display: "flex",
           justifyContent: "end",
-        }}
-      >
+          }}
+        >
         <button onClick={conversation}>Envoyer</button>
       </div>
 
       <div>Ici on est censé voir l&apos;adresse mail du destinataire :
           {" " + toTheMail/* Afficher la liste des utilisateurs ici */}
-        </div>
-        <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
-        <div>La date actuelle : {formattedDate}</div>
+      </div>
+      <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
+      <div>La date actuelle : {formattedDate}</div>
         
       <div>
         {conversationSection.map(([id, data]) => (
