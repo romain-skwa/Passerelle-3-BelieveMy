@@ -170,7 +170,22 @@
     margin-right: 10px;
 }
 /************************************************************************************************************/
-.petitMessage{
-    border: dashed grey 2px;
+.conversationContainer{
+    width: 20vw;
+    border: 2px purple solid;
+}
+
+.message{
+    width: 15vw;
+    box-sizing: border-box;
+    padding: 0.5rem;    
     margin: 0.5rem;
+    border-radius: 10px;
+}
+.messageFromAuthor{
+    border: dashed grey 2px;
+}
+.messageFromOther{
+    border: solid blue 2px;
+    margin-left: 25%;
 }

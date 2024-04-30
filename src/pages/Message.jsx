@@ -157,9 +157,9 @@ const MessageBox = () => {
       <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
       <div>La date actuelle : {formattedDate}</div>
         
-      <div>
+      <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
-          <div className="petitMessage" key={id}>
+          <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} key={id}>
             <p>
               De : {data.from} <br />
               Pour : {data.to} <br />
@@ -169,7 +169,7 @@ const MessageBox = () => {
             </p>
           </div>
         ))}
-      </div>
+        </div>
     </>
   );
 };
