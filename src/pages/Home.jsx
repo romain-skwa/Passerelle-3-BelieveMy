@@ -7,7 +7,7 @@ import ListTweet from "../components/Middle/ListTweet";
 
 function Home() {
   const [listeTweetUpdated, setListeTweetUpdated] = useState([]);
-  // La liste de tweets pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée dans FormWriteTweet,
+  // La liste de tweets pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée à partir de FormWriteTweet,
   // Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau tweet.
   const updateListeTweet = (newTweet) => {
     setListeTweetUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);

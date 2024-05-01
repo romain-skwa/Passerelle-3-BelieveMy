@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 
 // Ce composant est l'enfant du parent Home.
-// Il est lié à ListTweet, qui est lui-même aussi un enfant de
+// Il est lié à GetCommentaries, qui est lui-même aussi un enfant de
 
 /**** Obtenir la date actuelle ******************************************************************** */
 function formatDate(date) {
@@ -65,19 +65,13 @@ export default function FormWriteTweet(props) {
     if (!response.ok) {
       return "Une erreur est survenue. Impossible d'afficher la base de données.";
     }
-
+    props.updateListeTweet(commentary);
     const { name: idRandom } = await response.json();
     console.log(
       "Le data.name généré aléatoirement dans Firebase par FormWriteTweet " +
         idRandom
     );
-
-    // Appeler la fonction updateListeTweet pour mettre à jour l'état local listeTweet dans le composant parent Home.jsx
-    // On exécute, dans l'élément Home, la fonction updateListeTweet avec newTweet en tant que paramètre
-    // Cette fonction va ajouter le nouveau tweet (newTweet) à ce qu'il y avait déjà dans listeTweet. Voir le composant Home.
-    // Ensuite, la nouvelle liste maintenant composée va remplacer la précédente après l'actualisation du state listeTweet
-    props.updateListeTweet(commentary);
-  };
+ };
 
   return (
     <div>

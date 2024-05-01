@@ -15,7 +15,6 @@ const MessageBox = () => {
   const { tweetId } = useParams();// Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
   const {
     idOfConnectedUser,
-    pseudonymConnectedUser,
     mailOfConnectedUser,
   } = useContext(AuthContext);
 

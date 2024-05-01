@@ -13,6 +13,8 @@ import { AuthContext } from "../store/AuthProvider";
 import FormCommentary from "../components/Commentaries/FormCommentary";
 import GetCommentaries from "../components/Commentaries/GetCommentaries";
 
+// Nous sommes dans le parent de GetCommentaries qui récupère les commentaires d'un tweet et de 
+// FormCommentary le formulaire pour écrire les commentaires.
 
 export default function ListTweet(props) {
   // State
@@ -26,6 +28,11 @@ export default function ListTweet(props) {
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
 
+  const [listeCommentariesUpdated, setListeCommentariesUpdated] = useState([]);
+
+  const updateListeTweet = (newTweet) => {
+    setListeCommentariesUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);
+  };
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -77,7 +84,7 @@ export default function ListTweet(props) {
   /************************************************************************************************/
   //console.log(`listeTweet `, listeTweet)
   console.log(`l'identifiant du tweet généré par firebase`, IdTweet)
-
+  
   return(
     <>
       <div className="affichageListeTweet">
@@ -164,11 +171,11 @@ export default function ListTweet(props) {
           ))} 
       </div>
         <section>
-          <GetCommentaries IdTweet={IdTweet}/>
+          <GetCommentaries IdTweet={IdTweet} listeCommentariesParent={listeCommentariesUpdated}  />
         </section>
 
         <section>
-          <FormCommentary IdTweet={IdTweet} />
+          <FormCommentary IdTweet={IdTweet}updateListeTweet={updateListeTweet} />
         </section>
     </>
   );

@@ -7,16 +7,17 @@ import FollowThisUser from "../InsideTweet/Buttons/FollowThisUser";
 import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
+import { Link } from "react-router-dom";
 import ChangeCommentary from "./ChangeCommentary";
 import LikedCommentary from "./LikedCommentary";
 
-// Ce composant est l'enfant du parent Home.
-// Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
+// Ce composant est l'enfant du parent oneTweet.
+// Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de oneTweet.
 
 export default function GetCommentaries(props) {
-  // props provenant de Home
+  // props provenant de oneTweet
   // State
-  const [listCommentary, setListCommentary] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
+  const [listCommentary, setListCommentary] = useState(props.listeCommentariesParent); // Liste des tweets provenant de oneTweet grace au props
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
@@ -45,7 +46,7 @@ export default function GetCommentaries(props) {
     );
 
     if (!donneesRecueilliesCommentaires.ok) {
-      toast.error("Une erreur est survenue dans ListTweet");
+      toast.error("Une erreur est survenue dans GetCommentaries");
       return;
     }
 
@@ -95,17 +96,17 @@ export default function GetCommentaries(props) {
   // Le useEffect en utilisé pour que la fonction requete ne soit exécutée que lorsqu'on le décide.
   useEffect(() => {
     requete();
-  }, [props.listeTweetParent]); // Quand la liste est mise à jour (quand un nouveau tweet est écrit), la fonction requete se lance.
+  }, [props.listeCommentariesParent]); // Quand la liste est mise à jour (quand un nouveau Commentaire est écrit), la fonction requete se lance.
 
   // La requête qui affiche la liste de tweet sera relancée quand on clique sur le bouton Supprimer un tweet
   useEffect(() => {
-    requete(); // Le composant ListTweet dans lequel nous sommes est actualisé quand cette fonction est lancée
+    requete(); // Le composant GetCommentaries dans lequel nous sommes est actualisé quand cette fonction est lancée
     setDeleteNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [deleteNow]); // Élément déclencheur : changement d'état de deleteNow
 
   useEffect(() => {
     // Quand un des tweets est modifié :
-    requete(); // Le composant ListTweet dans lequel nous sommes est actualisé quand cette fonction est lancée
+    requete(); // Le composant GetCommentaries dans lequel nous sommes est actualisé quand cette fonction est lancée
     setChangethisTweetNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [changethisTweetNow]);
 
