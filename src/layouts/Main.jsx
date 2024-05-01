@@ -6,6 +6,7 @@ import Title from "../components/Title";
 import { CoDecoLink } from "../components/NavBar";
 import { SayHello } from "../components/Hello/Hello";
 import AlertMessage from "../components/Message/AlertMessage";
+import Message from "../components/Message";
 
 export default function Main() {
   // Variables
