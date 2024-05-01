@@ -28,11 +28,17 @@ export default function ListTweet(props) {
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
 
-  const [listeCommentariesUpdated, setListeCommentariesUpdated] = useState([]);
+// ------ Pour actualiser l'affichage des commentaires --------
 
+  const [listeCommentariesUpdated, setListeCommentariesUpdated] = useState([]);
   const updateListeTweet = (newTweet) => {
     setListeCommentariesUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);
   };
+  // La liste de commentaires pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée à partir de FormCommentary,
+  // Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau commentaire.
+  // listeCommentariesUpdated, qui est passé en props au composant GetCommentaries, sera alors mis à jour.
+  // Dans GetCommentaries, un useEffect permettant d'afficher les commentaires à nouveau sera enclenché à chaque fois que listeCommentariesUpdated changera.
+
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -175,7 +181,7 @@ export default function ListTweet(props) {
         </section>
 
         <section>
-          <FormCommentary IdTweet={IdTweet}updateListeTweet={updateListeTweet} />
+          <FormCommentary IdTweet={IdTweet} updateListeTweet={updateListeTweet} />
         </section>
     </>
   );

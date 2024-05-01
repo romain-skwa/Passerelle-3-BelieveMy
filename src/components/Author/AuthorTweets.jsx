@@ -90,7 +90,7 @@ export default function AuthorTweets({ authorId }) {
 
   const authorTweets = listeTweet ? listeTweet.filter((tweet) => tweet.author === authorId) : [];
   // Pour obtenir authorTweets, on filtre listeTweet et on stocke tous les tweets ce l'auteur ciblé
-  console.log(`authorTweets `, authorTweets);
+  //console.log(`authorTweets `, authorTweets);
 
   useEffect(() => {
     requete();

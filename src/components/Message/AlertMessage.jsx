@@ -24,10 +24,13 @@ const AlertMessage = () => {
   }, [toTheMail]);// je me demande si ce useEffect est vraiment utile
 
   useEffect(() => {
-    allTheConversations();
-    setFormattedDate(new Date().toLocaleDateString());
-    setFormattedTime(new Date().toLocaleTimeString());
-  }, [user]);
+    if (user) {
+      allTheConversations();
+      setFormattedDate(new Date().toLocaleDateString());
+      setFormattedTime(new Date().toLocaleTimeString());
+    }
+  }, [user]); // user est une dépendance pour que l'effet soit réexécuté lorsque l'utilisateur se connecte
+  
 
 // On récupère l'adresse mail de l'utilisateur destinataire du message ---------------------------------------------------------
 
