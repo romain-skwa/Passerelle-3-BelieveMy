@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import React from 'react';
 // Ce composant affiche le pseudonyme des utilisateurs à la place de leur identifiant unique ou leur mail.
 // par exemple : "Alice" à la place de -NtuK2i7W-JGNcnr_fkY ou "alice@yahoo.fr"
 
@@ -57,27 +58,37 @@ export function GetAuthorTweet(props){
                 return <div>Chargement...</div>;    
             }    
     
-            return userList.map((dataUser, index) => {    
-                if (tweet.author === dataUser.mailUser) {    
-                    return (
-                      <>
-                        {cancelLink ? (                
-                          <span style={{ textTransform: "capitalize" }}>                
-                            {dataUser.pseudonymUser}                
-                          </span>                
-                        ) : (                
-                          <Link to={`/AuthorPage/${dataUser.id}`} key={dataUser.id}>                
-                            <span style={{ textTransform: "capitalize" }}>                
-                              {dataUser.pseudonymUser}                
-                            </span>                
-                          </Link>                
-                        )}                
-                      </>
-                    );
-                }
-            });
-        };
+ 
+            return (
+              <>          
+                {userList.map((dataUser, index) => {          
+                  if (tweet.author === dataUser.mailUser) {          
+                    return (          
 
+                      <React.Fragment key={dataUser.id}>
+                        {/* Quand la props CancelLink === true est transmise, 
+                        seul le pseudonyme de l'auteur sera affiché*/}
+                        {cancelLink ? (          
+                          <span style={{ textTransform: "capitalize" }}>          
+                            {dataUser.pseudonymUser}          
+                          </span>
+
+                        ) : (
+                          /* sinon le pseudonyme affiché sera un lien vers la page concernant l'auteur du tweet*/
+                          <Link to={`/AuthorPage/${dataUser.id}`}>    
+                            <span style={{ textTransform: "capitalize" }}>      
+                              {dataUser.pseudonymUser}          
+                            </span>
+                          </Link>
+
+                        )}          
+                      </React.Fragment>          
+                    );          
+                  }          
+                })}          
+              </>          
+            );          
+          };
 return (
     <>
         {renderUserList()}

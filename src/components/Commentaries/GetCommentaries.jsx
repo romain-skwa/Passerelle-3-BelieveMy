@@ -3,13 +3,10 @@ import { toast } from "react-toastify";
 import DeleteCommentary from "./DeleteCommentary";
 import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
-import FollowThisUser from "../InsideTweet/FollowThisUser";
-import Commentaries from "../InsideTweet/Commentaries";
-import Liked from "../InsideTweet/Liked";
+import FollowThisUser from "../InsideTweet/Buttons/FollowThisUser";
 import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
-import { Link } from "react-router-dom";
 import ChangeCommentary from "./ChangeCommentary";
 import LikedCommentary from "./LikedCommentary";
 

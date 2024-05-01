@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Title from "../components/Title";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
@@ -14,12 +13,12 @@ export default function CoDeco() {
     formState: { errors },
   } = useForm();
 
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser,  } = useContext(AuthContext);
 
   // State
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  
   // Function
   const boxData = (data) => {
     // Quand on clique sur se connecter, ça exécute ceci

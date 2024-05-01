@@ -7,8 +7,8 @@ import DeleteTweet from "../InsideTweet/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
 import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
-import FollowThisUser from "../InsideTweet/FollowThisUser";
-import Liked from "../InsideTweet/Liked";
+import FollowThisUser from "../InsideTweet/Buttons/FollowThisUser";
+import Liked from "../InsideTweet/Buttons/Liked";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import Avatar from "../InsideTweet/Avatar";

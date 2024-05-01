@@ -9,8 +9,8 @@ import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { GetOneIdUser } from "../Hello/GetOneIdUser";
-import Liked from "../InsideTweet/Liked";
-import FollowThisUser from "../InsideTweet/FollowThisUser";
+import Liked from "../InsideTweet/Buttons/Liked";
+import FollowThisUser from "../InsideTweet/Buttons/FollowThisUser";
 import Avatar from "../InsideTweet/Avatar";
 
 // Ce composant est l'enfant du parent Home.

@@ -4,9 +4,9 @@ import DeleteTweet from "../InsideTweet/DeleteTweet"; // Plus tard
 import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
 import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
-import FollowThisUser from "../InsideTweet/FollowThisUser";
+import FollowThisUser from "../InsideTweet/Buttons/FollowThisUser";
 import Commentaries from "../InsideTweet/Commentaries";
-import Liked from "../InsideTweet/Liked";
+import Liked from "../InsideTweet/Buttons/Liked";
 import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
@@ -121,7 +121,7 @@ export default function ListTweet(props) {
         {/* Si listeTweet existe, son contenu est lu par .map*/}
         {listeTweet &&
           listeTweet.map((tweet) => (
-            <li key={tweet.title}>
+            <li key={tweet.id}>
               {tweet.title}
               {" : "}
               {tweet.content}{" "}
@@ -132,28 +132,47 @@ export default function ListTweet(props) {
       {listeTweet &&
         listeTweet.map((tweet) => (
           <div key={tweet.id} className="cadreTweet">
+            {/*********** Avatar **** Titre ******************************************************************/}
 
-          {/*********** Avatar **** Titre ******************************************************************/}
-            
-            <section style={{ display: "flex", paddingBottom:"1rem" }}>
+            <section style={{ display: "flex", paddingBottom: "1rem" }}>
               <Avatar tweet={tweet} />
-              <div style={{display:"flex", alignItems:"center", fontWeight:"bold",}}>{tweet.title /* TITRE */}</div>
-            </section>
-          
-          {/**** Image **********************************************************************************/}
-            
-            <section style={{ display: "flex", justifyContent:"center", paddingBottom:"1rem" }}>
-              {tweet.image && tweet.image !== "" ? <img style={{maxWidth: "100%"}} src={tweet.image} alt="Image du tweet" /> : null}
-            </section>
-
-          {/******** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
-
-              <div className="cadreTweetContent">
-                {tweet.content /* CONTENU */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontWeight: "bold",
+                }}
+              >
+                {tweet.title /* TITRE */}
               </div>
+            </section>
+
+            {/**** Image **********************************************************************************/}
+
+            <section
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                paddingBottom: "1rem",
+              }}
+            >
+              {tweet.image && tweet.image !== "" ? (
+                <img
+                  style={{ maxWidth: "100%" }}
+                  src={tweet.image}
+                  alt="Image du tweet"
+                />
+              ) : null}
+            </section>
+
+            {/******** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
+
+            <div className="cadreTweetContent">
+              {tweet.content /* CONTENU */}
+            </div>
 
             <div>
-              <div>L'id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
+              <div>L&apos;id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
                 Sinon c'est le bouton Modifier qui sera affiché */}
@@ -185,8 +204,9 @@ export default function ListTweet(props) {
                 <div>
                   {user ? (
                     <Commentaries tweet={tweet} />
-                  ) : <Link to="/connexion">Commentaire</Link>
-                }
+                  ) : (
+                    <Link to="/connexion">Commentaire</Link>
+                  )}
                 </div>
 
                 <div>
@@ -201,8 +221,8 @@ export default function ListTweet(props) {
                 {tweet.datePublication
                   ? ", le " + tweet.datePublication
                   : " Nous n'avons pas de date concernant ce tweet."}
-                {tweet.hourPublication ? " à " + tweet.hourPublication : null}
-                .{tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
+                {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
+                {tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
               </div>
 
               {/* J'envoie les props, les propriétés dans ce composant.

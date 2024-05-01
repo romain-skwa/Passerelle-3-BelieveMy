@@ -5,6 +5,7 @@ import GridLoader from "react-spinners/GridLoader";
 import Title from "../components/Title";
 import { CoDecoLink } from "../components/NavBar";
 import { SayHello } from "../components/Hello/Hello";
+import AlertMessage from "../components/Message/AlertMessage";
 
 export default function Main() {
   // Variables
@@ -19,6 +20,7 @@ export default function Main() {
       <Title />
       <CoDecoLink />
       <SayHello />
+      <AlertMessage />
       <Outlet />
     </>
   );

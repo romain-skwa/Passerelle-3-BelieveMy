@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 
+// ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const [inputContentMessage, setInputContentMessage] = useState("");
@@ -82,6 +83,8 @@ const MessageBox = () => {
     }
   };
 
+  //_________________________________________________________________________________________
+
   const conversation = async () => {
     if (!toTheMail) {
       toast.error("L'adresse mail du destinataire n'est pas définie.");
@@ -94,6 +97,7 @@ const MessageBox = () => {
       content: inputContentMessage,
       datePublication: formattedDate,
       hourPublication: formattedTime,
+      read: "notYet",
     };
 
     try {
@@ -129,7 +133,7 @@ const MessageBox = () => {
     <>
       <ToastContainer />
       <div>
-        <label htmlFor="inputContentMessage">Contenu du message</label>
+        <label htmlFor="inputContentMessage">Page des messages</label>
         <textarea
           cols="50"
           rows="10"

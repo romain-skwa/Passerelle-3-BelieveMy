@@ -1,11 +1,9 @@
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../store/AuthProvider";
+import { AuthContext } from "../../../store/AuthProvider";
 import { Link } from "react-router-dom";
-import  UnfollowThisUser  from "../InsideTweet/UnfollowThisUser";
-import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
-
-import SendMessage from "./SendMessage";
+import UnfollowThisUser from "./UnfollowThisUser";
+import { GetAuthorTweet } from "../GetAuthorTweet";
 
 export default function FollowThisUser(props) {
   // Variable
@@ -81,16 +79,24 @@ export default function FollowThisUser(props) {
         user && mailOfConnectedUser !== tweet.author ? (
           <>
             {preventFollowList.includes(tweet.author) ? (
-              <div style={{display:"flex"}}>
+              <div style={{ display: "flex" }}>
 
-                  <Link to={`/Message/${tweet.id}`} key={tweet.id}>
-                      <span style={{ textTransform: 'capitalize' }}>Ecrire à <GetAuthorTweet tweet={tweet} cancelLink={true} /* PSEUDONYME */ /></span>
-                  </Link>
+                {/* ECRIRE A L'AUTEUR DU TWEET */}
+                <Link to={`/Message/${tweet.id}`} key={tweet.id}>
+                  <span style={{ textTransform: "capitalize" }}>
+                    Ecrire à{" "}
+                    <GetAuthorTweet
+                      tweet={tweet}
+                      cancelLink={true} /* PSEUDONYME */
+                    />
+                  </span>
+
+                </Link>
                 <UnfollowThisUser tweet={tweet} />
               </div>
             ) : (
               <div className="addFollow followButon" onClick={updateFollowList}>
-                S'abonner 
+                S&apos;abonner
               </div>
             )}
           </>

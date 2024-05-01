@@ -18,7 +18,7 @@ export function SayHello() {
     if (user) {
       //  console.log("L'utilisateur est connecté " + user.email);
     } else {
-      console.log("euhhhhhhhhhhhhhhhhhh... pas connecté");
+    //  console.log("euhhhhhhhhhhhhhhhhhh... pas connecté");
     }
   });
   return (

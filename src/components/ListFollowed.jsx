@@ -60,7 +60,7 @@ const [listeFollow, setListeFollow] = useState([]);
     const tweetsAuteursSuivis = listeFollow.filter((tweet) =>
     followListOfConnectedUser ? followListOfConnectedUser.includes(tweet.mailUser) : false
   );
-console.log(`Contenu de tweetsAuteursSuivis `, tweetsAuteursSuivis);
+//console.log(`Contenu de tweetsAuteursSuivis `, tweetsAuteursSuivis);
 
   return (
     <>

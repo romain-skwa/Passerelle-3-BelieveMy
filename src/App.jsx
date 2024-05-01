@@ -35,7 +35,7 @@ export default function App() {
         //  console.log(user);
         //  console.log("L'utilisateur est bien connecté. Son adresse mail est :  " + user.email);
       } else {
-        console.log("NON connecté");
+        //console.log("NON connecté");
       }
     });
   }, []);
