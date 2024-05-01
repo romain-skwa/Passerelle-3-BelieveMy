@@ -25,7 +25,6 @@ export default function Avatar(props) {
       }
       const userListData  = await getUserlist.json();
 
-//console.log("Les données mailUser et pseudonymUser depuis GetAuthorTweet sont affichées ici ", userListData );     
 
       const donneesTransformees = [];
       // Avec cette boucle for in 

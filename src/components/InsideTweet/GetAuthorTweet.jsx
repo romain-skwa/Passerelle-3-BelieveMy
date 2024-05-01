@@ -7,10 +7,15 @@ import React from 'react';
 
 export function GetAuthorTweet(props){
     // Variable
-    const { tweet, cancelLink } = props;
+    const { tweet, cancelLink, authorTweet } = props;
     const [userList, setUserList] = useState();
   //  console.log(`userList depuis GetAuthorTweet ici : `, userList);
-/***************************************************************************************************** */
+    
+    // La propriété "tweet" est transmise par les composants ListTweet, AuthorTweets, GetCommentaries, FollowThisUser
+    // La propriété "authorTweet" est transmise par le composant AlertMessage
+      // Dans les deux cas, ce sont l'adresse mail (identifiant) de l'auteur du tweet
+    const author = tweet && tweet.author || authorTweet;
+  /***************************************************************************************************** */
 
     const requete = async () => {
     // Dans la variable const userlist, on va stocker le contenu récupéré sur Firebase
@@ -55,14 +60,14 @@ export function GetAuthorTweet(props){
     // Fonction pour itérer sur les éléments de userList
         const renderUserList = () => {
             if (!userList) {    
-                return <div>Chargement...</div>;    
+                return <span>Chargement...</span>;    
             }    
     
  
             return (
               <>          
                 {userList.map((dataUser, index) => {          
-                  if (tweet.author === dataUser.mailUser) {          
+                  if (author  === dataUser.mailUser) {          
                     return (          
 
                       <React.Fragment key={dataUser.id}>

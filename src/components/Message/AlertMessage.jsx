@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
+import {GetAuthorTweet} from "../../components/InsideTweet/GetAuthorTweet";
 
 const AlertMessage = () => {
   const [conversationSection, setConversationSection] = useState([]);
@@ -51,16 +52,16 @@ const AlertMessage = () => {
   };
   
   //_________________________________________________________________________________________
-
+console.log(`conversationSection `,conversationSection)
   return (
     <>
     {user ?  // Si l'utilisateur est connecté. La lsite de notifications pour les messages s'affiche
       <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
           <div key={id}>
-            <p>
-              Vous avez un messages de : {data.from} <br /> 
-            </p>
+            <div>
+              Vous avez un messages de : <GetAuthorTweet authorTweet={data.from} cancelLink={true} /> <br /> 
+            </div>
           </div>
         ))}
         </div> 
