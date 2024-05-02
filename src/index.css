@@ -170,27 +170,50 @@
     margin-right: 10px;
 }
 /************************************************************************************************************/
+.frameMessage{
+    width: 20vw;
+    height: 65vh;
+    border: 2px dashed black;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 8vw;
+    bottom: 1vh;
+}
 .conversationContainer{
     width: 20vw;
-    border: 2px purple solid;
+    flex-grow: 1;
+    max-height: 47vh;
+    overflow-y: auto; /* Ajouter une barre de défilement verticale */
+    background-color: azure;
 }
-
+.lineForAdresse{
+    display: flex;
+    justify-content: end;
+}
 .message{
-    width: 15vw;
+    background-color: beige;
+    position: relative;
     box-sizing: border-box;
+    display: inline-block;
     padding: 0.5rem;    
     margin: 0.5rem;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 .messageFromAuthor{
     border: dashed grey 2px;
+    padding-right: 2rem;
 }
 .messageFromOther{
     border: solid blue 2px;
-    margin-left: 25%;
 }
 /***************************************************************************************************************/
-.frameMessage{
+.conversationAlert{
     width: 20vw;
-    height: 50vh;
+}
+.buttonDeleteMessage{
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 0;
 }

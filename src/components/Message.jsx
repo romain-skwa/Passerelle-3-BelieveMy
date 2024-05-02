@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
+import {GetAuthorTweet} from "../components/InsideTweet/GetAuthorTweet";
+import DeleteMessage from "./Message/DeleteMessage";
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
@@ -11,9 +12,13 @@ const MessageBox = () => {
   const [inputContentMessage, setInputContentMessage] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
+  const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+
   const {
     idOfConnectedUser,
+    pseudonymConnectedUser,
     mailOfConnectedUser,
+    toTheMail,
     setToTheMail,
   } = useContext(AuthContext);
 
@@ -21,8 +26,21 @@ const MessageBox = () => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
-  }, []);
+    scrollToBottom();
+  }, [toTheMail, conversationSection]);
 
+  useEffect(() => {
+    allTheConversations(); // Le composant MessageBox dans lequel nous sommes est actualisé quand cette fonction est lancée
+    setDeleteNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
+  }, [deleteNow]);
+  
+  const conversationContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    conversationContainerRef.current?.scrollTo(0, conversationContainerRef.current.scrollHeight);
+  };
+
+ 
   //_________________________________________________________________________________________
 
   const allTheConversations = async () => {
@@ -43,10 +61,20 @@ const MessageBox = () => {
       }
   
       const data = await getEverything.json();
+      const dataWithId = [];
+      // Avec cette boucle for in...
+      for (const key in data) {
+        const newTweet = {
+          id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
+          ...data[key],
+        };
+        dataWithId.push(newTweet);// push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
+      }
       // On ne garde que les messages qui ont été envoyés ou reçus par l'utilisateur connecté
-      const filteredData = Object.entries(data).filter(([id, message]) => {
+      const filteredData = Object.entries(dataWithId).filter(([id, message]) => {
         return message.from === mailOfConnectedUser && message.to === toTheMail || message.from === toTheMail && message.to === mailOfConnectedUser;
       });
+      
       setConversationSection(filteredData);
     } catch (error) {
       console.error("Erreur dans allTheConversations : ", error);
@@ -98,15 +126,36 @@ const MessageBox = () => {
       console.error("Erreur dans conversation : ", error);
     }
   };
-
+  
   return (
     <section className="frameMessage">
-      <ToastContainer />
-      <div>
-        <label htmlFor="inputContentMessage">Page des messages</label>
+
+      <div style={{ display: "flex", justifyContent: "space-between ", }}>
+        <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
+        <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet authorTweet={toTheMail} /></div>
+      </div>
+        
+      <div className="conversationContainer"  ref={conversationContainerRef}>
+        {conversationSection.map(([id, data]) => (
+          <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
+            <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} >
+              <div>
+                {data.content} <br />
+                {/*data.id*/}
+                <DeleteMessage
+                  data={data}
+                  setDeleteNow={setDeleteNow}
+                ></DeleteMessage>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div>          
         <textarea
           cols="50"
-          rows="10"
+          rows="4"
           name="inputContentMessage"
           id="inputContentMessage"
           value={inputContentMessage}
@@ -124,26 +173,6 @@ const MessageBox = () => {
         >
         <button onClick={conversation}>Envoyer</button>
       </div>
-
-      <div>Ici on est censé voir l&apos;adresse mail du destinataire :
-          {" " + toTheMail/* Afficher la liste des utilisateurs ici */}
-      </div>
-      <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
-      <div>La date actuelle : {formattedDate}</div>
-        
-      <div className="conversationContainer">
-        {conversationSection.map(([id, data]) => (
-          <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} key={id}>
-            <p>
-              De : {data.from} <br />
-              Pour : {data.to} <br />
-              Message : {data.content} <br />
-              Date : {data.datePublication} <br />
-              Heure : {data.hourPublication} <br />
-            </p>
-          </div>
-        ))}
-        </div>
     </section>
   );
 };

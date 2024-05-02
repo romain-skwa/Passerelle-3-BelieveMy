@@ -22,6 +22,7 @@ export default function Main() {
       <CoDecoLink />
       <SayHello />
       <AlertMessage />
+      <Message />
       <Outlet />
     </>
   );

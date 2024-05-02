@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
     const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState(null);
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
-    const [toTheMail, setToTheMail] = useState("");// Destinataire
+    const [toTheMail, setToTheMail] = useState("charlotte@yahoo.fr");// Destinataire
 
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
@@ -46,7 +46,7 @@ const actualiserPseudo = (p) => {
 /*---------------------------------------------------------------------------------------------- */
 
 /*---------------------------------------------------------------------------------------------- */
-    useEffect(() => {
+   /* useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setUser(user);
@@ -54,7 +54,7 @@ const actualiserPseudo = (p) => {
           setUser(null);
         }
       });
-    }, []);
+    }, []);*/
 
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -154,6 +154,7 @@ useEffect(() => {
         followListOfConnectedUser,
         likedListOfConnectedUser,
         avatartOfTheConnectedUser,
+        toTheMail,
         setToTheMail,
         actualiserListFollow,
         actualiserLikedList,

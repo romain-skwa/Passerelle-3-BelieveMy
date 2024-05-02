@@ -52,11 +52,11 @@ const AlertMessage = () => {
   };
   
   //_________________________________________________________________________________________
-console.log(`conversationSection `,conversationSection)
+//console.log(`conversationSection `,conversationSection)
   return (
     <>
     {user ?  // Si l'utilisateur est connecté. La lsite de notifications pour les messages s'affiche
-      <div className="conversationContainer">
+      <div className="conversationAlert">
         {conversationSection.map(([id, data]) => (
           <div key={id}>
             <div>
