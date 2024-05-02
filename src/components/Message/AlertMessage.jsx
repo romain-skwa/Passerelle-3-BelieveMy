@@ -10,6 +10,7 @@ const AlertMessage = () => {
   const {
     user,
     mailOfConnectedUser,
+    setToTheMail,
   } = useContext(AuthContext);
 
 
@@ -17,7 +18,7 @@ const AlertMessage = () => {
     if (user) {
       allTheConversations();
     }
-  }, [user, mailOfConnectedUser]); // Ajoutez user comme dépendance pour que l'effet soit réexécuté lorsque l'utilisateur se connecte
+  }, [user, mailOfConnectedUser]); // Ajout de user comme dépendance pour que l'effet soit réexécuté lorsque l'utilisateur se connecte
 
 
   //_________________________________________________________________________________________
@@ -55,12 +56,15 @@ const AlertMessage = () => {
 //console.log(`conversationSection `,conversationSection)
   return (
     <>
-    {user ?  // Si l'utilisateur est connecté. La lsite de notifications pour les messages s'affiche
+    {user ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
       <div className="conversationAlert">
         {conversationSection.map(([id, data]) => (
           <div key={id}>
             <div>
-              Vous avez un messages de : <GetAuthorTweet authorTweet={data.from} cancelLink={true} /> <br /> 
+              Vous avez un messages de :
+              <span onClick={() => setToTheMail(data.from)}>
+               <GetAuthorTweet authorTweet={data.from} cancelLink={true} /> <br /> 
+              </span>
             </div>
           </div>
         ))}

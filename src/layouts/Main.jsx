@@ -17,13 +17,13 @@ export default function Main() {
   }
 
   return (
-    <>
+    <main style={{position:"relative"}}>
       <Title />
       <CoDecoLink />
       <SayHello />
       <AlertMessage />
       <Message />
       <Outlet />
-    </>
+    </main>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
@@ -15,6 +15,7 @@ const MessageBox = () => {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
 
   const {
+    user,
     idOfConnectedUser,
     pseudonymConnectedUser,
     mailOfConnectedUser,
@@ -26,7 +27,6 @@ const MessageBox = () => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
-    scrollToBottom();
   }, [toTheMail, conversationSection]);
 
   useEffect(() => {
@@ -34,11 +34,6 @@ const MessageBox = () => {
     setDeleteNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
   }, [deleteNow]);
   
-  const conversationContainerRef = useRef(null);
-
-  const scrollToBottom = () => {
-    conversationContainerRef.current?.scrollTo(0, conversationContainerRef.current.scrollHeight);
-  };
 
  
   //_________________________________________________________________________________________
@@ -128,14 +123,18 @@ const MessageBox = () => {
   };
   
   return (
+    <>
+    {user && toTheMail !== "none" ?  
     <section className="frameMessage">
+
+      <div style={{display: "flex", justifyContent: "end"}} onClick={() => setToTheMail("none")} >voila</div>
 
       <div style={{ display: "flex", justifyContent: "space-between ", }}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
         <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet authorTweet={toTheMail} /></div>
       </div>
         
-      <div className="conversationContainer"  ref={conversationContainerRef}>
+      <div className="conversationContainer" >
         {conversationSection.map(([id, data]) => (
           <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
             <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} >
@@ -174,6 +173,8 @@ const MessageBox = () => {
         <button onClick={conversation}>Envoyer</button>
       </div>
     </section>
+    : null /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
+    </>
   );
 };
 
