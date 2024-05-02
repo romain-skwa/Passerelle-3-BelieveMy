@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
     const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState(null);
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
-    const [toTheMail, setToTheMail] = useState("sylvain@yahoo.fr");// Destinataire
+    const [toTheMail, setToTheMail] = useState("none");// Destinataire
 
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 

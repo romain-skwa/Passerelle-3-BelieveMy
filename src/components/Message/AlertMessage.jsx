@@ -40,7 +40,17 @@ const AlertMessage = () => {
         return;
       }
   
-      const dataWithReadNotYet = await getEverything.json();
+      const data = await getEverything.json();
+
+      const dataWithReadNotYet = [];
+      // Avec cette boucle for in...
+      for (const key in data) {
+        const newTweet = {
+          id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
+          ...data[key],
+        };
+        dataWithReadNotYet.push(newTweet);// push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
+      }
       const filteredData = Object.entries(dataWithReadNotYet).filter(([id, message]) => {
         return message.read === "notYet" && message.to === mailOfConnectedUser;  
       });
@@ -53,7 +63,32 @@ const AlertMessage = () => {
   };
   
   //_________________________________________________________________________________________
-//console.log(`conversationSection `,conversationSection)
+console.log(`conversationSection `,conversationSection)
+
+const updateMessageReadStatus = async (messageId) => {
+  try {
+    const response = await fetch(
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation/${messageId}.json`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ read: "already" }),
+      }
+    );
+
+    if (!response.ok) {
+      toast.error("Une erreur est survenue lors de la mise à jour de la conversation.");
+      return;
+    }
+
+    allTheConversations(); // Actualiser la liste des conversations après la mise à jour de la lecture
+  } catch (error) {
+    console.error("Erreur dans updateMessageReadStatus : ", error);
+  }
+
+};
   return (
     <>
     {user ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
@@ -62,7 +97,7 @@ const AlertMessage = () => {
           <div key={id}>
             <div>
               Vous avez un messages de :
-              <span onClick={() => setToTheMail(data.from)}>
+              <span onClick={() => {setToTheMail(data.from); updateMessageReadStatus(data.id);}}>
                <GetAuthorTweet authorTweet={data.from} cancelLink={true} /> <br /> 
               </span>
             </div>

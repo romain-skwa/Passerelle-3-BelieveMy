@@ -22,6 +22,7 @@ import MyFollowedAuthors from "./pages/MyFollowedAuthors";
 import MyProfile from "./pages/MyProfile";
 import OneTweet from "./pages/OneTweet";
 import Message from "./pages/Message";
+import { useHistory } from "react-router-dom";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -36,9 +37,10 @@ export default function App() {
         //  console.log("L'utilisateur est bien connecté. Son adresse mail est :  " + user.email);
       } else {
         //console.log("NON connecté");
+        history.push("/");
       }
     });
-  }, []);
+  }, [history, user, loading]);
   // on va utiliser le routeur retourné ici
   return (
     <>
