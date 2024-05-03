@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import Avatar from "../InsideTweet/Avatar";
 import Commentaries from "../InsideTweet/Commentaries";
+import { Link } from "react-router-dom";
 
 export default function AuthorTweets({ authorId }) {
   const [listeTweet, setListeTweet] = useState(); // Liste de tous les tweets de tous les utilisateurs.

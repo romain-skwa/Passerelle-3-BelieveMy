@@ -62,51 +62,77 @@ const AlertMessage = () => {
     }
   };
   
+        //console.log(`conversationSection `,conversationSection)
   //_________________________________________________________________________________________
-console.log(`conversationSection `,conversationSection)
-
-const updateMessageReadStatus = async (messageId) => {
-  try {
-    const response = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation/${messageId}.json`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ read: "already" }),
-      }
-    );
-
-    if (!response.ok) {
-      toast.error("Une erreur est survenue lors de la mise à jour de la conversation.");
-      return;
+  const authorsToMessages = conversationSection.reduce((acc, [id, data]) => {
+    if (!acc[data.from]) {
+      acc[data.from] = [];
     }
+    acc[data.from].push({ id, data });
+    return acc;
+  }, {});
+  
+  const authors = Object.entries(authorsToMessages);
+        //console.log(authors)
+  //_________________________________________________________________________________________
 
-    allTheConversations(); // Actualiser la liste des conversations après la mise à jour de la lecture
-  } catch (error) {
-    console.error("Erreur dans updateMessageReadStatus : ", error);
-  }
+  const updateMessageReadStatus = async (author) => {
+    try {
+      const updatedMessages = conversationSection.filter(([id, message]) => {
+        return message.read === "notYet" && message.from === author;
+      });
+      console.log(`updatedMessages `, updatedMessages)
+  
+      const promises = updatedMessages.map(async ([id, conversation ]) => {
+        const response = await fetch(
+          `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation/${conversation.id}.json`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ read: "already" }),
+          }
+        );
+  
+        if (!response.ok) {
+          throw new Error("Une erreur est survenue lors de la mise à jour de la conversation.");
+        }
+  
+        return response.json(); // convertir la réponse en JSON
+      });
+  
+      await Promise.all(promises);
+      allTheConversations(); // Actualiser la liste des conversations après la mise à jour de la lecture
+    } catch (error) {
+      console.error("Erreur dans updateMessageReadStatus : ", error);
+      toast.error("Une erreur est survenue lors de la mise à jour de la conversation.");
+    }
+  };
 
-};
-  return (
-    <>
-    {user ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
-      <div className="conversationAlert">
-        {conversationSection.map(([id, data]) => (
-          <div key={id}>
-            <div>
-              Vous avez un messages de :
-              <span onClick={() => {setToTheMail(data.from); updateMessageReadStatus(data.id);}}>
-               <GetAuthorTweet authorTweet={data.from} cancelLink={true} /> <br /> 
-              </span>
-            </div>
+return (
+  <>
+  {user ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
+    <div className="conversationAlert">
+      {authors.map(([author, messages]) => (
+        <div key={author}>
+          <div>
+            Vous avez des messages de :
+            <span onClick={() => {
+              // setToTheMail pour définir dans le contexte l'adresse e-mail de l'auteur dont on veut lire les messages
+              // et appeler la fonction updateMessageReadStatus pour marquer les messages comme lus
+              setToTheMail(author);
+              updateMessageReadStatus(author);
+              }}>{/* Et pour afficher le pseudonyme de l'auteur au lieu de son adresse mail, il faut GetAuthorTweet */}
+              <GetAuthorTweet authorTweet={author} cancelLink={true} /> <br /> 
+            </span>
           </div>
-        ))}
-        </div> 
-        : null /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
-    </>
-  );
+        </div>
+      ))}
+      </div> 
+      : null /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
+  </>
+);
 };
 
 export default AlertMessage;
