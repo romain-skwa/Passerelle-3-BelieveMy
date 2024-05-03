@@ -11,6 +11,7 @@ import Avatar from "../InsideTweet/Avatar";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { Link } from "react-router-dom";
+import Write from "../InsideTweet/Buttons/Write";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -172,7 +173,6 @@ export default function ListTweet(props) {
             </div>
 
             <div>
-              <div>L&apos;id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
                 Sinon c'est le bouton Modifier qui sera affiché */}
@@ -194,26 +194,18 @@ export default function ListTweet(props) {
                 />
               )}
 
-              {/* Cœur **** Commentaire **** S'abonner ***** */}
+              {/* Cœur **** Commentaire **** Écrire ****** S'abonner ***** */}
               <div className="lineOfComponents">
+
                 <div className="like" /* CONTENANT */>
                   <Liked tweet={tweet} requete={requete} /* Cœur */ />
                   <span>{tweet.likedCounter /* COMPTEUR */}</span>
                 </div>
 
-                <div>
-                  {user ? (
-                    <Commentaries tweet={tweet} />
-                  ) : (
-                    <Link to="/connexion">Commentaire</Link>
-                  )}
-                </div>
+                  <Commentaries tweet={tweet} />
+                  <Write  tweet={tweet} />
+                  <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
 
-                <div>
-                  {user ? (
-                    <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
-                  ) : null}
-                </div>
               </div>
 
               <div>

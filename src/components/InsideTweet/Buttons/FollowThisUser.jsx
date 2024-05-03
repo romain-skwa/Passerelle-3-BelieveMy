@@ -76,32 +76,29 @@ export default function FollowThisUser(props) {
         // Pour s'assurer que le bouton "suivre" ne s'affichera pas sous un tweet écrit par l'utilisateur connecté
         // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur est différent du mail de l'auteur du tweet
         // alors, on affiche le bouton "suivre" ou la mention "Déjà suivi"
-        user && mailOfConnectedUser !== tweet.author ? (
+        user && mailOfConnectedUser !== tweet.author ? 
+        (
           <>
-            {preventFollowList.includes(tweet.author) ? (
+            {preventFollowList.includes(tweet.author) ? ( // Si l'auteur du tweet est déjà dans la liste des auteurs suivi par l'utilisateur
               <div style={{ display: "flex" }}>
 
-                {/* ECRIRE A L'AUTEUR DU TWEET */}
-                <Link to={`/Message/${tweet.id}`} key={tweet.id}>
-                  <span style={{ textTransform: "capitalize" }}>
-                    Ecrire à{" "}
-                    <GetAuthorTweet
-                      tweet={tweet}
-                      cancelLink={true} /* PSEUDONYME */
-                    />
-                  </span>
-
-                </Link>
+                {/* NE PLUS SUIVRE L'AUTEUR DU TWEET */}
                 <UnfollowThisUser tweet={tweet} />
               </div>
-            ) : (
-              <div className="addFollow followButon" onClick={updateFollowList}>
-                S&apos;abonner
-              </div>
-            )}
-          </>
-        ) : null
-      }
+                ) : (
+                  // Si l'utilisateur connecté n'est pas abonné, il peut cliquer sur le bouton suivant pour suivre l'auteur du tweet
+                  <div className="addFollow followButon" onClick={updateFollowList}>
+                    S&apos;abonner
+                  </div>
+                )}
+            </>
+          ) :   
+              <Link to="/connexion">{/* Si l'utilisateur n'est pas connecté mais qu'il clique, il arrivera sur la page de connexion*/}
+                <div className="addFollow followButon">
+                  S&apos;abonner
+                </div>
+              </Link>
+            }
     </>
   );
 }
