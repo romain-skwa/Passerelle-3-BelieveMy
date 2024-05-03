@@ -114,7 +114,6 @@ export default function GetCommentaries(props) {
 //console.log(`IdTweet juste avant d'afficher`, IdTweet)
   return (
     <div className="affichageListeTweet">
-      <h3>Liste des tweets</h3>
 
       {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
 

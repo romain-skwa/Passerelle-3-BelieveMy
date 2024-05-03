@@ -75,6 +75,9 @@ export default function FormWriteTweet(props) {
     // Cette fonction va ajouter le nouveau tweet (newTweet) à ce qu'il y avait déjà dans listeTweet. Voir le composant Home.
     // Ensuite, la nouvelle liste maintenant composée va remplacer la précédente après l'actualisation du state listeTweet
     props.updateListeTweet(newTweet);
+
+    // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
+    inputNewTweetContent('');
   };
 
   return (

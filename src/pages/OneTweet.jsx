@@ -20,7 +20,7 @@ export default function ListTweet(props) {
   // State
   const {IdTweet} = useParams();
   const [listeTweet, setListeTweet] = useState(); 
-  //console.log(`listeTweet `, listeTweet);
+  console.log(`listeTweet `, listeTweet);
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
@@ -69,8 +69,8 @@ export default function ListTweet(props) {
     //console.log("donnees transformees : ", donneesTransformees);
     //console.log("Les donneesRecueillies ", donneesRecueillies);
     //console.log("Les données  ", donnees);
-
-    setListeTweet([donnees]); // Mise à jour du state de listeTweet
+    const tweet = {...donnees, id: IdTweet };
+    setListeTweet([tweet]); // Mise à jour du state de listeTweet
     setLoading(false);
   };
 

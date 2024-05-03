@@ -71,6 +71,9 @@ export default function FormWriteTweet(props) {
       "Le data.name généré aléatoirement dans Firebase par FormWriteTweet " +
         idRandom
     );
+      
+    // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
+    inputNewTweetContent('');
  };
 
   return (

@@ -37,10 +37,8 @@ export default function DeleteMessage({ data, deleteNow, setDeleteNow }) {
       setLoading(false);
 
       // Mettre à jour l'état deleteNow pour relancer la fonction requete
-      setDeleteNow(true); /* deleteNow change.
-       C'est maintenant que le 2e useffect est lancé.
-       Donc la requête de récupération des tweets est exécutée.
-       Donc le composant TweetList est actualisé. Seulement ce composant. Pas la page toute entière.*/
+      setDeleteNow(true); /* deleteNow change.*/
+      
     }
     console.log(`user.email `,user.email)
   };

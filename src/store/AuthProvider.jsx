@@ -157,9 +157,6 @@ useEffect(() => {
 
   const dataCommentaries = await donneesRecueillies.json();
 
-  //console.log("donnees transformees dans CommentariesCounter: ", donneesTransformees);
-  //console.log("Les donneesRecueillies ", donneesRecueillies);
-  console.log("Les données  ", dataCommentaries);
   setAllCommentaries(dataCommentaries)
 };
 

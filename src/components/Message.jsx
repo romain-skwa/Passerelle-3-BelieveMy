@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import {GetAuthorTweet} from "../components/InsideTweet/GetAuthorTweet";
 import DeleteMessage from "./Message/DeleteMessage";
+// Encadré avec dialogue à droite de l'écran qui s'affiche quand l'utilisateur clique sur une notification
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
@@ -120,6 +121,9 @@ const MessageBox = () => {
     } catch (error) {
       console.error("Erreur dans conversation : ", error);
     }
+
+    // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
+    setInputContentMessage('');
   };
   
   return (
@@ -127,7 +131,7 @@ const MessageBox = () => {
     {user && toTheMail !== "none" ?  
     <section className="frameMessage">
 
-      <div style={{display: "flex", justifyContent: "end"}} onClick={() => setToTheMail("none")} >Fermer</div>
+      <div style={{display: "flex", justifyContent: "end", cursor:"pointer"}} onClick={() => setToTheMail("none")} >Fermer</div>
 
       <div style={{ display: "flex", justifyContent: "space-between ", }}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
