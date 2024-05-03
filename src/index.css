@@ -218,3 +218,20 @@
     right: 10px;
     top: 0;
 }
+/***************************************************************************************************************/
+.commentaryIconCounter{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+.commentaire{
+    width: 22px;
+    padding-top: 5px;
+}
+.numberCommentaries{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 10px;
+}

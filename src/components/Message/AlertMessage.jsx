@@ -117,8 +117,8 @@ return (
       {authors.map(([author, messages]) => (
         <div key={author}>
           <div>
-            Vous avez des messages de :
-            <span onClick={() => {
+            Vous avez des messages de : {" "}
+            <span style={{pointer: "cursor"}} onClick={() => {
               // setToTheMail pour définir dans le contexte l'adresse e-mail de l'auteur dont on veut lire les messages
               // et appeler la fonction updateMessageReadStatus pour marquer les messages comme lus
               setToTheMail(author);

@@ -16,10 +16,13 @@ const AuthProvider = ({children}) => {
     const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
     const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
     const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
-    const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState(null);
+    const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState([]);
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
+
+    //Ensemble des commentaires
+    const [allCommentaries, setAllCommentaries] = useState(null);
 
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
@@ -127,6 +130,43 @@ useEffect(() => {
 
 
 /*************************************************************************************************************/
+ //----------- Fonction -----------------------------------------------------------------------------------
+ const getAllCommentaries = async () => {
+  // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
+  setLoading(true);
+  toast("Chargement...");
+
+  // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
+  const donneesRecueillies = await fetch(
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,      
+      {      
+        method: "GET",      
+        headers: {      
+          "Content-Type": "application/json",      
+        },      
+      }      
+    ).catch(error => {      
+      console.error('Une erreur s\'est produite lors de la récupération des données : ', error);      
+      toast.error('Une erreur s\'est produite lors de la récupération des données');      
+    });
+
+  if (!donneesRecueillies.ok) {
+    toast.error("Une erreur est survenue dans ListTweet");
+    return;
+  }
+
+  const dataCommentaries = await donneesRecueillies.json();
+
+  //console.log("donnees transformees dans CommentariesCounter: ", donneesTransformees);
+  //console.log("Les donneesRecueillies ", donneesRecueillies);
+  console.log("Les données  ", dataCommentaries);
+  setAllCommentaries(dataCommentaries)
+};
+
+useEffect(() => {
+  getAllCommentaries();
+}, []);
+/*************************************************************************************************************/
     useEffect(() => {
         onAuthStateChanged(auth, (currenUser) => {
             setUser(currenUser);
@@ -155,6 +195,7 @@ useEffect(() => {
         likedListOfConnectedUser,
         avatartOfTheConnectedUser,
         toTheMail,
+        allCommentaries,
         setToTheMail,
         actualiserListFollow,
         actualiserLikedList,

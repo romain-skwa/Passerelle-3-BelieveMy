@@ -127,7 +127,7 @@ const MessageBox = () => {
     {user && toTheMail !== "none" ?  
     <section className="frameMessage">
 
-      <div style={{display: "flex", justifyContent: "end"}} onClick={() => setToTheMail("none")} >voila</div>
+      <div style={{display: "flex", justifyContent: "end"}} onClick={() => setToTheMail("none")} >Fermer</div>
 
       <div style={{ display: "flex", justifyContent: "space-between ", }}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
