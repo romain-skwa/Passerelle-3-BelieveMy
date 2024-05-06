@@ -20,6 +20,7 @@ const AuthProvider = ({children}) => {
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
+    const [recipientMail, setRecipientMail] = useState(""); // Destinataire
 
     //Ensemble des commentaires
     const [allCommentaries, setAllCommentaries] = useState(null);
@@ -114,7 +115,6 @@ useEffect(() => {
       const userConnectedData = userList.find((dataUser) => user.email === dataUser.mailUser);
   
       if (userConnectedData) {
-        console.log(`Est-ce que userConnectedData existe dans authProvider ? `, userConnectedData);  
         setIdOfConnectedUser(userConnectedData.id);  
         setPseudonymConnectedUser(userConnectedData.pseudonymUser);  
         setMailOfConnectedUser(userConnectedData.mailUser);
@@ -178,7 +178,7 @@ useEffect(() => {
     };
 
     const loginUser = (email, password) => {
-      console.log(`Appel de la fonction loginUser avec les valeurs suivantes : email = ${email}`);    
+      //console.log(`Appel de la fonction loginUser avec les valeurs suivantes : email = ${email}`);    
         return signInWithEmailAndPassword(auth, email, password);
     };
 
@@ -193,6 +193,8 @@ useEffect(() => {
         avatartOfTheConnectedUser,
         toTheMail,
         allCommentaries,
+        recipientMail,
+        setRecipientMail,
         setToTheMail,
         actualiserListFollow,
         actualiserLikedList,

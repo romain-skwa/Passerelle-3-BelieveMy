@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { Link } from "react-router-dom";
 import Write from "../InsideTweet/Buttons/Write";
+import ListDialogue from "../ListDialogue";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
@@ -116,19 +117,6 @@ export default function ListTweet(props) {
   return (
     <div className="affichageListeTweet">
       <h3>Liste des tweets</h3>
-
-      {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
-      <ul>
-        {/* Si listeTweet existe, son contenu est lu par .map*/}
-        {listeTweet &&
-          listeTweet.map((tweet) => (
-            <li key={tweet.id}>
-              {tweet.title}
-              {" : "}
-              {tweet.content}{" "}
-            </li>
-          ))}
-      </ul>
 
       {listeTweet &&
         listeTweet.map((tweet) => (

@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
+import  ListDialogue  from "../components/ListDialogue";
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
@@ -12,7 +13,7 @@ const MessageBox = () => {
   const [toTheMail, setToTheMail] = useState("");// Destinataire
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
-  const { tweetId } = useParams();// Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
+  const { tweetId } = useParams(); // Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
   const {
     idOfConnectedUser,
     mailOfConnectedUser,
@@ -49,9 +50,11 @@ const MessageBox = () => {
     const data = await getadressee.json();
     setToTheMail(data);
   };
+
   useEffect(() => {
     identification();
   }, []);
+  
   //_________________________________________________________________________________________
 
   const allTheConversations = async () => {
@@ -154,12 +157,13 @@ const MessageBox = () => {
         <button onClick={conversation}>Envoyer</button>
       </div>
 
-      <div>Ici on est censé voir l&apos;adresse mail du destinataire :
+      <div>Ici on est censé voir l&apos;adresse mail du destinataire : 
           {" " + toTheMail/* Afficher la liste des utilisateurs ici */}
       </div>
       <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
       <div>La date actuelle : {formattedDate}</div>
-        
+      <ListDialogue />
+
       <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
           <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} key={id}>
@@ -172,7 +176,7 @@ const MessageBox = () => {
             </p>
           </div>
         ))}
-        </div>
+      </div>
     </>
   );
 };

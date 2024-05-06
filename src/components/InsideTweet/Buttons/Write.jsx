@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import { AuthContext } from "../../../store/AuthProvider";
 import { Link } from "react-router-dom";
 import { GetAuthorTweet } from "../GetAuthorTweet";
@@ -9,8 +9,12 @@ export default function Write(props) {
   const { tweet } = props;
   const {
     mailOfConnectedUser,
+    setRecipientMail,
   } = useContext(AuthContext);
 
+  const handleWriteClick = () => {
+    setRecipientMail(tweet.author);
+  };
 return(
     <>
         {
@@ -18,20 +22,20 @@ return(
 // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur est différent du mail de l'auteur du tweet
 // alors, on affiche le bouton "Ecrire à ..."
         user && mailOfConnectedUser !== tweet.author ? 
-        (
+          (
             <> 
-                {/* ECRIRE A L'AUTEUR DU TWEET */}
-                <Link to={`/Message/${tweet.id}`} key={tweet.id}>
-                    <span >
-                        Ecrire à{" "}
-                        <GetAuthorTweet /* Composant affichant le PSEUDONYME */
+              {/* ECRIRE A L'AUTEUR DU TWEET */}
+              <Link to={`/WriteOneMessage/${tweet.id}`} onClick={handleWriteClick} key={tweet.id}>
+                  <span >
+                      Ecrire à{" "}
+                      <GetAuthorTweet /* Composant affichant le PSEUDONYME */
                         tweet={tweet}
                         cancelLink={true} 
-                        />
-                    </span>
-                </Link>
+                      />
+                  </span>
+              </Link>
             </>
-            ) :   null
+          ) :   null
         }
   </>)
 }
