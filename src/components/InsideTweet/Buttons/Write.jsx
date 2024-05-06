@@ -25,10 +25,10 @@ return(
           (
             <> 
               {/* ECRIRE A L'AUTEUR DU TWEET */}
-              <Link to={`/WriteOneMessage/${tweet.id}`} onClick={handleWriteClick} key={tweet.id}>
+              <Link to={`/WriteOneMessage/${tweet && tweet.id}`} onClick={handleWriteClick} key={tweet.id}>
                   <span >
                       Ecrire à{" "}
-                      <GetAuthorTweet /* Composant affichant le PSEUDONYME */
+                      <GetAuthorTweet /* Composant affichant le PSEUDONYME ;*/
                         tweet={tweet}
                         cancelLink={true} 
                       />

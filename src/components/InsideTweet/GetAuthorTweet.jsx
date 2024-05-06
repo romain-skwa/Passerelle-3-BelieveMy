@@ -16,7 +16,6 @@ export function GetAuthorTweet(props){
     // LA propriété "theInterlocutorId" est transmise par le composant ListDialogue
       // Dans les trois cas, ce sont l'adresse mail (identifiant) de l'auteur du tweet
     const author = tweet && tweet.author || authorTweet || theInterlocutorId && theInterlocutorId;
-    if (!theInterlocutorId){console.log("theInterlocutorId n'existe pas !")}
   /***************************************************************************************************** */
 
     const requete = async () => {

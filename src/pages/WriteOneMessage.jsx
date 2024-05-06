@@ -162,8 +162,9 @@ const MessageBox = () => {
       </div>
       <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
       <div>La date actuelle : {formattedDate}</div>
-      <ListDialogue />
 
+      <ListDialogue setToTheMail={setToTheMail} />
+      
       <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
           <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} key={id}>

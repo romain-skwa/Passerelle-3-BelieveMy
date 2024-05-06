@@ -22,7 +22,6 @@ import MyFollowedAuthors from "./pages/MyFollowedAuthors";
 import MyProfile from "./pages/MyProfile";
 import OneTweet from "./pages/OneTweet";
 import MessageBox from "./pages/WriteOneMessage";
-import CheckMessages from "./pages/CheckMessages";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -107,10 +106,6 @@ export default function App() {
                   {
                     path: "/WriteOneMessage/:tweetId",
                     element: <MessageBox />,
-                  },
-                  {
-                    path: "/CheckMessages/:tweetId",
-                    element: <CheckMessages />,
                   },
                 ],
               },

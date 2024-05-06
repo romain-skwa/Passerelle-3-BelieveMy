@@ -7,17 +7,12 @@ import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 
 import { useParams } from "react-router-dom";
 
-export default function ListDialogue() {
+export default function ListDialogue({setToTheMail}) {
   const [conversationSection, setConversationSection] = useState([]);
-  console.log(`conversationSection `,conversationSection);
-  const [inputContentMessage, setInputContentMessage] = useState("");
-  const [toTheMail, setToTheMail] = useState("");// Destinataire
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
-  const { userId } = useParams(); // Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
   const [uniqueNames, setUniqueNames] = useState(new Set());
   const {
-    idOfConnectedUser,
     mailOfConnectedUser,
   } = useContext(AuthContext);
 
@@ -75,13 +70,19 @@ export default function ListDialogue() {
         : conversationSection.find((message) => message.from === name)?.from
 );
 
+const handleToTheMail = (theInterlocutorId) => {
+  setToTheMail(theInterlocutorId);
+};
+
 return (
-  <>
+  <><section style={{border:"solid purple 2px"}}>
+
     {interlocutorIds.map((theInterlocutorId) => (
-      <div key={theInterlocutorId}>
-        <GetAuthorTweet theInterlocutorId={theInterlocutorId }cancelLink="true" /* PSEUDONYME */ />
+      <div key={theInterlocutorId} onClick={()=> handleToTheMail(theInterlocutorId)} style={{cursor:"pointer"}}>
+        <GetAuthorTweet theInterlocutorId={theInterlocutorId} cancelLink="true" /* PSEUDONYME */ />
       </div>
     ))}
+    </section>
   </>
 )
 }
