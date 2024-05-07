@@ -7,13 +7,14 @@ import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 
 // Encadré affichant les noms des interlocuteurs de l'utilisateur connecté
 
-export default function ListDialogue({setToTheMail}) {
+export default function ListDialogue({}) {
   const [conversationSection, setConversationSection] = useState([]);
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const [uniqueNames, setUniqueNames] = useState(new Set());
-  const {
+  const {user,
     mailOfConnectedUser,
+    setMailInterlocutor,
   } = useContext(AuthContext);
 
   useEffect(() => {
@@ -56,8 +57,6 @@ export default function ListDialogue({setToTheMail}) {
         });
         setUniqueNames(names);
 
- 
-
       } catch (error) {
         console.error("Erreur dans allTheConversations : ", error);
       }
@@ -71,11 +70,12 @@ export default function ListDialogue({setToTheMail}) {
 );
 
 const handleToTheMail = (theInterlocutorId) => {
-  setToTheMail(theInterlocutorId);
+  setMailInterlocutor(theInterlocutorId);
 };
 
 return (
-  <>
+  <> 
+  {user ? // Cette section n'apparaitra que si l'utilisateur est bien connecté
   <section className="listDialogue">
     Vos conversations :
     {interlocutorIds.map((theInterlocutorId) => (
@@ -84,6 +84,7 @@ return (
       </div>
     ))}
     </section>
+    : null }
   </>
 )
 }

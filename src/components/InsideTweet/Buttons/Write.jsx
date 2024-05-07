@@ -9,12 +9,9 @@ export default function Write(props) {
   const { tweet } = props;
   const {
     mailOfConnectedUser,
-    setRecipientMail,
   } = useContext(AuthContext);
 
-  const handleWriteClick = () => {
-    setRecipientMail(tweet.author);
-  };
+
 return(
     <>
         {
@@ -25,7 +22,7 @@ return(
           (
             <> 
               {/* ECRIRE A L'AUTEUR DU TWEET */}
-              <Link to={`/WriteOneMessage/${tweet && tweet.id}`} onClick={handleWriteClick} key={tweet.id}>
+              <Link to={`/WriteOneMessage/${tweet && tweet.id}`} key={tweet.id}>
                   <span >
                       Ecrire à{" "}
                       <GetAuthorTweet /* Composant affichant le PSEUDONYME ;*/

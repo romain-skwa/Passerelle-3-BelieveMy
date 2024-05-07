@@ -40,16 +40,18 @@ export default function DeleteMessage({ data, deleteNow, setDeleteNow }) {
       setDeleteNow(true); /* deleteNow change.*/
       
     }
-    console.log(`user.email `,user.email)
+    //console.log(`user.email `, user.email)
   };
   return(
     <>
+    <div>
         {user && user.email === data.from ? (
-        <div className="buttonDeleteMessage" onClick={onDeleteThisTweet}>
-        &#10006;
-        </div>
-           ) : null 
-        }
+          <div className="buttonDeleteMessage" onClick={onDeleteThisTweet}>
+            &#10006;
+          </div>
+            ) : null 
+          }
+      </div>
     </>
   ) 
 }

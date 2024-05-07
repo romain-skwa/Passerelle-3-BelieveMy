@@ -7,10 +7,11 @@ import { CoDecoLink } from "../components/NavBar";
 import { SayHello } from "../components/Hello/Hello";
 import AlertMessage from "../components/Message/AlertMessage";
 import Message from "../components/Message";
+import ListDialogue from "../components/ListDialogue";
 
 export default function Main() {
   // Variables
-  const { user, loading } = useContext(AuthContext);
+  const { loading,  } = useContext(AuthContext);
 
   if (loading) {
     return  (
@@ -32,9 +33,12 @@ export default function Main() {
       <section style={{position:"fixed", top:"6vh", left:"70vw"}}>
         <AlertMessage />
       </section>
+      <ListDialogue />
 
+      
       <Message />
       <Outlet />
+      
     </main>
   );
 }

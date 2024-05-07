@@ -17,10 +17,10 @@ const AuthProvider = ({children}) => {
     const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
     const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
     const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState([]);
+    const [mailInterlocutor, setMailInterlocutor] = useState("");// Destinataire
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
-    const [recipientMail, setRecipientMail] = useState(""); // Destinataire
 
     //Ensemble des commentaires
     const [allCommentaries, setAllCommentaries] = useState(null);
@@ -193,8 +193,8 @@ useEffect(() => {
         avatartOfTheConnectedUser,
         toTheMail,
         allCommentaries,
-        recipientMail,
-        setRecipientMail,
+        mailInterlocutor,
+        setMailInterlocutor,
         setToTheMail,
         actualiserListFollow,
         actualiserLikedList,

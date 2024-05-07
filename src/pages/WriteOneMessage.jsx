@@ -11,7 +11,6 @@ import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 const MessageBox = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const [inputContentMessage, setInputContentMessage] = useState("");
-  const [toTheMail, setToTheMail] = useState("");// Destinataire
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const { tweetId } = useParams(); // Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
@@ -19,14 +18,16 @@ const MessageBox = () => {
     idOfConnectedUser,
     mailOfConnectedUser,
     pseudonymConnectedUser,
+    mailInterlocutor,
+    setMailInterlocutor,
   } = useContext(AuthContext);
-
+console.log(`LE mail ici`, mailInterlocutor)
   useEffect(() => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
-  }, [toTheMail]);
-
+  }, [mailInterlocutor]);
+ 
 // On récupère l'adresse mail de l'utilisateur destinataire du message ---------------------------------------------------------
 
     // Contraint de procéder comme ceci afin d'éviter de montrer l'adresse mail (également identifiant) du destinataire dans l'url
@@ -50,7 +51,7 @@ const MessageBox = () => {
     }
 
     const data = await getadressee.json();
-    setToTheMail(data);
+    setMailInterlocutor(data);
   };
 
   useEffect(() => {
@@ -79,7 +80,7 @@ const MessageBox = () => {
       const data = await getEverything.json();
       // On ne garde que les messages qui ont été envoyés ou reçus par l'utilisateur connecté
       const filteredData = Object.entries(data).filter(([id, message]) => {
-        return message.from === mailOfConnectedUser && message.to === toTheMail || message.from === toTheMail && message.to === mailOfConnectedUser;
+        return message.from === mailOfConnectedUser && message.to === mailInterlocutor || message.from === mailInterlocutor && message.to === mailOfConnectedUser;
       });
       setConversationSection(filteredData);
     } catch (error) {
@@ -90,14 +91,14 @@ const MessageBox = () => {
   //_________________________________________________________________________________________
 
   const conversation = async () => {
-    if (!toTheMail) {
+    if (!mailInterlocutor) {
       toast.error("L'adresse mail du destinataire n'est pas définie.");
       return;
     }
 
     const newMessage = {
       from: mailOfConnectedUser,
-      to: toTheMail,
+      to: mailInterlocutor,
       content: inputContentMessage,
       datePublication: formattedDate,
       hourPublication: formattedTime,
@@ -143,17 +144,15 @@ const MessageBox = () => {
  
       <div>La date actuelle : {formattedDate}</div>
 
-      <ListDialogue setToTheMail={setToTheMail} />
-
       <div style={{ display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
-        <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
-        <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={toTheMail} /></div>
+        <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div> {/* Nom de l'utilisateur connecté */} 
+        <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={mailInterlocutor} /></div> {/* Nom de son interlocuteur */}
       </div>
       
       <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
           <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
-            <div className={data.to === mailOfConnectedUser ? "message  messageFromAuthor" : "message messageFromOther"} key={id}>
+            <div className={data.to === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
               <p> 
                 {data.content} <br />
                 Le {data.datePublication} à {data.hourPublication} <br />
@@ -183,7 +182,16 @@ const MessageBox = () => {
             justifyContent: "end",
             }}
             >
-          <div className="sendMessageButton" onClick={conversation}>Envoyer le message à <span style={{fontWeight:"bold"}}> <GetAuthorTweet theInterlocutorId={toTheMail} cancelLink="true" /* PSEUDONYME */ /></span></div>
+
+          <div 
+            className="sendMessageButton" // Bouton d'envoi
+            onClick={conversation}>
+              Envoyer le message à {" "}
+              <span style={{fontWeight:"bold"}}> 
+                <GetAuthorTweet theInterlocutorId={mailInterlocutor} cancelLink="true" /* PSEUDONYME */ />
+              </span>
+          </div>
+
         </div>
       </section>
     </section>
