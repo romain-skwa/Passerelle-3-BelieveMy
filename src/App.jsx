@@ -1,9 +1,7 @@
 import Connexion from "./pages/Connexion";
 import Home from "./pages/Home";
 import Error from "./pages/Error";
-import Zut from "./pages/Zut";
-import Envoi from "./pages/Envoi";
-import Essai from "./pages/Essai";
+
 import Inscription from "./pages/Inscription";
 import ChangeMyPseudo from "./components/MyProfile/ChangeMyPseudo";
 import Main from "./layouts/Main";
@@ -67,18 +65,7 @@ export default function App() {
                     path: "/inscription",
                     element: <Inscription />,
                   },
-                  {
-                    path: "/zut",
-                    element: <Zut />,
-                  },
-                  {
-                    path: "/essai",
-                    element: <Essai />,
-                  },
-                  {
-                    path: "/envoi",
-                    element: <Envoi />,
-                  },
+
                   {
                     path: "/ChangeMyPseudo",
                     element: <ChangeMyPseudo />,

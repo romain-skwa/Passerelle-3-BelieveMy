@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import  ListDialogue  from "../components/ListDialogue";
+import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
@@ -17,6 +18,7 @@ const MessageBox = () => {
   const {
     idOfConnectedUser,
     mailOfConnectedUser,
+    pseudonymConnectedUser,
   } = useContext(AuthContext);
 
   useEffect(() => {
@@ -126,59 +128,65 @@ const MessageBox = () => {
       );
 
       allTheConversations(); // Actualiser la liste des conversations après l'envoi d'un nouveau message
+    
+    // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
+    setInputContentMessage('');
+
     } catch (error) {
       console.error("Erreur dans conversation : ", error);
     }
   };
 
   return (
-    <>
+    <section className="WriteOneMessage">
       <ToastContainer />
-      <div>
-        <label htmlFor="inputContentMessage">Page des messages</label>
-        <textarea
-          cols="50"
-          rows="10"
-          name="inputContentMessage"
-          id="inputContentMessage"
-          value={inputContentMessage}
-          onChange={(e) => setInputContentMessage(e.target.value)}
-          placeholder="Écrivez votre nouveau message ici."
-          style={{ margin: "15px auto", padding: "5px", display: "block" }}
-        />
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "end",
-          }}
-        >
-        <button onClick={conversation}>Envoyer</button>
-      </div>
-
-      <div>Ici on est censé voir l&apos;adresse mail du destinataire : 
-          {" " + toTheMail/* Afficher la liste des utilisateurs ici */}
-      </div>
-      <div>Identifiant de l&apos;utilisateur connecté : {idOfConnectedUser}</div>
+ 
       <div>La date actuelle : {formattedDate}</div>
 
       <ListDialogue setToTheMail={setToTheMail} />
+
+      <div style={{ display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
+        <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
+        <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={toTheMail} /></div>
+      </div>
       
       <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
-          <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} key={id}>
-            <p>
-              De : {data.from} <br />
-              Pour : {data.to} <br />
-              Message : {data.content} <br />
-              Date : {data.datePublication} <br />
-              Heure : {data.hourPublication} <br />
-            </p>
+          <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
+            <div className={data.to === mailOfConnectedUser ? "message  messageFromAuthor" : "message messageFromOther"} key={id}>
+              <p> 
+                {data.content} <br />
+                Le {data.datePublication} à {data.hourPublication} <br />
+              </p>
+            </div>
           </div>
         ))}
       </div>
-    </>
+
+      <section className="writeTheMessage">
+        <div>
+          <textarea
+            cols="60"
+            rows="4"
+            name="inputContentMessage"
+            id="inputContentMessage"
+            value={inputContentMessage}
+            onChange={(e) => setInputContentMessage(e.target.value)}
+            placeholder="Écrivez votre nouveau message ici."
+            style={{ margin: "15px auto", padding: "5px", display: "block" }}
+            />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "end",
+            }}
+            >
+          <div className="sendMessageButton" onClick={conversation}>Envoyer le message à <span style={{fontWeight:"bold"}}> <GetAuthorTweet theInterlocutorId={toTheMail} cancelLink="true" /* PSEUDONYME */ /></span></div>
+        </div>
+      </section>
+    </section>
   );
 };
 

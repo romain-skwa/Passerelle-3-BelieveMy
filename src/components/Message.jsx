@@ -141,7 +141,7 @@ const MessageBox = () => {
       <div className="conversationContainer" >
         {conversationSection.map(([id, data]) => (
           <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
-            <div className={data.to === mailOfConnectedUser ? "message messageFromOther" : "message  messageFromAuthor"} >
+            <div className={data.to === mailOfConnectedUser ? "message messageFromAuthor" : "message  messageFromOther"} >
               <div>
                 {data.content} <br />
                 {/*data.id*/}

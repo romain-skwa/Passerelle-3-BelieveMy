@@ -8,8 +8,9 @@ a{
 .codeco{
     border: 1px red solid;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin: 0 2rem;
+    width: 10vw;
 }
 .tweetFrame{
     background-color: aquamarine;
@@ -73,7 +74,7 @@ a{
 
 .divAuthorFollowed{
     border: 1px brown solid;
-    margin: 1rem;
+    margin: 1rem 0;
     padding: 0.5rem;
     list-style-type: none;
     width: 200px;
@@ -185,7 +186,7 @@ a{
     bottom: 1vh;
 }
 .conversationContainer{
-    width: 20vw;
+    width: 100%;
     flex-grow: 1;
     max-height: 47vh;
     overflow-y: auto; /* Ajouter une barre de défilement verticale */
@@ -215,6 +216,7 @@ a{
 /***************************************************************************************************************/
 .conversationAlert{
     width: 20vw;
+
 }
 .buttonDeleteMessage{
     position: absolute;
@@ -238,4 +240,33 @@ a{
     align-items: center;
     justify-content: start;
     margin-left: 10px;
+}
+.writeTheMessage{
+    width: 100%;
+    border: 2px orange dashed;
+}
+
+.listDialogue{
+    border: solid purple 2px;
+    position: absolute;
+    top: 22vh;
+    left: 15vw;
+}
+.WriteOneMessage{
+    width: 552px;
+    margin: 0 auto;
+}
+.MyProfile{
+    width: 552px;
+    margin: 0 auto;
+}
+.ListFollowed{
+    position: fixed;
+    top: 35vh;
+    left: 15vw;
+}
+.sendMessageButton{
+    cursor: pointer;
+    margin: 0.5rem auto;
+    padding: 0.5rem;    
 }

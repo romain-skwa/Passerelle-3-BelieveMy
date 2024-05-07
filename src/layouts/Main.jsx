@@ -13,15 +13,26 @@ export default function Main() {
   const { user, loading } = useContext(AuthContext);
 
   if (loading) {
-    return <GridLoader color="#36d7b7" size={30} />; // J'arrive po à centrer
+    return  (
+      <>
+        <Title/>
+        <GridLoader color="#36d7b7" size={30} />
+      </>     
+    )
   }
 
   return (
-    <main style={{position:"relative"}}>
-      <Title />
-      <CoDecoLink />
-      <SayHello />
-      <AlertMessage />
+    <main>
+
+      <section style={{position:"fixed", top:"6vh", left:"15vw"}}>
+        <SayHello />
+        <CoDecoLink />
+      </section>
+
+      <section style={{position:"fixed", top:"6vh", left:"70vw"}}>
+        <AlertMessage />
+      </section>
+
       <Message />
       <Outlet />
     </main>

@@ -1,7 +1,6 @@
 import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
-import { GetOneIdUser } from "../components/Hello/GetOneIdUser";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 import { useNavigate } from 'react-router-dom';
 import ListFollowed from "../components/ListFollowed";
@@ -111,10 +110,7 @@ export default function MyFollowedAuthors() {
 //console.log(`tweetsSuivis `, tweetsSuivis)
   return (
     <div>
-      <h2>
-        <GetOneIdUser />
-      </h2>
-      La liste des auteurs que vous suivez.
+
       <ListFollowed />
 
     <div className="affichageListeTweet">

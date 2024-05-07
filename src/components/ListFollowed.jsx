@@ -2,9 +2,10 @@ import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { Link } from "react-router-dom";
+import { GetOneIdUser } from "../components/Hello/GetOneIdUser";
 
 export default function ListFollowed(){
-  // Variable
+// Variable
   const { followListOfConnectedUser, } = useContext(AuthContext);
 //console.log(`Contenu de followListOfConnectedUser `,followListOfConnectedUser);
 const [loading, setLoading] = useState(false);
@@ -63,7 +64,11 @@ const [listeFollow, setListeFollow] = useState([]);
 //console.log(`Contenu de tweetsAuteursSuivis `, tweetsAuteursSuivis);
 
   return (
-    <>
+    <section className="ListFollowed">
+      <h2>
+        <GetOneIdUser />
+      </h2>
+        Les auteurs que vous suivez :
         {/* Bloc pour afficher seulement les noms des auteurs suivis */}
         {tweetsAuteursSuivis && tweetsAuteursSuivis.length > 0 ? (
             <ul>
@@ -71,7 +76,7 @@ const [listeFollow, setListeFollow] = useState([]);
                 <li className="divAuthorFollowed" key={author.id} style={{ textTransform: 'capitalize' }}>
                   <Link to={`/AuthorPage/${author.id}`}>
                     {author.pseudonymUser}
-                    </Link>
+                  </Link>
                     {/* Ajoutez ici les éléments que vous souhaitez afficher pour chaque auteur */}
                 </li>
                 ))}
@@ -79,6 +84,6 @@ const [listeFollow, setListeFollow] = useState([]);
             ) : (
             <p>Vous n&apos;êtes en train de suivre aucun auteur.</p>
             )}
-    </>
+    </section>
     );
 }

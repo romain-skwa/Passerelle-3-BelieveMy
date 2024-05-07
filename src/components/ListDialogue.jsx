@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 
-import { useParams } from "react-router-dom";
+// Encadré affichant les noms des interlocuteurs de l'utilisateur connecté
 
 export default function ListDialogue({setToTheMail}) {
   const [conversationSection, setConversationSection] = useState([]);
@@ -75,8 +75,9 @@ const handleToTheMail = (theInterlocutorId) => {
 };
 
 return (
-  <><section style={{border:"solid purple 2px"}}>
-
+  <>
+  <section className="listDialogue">
+    Vos conversations :
     {interlocutorIds.map((theInterlocutorId) => (
       <div key={theInterlocutorId} onClick={()=> handleToTheMail(theInterlocutorId)} style={{cursor:"pointer"}}>
         <GetAuthorTweet theInterlocutorId={theInterlocutorId} cancelLink="true" /* PSEUDONYME */ />
