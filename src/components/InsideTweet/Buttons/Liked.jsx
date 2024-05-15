@@ -56,7 +56,7 @@ export default function Liked(props) {
       );
 
       const change = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
           method: "PUT", // La méthode PUT pour POSER de nouvelles données
           headers: {
@@ -80,7 +80,7 @@ export default function Liked(props) {
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${
+      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${
         IdTweet ? IdTweet : tweet.id
       }/likedCounter.json`
     );
@@ -91,7 +91,7 @@ export default function Liked(props) {
 
     // Envoi de la requête PUT pour remplacer la valeur dans Firebase
     const putResponse = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${
+      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${
         IdTweet ? IdTweet : tweet.id
       }/likedCounter.json`,
       {

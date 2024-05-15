@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
-
-// Encadré affichant les noms des interlocuteurs de l'utilisateur connecté
-
-export default function ListDialogue({ showOnlyUnread = false }) {
+// finalement, ce composant n'est pas utilisé (pour l'instant)
+const ConversationList = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const [uniqueNames, setUniqueNames] = useState(new Set());
+  const [unreadMessages, setUnreadMessages] = useState([]);
   const { user, mailOfConnectedUser, setMailInterlocutor } = useContext(AuthContext);
-  const [unreadInterlocutors, setUnreadInterlocutors] = useState([]);
 
   useEffect(() => {
     allTheConversations();
@@ -55,36 +52,45 @@ export default function ListDialogue({ showOnlyUnread = false }) {
       });
       setUniqueNames(names);
 
-      // Extraction des interlocuteurs avec des messages non lus
-      const unreadInterlocutors = filteredConversations.filter((message) => message.read === "notYet").map((message) => message.from === mailOfConnectedUser ? message.to : message.from);
-      setUnreadInterlocutors(Array.from(new Set(unreadInterlocutors)));
-      console.log(`unreadInterlocutors`, unreadInterlocutors)
+      // Mettre à jour la liste des messages non lus
+      const unreadMessages = filteredConversations.filter((message) => message.read === "notYet" && message.to === mailOfConnectedUser);
+      setUnreadMessages(unreadMessages);
     } catch (error) {
       console.error("Erreur dans allTheConversations : ", error);
     }
   };
 
+  const interlocutorIds = Array.from(uniqueNames).map((name) =>
+    name === mailOfConnectedUser
+      ? conversationSection.find((message) => message.to === name)?.to
+      : conversationSection.find((message) => message.from === name)?.from
+  );
+
   const handleToTheMail = (theInterlocutorId) => {
     setMailInterlocutor(theInterlocutorId);
   };
 
-  // Filtrer les interlocuteurs affichés en fonction de la valeur de showOnlyUnread
-  const displayedInterlocutors = showOnlyUnread
-    ? unreadInterlocutors
-    : Array.from(uniqueNames);
-
   return (
     <>
-      {user ? // Cette section n'apparaitra que si l'utilisateur est bien connecté
-        <section className="listDialogue">
+      {user ? (
+        <section className="conversationList">
           Vos conversations :
-          {displayedInterlocutors.map((theInterlocutorId) => (
-            <div className="nameInterlocutor" key={theInterlocutorId} onClick={() => handleToTheMail(theInterlocutorId)} style={{ cursor: "pointer" }}>
-              <GetAuthorTweet theInterlocutorId={theInterlocutorId} cancelLink="true" /* PSEUDONYME */ />
+          {interlocutorIds.map((theInterlocutorId) => (
+            <div
+              key={theInterlocutorId}
+              onClick={() => handleToTheMail(theInterlocutorId)}
+              style={{ cursor: "pointer" }}
+            >
+              <GetAuthorTweet theInterlocutorId={theInterlocutorId} cancelLink="true" />
+              {unreadMessages.some((message) => message.from === theInterlocutorId) && (
+                <span className="unread-message-indicator">Nouveau message</span>
+              )}
             </div>
           ))}
         </section>
-        : null}
+      ) : null}
     </>
   );
-}
+};
+
+export default ConversationList;

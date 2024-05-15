@@ -21,7 +21,7 @@ export function GetAuthorTweet(props){
     const requete = async () => {
     // Dans la variable const userlist, on va stocker le contenu récupéré sur Firebase
     const getUserlist = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList.json`,
         {
           method: "GET",
           headers: {

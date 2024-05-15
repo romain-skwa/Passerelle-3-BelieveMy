@@ -9,8 +9,8 @@ export default function Write(props) {
   const { tweet } = props;
   const {
     mailOfConnectedUser,
+    setMailInterlocutor,
   } = useContext(AuthContext);
-
 
 return(
     <>
@@ -22,8 +22,8 @@ return(
           (
             <> 
               {/* ECRIRE A L'AUTEUR DU TWEET */}
-              <Link to={`/WriteOneMessage/${tweet && tweet.id}`} key={tweet.id}>
-                  <span >
+              <Link to={`/WriteOneMessage`} key={tweet.id}>
+                  <span onClick={() => setMailInterlocutor(tweet.author)}>
                       Ecrire à{" "}
                       <GetAuthorTweet /* Composant affichant le PSEUDONYME ;*/
                         tweet={tweet}

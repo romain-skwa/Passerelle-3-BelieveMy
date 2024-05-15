@@ -18,10 +18,10 @@ const AuthProvider = ({children}) => {
     const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
     const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState([]);
     const [mailInterlocutor, setMailInterlocutor] = useState("");// Destinataire
+    console.log(`mailInterlocutor `, mailInterlocutor)
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
-
     //Ensemble des commentaires
     const [allCommentaries, setAllCommentaries] = useState(null);
 
@@ -48,8 +48,6 @@ const actualiserPseudo = (p) => {
   setPseudonymConnectedUser(p);
 }
 /*---------------------------------------------------------------------------------------------- */
-
-/*---------------------------------------------------------------------------------------------- */
    /* useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -75,7 +73,7 @@ const actualiserPseudo = (p) => {
 useEffect(() => {
     const requete = async () => {
       const getUserlist = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList.json`,
         {
           method: "GET",
           headers: {
@@ -138,7 +136,7 @@ useEffect(() => {
 
   // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
   const donneesRecueillies = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,      
+      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,      
       {      
         method: "GET",      
         headers: {      

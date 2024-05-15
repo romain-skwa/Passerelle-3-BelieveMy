@@ -36,18 +36,14 @@ export default function FollowThisUser(props) {
     if (!preventFollowList.includes(tweet.author)) {
       // Vérifier que l'auteur du tweet n'est pas déjà présent dans preventFollowList
       const newDataFollowList = {
-        mailUser: mailOfConnectedUser,
-        pseudonymUser: pseudonymConnectedUser,
         followList: [...preventFollowList, tweet.author], // contenu précédent + auteur du tweet actuel
-        likedList: likedListOfConnectedUser,
-        avatar: avatartOfTheConnectedUser,
       };
       console.log("Données à envoyer à Firebase :", newDataFollowList);
 
       const change = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
-          method: "PUT", // La méthode PUT pour POSER de nouvelles données
+          method: "PATCH", // La méthode PUT pour POSER de nouvelles données
           headers: {
             "Content-Type": "application/json",
           },
@@ -74,16 +70,16 @@ export default function FollowThisUser(props) {
     <>
       {
         // Pour s'assurer que le bouton "suivre" ne s'affichera pas sous un tweet écrit par l'utilisateur connecté
-        // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur est différent du mail de l'auteur du tweet
-        // alors, on affiche le bouton "suivre" ou la mention "Déjà suivi"
+        // voici la condition suivante, si un utilisateur est bien connecté ET si le mail de cet utilisateur !== du mail de l'auteur du tweet
+        // alors, on affiche le bouton "suivre" ou la mention "Abonné"
+
+        // UTILISATEUR CONNECTÉ
         user && mailOfConnectedUser !== tweet.author ? 
         (
           <>
             {preventFollowList.includes(tweet.author) ? ( // Si l'auteur du tweet est déjà dans la liste des auteurs suivi par l'utilisateur
-              <div style={{ display: "flex" }}>
-
-                {/* NE PLUS SUIVRE L'AUTEUR DU TWEET */}
-                <UnfollowThisUser tweet={tweet} />
+              <div style={{ display: "flex" }}>                
+                <UnfollowThisUser tweet={tweet} />{/* NE PLUS SUIVRE L'AUTEUR DU TWEET */}
               </div>
                 ) : (
                   // Si l'utilisateur connecté n'est pas abonné, il peut cliquer sur le bouton suivant pour suivre l'auteur du tweet
@@ -92,13 +88,18 @@ export default function FollowThisUser(props) {
                   </div>
                 )}
             </>
-          ) :   
-              <Link to="/connexion">{/* Si l'utilisateur n'est pas connecté mais qu'il clique, il arrivera sur la page de connexion*/}
-                <div className="addFollow followButon">
-                  S&apos;abonner
-                </div>
-              </Link>
+          ) : // Si l'utiliseur connecté a son mail identique à celui de l'auteur du tweet. Cela signifie qu'il est l'auteur de ce tweet. Donc on n'affiche rien.
+              null 
             }
+
+      {/* UTILISATEUR CONNECTÉ */}
+      {!user ? 
+        <Link to="/connexion">{/* Si l'utilisateur n'est pas connecté mais qu'il clique, il arrivera sur la page de connexion*/}
+          <div className="addFollow followButon">
+            S&apos;abonner
+          </div>
+        </Link> : null
+      }
     </>
   );
 }

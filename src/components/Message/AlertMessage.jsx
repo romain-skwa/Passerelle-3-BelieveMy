@@ -26,7 +26,7 @@ const AlertMessage = () => {
   const allTheConversations = async () => {
     try {
       const getEverything = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
           headers: {
@@ -85,7 +85,7 @@ const AlertMessage = () => {
   
       const promises = updatedMessages.map(async ([id, conversation ]) => {
         const response = await fetch(
-          `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation/${conversation.id}.json`,
+          `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation/${conversation.id}.json`,
           {
             method: "PATCH",
             headers: {

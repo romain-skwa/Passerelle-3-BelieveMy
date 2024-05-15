@@ -60,7 +60,7 @@ export default function AboutThisUser() {
     };
 
     const change = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
       {
         method: "PATCH", // La méthode PUT pour POSER de nouvelles données
         headers: {

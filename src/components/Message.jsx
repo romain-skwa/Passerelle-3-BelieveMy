@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
@@ -24,25 +24,13 @@ const MessageBox = () => {
     setToTheMail,
   } = useContext(AuthContext);
 
-  useEffect(() => {
-    allTheConversations();
-    setFormattedDate(new Date().toLocaleDateString());
-    setFormattedTime(new Date().toLocaleTimeString());
-  }, [toTheMail, conversationSection]);
 
-  useEffect(() => {
-    allTheConversations(); // Le composant MessageBox dans lequel nous sommes est actualisé quand cette fonction est lancée
-    setDeleteNow(false); // Le state deleteNow est remis à false maintenant que la liste de tweet est mise à jour
-  }, [deleteNow]);
-  
-
- 
   //_________________________________________________________________________________________
 
-  const allTheConversations = async () => {
+  const allTheConversations = useCallback(async () => {
     try {
       const getEverything = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
           headers: {
@@ -75,7 +63,13 @@ const MessageBox = () => {
     } catch (error) {
       console.error("Erreur dans allTheConversations : ", error);
     }
-  };
+  }, [mailOfConnectedUser, toTheMail]);
+
+  useEffect(() => {
+    allTheConversations();
+    setFormattedDate(new Date().toLocaleDateString());
+    setFormattedTime(new Date().toLocaleTimeString());
+  }, [toTheMail, allTheConversations]);
 
   //_________________________________________________________________________________________
 
@@ -96,7 +90,7 @@ const MessageBox = () => {
 
     try {
       const response = await fetch(
-        "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json",
+        "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json",
         {
           method: "POST",
           headers: {

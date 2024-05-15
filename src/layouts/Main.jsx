@@ -7,7 +7,6 @@ import { CoDecoLink } from "../components/NavBar";
 import { SayHello } from "../components/Hello/Hello";
 import AlertMessage from "../components/Message/AlertMessage";
 import Message from "../components/Message";
-import ListDialogue from "../components/ListDialogue";
 
 export default function Main() {
   // Variables
@@ -33,7 +32,6 @@ export default function Main() {
       <section style={{position:"fixed", top:"6vh", left:"70vw"}}>
         <AlertMessage />
       </section>
-      <ListDialogue />
 
       
       <Message />

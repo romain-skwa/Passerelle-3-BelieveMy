@@ -188,7 +188,6 @@ a{
 .conversationContainer{
     width: 100%;
     flex-grow: 1;
-    max-height: 47vh;
     overflow-y: auto; /* Ajouter une barre de défilement verticale */
     background-color: azure;
 }
@@ -216,6 +215,7 @@ a{
 /***************************************************************************************************************/
 .conversationAlert{
     width: 20vw;
+    border: 2px orange dashed;
 
 }
 .buttonDeleteMessage{
@@ -247,8 +247,8 @@ a{
 }
 
 .listDialogue{
-    border: solid purple 2px;
-    position: absolute;
+    border: solid rgb(23, 128, 0) 2px;
+    position: fixed;
     top: 22vh;
     left: 15vw;
 }
@@ -269,4 +269,9 @@ a{
     cursor: pointer;
     margin: 0.5rem auto;
     padding: 0.5rem;    
+}
+.nameInterlocutor{
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border: 1px solid skyblue;
 }

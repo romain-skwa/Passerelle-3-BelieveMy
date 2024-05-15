@@ -36,7 +36,7 @@ export default function GetCommentaries(props) {
 
     // Dans la variable const donneesRecueilliesCommentaires, on va stocker le contenu récupéré sur Firebase
     const donneesRecueilliesCommentaires = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,
+      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,
       {
         method: "GET",
         headers: {

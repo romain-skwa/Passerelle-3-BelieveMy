@@ -26,7 +26,7 @@ export default function ChangeThisTweet(props) {
             }
     
             const change = await fetch(
-                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
+                `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
                 {
                   method: "PUT", // La méthode PUT pour POSER de nouvelles données
                   headers: {

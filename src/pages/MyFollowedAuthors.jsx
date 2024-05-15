@@ -12,7 +12,6 @@ import DeleteTweet from "../components/InsideTweet/DeleteTweet"; // Plus tard
 import Avatar from "../components/InsideTweet/Avatar";
 import Commentaries from "../components/InsideTweet/Commentaries";
 import Write from "../components/InsideTweet/Buttons/Write";
-
 /*
   Page dans laquelle on va voir la liste des auteurs suivis par l'utilisateur connecté
   ainsi que tous les tweets des auteurs suivis.
@@ -53,7 +52,7 @@ export default function MyFollowedAuthors() {
             
         // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
         const donneesRecueillies = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json`,
         {
             method: "GET",
             headers: {
@@ -110,7 +109,6 @@ export default function MyFollowedAuthors() {
 //console.log(`tweetsSuivis `, tweetsSuivis)
   return (
     <div>
-
       <ListFollowed />
 
     <div className="affichageListeTweet">

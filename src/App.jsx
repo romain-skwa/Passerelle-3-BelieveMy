@@ -91,7 +91,7 @@ export default function App() {
                     element: <OneTweet />,
                   },
                   {
-                    path: "/WriteOneMessage/:tweetId",
+                    path: "/WriteOneMessage",
                     element: <MessageBox />,
                   },
                 ],

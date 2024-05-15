@@ -55,7 +55,7 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
       const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email, followList : [], avatar : data.avatar,}
 
       const newUser = await fetch(// Une nouvelle section  dans realtime database : userList.
-        "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json",
+        "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList.json",
                     {
                     method: "POST",
                     headers: {

@@ -25,7 +25,7 @@ export default function ChangeThisTweet(props) {
     // dans les autres pages, son identifiant sera tweet.id
     // Dans les deux cas l'identifiant sera toujours le même. Il s'agit juste d'une façon différente de l'acquérir.
             const change = await fetch(
-                `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet ? IdTweet : tweet.id}.json`,
+                `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet ? IdTweet : tweet.id}.json`,
                 {
                   method: "PUT", // La méthode PUT pour POSER de nouvelles données
                   headers: {

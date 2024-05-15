@@ -21,49 +21,20 @@ const MessageBox = () => {
     mailInterlocutor,
     setMailInterlocutor,
   } = useContext(AuthContext);
-console.log(`LE mail ici`, mailInterlocutor)
+  
   useEffect(() => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
   }, [mailInterlocutor]);
  
-// On récupère l'adresse mail de l'utilisateur destinataire du message ---------------------------------------------------------
 
-    // Contraint de procéder comme ceci afin d'éviter de montrer l'adresse mail (également identifiant) du destinataire dans l'url
-    // A la place le useParams utilisera l'identifiant unique du tweet
-
-  const identification = async () => {
-    // Dans la variable const adressee, on va stocker le contenu récupéré sur Firebase
-    const getadressee = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweetId}/author.json`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!getadressee.ok) {
-      toast.error("Une erreur est survenue dans userTweet");
-      return;
-    }
-
-    const data = await getadressee.json();
-    setMailInterlocutor(data);
-  };
-
-  useEffect(() => {
-    identification();
-  }, []);
-  
   //_________________________________________________________________________________________
 
   const allTheConversations = async () => {
     try {
-      const getEverything = await fetch(
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
+      const getAllConversations = await fetch(
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
           headers: {
@@ -72,12 +43,11 @@ console.log(`LE mail ici`, mailInterlocutor)
         }
       );
   
-      if (!getEverything.ok) {
-        toast.error("Une erreur est survenue dans userTweet");
-        return;
+      if (!getAllConversations.ok) {
+        throw new Error("Une erreur est survenue dans userTweet");
       }
   
-      const data = await getEverything.json();
+      const data = await getAllConversations.json();
       // On ne garde que les messages qui ont été envoyés ou reçus par l'utilisateur connecté
       const filteredData = Object.entries(data).filter(([id, message]) => {
         return message.from === mailOfConnectedUser && message.to === mailInterlocutor || message.from === mailInterlocutor && message.to === mailOfConnectedUser;
@@ -85,10 +55,11 @@ console.log(`LE mail ici`, mailInterlocutor)
       setConversationSection(filteredData);
     } catch (error) {
       console.error("Erreur dans allTheConversations : ", error);
+      toast.error(error.message);
     }
   };
 
-  //_________________________________________________________________________________________
+  // On écrit un nouveau message_________________________________________________________________________________________
 
   const conversation = async () => {
     if (!mailInterlocutor) {
@@ -107,7 +78,7 @@ console.log(`LE mail ici`, mailInterlocutor)
 
     try {
       const response = await fetch(
-        "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json",
+        "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json",
         {
           method: "POST",
           headers: {
@@ -141,13 +112,15 @@ console.log(`LE mail ici`, mailInterlocutor)
   return (
     <section className="WriteOneMessage">
       <ToastContainer />
- 
-      <div>La date actuelle : {formattedDate}</div>
+      <ListDialogue />
 
       <div style={{ display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div> {/* Nom de l'utilisateur connecté */} 
         <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={mailInterlocutor} /></div> {/* Nom de son interlocuteur */}
       </div>
+      
+      {mailOfConnectedUser && (
+
       
       <div className="conversationContainer">
         {conversationSection.map(([id, data]) => (
@@ -160,7 +133,7 @@ console.log(`LE mail ici`, mailInterlocutor)
             </div>
           </div>
         ))}
-      </div>
+      </div>)}
 
       <section className="writeTheMessage">
         <div>

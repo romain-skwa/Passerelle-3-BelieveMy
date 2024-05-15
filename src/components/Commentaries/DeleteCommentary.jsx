@@ -20,7 +20,7 @@ export default function DeleteTweet({ tweet, deleteNow, setDeleteNow }) {
       // Supprimer cette donnée de la base de données Firebase
       const response = await fetch(
 // Les données tweet sont transmises par la props tweet plus haut. On utilise l'id inclus dans tweet pour identifer le tweet qui sera supprimé
-        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
+        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
         {
           method: "DELETE", // Méthode pour supprimer le tweet sélectionné juste au dessus
           headers: {

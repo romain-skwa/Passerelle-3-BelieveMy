@@ -23,7 +23,7 @@ export default function AuthorPage() {
 const requete = async () => {
   // Dans la variable const userdata, on va stocker le contenu récupéré sur Firebase
   const getUserlist = await fetch(
-      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${authorId}.json`,
+      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${authorId}.json`,
       // Avec cette requête, je récupère les informations stockées dans la partie userList concernant l'auteur que j'ai ciblé.
       {
         method: "GET",
