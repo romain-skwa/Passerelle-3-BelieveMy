@@ -20,7 +20,7 @@ const ConversationList = () => {
 
   const allTheConversations = async () => {
     try {
-      const getEverything = await fetch(
+      const getAllConversations = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
@@ -30,15 +30,15 @@ const ConversationList = () => {
         }
       );
 
-      if (!getEverything.ok) {
-        toast.error("Une erreur est survenue dans userTweet");
+      if (!getAllConversations.ok) {
+        toast.error("Une erreur est survenue dans ConversationList");
         return;
       }
 
-      const data = await getEverything.json();
+      const dataAllConversations = await getAllConversations.json();
 
       // Filtre pour ne garder que les messages qui ont été écrits ou reçus par mailOfConnectedUser
-      const filteredConversations = Object.values(data).filter((message) => {
+      const filteredConversations = Object.values(dataAllConversations).filter((message) => {
         return message.from === mailOfConnectedUser || message.to === mailOfConnectedUser;
       });
 

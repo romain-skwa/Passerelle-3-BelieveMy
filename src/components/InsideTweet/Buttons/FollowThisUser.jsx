@@ -38,7 +38,7 @@ export default function FollowThisUser(props) {
       const newDataFollowList = {
         followList: [...preventFollowList, tweet.author], // contenu précédent + auteur du tweet actuel
       };
-      console.log("Données à envoyer à Firebase :", newDataFollowList);
+     // console.log("Données à envoyer à Firebase :", newDataFollowList);
 
       const change = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,

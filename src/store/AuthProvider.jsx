@@ -18,7 +18,6 @@ const AuthProvider = ({children}) => {
     const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
     const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState([]);
     const [mailInterlocutor, setMailInterlocutor] = useState("");// Destinataire
-    console.log(`mailInterlocutor `, mailInterlocutor)
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
@@ -172,6 +171,8 @@ useEffect(() => {
     // Function
     const logOut = () => {
         setLoading(true);
+        setToTheMail("none");
+        setMailInterlocutor("none");
         return signOut(auth);
     };
 

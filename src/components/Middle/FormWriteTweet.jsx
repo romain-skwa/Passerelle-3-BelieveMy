@@ -65,10 +65,7 @@ export default function FormWriteTweet(props) {
     }
 
     const { name: idRandom } = await response.json();
-    console.log(
-      "Le data.name généré aléatoirement dans Firebase par FormWriteTweet " +
-        idRandom
-    );
+   // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
 
     // Appeler la fonction updateListeTweet pour mettre à jour l'état local listeTweet dans le composant parent Home.jsx
     // On exécute, dans l'élément Home, la fonction updateListeTweet avec newTweet en tant que paramètre

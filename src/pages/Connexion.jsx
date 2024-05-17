@@ -22,7 +22,7 @@ export default function CoDeco() {
   // Function
   const boxData = (data) => {
     // Quand on clique sur se connecter, ça exécute ceci
-    console.log(data);
+    //console.log(data);
     if (loading) return;
 
     loginUser(data.email, data.password) // pour utiliser la fonction présente dans le contexte AuthContext servant à se connecter

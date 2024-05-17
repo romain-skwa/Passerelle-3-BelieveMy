@@ -67,10 +67,7 @@ export default function FormWriteTweet(props) {
     }
     props.updateListeTweet(commentary);
     const { name: idRandom } = await response.json();
-    console.log(
-      "Le data.name généré aléatoirement dans Firebase par FormWriteTweet " +
-        idRandom
-    );
+    // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
       
     // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
     inputNewTweetContent.current.value = "";

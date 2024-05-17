@@ -71,7 +71,12 @@ a{
     padding: 0.5rem;
     width: 40vw;
 }
-
+/************************************************************************************/
+.ListFollowed{
+    position: fixed;
+    top: 42vh;
+    left: 15vw;
+}
 .divAuthorFollowed{
     border: 1px brown solid;
     margin: 1rem 0;
@@ -79,15 +84,94 @@ a{
     list-style-type: none;
     width: 200px;
 }
-
-.divTweetFollowed{
-    border: 1px red dashed;
-    margin: 1rem;
-    padding: 0.5rem;
-    list-style-type: none; /* Pour enlever les gros ronds noirs */
-    width: 552px;
-}
 /************************************************************************************/
+.avatar{
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+.largeAvatar{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+/************************************************************************************************************/
+.lineOfComponents{
+    display: flex;
+    justify-content: space-between;
+    border: 1px black solid;
+    align-items: center;
+    margin: 10px 0;
+}
+
+    .likeComments{
+        width: 40%;
+    background-color: aqua;
+        display: flex; 
+        justify-content: space-between;
+    }
+
+        .like{
+            display: inline-flex;
+            align-items: center;
+            padding: 5px;
+        }
+            /**************************************************************/
+            .red_like{
+                display: inline-block;
+                position: relative;
+                height: 22px;
+                width: 22px;
+                background-image: url("../icone/full_red.png");
+                background-size: 100%;
+                margin-right: 0.5rem;
+                cursor: pointer;
+            }
+            .red_like:hover{
+                background-image: url("../icone/empty_black.png");
+                margin-right: 0.5rem;
+            }
+
+            .empty_like{
+                height: 22px;
+                width: 22px;
+                margin-right: 0.5rem;
+                cursor: pointer;
+            }
+            /*********************************************************************/
+            
+    .commentaryIconCounter{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+    }
+    
+    .commentaire{
+        width: 22px;
+        padding-top: 5px;
+    }
+    
+    .numberCommentaries{
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        margin-left: 10px;
+    }
+
+            /*********************************************************************/
+
+    .FollowThisUser{
+        width: 30%;
+        border: 1px orange dashed;
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+    }
+        
+/************************************************************************************************************/
+
 .followButon{
     cursor: pointer;
     height: 28px;
@@ -113,7 +197,7 @@ a{
     width: 110px; /* Augmenter la largeur de l'élément .followed */ 
     height: 28px; /* Augmenter la hauteur de l'élément .followed  */
     background-color: rgb(199, 52, 52);
-    transform: translateX(-8px);
+    transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
     color: transparent;
 }
 .followed:hover::before{
@@ -126,55 +210,10 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
 }
-/************************************************************************************************************/
-.red_like{
-    display: inline-block;
-    position: relative;
-    height: 22px;
-    width: 22px;
-    background-image: url("../icone/full_red.png");
-    background-size: 100%;
-    margin-right: 0.5rem;
-    cursor: pointer;
-}
-.red_like:hover{
-    background-image: url("../icone/empty_black.png");
-    margin-right: 0.5rem;
-}
+/************************************************************************************************/
 
-.empty_like{
-    height: 22px;
-    width: 22px;
-    margin-right: 0.5rem;
-    cursor: pointer;
-}
-/************************************************************************************************************/
-.like{
-    display: inline-flex;
-    align-items: center;
-    padding: 5px;
-}
-/************************************************************************************************************/
-.lineOfComponents{
-    display: flex;
-    border: 1px black solid;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-}
-/************************************************************************************************************/
-.avatar{
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-.largeAvatar{
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-}
-/************************************************************************************************************/
 .frameMessage{
     width: 20vw;
     height: 66vh;
@@ -184,6 +223,10 @@ a{
     position: fixed;
     right: 8vw;
     bottom: 1vh;
+}
+.WriteOneMessage{
+    width: 552px;
+    margin: 0 auto;
 }
 .conversationContainer{
     width: 100%;
@@ -212,7 +255,16 @@ a{
 .messageFromOther{
     border: solid blue 2px;
 }
-/***************************************************************************************************************/
+.writeTheMessage{
+    width: 100%;
+    border: 2px orange dashed;
+}
+.sendMessageButton{
+    cursor: pointer;
+    margin: 0.5rem auto;
+    padding: 0.5rem;    
+}
+/********************************************************************************************/
 .conversationAlert{
     width: 20vw;
     border: 2px orange dashed;
@@ -224,27 +276,7 @@ a{
     right: 10px;
     top: 0;
 }
-/***************************************************************************************************************/
-.commentaryIconCounter{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-}
-.commentaire{
-    width: 22px;
-    padding-top: 5px;
-}
-.numberCommentaries{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    margin-left: 10px;
-}
-.writeTheMessage{
-    width: 100%;
-    border: 2px orange dashed;
-}
+/*********************************************************************************************/
 
 .listDialogue{
     border: solid rgb(23, 128, 0) 2px;
@@ -252,26 +284,15 @@ a{
     top: 22vh;
     left: 15vw;
 }
-.WriteOneMessage{
-    width: 552px;
-    margin: 0 auto;
-}
-.MyProfile{
-    width: 552px;
-    margin: 0 auto;
-}
-.ListFollowed{
-    position: fixed;
-    top: 35vh;
-    left: 15vw;
-}
-.sendMessageButton{
-    cursor: pointer;
-    margin: 0.5rem auto;
-    padding: 0.5rem;    
-}
+
 .nameInterlocutor{
+    display: block;
     padding: 0.5rem;
     margin: 0.5rem;
     border: 1px solid skyblue;
+}
+/********************************************************************************************/
+.MyProfile{
+    width: 552px;
+    margin: 0 auto;
 }

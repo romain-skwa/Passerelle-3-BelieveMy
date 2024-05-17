@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import FormWriteTweet from "../components/Middle/FormWriteTweet";
-import MyTweets from "../components/Middle/MyTweets";
+import MyOwnTweets from "../components/Middle/MyOwnTweets";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../store/AuthProvider";
 
@@ -27,7 +27,7 @@ function Home() {
   return (
     <div>
       <FormWriteTweet updateListeTweet={updateListeTweet} />
-      <MyTweets listeTweetParent={listeTweetUpdated} />{" "}
+      <MyOwnTweets listeTweetParent={listeTweetUpdated} />{" "}
       {/* Les tweets écrits par l'utilisateur connecté */}
     </div>
   );

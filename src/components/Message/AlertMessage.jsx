@@ -11,6 +11,7 @@ const AlertMessage = () => {
     user,
     mailOfConnectedUser,
     setToTheMail,
+    setMailInterlocutor,
   } = useContext(AuthContext);
 
 
@@ -25,7 +26,7 @@ const AlertMessage = () => {
 
   const allTheConversations = async () => {
     try {
-      const getEverything = await fetch(
+      const getAllConversations = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
@@ -35,19 +36,19 @@ const AlertMessage = () => {
         }
       );
   
-      if (!getEverything.ok) {
-        toast.error("Une erreur est survenue dans userTweet");
+      if (!getAllConversations.ok) {
+        toast.error("Une erreur est survenue dans le composant Alerte Message");
         return;
       }
   
-      const data = await getEverything.json();
+      const dataAllConversations = await getAllConversations.json();
 
       const dataWithReadNotYet = [];
       // Avec cette boucle for in...
-      for (const key in data) {
+      for (const key in dataAllConversations) {
         const newTweet = {
           id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
-          ...data[key],
+          ...dataAllConversations[key],
         };
         dataWithReadNotYet.push(newTweet);// push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
       }
@@ -62,7 +63,6 @@ const AlertMessage = () => {
     }
   };
   
-        //console.log(`conversationSection `,conversationSection)
   //_________________________________________________________________________________________
   const authorsToMessages = conversationSection.reduce((acc, [id, data]) => {
     if (!acc[data.from]) {
@@ -73,7 +73,6 @@ const AlertMessage = () => {
   }, {});
   
   const authors = Object.entries(authorsToMessages);
-        //console.log(authors)
   //_________________________________________________________________________________________
 
   const updateMessageReadStatus = async (author) => {
@@ -81,7 +80,7 @@ const AlertMessage = () => {
       const updatedMessages = conversationSection.filter(([id, message]) => {
         return message.read === "notYet" && message.from === author;
       });
-      console.log(`updatedMessages `, updatedMessages)
+     // console.log(`updatedMessages `, updatedMessages)
   
       const promises = updatedMessages.map(async ([id, conversation ]) => {
         const response = await fetch(
@@ -110,18 +109,23 @@ const AlertMessage = () => {
     }
   };
 
+  const handleToTheMail = (author) => {
+    setMailInterlocutor(author);
+    setToTheMail(author);
+  };
+
 return (
   <>
-  {user ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
+  {user && conversationSection.length > 0 ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
     <div className="conversationAlert">
+      <p>Nouveaux messages de :</p>
       {authors.map(([author, messages]) => (
         <div key={author}>
           <div>
-            Vous avez des messages de : {" "}
             <span style={{pointer: "cursor"}} onClick={() => {
               // setToTheMail pour définir dans le contexte l'adresse e-mail de l'auteur dont on veut lire les messages
               // et appeler la fonction updateMessageReadStatus pour marquer les messages comme lus
-              setToTheMail(author);
+              handleToTheMail(author);
               updateMessageReadStatus(author);
               }}>{/* Et pour afficher le pseudonyme de l'auteur au lieu de son adresse mail, il faut GetAuthorTweet */}
               <GetAuthorTweet authorTweet={author} cancelLink={true} /> <br /> 
@@ -130,7 +134,7 @@ return (
         </div>
       ))}
       </div> 
-      : null /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
+      : <p>Vous n'avez pas de nouveaux messages.</p> /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
   </>
 );
 };

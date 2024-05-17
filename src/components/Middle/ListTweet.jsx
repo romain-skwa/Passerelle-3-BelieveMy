@@ -120,7 +120,7 @@ export default function ListTweet(props) {
       {listeTweet &&
         listeTweet.map((tweet) => (
           <div key={tweet.id} className="cadreTweet">
-            {/*********** Avatar **** Titre ******************************************************************/}
+{/*********** Avatar **** Titre ******************************************************************/}
 
             <section style={{ display: "flex", paddingBottom: "1rem" }}>
               <Avatar tweet={tweet} />
@@ -135,7 +135,7 @@ export default function ListTweet(props) {
               </div>
             </section>
 
-            {/**** Image **********************************************************************************/}
+{/***************** Image **********************************************************************************/}
 
             <section
               style={{
@@ -153,7 +153,8 @@ export default function ListTweet(props) {
               ) : null}
             </section>
 
-            {/******** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
+
+{/***************** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
 
             <div className="cadreTweetContent">
               {tweet.content /* CONTENU */}
@@ -181,20 +182,26 @@ export default function ListTweet(props) {
                 />
               )}
 
-              {/* Cœur **** Commentaire **** Écrire ****** S'abonner ***** */}
+
+{/*************** Cœur **** Commentaire **** Écrire ****** S'abonner **************************************** */}
               <div className="lineOfComponents">
+                
+                <section className="likeComments">
+                  <div className="like" /* CONTENANT */>
+                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                    <span>{tweet.likedCounter /* COMPTEUR */}</span>
+                  </div>
+                    <Commentaries tweet={tweet} />
+                </section>
 
-                <div className="like" /* CONTENANT */>
-                  <Liked tweet={tweet} requete={requete} /* Cœur */ />
-                  <span>{tweet.likedCounter /* COMPTEUR */}</span>
-                </div>
-
-                  <Commentaries tweet={tweet} />
                   <Write  tweet={tweet} />
+                <section className="FollowThisUser">
                   <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
+                </section>
 
               </div>
 
+{/************* Ecrit par ****************************/}
               <div>
                 Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                 {tweet.datePublication

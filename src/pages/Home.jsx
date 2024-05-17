@@ -1,6 +1,8 @@
 import { useState } from "react";
 import FormWriteTweet from "../components/Middle/FormWriteTweet";
 import ListTweet from "../components/Middle/ListTweet";
+import  ListDialogue  from "../components/ListDialogue";
+
 // Home dans lequel nous sommes est le composant parent de ListTweet et de FormWriteTweet
 // Il les contient.
 

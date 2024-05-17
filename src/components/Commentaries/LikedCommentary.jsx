@@ -44,10 +44,7 @@ export default function Liked(props) {
         followList: followListOfConnectedUser,
         likedList: [...preventLikedList, tweet.id],
       };
-      console.log(
-        "Données à envoyer à Firebase depuis le composant Liked : ",
-        newDataLikedList
-      );
+    //  console.log("Données à envoyer à Firebase depuis le composant Liked : ", newDataLikedList);
 
       const change = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
@@ -70,7 +67,7 @@ export default function Liked(props) {
     /* -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- */
     // PARTIE 2
 
-    console.log("Fonction likeThisCommentary appelée pour le commentaire ", tweet.id);
+   // console.log("Fonction likeThisCommentary appelée pour le commentaire ", tweet.id);
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
@@ -97,12 +94,12 @@ export default function Liked(props) {
       const errorBody = await putResponse.json();
       console.error("Error:", errorBody.error);
     } else {
-      console.log("J'incrémente LikedCounter dans le tweet : " + tweet.title);
+     // console.log("J'incrémente LikedCounter dans le tweet : " + tweet.title);
     }
       // Appelle la fonction requete() pour rafraîchir la liste des tweets
 
       props.requete();
-          console.log("ça devrait mettre à jour le nombre de cœur.");
+        //  console.log("ça devrait mettre à jour le nombre de cœur.");
 
   };
   return (

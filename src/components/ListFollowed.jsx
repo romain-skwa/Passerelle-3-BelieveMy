@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { Link } from "react-router-dom";
 import { GetOneIdUser } from "../components/Hello/GetOneIdUser";
-
+// Page où l'utilisateur peut voir tous les auteurs qu'il suit et les tweets de ces auteurs
 export default function ListFollowed(){
 // Variable
   const { followListOfConnectedUser, } = useContext(AuthContext);

@@ -5,8 +5,8 @@ import GridLoader from "react-spinners/GridLoader";
 import Title from "../components/Title";
 import { CoDecoLink } from "../components/NavBar";
 import { SayHello } from "../components/Hello/Hello";
-import AlertMessage from "../components/Message/AlertMessage";
 import Message from "../components/Message";
+import  ListDialogue  from "../components/ListDialogue";
 
 export default function Main() {
   // Variables
@@ -23,16 +23,12 @@ export default function Main() {
 
   return (
     <main>
+        <ListDialogue />
 
       <section style={{position:"fixed", top:"6vh", left:"15vw"}}>
         <SayHello />
         <CoDecoLink />
       </section>
-
-      <section style={{position:"fixed", top:"6vh", left:"70vw"}}>
-        <AlertMessage />
-      </section>
-
       
       <Message />
       <Outlet />

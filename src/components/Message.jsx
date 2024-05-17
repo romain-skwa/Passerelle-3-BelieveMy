@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
-import {GetAuthorTweet} from "../components/InsideTweet/GetAuthorTweet";
+import {GetAuthorTweet} from "./InsideTweet/GetAuthorTweet";
 import DeleteMessage from "./Message/DeleteMessage";
 // Encadré avec dialogue à droite de l'écran qui s'affiche quand l'utilisateur clique sur une notification
 
@@ -17,7 +17,6 @@ const MessageBox = () => {
 
   const {
     user,
-    idOfConnectedUser,
     pseudonymConnectedUser,
     mailOfConnectedUser,
     toTheMail,
@@ -29,7 +28,7 @@ const MessageBox = () => {
 
   const allTheConversations = useCallback(async () => {
     try {
-      const getEverything = await fetch(
+      const getAllConversations = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
@@ -39,18 +38,19 @@ const MessageBox = () => {
         }
       );
   
-      if (!getEverything.ok) {
+      if (!getAllConversations.ok) {
         toast.error("Une erreur est survenue dans userTweet");
         return;
       }
   
-      const data = await getEverything.json();
+      const dataAllConversations = await getAllConversations.json();
+      
       const dataWithId = [];
       // Avec cette boucle for in...
-      for (const key in data) {
+      for (const key in dataAllConversations) {
         const newTweet = {
           id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
-          ...data[key],
+          ...dataAllConversations[key],
         };
         dataWithId.push(newTweet);// push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
       }
@@ -106,10 +106,7 @@ const MessageBox = () => {
       }
 
       const { name: idRandom } = await response.json();
-      console.log(
-        "Le data.name généré aléatoirement dans Firebase par FormWriteTweet " +
-          idRandom
-      );
+    //  console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
 
       allTheConversations(); // Actualiser la liste des conversations après l'envoi d'un nouveau message
     } catch (error) {

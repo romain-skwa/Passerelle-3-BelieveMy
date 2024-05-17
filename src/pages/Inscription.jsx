@@ -18,7 +18,7 @@ export default function Home() {
   const sendDataToFirebase = async (data) => {
 
     if (data.password !== data.passwordConfirm) {
-      console.log("Les deux champs de mot de passe ne sont pas identiques.");
+      //console.log("Les deux champs de mot de passe ne sont pas identiques.");
       setErrorMessagePasswords("Les deux champs de mot de passe doivent être identiques.")
       return;
     }
@@ -71,7 +71,7 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
         }
     
         const {name: idRandom} = await newUser.json();
-        console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
+       // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
   };
   return (
     <>

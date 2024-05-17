@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
-import  ListDialogue  from "../components/ListDialogue";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
@@ -13,13 +11,12 @@ const MessageBox = () => {
   const [inputContentMessage, setInputContentMessage] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
-  const { tweetId } = useParams(); // Identifiant du tweet récupéré pour retrouver l'adresse mail (identifiant) du destinataire.
   const {
-    idOfConnectedUser,
     mailOfConnectedUser,
     pseudonymConnectedUser,
     mailInterlocutor,
-    setMailInterlocutor,
+    toTheMail,
+    setToTheMail,
   } = useContext(AuthContext);
   
   useEffect(() => {
@@ -30,7 +27,8 @@ const MessageBox = () => {
  
 
   //_________________________________________________________________________________________
-
+  setToTheMail("none");
+  
   const allTheConversations = async () => {
     try {
       const getAllConversations = await fetch(
@@ -44,12 +42,12 @@ const MessageBox = () => {
       );
   
       if (!getAllConversations.ok) {
-        throw new Error("Une erreur est survenue dans userTweet");
+        throw new Error("Une erreur est survenue dans la page Écrire un meesage");
       }
   
-      const data = await getAllConversations.json();
+      const dataAllConversations = await getAllConversations.json();
       // On ne garde que les messages qui ont été envoyés ou reçus par l'utilisateur connecté
-      const filteredData = Object.entries(data).filter(([id, message]) => {
+      const filteredData = Object.entries(dataAllConversations).filter(([id, message]) => {
         return message.from === mailOfConnectedUser && message.to === mailInterlocutor || message.from === mailInterlocutor && message.to === mailOfConnectedUser;
       });
       setConversationSection(filteredData);
@@ -94,10 +92,7 @@ const MessageBox = () => {
       }
 
       const { name: idRandom } = await response.json();
-      console.log(
-        "Le data.name généré aléatoirement dans Firebase par FormWriteTweet " +
-          idRandom
-      );
+      //console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
 
       allTheConversations(); // Actualiser la liste des conversations après l'envoi d'un nouveau message
     
@@ -112,7 +107,6 @@ const MessageBox = () => {
   return (
     <section className="WriteOneMessage">
       <ToastContainer />
-      <ListDialogue />
 
       <div style={{ display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div> {/* Nom de l'utilisateur connecté */} 

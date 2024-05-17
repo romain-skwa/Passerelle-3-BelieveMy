@@ -4,7 +4,6 @@ import { AuthContext } from "../../../store/AuthProvider";
 
 export default function UnfollowThisUser(props) {
   // Variable
-  const { user } = useContext(AuthContext);
   const { tweet } = props;
   const {
     idOfConnectedUser,
@@ -20,8 +19,6 @@ export default function UnfollowThisUser(props) {
 
   const { actualiserListFollow } = useContext(AuthContext); // vient du contexte.
 
-  const saveContent = followListOfConnectedUser; // Pour sauvegarder une copie de la liste d'abonnement de l'utilisateur.
-
   useEffect(() => {
     setpreventFollowList(followListOfConnectedUser || []);
     return () => setpreventFollowList([]);
@@ -32,7 +29,7 @@ export default function UnfollowThisUser(props) {
   const deleteFollowList = async () => {
     if (preventFollowList.includes(tweet.author)) {
       // Filtrer l'auteur de la liste de suivi
-      const newFollowList = preventFollowList.filter(
+      const newFollowList = preventFollowList.filter(// La liste des auteurs suivis une fois que l'on a enlevé l'auteur choisi
         (author) => author !== tweet.author
       );
 
@@ -54,7 +51,8 @@ export default function UnfollowThisUser(props) {
         }
       );
 
-      if (!change.ok) {
+      if (!change.ok) {        
+        actualiserListFollow(preventFollowList);// Restaurer la copie initiale de la liste d'abonnement en cas d'erreur
         toast.error("Erreur !");
         return;
       }

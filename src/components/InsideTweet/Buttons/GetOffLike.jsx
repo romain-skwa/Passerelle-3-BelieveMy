@@ -40,19 +40,14 @@ export default function Liked(props) {
 
   // PARTIE 1
   const unlikeThisTweet = async () => {
+    // Vérifier que le tweet en question n'est pas déjà présent dans preventLikedList
     if (preventLikedList.includes(tweet.id)) {
-      // Vérifier que le tweet en question n'est pas déjà présent dans preventLikedList
       const GetOffLikeList = {
         mailUser: mailOfConnectedUser,
         pseudonymUser: pseudonymConnectedUser,
         followList: followListOfConnectedUser,
         likedList: preventLikedList.filter((id) => id !== tweet.id),
       };
-
-      console.log(
-        "Données à envoyer à Firebase  depuis le composant GetOffLike : ",
-        GetOffLikeList
-      );
 
       const change = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
@@ -75,7 +70,7 @@ export default function Liked(props) {
     /* -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- */
     // PARTIE 2
 
-    console.log("Fonction likeThisTweet appelée");
+   // console.log("Fonction likeThisTweet appelée");
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
@@ -102,7 +97,7 @@ export default function Liked(props) {
       const errorBody = await putResponse.json();
       console.error("Error:", errorBody.error);
     } else {
-      console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
+     // console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
     }
     props.requete();
   };

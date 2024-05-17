@@ -191,28 +191,24 @@ export default function ListTweet(props) {
                 />
               )}
 
-              {/* Cœur **** Commentaire **** S'abonner ***** */}
+
+{/*************** Cœur **** Commentaire **** Écrire ****** S'abonner **************************************** */}
               <div className="lineOfComponents">
-                <div className="like" /* CONTENANT */>
-                  <Liked tweet={tweet} requete={requete} /* Cœur */ />
-                  <span>{tweet.likedCounter /* COMPTEUR */}</span>
-                </div>
+                
+                <section className="likeComments">
+                  <div className="like" /* CONTENANT */>
+                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                    <span>{tweet.likedCounter /* COMPTEUR */}</span>
+                  </div>
 
-                <div>
-                  {user ? (
                     <Commentaries tweet={tweet} />
-                  ) : (
-                    <Link to="/connexion">Commentaire</Link>
-                  )}
-                </div>
+                </section>
 
-                <div>
-                  {user ? (
-                    <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
-                  ) : null}
-                </div>
+                  <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
+
               </div>
 
+{/************* Ecrit par ****************************/}
               <div>
                 Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                 {tweet.datePublication

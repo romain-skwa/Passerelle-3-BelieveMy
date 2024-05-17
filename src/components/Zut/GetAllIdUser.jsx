@@ -29,10 +29,7 @@ export function GetAllIdUser() {
 
     const userListData = await getUserlist.json();
 
-    console.log(
-      "Les données recueillies dans la partie userList devraient être affichées ici ",
-      userListData
-    );
+    //console.log("Les données recueillies dans la partie userList devraient être affichées ici ", userListData);
 
     const donneesTransformees = [];
     // Avec cette boucle for in ... aye aye Je n'ai pas encore compris exactement comment ça marche
@@ -44,7 +41,7 @@ export function GetAllIdUser() {
       // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
       donneesTransformees.push(dataUserProfile);
     }
-    console.log("donnees transformees : ", donneesTransformees);
+    //console.log("donnees transformees : ", donneesTransformees);
     setUserList([...donneesTransformees]);
   };
 
