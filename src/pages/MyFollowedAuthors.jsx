@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 import { useNavigate } from 'react-router-dom';
-import ListFollowed from "../components/ListFollowed";
 import FollowThisUser from "../components/InsideTweet/Buttons/FollowThisUser";
 import Liked from "../components/InsideTweet/Buttons/Liked";
 import ChangeThisTweet from "../components/InsideTweet/ChangeThisTweet";
@@ -109,7 +108,6 @@ export default function MyFollowedAuthors() {
 //console.log(`tweetsSuivis `, tweetsSuivis)
   return (
     <div>
-      <ListFollowed />
 
       <div className="affichageListeTweet">
 

@@ -72,11 +72,7 @@ a{
     width: 40vw;
 }
 /************************************************************************************/
-.ListFollowed{
-    position: fixed;
-    top: 42vh;
-    left: 15vw;
-}
+
 .divAuthorFollowed{
     border: 1px brown solid;
     margin: 1rem 0;

@@ -8,7 +8,7 @@ import DeleteMessage from "./Message/DeleteMessage";
 // Encadré avec dialogue à droite de l'écran qui s'affiche quand l'utilisateur clique sur une notification
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
-const MessageBox = () => {
+const FrameRightMessage = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const [inputContentMessage, setInputContentMessage] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
@@ -173,4 +173,4 @@ const MessageBox = () => {
   );
 };
 
-export default MessageBox;
+export default FrameRightMessage;
