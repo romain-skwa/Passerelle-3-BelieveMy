@@ -77,8 +77,11 @@ export default function ListDialogue({ showOnlyUnread = false }) {
 
   // Filtrer les interlocuteurs affichés en fonction de la valeur de showOnlyUnread
   const displayedInterlocutors = showOnlyUnread
-    ? unreadInterlocutors
-    : Array.from(uniqueNames);
+
+  ? unreadInterlocutors.filter((interlocutor) => interlocutor !== mailOfConnectedUser)
+
+  : Array.from(uniqueNames).filter((interlocutor) => interlocutor !== mailOfConnectedUser);
+
 
   return (
     <>

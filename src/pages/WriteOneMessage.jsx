@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
+import DeleteMessage from "../components/Message/DeleteMessage";
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
@@ -11,6 +12,8 @@ const MessageBox = () => {
   const [inputContentMessage, setInputContentMessage] = useState("");
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
+  const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+
   const {
     mailOfConnectedUser,
     pseudonymConnectedUser,
@@ -23,11 +26,16 @@ const MessageBox = () => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
-  }, [mailInterlocutor]);
+    setDeleteNow(false); 
+  }, [deleteNow, mailInterlocutor]);
  
 
   //_________________________________________________________________________________________
-  setToTheMail("none");
+  useEffect(() => {
+    return () => {
+      setToTheMail("none");
+    };
+  }, []);  
   
   const allTheConversations = async () => {
     try {
@@ -46,8 +54,19 @@ const MessageBox = () => {
       }
   
       const dataAllConversations = await getAllConversations.json();
+
+      const dataWithId = [];
+      // Avec cette boucle for in...
+      for (const key in dataAllConversations) {
+        const newTweet = {
+          id: key, // L'identifiant généré par firebase est maintenant une valeur de l'id que je crée
+          ...dataAllConversations[key],
+        };
+        dataWithId.push(newTweet);// push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
+      }
+
       // On ne garde que les messages qui ont été envoyés ou reçus par l'utilisateur connecté
-      const filteredData = Object.entries(dataAllConversations).filter(([id, message]) => {
+      const filteredData = Object.entries(dataWithId).filter(([id, message]) => {
         return message.from === mailOfConnectedUser && message.to === mailInterlocutor || message.from === mailInterlocutor && message.to === mailOfConnectedUser;
       });
       setConversationSection(filteredData);
@@ -113,21 +132,24 @@ const MessageBox = () => {
         <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={mailInterlocutor} /></div> {/* Nom de son interlocuteur */}
       </div>
       
-      {mailOfConnectedUser && (
-
-      
-      <div className="conversationContainer">
-        {conversationSection.map(([id, data]) => (
-          <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
-            <div className={data.to === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
-              <p> 
-                {data.content} <br />
-                Le {data.datePublication} à {data.hourPublication} <br />
-              </p>
+      {mailOfConnectedUser && (      
+        <div className="conversationContainer">
+          {conversationSection.map(([id, data]) => (
+            <div className={data.from === mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
+              <div className={data.from === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
+                <div> 
+                  {data.content} <br />
+                  Le {data.datePublication} à {data.hourPublication} <br />
+                  <DeleteMessage
+                    data={data}
+                    setDeleteNow={setDeleteNow}
+                  ></DeleteMessage>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>)}
+          ))}
+        </div>
+      )}
 
       <section className="writeTheMessage">
         <div>

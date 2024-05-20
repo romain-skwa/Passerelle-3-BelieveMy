@@ -60,6 +60,7 @@ const FrameRightMessage = () => {
       });
       
       setConversationSection(filteredData);
+      setDeleteNow(false);
     } catch (error) {
       console.error("Erreur dans allTheConversations : ", error);
     }
@@ -69,7 +70,8 @@ const FrameRightMessage = () => {
     allTheConversations();
     setFormattedDate(new Date().toLocaleDateString());
     setFormattedTime(new Date().toLocaleTimeString());
-  }, [toTheMail, allTheConversations]);
+    setDeleteNow(false);
+  }, [deleteNow, toTheMail, allTheConversations]);
 
   //_________________________________________________________________________________________
 
@@ -139,7 +141,7 @@ const FrameRightMessage = () => {
                 <DeleteMessage
                   data={data}
                   setDeleteNow={setDeleteNow}
-                ></DeleteMessage>
+                ></DeleteMessage> 
               </div>
             </div>
           </div>

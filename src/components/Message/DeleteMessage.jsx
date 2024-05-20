@@ -7,11 +7,11 @@ import { AuthContext } from "../../store/AuthProvider";
 
 // Props { tweet } pour transmettre aux lignes ci-dessous les données venant du composant parent DeleteTweet
 // props setDeleteNow, on change la valeur de deleteNow ici et ça va déclencher un useEffect dans le composant parent ListTweet
-export default function DeleteMessage({ data}) {
+export default function DeleteMessage({ data, setDeleteNow}) {
   const [loading, setLoading] = useState(false); // Pour afficher l'icone de chargement
   const { user } = useContext(AuthContext);
 
-  const onDeleteThisTweet = async () => {
+  const onDeleteThisTweet = async () => { console.log("Tu as cliqué sur la croix pour supprimer le message. Et l'identifiant de message est : ", data.id)
     // Delete
     if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) { // Vérification
       setLoading(true);
@@ -35,7 +35,7 @@ export default function DeleteMessage({ data}) {
         return;
       }
       setLoading(false);
-      
+      setDeleteNow(true);
     }
     //console.log(`user.email `, user.email)
   };

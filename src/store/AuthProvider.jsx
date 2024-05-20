@@ -23,7 +23,6 @@ const AuthProvider = ({children}) => {
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
     //Ensemble des commentaires
     const [allCommentaries, setAllCommentaries] = useState(null);
-
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
 Grace au contexte, cette fonction sera exécutée depuis le composant FollowThisUser
