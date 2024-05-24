@@ -20,7 +20,7 @@ export function CheckUserAuthor(props) {
       {user && user.email === tweet.author ? (
         <>
           <button onClick={() => handleFrameChangeTweet(tweet.id)}>
-            Modifier
+            Modifier votre tweet
           </button>
         </>
       ) : (

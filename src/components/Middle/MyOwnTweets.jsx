@@ -169,7 +169,6 @@ export default function ListTweet(props) {
             </div>
 
             <div>
-              <div>L&apos;id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
                 Sinon c'est le bouton Modifier qui sera affiché */}

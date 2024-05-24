@@ -127,19 +127,19 @@ const MessageBox = () => {
     <section className="WriteOneMessage">
       <ToastContainer />
 
-      <div style={{ display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
+      <div style={{display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div> {/* Nom de l'utilisateur connecté */} 
         <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={mailInterlocutor} /></div> {/* Nom de son interlocuteur */}
       </div>
       
-      {mailOfConnectedUser && (      
+      {mailOfConnectedUser && (
         <div className="conversationContainer">
           {conversationSection.map(([id, data]) => (
             <div className={data.from === mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
               <div className={data.from === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
-                <div> 
+                <div>
                   {data.content} <br />
-                  Le {data.datePublication} à {data.hourPublication} <br />
+                  Le {data.datePublication} à {data.hourPublication}
                   <DeleteMessage
                     data={data}
                     setDeleteNow={setDeleteNow}

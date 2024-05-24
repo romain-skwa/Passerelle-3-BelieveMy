@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import DeleteTweet from "../InsideTweet/DeleteTweet"; // Plus tard
-import ChangeThisTweet from "../InsideTweet/ChangeThisTweet";
-import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
-import { CheckUserAuthor } from "../InsideTweet/CheckUserAuthor";
-import FollowThisUser from "../InsideTweet/Buttons/FollowThisUser";
-import Commentaries from "../InsideTweet/Commentaries";
-import Liked from "../InsideTweet/Buttons/Liked";
-import Avatar from "../InsideTweet/Avatar";
+import DeleteTweet from "./InsideTweet/DeleteTweet"; // Plus tard
+import ChangeThisTweet from "./InsideTweet/ChangeThisTweet";
+import { GetAuthorTweet } from "./InsideTweet/GetAuthorTweet";
+import { CheckUserAuthor } from "./InsideTweet/CheckUserAuthor";
+import FollowThisUser from "./InsideTweet/Buttons/FollowThisUser";
+import Commentaries from "./InsideTweet/Commentaries";
+import Liked from "./InsideTweet/Buttons/Liked";
+import Avatar from "./InsideTweet/Avatar";
 import { useContext } from "react";
-import { AuthContext } from "../../store/AuthProvider";
+import { AuthContext } from "../store/AuthProvider";
 import { Link } from "react-router-dom";
-import Write from "../InsideTweet/Buttons/Write";
+import Write from "./InsideTweet/Buttons/Write";
 
 // Ce composant est l'enfant du parent Home.
 // Il est lié à FormWriteTweet, qui est lui-même aussi un enfant de Home.
 
-export default function ListTweet(props) {
+export default function BeforeConnection(props) {
   // props provenant de Home
   // State
   const [listeTweet, setListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
@@ -28,11 +28,6 @@ export default function ListTweet(props) {
     {}
   ); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
-  const [isLoggedIn, setIsLoggedIn] = useState("affichageListeTweet");
-
-  useEffect(() => {
-    setIsLoggedIn("affichageListeTweet lightShadow");
-  }, [user]);
 
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
@@ -118,8 +113,9 @@ export default function ListTweet(props) {
 
   /********************************************************************************** */
   return (
-    <div className="affichageListeTweet">
-      <h3>Liste des tweets</h3>
+
+    <div className="affichageListeTweet lightShadow">
+      <h3>Liste des tweets dans before connection</h3>
 
       {listeTweet &&
         listeTweet.map((tweet) => (
@@ -207,7 +203,7 @@ export default function ListTweet(props) {
               </div>
 
 {/************* Ecrit par ****************************/}
-              <div className="dateOfTweet">
+              <div>
                 Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                 {tweet.datePublication
                   ? ", le " + tweet.datePublication

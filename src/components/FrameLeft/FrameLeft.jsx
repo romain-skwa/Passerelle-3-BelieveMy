@@ -14,7 +14,7 @@ export default function FrameLeft() {
             <ListDialogue />
             <ListFollowed />
             </section>
-        ) : null}
+        ) : null }
         
         </>
     )

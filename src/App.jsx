@@ -53,6 +53,7 @@ export default function App() {
                 errorElement: <Error />, // En cas d'erreur, cette page est affichée
                 children: [
                   // La propriété children est un tableau qui rassemble toutes nos adresses
+
                   {
                     path: "/", // S'il n'y a rien après le "/"...
                     element: <Home />, //...alors la page d'accueil Home s'affiche

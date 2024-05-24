@@ -44,7 +44,7 @@ export default function CoDeco() {
   };
 
   return (
-    <div>
+    <div className="frameConnection">
       {/* handleSubmit utilisé par React-hook-form va valider les données
     si tout est bon, les données sont envoyées sous forme de tableau dans boxData */}
       <form onSubmit={handleSubmit(boxData)}>{/* L'évènement onSubmit est déclenché quand on clique sur le bouton Se connecter 
@@ -95,7 +95,7 @@ export default function CoDeco() {
         </div>
       </form>
       <div>
-        <Link to="/"> Retour à l&apos;accueil</Link>
+        <Link to="/Home"> Retour à l&apos;accueil</Link>
       </div>
     </div>
   );

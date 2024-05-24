@@ -124,33 +124,33 @@ const FrameRightMessage = () => {
     {user && toTheMail !== "none" ?  
     <section className="frameMessage">
 
-      <div style={{display: "flex", justifyContent: "end", cursor:"pointer"}} onClick={() => setToTheMail("none")} >Fermer</div>
+      <div style={{display: "flex", justifyContent: "end", cursor:"pointer", padding:"8px"}} onClick={() => setToTheMail("none")} >Fermer</div>
 
       <div style={{ display: "flex", justifyContent: "space-between ", }}>
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
         <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet authorTweet={toTheMail} /></div>
       </div>
         
-      <div className="conversationContainer" >
-        {conversationSection.map(([id, data]) => (
-          <div className={data.to !== mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
-            <div className={data.to === mailOfConnectedUser ? "message messageFromAuthor" : "message  messageFromOther"} >
-              <div>
-                {data.content} <br />
-                {/*data.id*/}
-                <DeleteMessage
-                  data={data}
-                  setDeleteNow={setDeleteNow}
-                ></DeleteMessage> 
+       <div className="conversationContainer">
+          {conversationSection.map(([id, data]) => (
+            <div className={data.from === mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
+              <div className={data.from === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
+                <div>
+                  {data.content} <br />
+                  Le {data.datePublication} à {data.hourPublication}
+                  <DeleteMessage
+                    data={data}
+                    setDeleteNow={setDeleteNow}
+                  ></DeleteMessage>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
       <div>          
         <textarea
-          cols="50"
+          cols="38"
           rows="4"
           name="inputContentMessage"
           id="inputContentMessage"

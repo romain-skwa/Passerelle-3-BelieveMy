@@ -118,10 +118,11 @@ export default function Liked(props) {
               requete={requete}
             />
           ) : (
-            <img
+            <img // icone de coeur vide qui apparait lorsqu'on n'a pas encore cliquer sur J'aime
               onClick={likeThisTweet}
               className="empty_like"
               src="../../../icone/empty_red.png"
+              title="J'aime ce tweet"
             />
           )}
         </>

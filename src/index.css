@@ -1,9 +1,17 @@
 *{
     margin: 0;
     padding: 0;
+    color: rgb(205, 216, 227);
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-image: linear-gradient(to right bottom, #011332, #150b24, #170518, #11020b, #000000);
 }
 a{
     text-decoration: none;
+}
+button{
+    color: black;
 }
 .codeco{
     border: 1px red solid;
@@ -31,8 +39,9 @@ a{
 }
 .formulaire{
     width: 30vw;
-    background-color: antiquewhite;
-    margin: 0 auto;
+    margin: 2vh auto 5vh;
+    padding: 15px;
+    box-shadow: 20px 5px 25px black, -5px -4px 10px rgb(125, 122, 122);
 }
 .prochain{
     background-color: burlywood;
@@ -44,21 +53,31 @@ a{
 }
 /*************************** ShowListTweet ****************************************/
 .affichageListeTweet{
-    width: 552px;
+    width: 30vw;
     margin: 0 auto;
-    border: 1px red solid;
+    padding: 15px;
+    box-shadow: 20px 0px 25px black, -5px 0px 10px rgb(125, 122, 122);
+}
+.lightShadow{
+    animation: lightShadow 10s forwards;
+}
+@keyframes lightShadow{
+    from{ box-shadow: 00px 0px 10px blue, -00px 0px 10px blue; }
+    50% { box-shadow: 20px 0px 25px skyblue, -20px 0px 10px skyblue; }
+    to  { box-shadow: 20px 0px 25px black, -5px 0px 10px rgb(125, 122, 122); }
 }
 .cadreTweet{
     min-height: 100px;
-    background-color: bisque;
+    background-color: 11020b;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px black, inset 3px 3px 5px rgb(125, 122, 122);
     box-sizing: border-box;
-    margin: 15px 0;
-    padding: 10px;
+    margin: 20px 0;
+    padding: 15px;
     list-style-type: none; /* Pour enlever les gros ronds noirs */
 }
 .cadreTweetContent{
-    border: grey 1px dashed;
-    margin: 12px 0;
+    padding: 10px;
 }
 
 .invalid-input {
@@ -70,6 +89,12 @@ a{
     margin: 1rem;
     padding: 0.5rem;
     width: 40vw;
+}
+/********************** FrameConection ********************************************/
+.frameConnection{
+    width: 30vw;
+    margin: 6vh auto;
+    border: 1px yellow solid;
 }
 /************************************************************************************/
 
@@ -103,7 +128,6 @@ a{
 
     .likeComments{
         width: 40%;
-    background-color: aqua;
         display: flex; 
         justify-content: space-between;
     }
@@ -125,7 +149,7 @@ a{
                 cursor: pointer;
             }
             .red_like:hover{
-                background-image: url("../icone/empty_black.png");
+                background-image: url("../icone/broken_red.png");
                 margin-right: 0.5rem;
             }
 
@@ -145,10 +169,15 @@ a{
     }
     
     .commentaire{
+        filter: drop-shadow(0px 0px 15px rgba(251, 249, 249, 1));
         width: 22px;
-        padding-top: 5px;
+        position: relative;
+        top: 2px;
+        transition: 0.2s;
     }
-    
+    .commentaire:hover{
+        scale: 1.4;
+    }
     .numberCommentaries{
         display: flex;
         align-items: center;
@@ -160,7 +189,6 @@ a{
 
     .FollowThisUser{
         width: 30%;
-        border: 1px orange dashed;
         display: flex; 
         justify-content: center;
         align-items: center;
@@ -185,12 +213,13 @@ a{
 .followed{
     background-color: rgb(138, 218, 145);
     border: 1px solid black;
-    width: 94px;
+    width: 108px;
     position: relative;
     transition: 0.2s;
+    color: black;
 }
 .followed:hover{ 
-    width: 110px; /* Augmenter la largeur de l'élément .followed */ 
+    width: 124px; /* Augmenter la largeur de l'élément .followed */ 
     height: 28px; /* Augmenter la hauteur de l'élément .followed  */
     background-color: rgb(199, 52, 52);
     transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
@@ -212,7 +241,7 @@ a{
 
 .frameMessage{
     width: 20vw;
-    height: 66vh;
+    height: 80vh;
     border: 2px dashed black;
     display: flex;
     flex-direction: column;
@@ -221,7 +250,7 @@ a{
     bottom: 1vh;
 }
 .WriteOneMessage{
-    width: 552px;
+    width: 30vw;
     margin: 0 auto;
 }
 .conversationContainer{
@@ -289,6 +318,18 @@ a{
 }
 /********************************************************************************************/
 .MyProfile{
-    width: 552px;
+    width: 30vw;
     margin: 0 auto;
+}
+.dateOfTweet{
+    font-size: 0.8rem;
+}
+
+.enveloppe{
+    width: 25px;
+    box-shadow: 0px 0px 15px rgb(205, 216, 227);
+    transition: 0.2s;
+}
+.enveloppe:hover{
+    scale: 1.4;
 }

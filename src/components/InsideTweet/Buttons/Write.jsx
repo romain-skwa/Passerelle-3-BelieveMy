@@ -12,6 +12,8 @@ export default function Write(props) {
     setMailInterlocutor,
   } = useContext(AuthContext);
 
+  const [nameAuthorTweet, setNameAuthorTweet] = useState('');
+                     console.log(`nameAuthorTweet`, nameAuthorTweet) 
 return(
     <>
         {
@@ -24,15 +26,17 @@ return(
               {/* ECRIRE A L'AUTEUR DU TWEET */}
               <Link to={`/WriteOneMessage`} key={tweet.id}>
                   <span onClick={() => setMailInterlocutor(tweet.author)}>
-                      Ecrire à{" "}
-                      <GetAuthorTweet /* Composant affichant le PSEUDONYME ;*/
-                        tweet={tweet}
-                        cancelLink={true} 
-                      />
+                    <img 
+                    className="enveloppe" 
+                    src="../../../../icone/envelope_icon.png" 
+                    alt="Écrire à l'auteur du tweet" 
+                    title="Écrire à l'auteur du tweet"
+                    />
                   </span>
               </Link>
             </>
           ) :   null
         }
+ 
   </>)
 }

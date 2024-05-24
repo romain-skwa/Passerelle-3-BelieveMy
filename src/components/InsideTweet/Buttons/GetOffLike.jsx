@@ -106,12 +106,12 @@ export default function Liked(props) {
       {user ? (
         <>
           {preventLikedList.includes(tweet.id) ? (
-            <div onClick={unlikeThisTweet} className="red_like"></div>
+            <div onClick={unlikeThisTweet} className="red_like" title="Je n'aime plus ce tweet"></div>
           ) : (
             <img
               onClick={likeThisTweet}
               className="empty_like"
-              src="../../../icone/empty_red.png"
+              src="../../../icone/empty_red.png"              
             />
           )}
         </>

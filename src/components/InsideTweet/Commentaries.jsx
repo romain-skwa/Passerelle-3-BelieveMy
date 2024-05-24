@@ -17,7 +17,7 @@ export default function Commentaries(props){
             {user ? ( // Si l'utilisateur est connecté
             <div className="commentaryIconCounter">
                 <Link to={`/OneTweet/${tweet.id}`} key={tweet.id}>
-                    <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
+                    <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" title="Commentez ce tweet"/>
                 </Link>
                 
                 <CommentariesCounter tweet={tweet} />

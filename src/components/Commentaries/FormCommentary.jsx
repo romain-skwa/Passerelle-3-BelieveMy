@@ -71,6 +71,8 @@ export default function FormWriteTweet(props) {
       
     // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
     inputNewTweetContent.current.value = "";
+    inputNewTweetTitle.current.value = "";
+    inputNewImageContent.current.value = "";
    };
 
   return (
