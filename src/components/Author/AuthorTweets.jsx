@@ -14,6 +14,7 @@ import { AuthContext } from "../../store/AuthProvider";
 import Avatar from "../InsideTweet/Avatar";
 import Commentaries from "../InsideTweet/Commentaries";
 import { Link } from "react-router-dom";
+import Write from "../InsideTweet/Buttons/Write";
 
 export default function AuthorTweets({ authorId }) {
   const [listeTweet, setListeTweet] = useState(); // Liste de tous les tweets de tous les utilisateurs.
@@ -142,7 +143,6 @@ export default function AuthorTweets({ authorId }) {
           </div>
 
           <div>
-            <div>L&apos;id de ce tweet : {tweet.id /* ID du TWEET*/} </div>
 
             {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
               Sinon c'est le bouton Modifier qui sera affiché */}
@@ -164,27 +164,23 @@ export default function AuthorTweets({ authorId }) {
               />
             )}
 
-            {/* Cœur **** Commentaire **** S'abonner ***** */}
-            <div className="lineOfComponents">
-              <div className="like" /* CONTENANT */>
-                <Liked tweet={tweet} requete={requete} /* Cœur */ />
-                <span>{tweet.likedCounter /* COMPTEUR */}</span>
-              </div>
+{/*************** Cœur **** Commentaire **** Écrire ****** S'abonner **************************************** */}
+<div className="lineOfComponents">
+                
+                <section className="likeComments">
+                  <div className="like" /* CONTENANT */>
+                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                    <span>{tweet.likedCounter /* COMPTEUR */}</span>
+                  </div>
+                    <Commentaries tweet={tweet} />
+                </section>
 
-              <div>
-                {user ? (
-                  <Commentaries tweet={tweet} />
-                ) : (
-                  <Link to="/connexion">Commentaire</Link>
-                )}
-              </div>
-
-              <div>
-                {user ? (
+                  <Write  tweet={tweet} />
+                <section className="FollowThisUser">
                   <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
-                ) : null}
+                </section>
+
               </div>
-            </div>
 
             <div>
               Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />

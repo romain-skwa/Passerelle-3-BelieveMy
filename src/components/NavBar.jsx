@@ -13,10 +13,10 @@ export function CoDecoLink() {
   return (
     <div className="codeco apparition">
       {auth.currentUser ?  <div onClick={() => logOut()} to="/" style={{ cursor: "pointer" }}> Déconnexion </div> : <Link to="/connexion"> Connexion </Link>} 
-      <Link to="/">Page d&apos;accueil</Link>
-      {user && <Link to="/MyFollowedAuthors"> MyFollowedAuthors </Link>}
-      {user && <Link to="/MyTweets"> MyTweets </Link>}
-      {user && <Link to="/MyProfile"> MyProfile </Link>}
+      <Link to="/" style={{marginTop:"1rem"}}>Page d&apos;accueil</Link>
+      {user && <Link to="/MyFollowedAuthors" style={{marginTop:"0.3rem"}}> Mes abonnements </Link>}
+      {user && <Link to="/MyTweets" style={{marginTop:"0.3rem"}}> Mes propres Tweets </Link>}
+      {user && <Link to="/MyProfile" style={{marginTop:"0.3rem"}}> Mon profil </Link>}
       {auth.currentUser ?  null : <Link to="/inscription"> Inscription </Link> }
     </div>
   );

@@ -2,17 +2,12 @@ import { auth } from "../../firebase";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { onAuthStateChanged } from "firebase/auth";
-import { GetOneIdUser } from "./GetOneIdUser";
 
 export function SayHello() {
   // Variable
   const { user } = useContext(AuthContext);
   const {
-    idOfConnectedUser,
     pseudonymConnectedUser,
-    mailOfConnectedUser,
-    followListOfConnectedUser,
-    likedListOfConnectedUser,
   } = useContext(AuthContext);
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -22,14 +17,19 @@ export function SayHello() {
     }
   });
   return (
-    <div className="codeco apparition">
-      {user ? (
-        <div>
+    <div className="apparition">
+      {user ? 
+      (
+        <div >
           {" "}
-          Bonjour {pseudonymConnectedUser}{" "}
+          Bonjour <span style={{ textTransform: "uppercase" }}>{pseudonymConnectedUser}</span> {" "}
         </div>
-      ) : (
-        <div>Bonjour</div>
+      ) 
+        : 
+      (
+        <div>
+          Bonjour
+        </div>
       )}
     </div>
   );
