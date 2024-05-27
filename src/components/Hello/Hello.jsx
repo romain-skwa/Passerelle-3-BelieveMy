@@ -22,7 +22,7 @@ export function SayHello() {
     }
   });
   return (
-    <div className="codeco">
+    <div className="codeco apparition">
       {user ? (
         <div>
           {" "}

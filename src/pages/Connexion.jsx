@@ -95,7 +95,7 @@ export default function CoDeco() {
         </div>
       </form>
       <div>
-        <Link to="/Home"> Retour à l&apos;accueil</Link>
+        <Link to="/"> Retour à l&apos;accueil</Link>
       </div>
     </div>
   );

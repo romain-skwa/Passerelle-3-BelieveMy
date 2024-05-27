@@ -117,7 +117,8 @@ const AlertMessage = () => {
 return (
   <>
   {user && conversationSection.length > 0 ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
-    <div className="conversationAlert">
+    <div className="conversationAlert apparition">
+      <img className="mailRed" src="../../../icone/envelope_icon_red_white.png" alt="Enveloppe Rouge" />
       <p>Nouveaux messages de :</p>
       {authors.map(([author, messages]) => (
         <div key={author}>
@@ -134,7 +135,7 @@ return (
         </div>
       ))}
       </div> 
-      : <p>Vous n'avez pas de nouveaux messages.</p> /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
+      : <p className="conversationWith">Vous n'avez pas de nouveaux messages.</p> /* Si aucun utilisateur n'est connecté, il n'y a rien*/}
   </>
 );
 };

@@ -2,7 +2,6 @@ import { toast } from "react-toastify";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { Link } from "react-router-dom";
-import { GetOneIdUser } from "../Hello/GetOneIdUser";
 // Page où l'utilisateur peut voir tous les auteurs qu'il suit et les tweets de ces auteurs
 export default function ListFollowed() {
   // Variable
@@ -66,10 +65,7 @@ export default function ListFollowed() {
   //console.log(`Contenu de tweetsAuteursSuivis `, tweetsAuteursSuivis);
 
   return (
-    <section className="ListFollowed">
-      <h2>
-        <GetOneIdUser />
-      </h2>
+    <section className="conversationWith">
       Les auteurs que vous suivez :
       {/* Bloc pour afficher seulement les noms des auteurs suivis */}
       {tweetsAuteursSuivis && tweetsAuteursSuivis.length > 0 ? (
@@ -80,10 +76,9 @@ export default function ListFollowed() {
               key={author.id}
               style={{ textTransform: "capitalize" }}
             >
-              <Link to={`/AuthorPage/${author.id}`}>
+              <Link to={`/AuthorPage/${author.id}`} className="LinkListFollowed">
                 {author.pseudonymUser}
               </Link>
-              {/* Ajoutez ici les éléments que vous souhaitez afficher pour chaque auteur */}
             </li>
           ))}
         </ul>

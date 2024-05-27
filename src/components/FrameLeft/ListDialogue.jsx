@@ -82,12 +82,11 @@ export default function ListDialogue({ showOnlyUnread = false }) {
 
   : Array.from(uniqueNames).filter((interlocutor) => interlocutor !== mailOfConnectedUser);
 
-
   return (
     <>
       {user ? ( // Cette section n'apparaitra que si l'utilisateur est bien connecté
-        <section >
-          Vos conversations :{/* Liste des converstations*/}
+        <section className="conversationWith">
+          Vos conversations avec :{/* Liste des converstations*/}
           {displayedInterlocutors.map((theInterlocutorId) => (
             <Link
               to={`/WriteOneMessage`}
@@ -95,7 +94,7 @@ export default function ListDialogue({ showOnlyUnread = false }) {
               key={theInterlocutorId}
               onClick={() => handleToTheMail(theInterlocutorId)}
               style={{ cursor: "pointer" }}
-            >
+            > 
               <GetAuthorTweet
                 theInterlocutorId={theInterlocutorId}
                 cancelLink="true" /* PSEUDONYME */

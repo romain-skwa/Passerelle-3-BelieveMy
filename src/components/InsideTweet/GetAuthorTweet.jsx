@@ -73,7 +73,7 @@ export function GetAuthorTweet(props){
                         {/* Quand la props CancelLink === true est transmise, 
                         seul le pseudonyme de l'auteur sera affiché*/}
                         {cancelLink ? (          
-                          <span style={{ textTransform: "capitalize" }}>          
+                          <span className="GetAuthorTweet">          
                             {dataUser.pseudonymUser}      
                           </span>
 
