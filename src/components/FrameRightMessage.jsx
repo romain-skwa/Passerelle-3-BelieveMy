@@ -124,11 +124,13 @@ const FrameRightMessage = () => {
     {user && toTheMail !== "none" ?  
     <section className="frameRightDialogue">
 
-      <div style={{display: "flex", justifyContent: "end", cursor:"pointer", padding:"8px"}} onClick={() => setToTheMail("none")} >Fermer</div>
+      <div style={{display: "flex", justifyContent: "end", cursor:"pointer", padding:"8px", margin:"0px 10px 5px"}} onClick={() => setToTheMail("none")} >
+        &#10006;
+      </div>
 
       <div style={{ display: "flex", justifyContent: "space-between ", }}>
-        <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div>            
-        <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet authorTweet={toTheMail} /></div>
+        <div style={{marginLeft :"1.5rem"}}>{pseudonymConnectedUser}</div>            
+        <div style={{marginRight:"1.5rem"}}><GetAuthorTweet authorTweet={toTheMail} /></div>
       </div>
         
        <div className="conversationContainer">
@@ -161,12 +163,7 @@ const FrameRightMessage = () => {
         />
       </div>
 
-      <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            }}
-            >
+      <div style={{display: "flex", justifyContent: "center",}}>
         <div 
           className="sendMessageButton" // Bouton d'envoi
           onClick={conversation}>

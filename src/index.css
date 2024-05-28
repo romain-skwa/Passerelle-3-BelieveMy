@@ -6,7 +6,7 @@
 }
 
 body {
-    height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(
     to right bottom,
     #011332,
@@ -63,8 +63,20 @@ body {
   margin: 2vh auto 5vh;
   padding: 15px;
   box-sizing: border-box;
-  box-shadow: 20px 5px 25px black, -5px -4px 10px rgb(125, 122, 122);
+  box-shadow: 10px 10px 15px black, inset 3px 3px 5px rgb(125, 122, 122);
+  border-radius: 15px;
 }
+  .formulaire label{
+    margin: 0 auto;
+  }
+  .formulaire input, .formulaire textarea{
+    color: #20081e;
+    background-color: aliceblue;
+    border-radius: 5px;
+  }
+  .formulaire input:focus, .formulaire textarea:focus{
+    border: dashed 2px forestgreen;
+  }
 .prochain {
   background-color: burlywood;
 }
@@ -323,7 +335,7 @@ body {
         .textareawriteTheMessage {
           background-color: #11020b;
           border: 1px solid transparent;
-          box-shadow:  5px 5px 5px rgb(233, 15, 15),  -5px -5px 5px rgb(233, 15, 15);
+          box-shadow:  4px 4px 5px #3c1939,  -4px -4px 5px #3c1939, inset 4px 4px 5px #473545, inset -4px -4px 5px #473545;;
         }
         .textareawriteTheMessage:focus{
           outline: none ;

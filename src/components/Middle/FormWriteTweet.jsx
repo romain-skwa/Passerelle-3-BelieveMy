@@ -86,43 +86,57 @@ export default function FormWriteTweet(props) {
       {user ? ( // Si un utilisateur est connecté, on affiche la section ci-dessous
         <section className="formulaire">
           {/* pourquoi ça ne marche pas quand j'écris form ? */}
-          <h3 style={{ textAlign: "center" }}>Ecrire un nouveau tweet</h3>
+          <h3 style={{ textAlign: "center", margin: "5px auto 20px", }}>Ecrire un nouveau tweet</h3>
 
-          <label htmlFor="inputNewTweetTitle">
-            Titre<br></br>
+          <label htmlFor="inputNewTweetTitle" style={{color:"yellow"}}>
+            <span style={{ display:"block", textAlign:"center"}}>
+              Titre
+            </span>
           </label>
+
           <input // le inputNewTweetTitle de la const style-component. Ici, ça remplace le mot "input" dans la balise de début
             type="text"
             name="inputNewTweetTitle"
             id="inputNewTweetTitle"
             ref={inputNewTweetTitle}
-            size="50"
+            size="67"
             placeholder="Donnez un titre à votre tweet"
-            style={{ margin: "15px auto", display: "block" }}
+            style={{ margin: "5px auto 20px", padding:"5px", outline:"none", display: "block" }}
           />
 
           <div>
-            <label htmlFor="inputNewImageContent">Image</label><br></br>
+            <label htmlFor="inputNewImageContent">
+              <span style={{display:"block", textAlign:"center"}}>
+                Image
+              </span>
+            </label>
+            
             <input
              type="text"
              name="inputNewImageContent"
              id="inputNewImageContent"
              ref={inputNewImageContent}
-             size="50"
-             placeholder="Coller le lien d'une image."
+             size="67"
+             placeholder="Coller le lien d'une image. ( Facultatif )"
+             style={{ margin: "5px auto 20px", padding:"5px", outline:" none", display: "block" }}
               />
           </div>
           
           <div>
-            <label htmlFor="inputNewTweetContent">Contenu du tweet</label>
+            <label htmlFor="inputNewTweetContent">
+              <span style={{display:"block", textAlign:"center"}}>
+                Contenu du tweet
+              </span>
+            </label>
+
             <textarea
               cols="50"
-              rows="10"
+              rows="6"
               name="inputNewTweetContent"
               id="inputNewTweetContent"
               ref={inputNewTweetContent}
               placeholder="Écrivez votre nouveau tweet ici."
-              style={{ margin: "15px auto", padding: "5px", display: "block" }}
+              style={{ margin: "5px auto 20px", padding: "5px", outline:" none", display: "block" }}
             />
           </div>
 

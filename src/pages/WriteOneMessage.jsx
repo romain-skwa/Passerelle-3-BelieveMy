@@ -167,13 +167,7 @@ const MessageBox = () => {
             />
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            }}
-            >
-
+        <div style={{ display: "flex", justifyContent: "end", }}>
           <div 
             className="sendMessageButton" // Bouton d'envoi
             onClick={conversation}>
@@ -182,8 +176,8 @@ const MessageBox = () => {
                 <GetAuthorTweet theInterlocutorId={mailInterlocutor} cancelLink="true" /* PSEUDONYME */ />
               </span>
           </div>
-
         </div>
+        
       </section>
     </section>
   );
