@@ -13,26 +13,24 @@ import { SayHello } from "../../components/Hello/Hello";
 export default function FrameLeft() {
     const { user, } = useContext(AuthContext);
     return(
-        <>
-            { user ? (
-                <>
-                    <div className="framelistDialogue">
+        <>               
+            <div className="framelistDialogue">
 
-                        <section className="SayHelloCoDecoLink">
-                            <SayHello />
-                            <CoDecoLink /* Les liens page accueil, mes auteurs suivis, mes tweets, mon profil, connexion/déconnexion */ />
-                        </section>
+                <section className="SayHelloCoDecoLink">
+                    <SayHello />
+                    <CoDecoLink /* Les liens page accueil, mes auteurs suivis, mes tweets, mon profil, connexion/déconnexion */ />
+                </section>
 
+                { user ? (
+                    <>
                         <section>
                             <AlertMessage />
                             <ListDialogue />
                             <ListFollowed />
                         </section>
-
-                    </div>
-                </>
-            ) : null }
-        
+                    </>
+                ) : null }
+          </div>
         </>
     )
 }

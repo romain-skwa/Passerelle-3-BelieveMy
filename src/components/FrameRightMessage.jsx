@@ -122,7 +122,7 @@ const FrameRightMessage = () => {
   return (
     <>
     {user && toTheMail !== "none" ?  
-    <section className="frameMessage">
+    <section className="frameRightDialogue">
 
       <div style={{display: "flex", justifyContent: "end", cursor:"pointer", padding:"8px"}} onClick={() => setToTheMail("none")} >Fermer</div>
 
@@ -137,7 +137,7 @@ const FrameRightMessage = () => {
               <div className={data.from === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
                 <div>
                   {data.content} <br />
-                  Le {data.datePublication} à {data.hourPublication}
+                  <span style={{fontSize:"0.7rem"}}>Le {data.datePublication} à {data.hourPublication}</span>
                   <DeleteMessage
                     data={data}
                     setDeleteNow={setDeleteNow}
@@ -148,26 +148,33 @@ const FrameRightMessage = () => {
           ))}
         </div>
 
-      <div>          
+      <div >          
         <textarea
-          cols="38"
+          cols="44"
           rows="4"
           name="inputContentMessage"
           id="inputContentMessage"
           value={inputContentMessage}
           onChange={(e) => setInputContentMessage(e.target.value)}
           placeholder="Écrivez votre nouveau message ici."
-          style={{ margin: "15px auto", padding: "5px", display: "block" }}
+          style={{ margin: "20px auto", padding: "5px", display: "block", outline:" none", backgroundColor:"#3c1939" }}
         />
       </div>
 
       <div
-        style={{
-          display: "flex",
-          justifyContent: "end",
-          }}
-        >
-        <button onClick={conversation}>Envoyer</button>
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            }}
+            >
+        <div 
+          className="sendMessageButton" // Bouton d'envoi
+          onClick={conversation}>
+            Envoyer le message à {" "}
+            <span style={{fontWeight:"bold"}}> 
+              <GetAuthorTweet theInterlocutorId={toTheMail} cancelLink="true" /* PSEUDONYME */ />
+            </span>
+        </div>
       </div>
     </section>
     : null /* Si aucun utilisateur n'est connecté, il n'y a rien*/}

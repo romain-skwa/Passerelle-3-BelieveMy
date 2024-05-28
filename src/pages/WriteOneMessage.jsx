@@ -127,7 +127,7 @@ const MessageBox = () => {
     <section className="WriteOneMessage">
       <ToastContainer />
 
-      <div style={{display: "flex", justifyContent: "space-between ", border:"solid pink 1px"}}>
+      <div className="twoNames" >
         <div style={{marginLeft:"1.5rem"}}>{pseudonymConnectedUser}</div> {/* Nom de l'utilisateur connecté */} 
         <div style={{marginRight:"1.5rem"}}> <GetAuthorTweet theInterlocutorId={mailInterlocutor} /></div> {/* Nom de son interlocuteur */}
       </div>
@@ -135,11 +135,12 @@ const MessageBox = () => {
       {mailOfConnectedUser && (
         <div className="conversationContainer">
           {conversationSection.map(([id, data]) => (
-            <div className={data.from === mailOfConnectedUser ?  null : "lineForAdresse"} key={id}>
+            <div className={data.from === mailOfConnectedUser ? null : "lineForAdresse"} key={id}>
               <div className={data.from === mailOfConnectedUser ? "message messageFromAuthor" : "message messageFromOther"} key={id}>
                 <div>
                   {data.content} <br />
-                  Le {data.datePublication} à {data.hourPublication}
+
+                  <span style={{fontSize:"0.7rem"}}>Le {data.datePublication} à {data.hourPublication}</span>
                   <DeleteMessage
                     data={data}
                     setDeleteNow={setDeleteNow}
@@ -154,13 +155,14 @@ const MessageBox = () => {
       <section className="writeTheMessage">
         <div>
           <textarea
-            cols="60"
+            cols="55"
             rows="4"
             name="inputContentMessage"
             id="inputContentMessage"
             value={inputContentMessage}
             onChange={(e) => setInputContentMessage(e.target.value)}
             placeholder="Écrivez votre nouveau message ici."
+            className="textareawriteTheMessage"
             style={{ margin: "15px auto", padding: "5px", display: "block" }}
             />
         </div>

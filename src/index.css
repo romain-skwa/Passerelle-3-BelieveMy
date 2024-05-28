@@ -1,394 +1,458 @@
-*{
-    margin: 0;
-    padding: 0;
-    color: rgb(205, 216, 227);
-    font-family: Arial, Helvetica, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  color: rgb(205, 216, 227);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background-image: linear-gradient(to right bottom, #011332, #150b24, #170518, #11020b, #000000);
+body {
+    height: 100vh;
+  background-image: linear-gradient(
+    to right bottom,
+    #011332,
+    #150b24,
+    #170518,
+    #11020b,
+    #000000
+  );
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-button{
-    color: black;
+button {
+  color: black;
 }
 
-.tweetFrame{
-    background-color: aquamarine;
-    width: 40vw;
-    margin: 1rem auto;
-    padding: 1rem;
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
 }
-.contentTweet{
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border-radius: 10px;
-    background-color: antiquewhite;
+
+body::-webkit-scrollbar-track {
+  background: orange; /* color of the tracking area */
 }
-.authorTweet{
-    border: 1px red solid;
-    display: flex;
-    justify-content: end;
+
+body::-webkit-scrollbar-thumb {
+  background-color: blue; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid orange; /* creates padding around scroll thumb */
 }
-.formulaire{
-    width: 30vw;
-    margin: 2vh auto 5vh;
-    padding: 15px;
-    box-sizing: border-box;
-    box-shadow: 20px 5px 25px black, -5px -4px 10px rgb(125, 122, 122);
+body {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: grey black; /* scroll thumb and track */
 }
-.prochain{
-    background-color: burlywood;
+
+.tweetFrame {
+  background-color: aquamarine;
+  width: 40vw;
+  margin: 1rem auto;
+  padding: 1rem;
 }
-.centrons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.contentTweet {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: antiquewhite;
+}
+.authorTweet {
+  border: 1px red solid;
+  display: flex;
+  justify-content: end;
+}
+.formulaire {
+  width: 30vw;
+  margin: 2vh auto 5vh;
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 20px 5px 25px black, -5px -4px 10px rgb(125, 122, 122);
+}
+.prochain {
+  background-color: burlywood;
+}
+.centrons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /******************** Encadré Bonjour & Connexion/Deconnexion Page d'Accueil *****/
-.codeco{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 10vw;
+.codeco {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 10vw;
 }
-.apparition:nth-of-type(1){
-    margin-bottom: 1rem;
+.apparition:nth-of-type(1) {
+  margin-bottom: 1rem;
 }
 
-.SayHelloCoDecoLink{
-    border-radius: 10px;
-    border: red solid 2px;
-    padding: 1rem;
+.SayHelloCoDecoLink {
+  border-radius: 10px;
+  border: red solid 2px;
+  padding: 1rem;
 }
 /*************************** ShowListTweet ****************************************/
-.affichageListeTweet{
-    width: 30vw;
-    margin: 0 auto;
+.affichageListeTweet {
+  width: 30vw;
+  margin: 0 auto;
 }
-.lightShadow{
-    animation: lightShadow 10s forwards;
+.lightShadow {
+  animation: lightShadow 10s forwards;
 }
-@keyframes lightShadow{
-    from{ box-shadow: 00px 0px 10px blue, -00px 0px 10px blue; }
-    50% { box-shadow: 20px 0px 25px skyblue, -20px 0px 10px skyblue; }
-    to  { box-shadow: 20px 0px 25px black, -5px 0px 10px rgb(125, 122, 122); }
+@keyframes lightShadow {
+  from {
+    box-shadow: 00px 0px 10px blue, -00px 0px 10px blue;
+  }
+  50% {
+    box-shadow: 20px 0px 25px skyblue, -20px 0px 10px skyblue;
+  }
+  to {
+    box-shadow: 20px 0px 25px black, -5px 0px 10px rgb(125, 122, 122);
+  }
 }
-.cadreTweet{
-    min-height: 100px;
-    background-color: 11020b;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px black, inset 3px 3px 5px rgb(125, 122, 122);
-    box-sizing: border-box;
-    margin: 20px 0;
-    padding: 15px;
-    list-style-type: none; /* Pour enlever les gros ronds noirs */
+.cadreTweet {
+  min-height: 100px;
+  background-color: 11020b;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px black, inset 3px 3px 5px rgb(125, 122, 122);
+  box-sizing: border-box;
+  margin: 20px 0;
+  padding: 15px;
+  list-style-type: none; /* Pour enlever les gros ronds noirs */
 }
-.cadreTweetContent{
-    padding: 10px;
+.cadreTweetContent {
+  padding: 10px;
 }
 
 .invalid-input {
-    border: 1px solid red;  
-  }
+  border: 1px solid red;
+}
 
-.frameAuthorTweet{
-    background-color: beige;
-    margin: 1rem;
-    padding: 0.5rem;
-    width: 40vw;
+.frameAuthorTweet {
+  background-color: beige;
+  margin: 1rem;
+  padding: 0.5rem;
+  width: 40vw;
 }
 /********************** FrameConection ********************************************/
-.frameConnection{
-    width: 30vw;
-    margin: 6vh auto;
-    border: 1px yellow solid;
+.frameConnection {
+  width: 30vw;
+  margin: 6vh auto;
+  border: 1px yellow solid;
 }
-/************************************************************************************/
-
 
 /************************************************************************************/
-.avatar{
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+.avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
-.largeAvatar{
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
+.largeAvatar {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
 }
 
 /************************************************************************************************************/
-.lineOfComponents{
-    display: flex;
-    justify-content: space-between;
-    border: 1px black solid;
-    align-items: center;
-    margin: 10px 0;
+.lineOfComponents {
+  display: flex;
+  justify-content: space-between;
+  border: 1px black solid;
+  align-items: center;
+  margin: 10px 0;
 }
 
-    .likeComments{
-        width: 40%;
-        display: flex; 
+.likeComments {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.like {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px;
+}
+/**************************************************************/
+.red_like {
+  display: inline-block;
+  position: relative;
+  height: 22px;
+  width: 22px;
+  background-image: url("../icone/full_red.png");
+  background-size: 100%;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+.red_like:hover {
+  background-image: url("../icone/broken_red.png");
+  margin-right: 0.5rem;
+}
+
+.empty_like {
+  height: 22px;
+  width: 22px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+/*********************************************************************/
+
+.commentaryIconCounter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.commentaire {
+  filter: drop-shadow(0px 0px 15px rgba(251, 249, 249, 1));
+  width: 22px;
+  position: relative;
+  top: 2px;
+  transition: 0.2s;
+}
+.commentaire:hover {
+  scale: 1.4;
+}
+.numberCommentaries {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-left: 10px;
+}
+
+/*********************************************************************/
+
+.FollowThisUser {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/************************************************************************************************************/
+
+.followButon {
+  cursor: pointer;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.addFollow {
+  background-color: black;
+  color: white;
+  width: 94px;
+}
+.followed {
+  background-color: rgb(138, 218, 145);
+  border: 1px solid black;
+  width: 108px;
+  position: relative;
+  transition: 0.2s;
+  color: black;
+}
+.followed:hover {
+  width: 124px; /* Augmenter la largeur de l'élément .followed */
+  height: 28px; /* Augmenter la hauteur de l'élément .followed  */
+  background-color: rgb(199, 52, 52);
+  transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
+  color: transparent;
+}
+.followed:hover::before {
+  background-color: rgb(199, 52, 52);
+  border-radius: 8px;
+  color: white;
+  content: "Se désabonner";
+  position: absolute;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
+}
+/*************************** Encadré central DIALOGUE Milieu *********************************************************************/
+
+.WriteOneMessage {
+  position: relative; top: 20px;
+  width: 30vw; height: 890px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px black, inset 3px 5px 8px rgb(125, 122, 122);
+
+}
+
+    .twoNames{
+        display:flex;
         justify-content: space-between;
+        padding: 1rem 0rem;
+        font-size: 1.5rem;
+        text-transform: capitalize;
+        width: 30vw;
+        box-sizing: content-box;
     }
+    /******************/
 
-        .like{
-            display: inline-flex;
-            align-items: center;
-            padding: 5px;
+    .conversationContainer {
+        width: 100%; height: 72%;
+        flex-grow: 1;
+        overflow-y: auto; /* Ajouter une barre de défilement verticale */
+    }
+        .lineForAdresse {
+            display: flex;
+            justify-content: end;
+            margin-right: 1rem;
         }
-            /**************************************************************/
-            .red_like{
-                display: inline-block;
+            .message {
                 position: relative;
-                height: 22px;
-                width: 22px;
-                background-image: url("../icone/full_red.png");
-                background-size: 100%;
-                margin-right: 0.5rem;
-                cursor: pointer;
+                box-sizing: border-box;
+                display: inline-block;
+                padding: 0.5rem;
+                margin: 0.5rem;
+                border-radius: 7px;
+                max-width: 70%;
             }
-            .red_like:hover{
-                background-image: url("../icone/broken_red.png");
-                margin-right: 0.5rem;
+            .messageFromAuthor {
+                background-color: #3c1939;
+                padding-right: 2rem;
+                margin-left: 1rem;
             }
-
-            .empty_like{
-                height: 22px;
-                width: 22px;
-                margin-right: 0.5rem;
-                cursor: pointer;
+            .messageFromOther {
+                background-color: #1c2932;
             }
-            /*********************************************************************/
-            
-    .commentaryIconCounter{
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 5px;
+        .textareawriteTheMessage {
+          background-color: #11020b;
+          border: 1px solid transparent;
+          box-shadow:  5px 5px 5px rgb(233, 15, 15),  -5px -5px 5px rgb(233, 15, 15);
+        }
+        .textareawriteTheMessage:focus{
+          outline: none ;
+        }
+/************* Bouton Envoyer le message ***********/
+    .writeTheMessage { /* Textarea + Bouton envoi */
+      width: 95%;
+      margin: 0 auto;
     }
-    
-    .commentaire{
-        filter: drop-shadow(0px 0px 15px rgba(251, 249, 249, 1));
-        width: 22px;
-        position: relative;
-        top: 2px;
-        transition: 0.2s;
-    }
-    .commentaire:hover{
-        scale: 1.4;
-    }
-    .numberCommentaries{
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        margin-left: 10px;
-    }
-
-            /*********************************************************************/
-
-    .FollowThisUser{
-        width: 30%;
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-    }
-        
-/************************************************************************************************************/
-
-.followButon{
-    cursor: pointer;
-    height: 28px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-.addFollow{
-    background-color: black;
-    color: white;
-    width: 94px;
-}
-.followed{
-    background-color: rgb(138, 218, 145);
-    border: 1px solid black;
-    width: 108px;
-    position: relative;
-    transition: 0.2s;
-    color: black;
-}
-.followed:hover{ 
-    width: 124px; /* Augmenter la largeur de l'élément .followed */ 
-    height: 28px; /* Augmenter la hauteur de l'élément .followed  */
-    background-color: rgb(199, 52, 52);
-    transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
-    color: transparent;
-}
-.followed:hover::before{
-    background-color: rgb(199, 52, 52);
-    border-radius: 8px;
-    color: white;
-    content: "Se désabonner";
-    position: absolute;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-origin: center center; /* Centrer le point d'origine des transformations CSS */
-}
-/************************************************************************************************/
-
-.frameMessage{
-    width: 20vw;
-    height: 80vh;
-    border: 2px dashed black;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    right: 8vw;
-    bottom: 1vh;
-}
-.WriteOneMessage{
-    width: 30vw;
-    margin: 0 auto;
-}
-.conversationContainer{
-    width: 100%;
-    flex-grow: 1;
-    overflow-y: auto; /* Ajouter une barre de défilement verticale */
-    background-color: azure;
-}
-.lineForAdresse{
-    display: flex;
-    justify-content: end;
-}
-.message{
-    background-color: beige;
-    position: relative;
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 0.5rem;    
-    margin: 0.5rem;
-    border-radius: 7px;
-    max-width: 70%;
-}
-.messageFromAuthor{
-    border: dashed grey 2px;
-    padding-right: 2rem;
-}
-.messageFromOther{
-    border: solid blue 2px;
-}
-.writeTheMessage{
-    width: 100%;
-    border: 2px orange dashed;
-}
-.sendMessageButton{
-    cursor: pointer;
-    margin: 0.5rem auto;
-    padding: 0.5rem;    
-}
+        .sendMessageButton {
+          text-align: center;
+          cursor: pointer;
+          padding: 0.5rem;
+          border: #3c1939 double 3px;
+          border-radius: 5px;
+          background-color: #20081e;
+        }
+/*********** Encadré Droite dialogue*********************/
+.frameRightDialogue {
+  position: fixed;
+  right: 5vw;
+  border: 1px solid sienna;
+  width: 25vw; height: 95vh;
+  }
 /********************************************************************************************/
-.conversationAlert{
-    width: 15vw;
-    padding: 2rem 1.5rem;
-    border-radius: 8px;
-    background-color: #011332;
-    box-shadow: 20px 10px 25px black,  inset -3px -3px 5px black, inset 3px 3px 5px rgb(125, 122, 122);
-    position: relative;
+.conversationAlert {
+  width: 15vw;
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  background-color: #011332;
+  box-shadow: 20px 10px 25px black, inset -3px -3px 5px black,
+    inset 3px 3px 5px rgb(125, 122, 122);
+  position: relative;
+  margin-top: 1rem;
 }
-.mailRed{
-    position: absolute;
-    right: 50px; top: 20px;
-    transform: rotate(25deg);
+.mailRed {
+  position: absolute;
+  right: 50px;
+  top: 29px;
+  transform: rotate(25deg);
 }
-.buttonDeleteMessage{
-    position: absolute;
-    cursor: pointer;
-    right: 10px;
-    top: 0;
+.buttonDeleteMessage {
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+  top: 0;
 }
 /*********************************************************************************************/
 
-.framelistDialogue{
-    position: fixed;
-    top: 10vh;
-    left: 11vw;
+.framelistDialogue {
+  position: fixed;
+  top: 10vh;
+  left: 11vw;
 }
 
-    .pasNouveauxMessages{
-        font-size: 0.8rem;
-        border: dashed 1px ;
-        padding: 7px;
-        border-radius: 5px;
-    }
+.pasNouveauxMessages {
+  font-size: 0.8rem;
+  border: dashed 1px;
+  padding: 7px;
+  border-radius: 5px;
+}
 
-    /************** Rectangle avec liste de noms Conversations ****************************/
-    .conversationWith{
-        margin-top: 1rem;
-        padding: 2rem 1.5rem;
-        border-radius: 8px;
-        background-color: #011332;
-        box-shadow: 20px 10px 25px black,  inset -3px -3px 5px black, inset 3px 3px 5px rgb(125, 122, 122);
-        font-size: 0.8rem;
-        color: orange;
-    }
+/************** Rectangle avec liste de noms Conversations ****************************/
+.conversationWith {
+  margin-top: 1rem;
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  background-color: #011332;
+  box-shadow: 20px 10px 25px black, inset -3px -3px 5px black,
+    inset 3px 3px 5px rgb(125, 122, 122);
+  font-size: 0.8rem;
+  color: orange;
+}
 
-        .nameInterlocutor{
-            display: block;
-            padding: 0.5rem 1rem;
-            margin: 0.5rem 0;
-            transition: 0.2s;
-            border-radius: 5px;
-            font-size: 1.1rem;
-        }
-            .GetAuthorTweet{
-                text-transform: uppercase;
-            }
+.nameInterlocutor {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  transition: 0.2s;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+.GetAuthorTweet {
+  text-transform: uppercase;
+}
 /******************** Rectangle avec liste des membres suivis **********************************************/
-.divAuthorFollowed{
-    margin: 1rem 0;
-    padding: 0.5rem;
-    list-style-type: none;
-    width: 200px;
+.divAuthorFollowed {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  list-style-type: none;
+  width: 200px;
 }
 
-    .LinkListFollowed{
-        text-transform: uppercase;
-        font-size: 1.1rem; 
-        color: cadetblue;
-    }
+.LinkListFollowed {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  color: cadetblue;
+}
 /********************************************************************************************/
 
-.MyProfile{
-    width: 30vw;
-    margin: 0 auto;
+.MyProfile {
+  width: 30vw;
+  margin: 0 auto;
 }
-.dateOfTweet{
-    font-size: 0.8rem;
-}
-
-.enveloppe{
-    width: 25px;
-    box-shadow: 0px 0px 15px rgb(205, 216, 227);
-    transition: 0.2s;
-}
-.enveloppe:hover{
-    scale: 1.4;
+.dateOfTweet {
+  font-size: 0.8rem;
 }
 
-.apparition{
+.enveloppe {
+  width: 25px;
+  box-shadow: 0px 0px 15px rgb(205, 216, 227);
+  transition: 0.2s;
+}
+.enveloppe:hover {
+  scale: 1.4;
+}
+
+.apparition {
+  opacity: 0;
+  animation: apparition 2s forwards;
+}
+@keyframes apparition {
+  from {
     opacity: 0;
-    animation: apparition 2s forwards;
+  }
+  to {
+    opacity: 1;
+  }
 }
-@keyframes apparition{
-    from {opacity: 0;}
-    to   {opacity: 1;}
+.apparition:nth-of-type(2) {
+  animation-delay: 2s;
 }
-.apparition:nth-of-type(2){animation-delay: 2s;}
-

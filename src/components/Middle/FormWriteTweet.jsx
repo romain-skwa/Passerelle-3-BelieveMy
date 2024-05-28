@@ -13,7 +13,7 @@ function formatDate(date) {
 
 const today = new Date();
 const formattedDate = formatDate(today);
-console.log(`La date d'aujourd'hui en français : ${formattedDate}`);
+//console.log(`La date d'aujourd'hui en français : ${formattedDate}`);
 
 /***** Obtenir l'heure actuelle *************** */
 
@@ -24,7 +24,7 @@ function formatTime(date) {
 
 const now = new Date();
 const formattedTime = formatTime(now);
-console.log(`L'heure actuelle en français : ${formattedTime}`);
+//console.log(`L'heure actuelle en français : ${formattedTime}`);
 
 /****************************** FORMULAIRE ********************************************************** */
 export default function FormWriteTweet(props) {

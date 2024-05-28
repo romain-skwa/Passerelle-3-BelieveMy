@@ -12,8 +12,6 @@ export default function Write(props) {
     setMailInterlocutor,
   } = useContext(AuthContext);
 
-  const [nameAuthorTweet, setNameAuthorTweet] = useState('');
-                     console.log(`nameAuthorTweet`, nameAuthorTweet) 
 return(
     <>
         {
