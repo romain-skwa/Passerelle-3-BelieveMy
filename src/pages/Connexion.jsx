@@ -47,7 +47,7 @@ export default function CoDeco() {
     <div className="frameConnection">
       {/* handleSubmit utilisé par React-hook-form va valider les données
     si tout est bon, les données sont envoyées sous forme de tableau dans boxData */}
-      <form onSubmit={handleSubmit(boxData)}>{/* L'évènement onSubmit est déclenché quand on clique sur le bouton Se connecter 
+      <form className="insideFrameConnection" onSubmit={handleSubmit(boxData)}>{/* L'évènement onSubmit est déclenché quand on clique sur le bouton Se connecter 
       La fonction handleSubmit de react-hook-form est appelée en lui passant la fonction boxData en argument.
       handleSubmit valide toutes les entrées du formulaire en utilisant les règles de validation spécifiées avec register.
       Si toutes les entrées sont valides, handleSubmit appelle la fonction boxData en lui passant un objet contenant les valeurs des entrées du formulaire
@@ -88,15 +88,13 @@ export default function CoDeco() {
             {errors.password.message}
           </p>
         )}
-        <button>Se connecter</button>
+        <button className="loggIn">Se connecter</button>
 
-        <div>
+        <div className="createAccount">
           <Link to="/inscription">Créer un compte</Link>
         </div>
       </form>
-      <div>
-        <Link to="/"> Retour à l&apos;accueil</Link>
-      </div>
+
     </div>
   );
 }

@@ -119,12 +119,10 @@ export default function ListTweet(props) {
   /********************************************************************************** */
   return (
     <div className="affichageListeTweet">
-      <h3>Liste des tweets</h3>
 
       {listeTweet &&
         listeTweet.map((tweet) => (
           <div key={tweet.id} className="cadreTweet ">
-
 
 {/*********** Avatar **** Titre ******************************************************************/}
 
