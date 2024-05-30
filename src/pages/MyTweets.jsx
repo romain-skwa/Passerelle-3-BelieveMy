@@ -14,7 +14,7 @@ function Home() {
   const navigate = useNavigate();
   const [listeTweetUpdated, setListeTweetUpdated] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette apge sans être connecté
     if (!user) {
       navigate('/connexion');
     }

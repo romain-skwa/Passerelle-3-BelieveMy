@@ -11,7 +11,7 @@ export default function ListDialogue({ showOnlyUnread = false }) {
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const [uniqueNames, setUniqueNames] = useState(new Set());
-  const { user, mailOfConnectedUser, setMailInterlocutor } = useContext(AuthContext);
+  const { user, mailOfConnectedUser, setMailInterlocutor, setForUpdateMessageReadStatus } = useContext(AuthContext);
   const [unreadInterlocutors, setUnreadInterlocutors] = useState([]);
 
   useEffect(() => {
@@ -73,13 +73,12 @@ export default function ListDialogue({ showOnlyUnread = false }) {
 
   const handleToTheMail = (theInterlocutorId) => {
     setMailInterlocutor(theInterlocutorId);
+    setForUpdateMessageReadStatus(theInterlocutorId);
   };
 
   // Filtrer les interlocuteurs affichés en fonction de la valeur de showOnlyUnread
   const displayedInterlocutors = showOnlyUnread
-
   ? unreadInterlocutors.filter((interlocutor) => interlocutor !== mailOfConnectedUser)
-
   : Array.from(uniqueNames).filter((interlocutor) => interlocutor !== mailOfConnectedUser);
 
   return (

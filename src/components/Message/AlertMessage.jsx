@@ -8,10 +8,11 @@ import {GetAuthorTweet} from "../../components/InsideTweet/GetAuthorTweet";
 const AlertMessage = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const {
-    user,
-    mailOfConnectedUser,
-    setToTheMail,
-    setMailInterlocutor,
+    user, // pour savoir si un utilisateur est connecté ou non
+    mailOfConnectedUser, // pour obtenir le mail de l'utilisateur connecté, c'est son identifiant
+    setToTheMail, // le mail du destinataire, donnée utilisée dans FrameRightMessage, l'encadré de dialogue à DROITE de l'écran
+    setMailInterlocutor, // le mail du destinataire, donnée utilisée dans WriteOneMessage, l'encadré dialogue au MILIEU de l'écran
+    forUpdateMessageReadStatus, // pour lancer la fonction qui met à jour le status du message "dejà lu" à partir du composant ListDialogue
   } = useContext(AuthContext);
 
 
@@ -76,11 +77,12 @@ const AlertMessage = () => {
   //_________________________________________________________________________________________
 
   const updateMessageReadStatus = async (author) => {
+    //console.log("On lance la fonction updateMessageReadStatus avec pour arguments ", author)
     try {
       const updatedMessages = conversationSection.filter(([id, message]) => {
         return message.read === "notYet" && message.from === author;
       });
-     // console.log(`updatedMessages `, updatedMessages)
+      console.log(`updatedMessages dans le fichier AlertMessage`, updatedMessages)
   
       const promises = updatedMessages.map(async ([id, conversation ]) => {
         const response = await fetch(
@@ -114,7 +116,11 @@ const AlertMessage = () => {
     setToTheMail(author);
   };
 
-return (
+  useEffect(() => {
+    updateMessageReadStatus(forUpdateMessageReadStatus);
+  }, [forUpdateMessageReadStatus]);
+  
+  return (
   <>
   {user && conversationSection.length > 0 ?  // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
     <div className="conversationAlert apparition">

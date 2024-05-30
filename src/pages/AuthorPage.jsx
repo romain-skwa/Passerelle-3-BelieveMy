@@ -1,7 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AuthorTweets from "../components/Author/AuthorTweets";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../store/AuthProvider";
+
 /*
 Cette page sert à afficher les tweets d'un utilisateur précis. Pas celui qui est connecté ; un autre.
 Pour accéder à cette page, il faut simplement cliquer sur un pseudo.
@@ -15,7 +17,14 @@ authorId est l'identifiant généré aléatoirement par firebase. Il est unique 
 export default function AuthorPage() {
   const { authorId } = useParams();
   const [idTarget, setIdTarget] = useState({ mailUser: "" });
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
   //console.log("Ce qu'on récupère dans useParams " + authorId)
 
 /***************************************************************************************************** */

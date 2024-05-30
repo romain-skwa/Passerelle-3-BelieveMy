@@ -410,7 +410,7 @@ body {
 /*********** Encadré Droite dialogue*********************/
 .frameRightDialogue {
   position: fixed;
-  right: 5vw;
+  right: 5vw; top: 2vh;
   border: 1px solid sienna;
   width: 25vw; height: 95vh;
   }

@@ -18,11 +18,14 @@ const AuthProvider = ({children}) => {
     const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
     const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState([]);
     const [mailInterlocutor, setMailInterlocutor] = useState("");// Destinataire
+    const [forUpdateMessageReadStatus, setForUpdateMessageReadStatus] = useState();
 
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
     //Ensemble des commentaires
     const [allCommentaries, setAllCommentaries] = useState(null);
+ console.log(`mailInterlocutor :`, mailInterlocutor);
+console.log(`toTheMail :`, toTheMail);   
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
 Grace au contexte, cette fonction sera exécutée depuis le composant FollowThisUser
@@ -192,12 +195,14 @@ useEffect(() => {
         toTheMail,
         allCommentaries,
         mailInterlocutor,
+        forUpdateMessageReadStatus,
         setMailInterlocutor,
         setToTheMail,
         actualiserListFollow,
         actualiserLikedList,
         actualiserAvatar,
         actualiserPseudo,
+        setForUpdateMessageReadStatus,
         logOut,// pour déconnecter notre utilisateur de n'importe où
         loginUser,
     }

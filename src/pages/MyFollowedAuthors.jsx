@@ -25,7 +25,12 @@ export default function MyFollowedAuthors() {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
 
-
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
+  
   const {
     followListOfConnectedUser,
   } = useContext(AuthContext);

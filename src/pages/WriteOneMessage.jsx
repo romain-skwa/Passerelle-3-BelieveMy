@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../store/AuthProvider";
 import { GetAuthorTweet } from "../components/InsideTweet/GetAuthorTweet";
 import DeleteMessage from "../components/Message/DeleteMessage";
+import { useNavigate } from 'react-router-dom';
 
 // ECRIRE UN MESSAGE A UN AUTRE UTILISATEUR
 const MessageBox = () => {
@@ -13,12 +14,19 @@ const MessageBox = () => {
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
 
   const {
     mailOfConnectedUser,
     pseudonymConnectedUser,
     mailInterlocutor,
-    toTheMail,
     setToTheMail,
   } = useContext(AuthContext);
   
@@ -35,7 +43,7 @@ const MessageBox = () => {
     return () => {
       setToTheMail("none");
     };
-  }, []);  
+  }, []);
   
   const allTheConversations = async () => {
     try {
