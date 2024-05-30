@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import {GetAuthorTweet} from "../../components/InsideTweet/GetAuthorTweet";
 
+// Dans l'encadré en haut à gauche, on affiche la liste des auteurs qui nous ont écrit de nouveaux messages
 const AlertMessage = () => {
   const [conversationSection, setConversationSection] = useState([]);
   const {
@@ -82,7 +83,7 @@ const AlertMessage = () => {
       const updatedMessages = conversationSection.filter(([id, message]) => {
         return message.read === "notYet" && message.from === author;
       });
-      console.log(`updatedMessages dans le fichier AlertMessage`, updatedMessages)
+      //console.log(`updatedMessages dans le fichier AlertMessage`, updatedMessages)
   
       const promises = updatedMessages.map(async ([id, conversation ]) => {
         const response = await fetch(

@@ -24,8 +24,7 @@ const AuthProvider = ({children}) => {
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
     //Ensemble des commentaires
     const [allCommentaries, setAllCommentaries] = useState(null);
- console.log(`mailInterlocutor :`, mailInterlocutor);
-console.log(`toTheMail :`, toTheMail);   
+
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
 Grace au contexte, cette fonction sera exécutée depuis le composant FollowThisUser
@@ -49,15 +48,6 @@ const actualiserPseudo = (p) => {
   setPseudonymConnectedUser(p);
 }
 /*---------------------------------------------------------------------------------------------- */
-   /* useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          setUser(user);
-        } else {
-          setUser(null);
-        }
-      });
-    }, []);*/
 
     useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {

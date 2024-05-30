@@ -91,25 +91,21 @@ export default function AboutThisUser() {
   };
   //console.log(`Le nouveau Pseudo qui vient d'être entré `, newPseudoUser);
   return (
-    <>
-      <p>
-        Votre pseudonyme actuel est{" "}
+    <section className="ChangePseudo">
+      <div>
+        Votre pseudonyme actuel est : {" "}
         {
           user &&
             pseudonymConnectedUser /* Si un utilisateur est connecté, alors le pseudo importé du contexte */
         }
-      </p>
+      </div>
       <input
         type="text"
         value={newPseudoUser}
         onChange={handleInputChange}
-        style={{ width: "200px" }}
+        style={{ width: "250px" }}
       />
-      <button onClick={updatePseudo}>Mettre à jour le pseudo</button>
-      <p>
-        Votre pseudonyme :{" "}
-        {pseudonymConnectedUser}
-      </p>
-    </>
+      <div style={{cursor:"pointer"}} onClick={updatePseudo}>Mettre à jour le pseudo</div>
+    </section>
   );
 }

@@ -118,7 +118,7 @@ export default function ListTweet(props) {
   return (
     <div className="affichageListeTweet">
       <h3>
-        Liste des tweets de l&apos;utilisateur connecté : <GetOneIdUser />{" "}
+        <GetOneIdUser />{" "}, voici vos tweets
       </h3>
 
       {myListeTweet &&

@@ -59,20 +59,23 @@ export default function ChangeMyAvatar() {
   };
 
   return (
-    <>
-      <p>
-        Votre avatar :{" "}
+    <section className="ChangePseudo">
+      <div>
+        Votre avatar
+        <br></br>
         <img className="largeAvatar" src={avatartOfTheConnectedUser} alt="Votre avatar" />
-      </p>
+      </div>
       <input
         type="text"
         placeholder="Entrez l'url de l'image choisie"
         value={newAvatar}
         onChange={handleInputChange}
-        style={{ width: "200px" }}
+        style={{ width: "300px" }}
       />
-      <button onClick={() => updateAvatar(newAvatar)}>Changer l'avatar</button>
-      <button onClick={deleteAvatar}>Supprimer mon avatar</button>
-    </>
+      <div className="buttonsAvatar">
+        <button onClick={() => updateAvatar(newAvatar)}>Changer l'avatar</button>
+        <button onClick={deleteAvatar}>Supprimer mon avatar</button>
+      </div>
+    </section>
   );
 }

@@ -93,7 +93,7 @@ export default function ListDialogue({ showOnlyUnread = false }) {
               key={theInterlocutorId}
               onClick={() => handleToTheMail(theInterlocutorId)}
               style={{ cursor: "pointer" }}
-            > 
+            >
               <GetAuthorTweet
                 theInterlocutorId={theInterlocutorId}
                 cancelLink="true" /* PSEUDONYME */
@@ -101,7 +101,7 @@ export default function ListDialogue({ showOnlyUnread = false }) {
             </Link>
           ))}
         </section>
-      ) : null}
+      ) : "Vous n'avez entamé aucune conversations."}
     </>
   );
 }

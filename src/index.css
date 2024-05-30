@@ -206,16 +206,7 @@ body {
 
 
 /************************************************************************************/
-.avatar {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-.largeAvatar {
-  width: 80px;
-  height: 80px;
-  margin-right: 10px;
-}
+
 
 /************************************************************************************************************/
 .lineOfComponents {
@@ -414,14 +405,14 @@ body {
   border: 1px solid sienna;
   width: 25vw; height: 95vh;
   }
-/********************************************************************************************/
+
+/************** Nouveaux messages de : **************************************************************/
 .conversationAlert {
   width: 15vw;
   padding: 2rem 1.5rem;
   border-radius: 8px;
   background-color: #011332;
-  box-shadow: 20px 10px 25px black, inset -3px -3px 5px black,
-    inset 3px 3px 5px rgb(125, 122, 122);
+  box-shadow: 20px 10px 25px black, inset -3px -3px 5px black, inset 3px 3px 5px rgb(125, 122, 122);
   position: relative;
   margin-top: 1rem;
 }
@@ -431,12 +422,16 @@ body {
   top: 29px;
   transform: rotate(25deg);
 }
+
+
+/************* Bouton DELETE **********************************************************************/
 .buttonDeleteMessage {
   position: absolute;
   cursor: pointer;
   right: 10px;
   top: 0;
 }
+
 /*********************************************************************************************/
 
 .framelistDialogue {
@@ -488,12 +483,38 @@ body {
   font-size: 1.1rem;
   color: cadetblue;
 }
-/********************************************************************************************/
 
+/******************************* Mon PROFIL ************************************************/
 .MyProfile {
-  width: 30vw;
-  margin: 0 auto;
+  width: 20vw; height: 70vh;
+  margin: 0 auto ;
 }
+.ChangePseudo{
+  display: flex; flex-direction: column; align-items:  center;
+  box-shadow: 20px 10px 25px black, inset -3px -3px 5px black, inset 3px 3px 5px rgb(125, 122, 122);
+  border-radius: 10px;
+}
+.ChangePseudo:nth-of-type(1){margin-top: 5rem;}
+.ChangePseudo:nth-of-type(2){margin-top: 2rem;}
+
+.ChangePseudo div   {margin: 5px; padding: 8px;}
+.ChangePseudo input {margin: 5px; padding: 8px; color: black;}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.largeAvatar {
+  width: 90px;
+  height: 90px;
+  margin-top: 10px;
+}
+.buttonsAvatar{display: flex;}
+.buttonsAvatar button{margin: 10px; padding: 7px 6px;}
+
+/****************************************************************************************/
+
 .dateOfTweet {
   font-size: 0.8rem;
 }
