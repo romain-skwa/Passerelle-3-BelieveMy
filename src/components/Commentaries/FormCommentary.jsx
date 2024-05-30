@@ -88,20 +88,20 @@ export default function FormWriteTweet(props) {
             name="inputNewTweetTitle"
             id="inputNewTweetTitle"
             ref={inputNewTweetTitle}
-            size="70"
+            size="72"
             placeholder="Donnez un titre à votre commentaire"
-            style={{ margin: "15px auto", display: "block" }}
+            style={{ margin: "15px auto", padding:"5px",display: "block" }}
           />
 
           <div>
             <textarea
-              cols="70"
+              cols="54"
               rows="5"
               name="inputNewTweetContent"
               id="inputNewTweetContent"
               ref={inputNewTweetContent}
               placeholder="Écrivez votre nouveau tweet ici."
-              style={{ margin: "10px auto", padding: "5px 0", display: "block" }}
+              style={{ margin: "10px auto", padding: "5px ", display: "block" }}
             />
           </div>
 
@@ -111,7 +111,7 @@ export default function FormWriteTweet(props) {
              name="inputNewImageContent"
              id="inputNewImageContent"
              ref={inputNewImageContent}
-             size="70"
+             size="72"
              placeholder="Coller le lien d'une image."
              style={{ margin: "10px auto", padding: "5px", display: "block" }}
               />

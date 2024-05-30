@@ -22,7 +22,7 @@ export function CoDecoLink() {
       <Link to="/" style={{marginTop:"1rem"}}>Page d&apos;accueil</Link>
       {user && <Link to="/MyFollowedAuthors" style={{marginTop:"0.3rem"}}> Mes abonnements </Link>}
       {user && <Link to="/MyTweets" style={{marginTop:"0.3rem"}}> Mes propres Tweets </Link>}
-      {user && <Link to="/MyProfile" style={{marginTop:"0.3rem"}}> Mon profil </Link>}
+      {user && <Link to="/MyProfile" style={{marginTop:"0.3rem"}}> Modifier mon profil </Link>}
       {auth.currentUser ?  null : <Link to="/inscription"> Inscription </Link> }
     </div>
   );

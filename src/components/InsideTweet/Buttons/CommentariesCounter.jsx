@@ -12,6 +12,7 @@ export default function CommentariesCounter(props) {
       return 0;
     }
   };
+
   return (
     <>
         <div className="numberCommentaries">{countCommentaries()} </div>

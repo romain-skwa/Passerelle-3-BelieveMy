@@ -45,11 +45,11 @@ export default function ChangeThisTweet(props) {
         };
 
     return(
-        <>on change le tweet
+        <>
             <textarea 
                 name="contentTweet" 
                 id="contentTweet" 
-                cols="73" rows="5" 
+                cols="57" rows="5" 
                 ref={newContentRef}
                 defaultValue={tweet.content} // Le contenu intial est déjà présent à l'affichage et peut maintenant être modifié
             />
@@ -61,7 +61,7 @@ export default function ChangeThisTweet(props) {
              name="inputNewImageContent"
              id="inputNewImageContent"
              ref={inputNewImageContent}
-             size="50"
+             size="75"
              placeholder={theTweet.image}
               />
           </div>

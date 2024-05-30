@@ -17,12 +17,8 @@ export default function Liked(props) {
   //console.log(`Ce que contient le tweet `, tweet)
   const {
     idOfConnectedUser,
-    pseudonymConnectedUser,
-    mailOfConnectedUser,
-    followListOfConnectedUser,
     likedListOfConnectedUser,
     actualiserLikedList,
-    avatartOfTheConnectedUser,
   } = useContext(AuthContext);
 
   const [preventLikedList, setPreventLikedList] = useState(
@@ -44,14 +40,13 @@ export default function Liked(props) {
     if (!preventLikedList.includes(IdTweet ? IdTweet : tweet.id)) {
       // Vérifier que le tweet en question n'est pas déjà présent dans preventLikedList
       const newDataLikedList = {
-
         likedList: [...preventLikedList, IdTweet ? IdTweet : tweet.id],
       };
  
       const change = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
-          method: "PATCH", // La méthode PUT pour POSER de nouvelles données
+          method: "PATCH", // La méthode PATCH pour CHANGER une donnée
           headers: {
             "Content-Type": "application/json",
           },
