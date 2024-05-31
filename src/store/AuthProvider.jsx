@@ -121,7 +121,7 @@ useEffect(() => {
 /*************************************************************************************************************/
  //----------- Fonction -----------------------------------------------------------------------------------
  const getAllCommentaries = async () => {
-  // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
+  // REQUETE pour obtenir les commentaires (Les titres, les contenus, nom de l'auteur)
   setLoading(true);
   toast("Chargement...");
 
@@ -152,6 +152,8 @@ useEffect(() => {
 useEffect(() => {
   getAllCommentaries();
 }, []);
+
+
 /*************************************************************************************************************/
     useEffect(() => {
         onAuthStateChanged(auth, (currenUser) => {

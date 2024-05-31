@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 
@@ -27,15 +27,17 @@ const formattedTime = formatTime(now);
 console.log(`L'heure actuelle en français : ${formattedTime}`);
 
 /****************************** FORMULAIRE ********************************************************** */
-export default function FormWriteTweet(props) {
+export default function FormWriteCommentary(props) {
   const { user } = useContext(AuthContext);
-  const { IdTweet } = props;
+  const { IdTweet, updateListeTweet } = props;
 
   // Variables
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
   const inputNewImageContent = useRef();
   
+
+
   // Création nouveau tweet
   const createNewCommentary = async () => {
     const commentary = {
@@ -66,7 +68,8 @@ export default function FormWriteTweet(props) {
       return "Une erreur est survenue. Impossible d'afficher la base de données.";
     }
     props.updateListeTweet(commentary);
-    const { name: idRandom } = await response.json();
+
+    // const { name: idRandom } = await response.json();
     // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
       
     // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message

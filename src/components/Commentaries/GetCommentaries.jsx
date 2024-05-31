@@ -124,7 +124,6 @@ export default function GetCommentaries(props) {
           <div key={tweet.id} className="cadreTweet">
 
           {/*********** Avatar **** Titre ******************************************************************/}
-            Commentaires du tweet : {tweet.commentaryOf}
             <section style={{ display: "flex", paddingBottom:"1rem" }}>
               <Avatar tweet={tweet} />
               <div style={{display:"flex", alignItems:"center", fontWeight:"bold",}}>{tweet.title /* TITRE */}</div>
@@ -143,8 +142,6 @@ export default function GetCommentaries(props) {
               </div>
 
             <div>
-              <div>L'id de ce commentaire : {tweet.id /* ID du TWEET*/} </div>
-
               {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
                 Sinon c'est le bouton Modifier qui sera affiché */}
               {frameChangeTweetState[tweet.id] ? (
@@ -179,7 +176,7 @@ export default function GetCommentaries(props) {
                 </div>
               </div>
 
-              <div>
+              <div style={{fontSize:"0.8rem"}}>
                 Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                 {tweet.datePublication
                   ? ", le " + tweet.datePublication
