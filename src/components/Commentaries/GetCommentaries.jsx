@@ -22,12 +22,9 @@ export default function GetCommentaries(props) {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState(
-    {}
-  ); /* sera changé dans la fonction handleFrameChangeTweet */
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
-  const { IdTweet } = props;
-
+  const { IdTweet, listeCommentariesParent, setCommentaryCount }  = props;
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -76,6 +73,7 @@ export default function GetCommentaries(props) {
 
     setListCommentary([...donneesTransformees]); // Mise à jour du state de listCommentary
     setLoading(false);
+    setCommentaryCount(donneesTransformees.filter(tweet => tweet.commentaryOf === IdTweet).length);
   };
 
   // Fonction pour mettre à jour l'état de frameChangeTweetState pour un tweet spécifique

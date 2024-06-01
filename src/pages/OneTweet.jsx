@@ -13,7 +13,6 @@ import { AuthContext } from "../store/AuthProvider";
 import FormCommentary from "../components/Commentaries/FormCommentary";
 import GetCommentaries from "../components/Commentaries/GetCommentaries";
 import Write from "../components/InsideTweet/Buttons/Write";
-import CommentariesCounter from "../components/InsideTweet/Buttons/CommentariesCounter";
 
 // Nous sommes dans le parent de GetCommentaries qui récupère les commentaires d'un tweet et de 
 // FormCommentary le formulaire pour écrire les commentaires.
@@ -27,16 +26,17 @@ export default function OneTweet(props) {
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
-  const { user  } = useContext(AuthContext);
-
+  const { user } = useContext(AuthContext);
+  
   const [commentaryCount, setCommentaryCount] = useState(0);
+
 // ------ Pour actualiser l'affichage des commentaires --------
 
   const [listeCommentariesUpdated, setListeCommentariesUpdated] = useState([]);
   const updateListeTweet = (newTweet) => {
     setListeCommentariesUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);
-    setCommentaryCount(commentaryCount + 1);
   };
+
   // La liste de commentaires pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée à partir de FormCommentary,
   // Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau commentaire.
   // listeCommentariesUpdated, qui est passé en props au composant GetCommentaries, sera alors mis à jour.
@@ -88,7 +88,7 @@ export default function OneTweet(props) {
   }, []); 
 
   /************************************************************************************************/
-
+  
   return(
     <>
       <div className="affichageListeTweet">
@@ -136,7 +136,8 @@ export default function OneTweet(props) {
 
             <div>
 
-{/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour. Sinon c'est le bouton Modifier qui sera affiché */}
+              {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
+                Sinon c'est le bouton Modifier qui sera affiché */}
               {frameChangeTweetState[tweet.id] ? (
                 <>
                   <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
@@ -165,7 +166,7 @@ export default function OneTweet(props) {
 
                 <div className="commentaryIconCounter">
                   <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
-                  <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} setCommentaryCount={setCommentaryCount} />
+                  <div className="numberCommentaries">{commentaryCount}</div>
                 </div> 
 
                   <Write  tweet={tweet} />
@@ -194,7 +195,7 @@ export default function OneTweet(props) {
         ))}
       </div>
         <section>
-          <GetCommentaries IdTweet={IdTweet} listeCommentariesParent={listeCommentariesUpdated}  />
+        <GetCommentaries IdTweet={IdTweet} listeCommentariesParent={listeCommentariesUpdated} setCommentaryCount={setCommentaryCount} />
         </section>
 
         <section>
