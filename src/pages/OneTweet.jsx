@@ -13,6 +13,7 @@ import { AuthContext } from "../store/AuthProvider";
 import FormCommentary from "../components/Commentaries/FormCommentary";
 import GetCommentaries from "../components/Commentaries/GetCommentaries";
 import Write from "../components/InsideTweet/Buttons/Write";
+import CommentariesCounter from "../components/InsideTweet/Buttons/CommentariesCounter";
 
 // Nous sommes dans le parent de GetCommentaries qui récupère les commentaires d'un tweet et de 
 // FormCommentary le formulaire pour écrire les commentaires.
@@ -28,19 +29,20 @@ export default function OneTweet(props) {
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
   
-  const [commentaryCount, setCommentaryCount] = useState(0);
+  const [commentaryCount, setCommentaryCount] = useState(0); // Nombre de commentaires pour ce tweet. Il est calculé dans GetCommentaries
 
 // ------ Pour actualiser l'affichage des commentaires --------
 
-  const [listeCommentariesUpdated, setListeCommentariesUpdated] = useState([]);
+  const [listeCommentariesAdded, setListeCommentariesAdded] = useState([]);
   const updateListeTweet = (newTweet) => {
-    setListeCommentariesUpdated((prevListeTweet) => [...prevListeTweet, newTweet]);
+    setListeCommentariesAdded((prevListeTweet) => [...prevListeTweet, newTweet]);
   };
+ // console.log('listeCommentariesAdded.... ', listeCommentariesAdded);      
 
   // La liste de commentaires pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée à partir de FormCommentary,
   // Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau commentaire.
-  // listeCommentariesUpdated, qui est passé en props au composant GetCommentaries, sera alors mis à jour.
-  // Dans GetCommentaries, un useEffect permettant d'afficher les commentaires à nouveau sera enclenché à chaque fois que listeCommentariesUpdated changera.
+  // listeCommentariesAdded, qui est passé en props au composant GetCommentaries, sera alors mis à jour.
+  // Dans GetCommentaries, un useEffect permettant d'afficher les commentaires à nouveau sera enclenché à chaque fois que listeCommentariesAdded changera.
 
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
@@ -166,7 +168,7 @@ export default function OneTweet(props) {
 
                 <div className="commentaryIconCounter">
                   <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
-                  <div className="numberCommentaries">{commentaryCount}</div>
+                  <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} />
                 </div> 
 
                   <Write  tweet={tweet} />
@@ -195,7 +197,7 @@ export default function OneTweet(props) {
         ))}
       </div>
         <section>
-        <GetCommentaries IdTweet={IdTweet} listeCommentariesParent={listeCommentariesUpdated} setCommentaryCount={setCommentaryCount} />
+        <GetCommentaries IdTweet={IdTweet} listeCommentariesAdded={listeCommentariesAdded} setCommentaryCount={setCommentaryCount} />
         </section>
 
         <section>

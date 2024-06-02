@@ -124,11 +124,11 @@ const FrameRightMessage = () => {
     {user && toTheMail !== "none" ?  
     <section className="frameRightDialogue">
 
-      <div style={{display: "flex", justifyContent: "end", cursor:"pointer", padding:"8px", margin:"0px 10px 5px"}} onClick={() => setToTheMail("none")} >
+      <div style={{display: "flex", justifyContent: "end", cursor:"pointer", padding:"8px", margin:"0px 10px 0px"}} onClick={() => setToTheMail("none")} >
         &#10006;
       </div>
 
-      <div style={{ display: "flex", justifyContent: "space-between ", }}>
+      <div style={{ display: "flex", justifyContent: "space-between ", padding:"0 0 5px ",}}>
         <div style={{marginLeft :"1.5rem"}}>{pseudonymConnectedUser}</div>            
         <div style={{marginRight:"1.5rem"}}><GetAuthorTweet authorTweet={toTheMail} /></div>
       </div>
@@ -159,7 +159,7 @@ const FrameRightMessage = () => {
           value={inputContentMessage}
           onChange={(e) => setInputContentMessage(e.target.value)}
           placeholder="Écrivez votre nouveau message ici."
-          style={{ margin: "20px auto", padding: "5px", display: "block", outline:" none", backgroundColor:"#3c1939" }}
+          style={{ margin: "15px auto", padding: "5px", display: "block", outline:" none", color:"rgb(205, 216, 227)", backgroundColor:"#3c1939" }}
         />
       </div>
 

@@ -17,14 +17,14 @@ import LikedCommentary from "./LikedCommentary";
 export default function GetCommentaries(props) {
   // props provenant de oneTweet
   // State
-  const [listCommentary, setListCommentary] = useState(props.listeCommentariesParent); // Liste des tweets provenant de oneTweet grace au props
+  const [listCommentary, setListCommentary] = useState(props.listeCommentariesAdded); // Liste des tweets provenant de oneTweet grace au props
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
-  const { IdTweet, listeCommentariesParent, setCommentaryCount }  = props;
+  const { IdTweet, listeCommentariesAdded,  }  = props;
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -69,11 +69,9 @@ export default function GetCommentaries(props) {
       // push sert à ajouter dans le tableau de donneesTransformees le contenu de newTweet.
       donneesTransformees.push(newTweet);
     }
-    //console.log("donnees transformees : ", donneesTransformees);
 
     setListCommentary([...donneesTransformees]); // Mise à jour du state de listCommentary
     setLoading(false);
-    setCommentaryCount(donneesTransformees.filter(tweet => tweet.commentaryOf === IdTweet).length);
   };
 
   // Fonction pour mettre à jour l'état de frameChangeTweetState pour un tweet spécifique
@@ -94,7 +92,8 @@ export default function GetCommentaries(props) {
   // Le useEffect en utilisé pour que la fonction requete ne soit exécutée que lorsqu'on le décide.
   useEffect(() => {
     requete();
-  }, [props.listeCommentariesParent]); // Quand la liste est mise à jour (quand un nouveau Commentaire est écrit), la fonction requete se lance.
+    //console.log("Le useEffect déclenché par listeCommentariesAdded dans GetCommentaries ");
+  }, [listeCommentariesAdded]); // Quand la liste est mise à jour (quand un nouveau Commentaire est écrit), la fonction requete se lance.
 
   // La requête qui affiche la liste de tweet sera relancée quand on clique sur le bouton Supprimer un tweet
   useEffect(() => {

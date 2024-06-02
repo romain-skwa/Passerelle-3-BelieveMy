@@ -273,6 +273,7 @@ input, textarea{color: black;}
   align-items: center;
   justify-content: start;
   margin-left: 10px;
+
 }
 
 /*********************************************************************/
@@ -402,7 +403,7 @@ input, textarea{color: black;}
   position: fixed;
   right: 5vw; top: 2vh;
   border: 1px solid sienna;
-  width: 25vw; height: 95vh;
+  width: 25vw; height: 96vh;
   }
 
 /************** Nouveaux messages de : **************************************************************/

@@ -23,7 +23,6 @@ const AuthProvider = ({children}) => {
     // Donnée qui désigne le destinaire lors de l'envoi d'un message
     const [toTheMail, setToTheMail] = useState("none");// Destinataire
     //Ensemble des commentaires
-    const [allCommentaries, setAllCommentaries] = useState(null);
 
 /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
@@ -119,39 +118,8 @@ useEffect(() => {
 
 
 /*************************************************************************************************************/
- //----------- Fonction -----------------------------------------------------------------------------------
- const getAllCommentaries = async () => {
-  // REQUETE pour obtenir les commentaires (Les titres, les contenus, nom de l'auteur)
-  setLoading(true);
-  toast("Chargement...");
 
-  // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
-  const donneesRecueillies = await fetch(
-      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json`,      
-      {      
-        method: "GET",      
-        headers: {      
-          "Content-Type": "application/json",      
-        },      
-      }      
-    ).catch(error => {      
-      console.error('Une erreur s\'est produite lors de la récupération des données : ', error);      
-      toast.error('Une erreur s\'est produite lors de la récupération des données');      
-    });
 
-  if (!donneesRecueillies.ok) {
-    toast.error("Une erreur est survenue dans ListTweet");
-    return;
-  }
-
-  const dataCommentaries = await donneesRecueillies.json();
-
-  setAllCommentaries(dataCommentaries)
-};
-
-useEffect(() => {
-  getAllCommentaries();
-}, []);
 
 
 /*************************************************************************************************************/
@@ -185,7 +153,6 @@ useEffect(() => {
         likedListOfConnectedUser,
         avatartOfTheConnectedUser,
         toTheMail,
-        allCommentaries,
         mailInterlocutor,
         forUpdateMessageReadStatus,
         setMailInterlocutor,
