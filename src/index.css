@@ -380,6 +380,7 @@ input, textarea{color: black;}
         .textareawriteTheMessage {
           background-color: #11020b;
           border: 1px solid transparent;
+          color: aliceblue;
           box-shadow:  4px 4px 5px #3c1939,  -4px -4px 5px #3c1939, inset 4px 4px 5px #473545, inset -4px -4px 5px #473545;;
         }
         .textareawriteTheMessage:focus{

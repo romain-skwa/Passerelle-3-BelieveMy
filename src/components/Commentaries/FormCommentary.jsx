@@ -40,6 +40,16 @@ export default function FormWriteCommentary(props) {
 
   // Création nouveau tweet
   const createNewCommentary = async () => {
+
+    if (inputNewTweetTitle.current.value.trim() === "") {
+      alert("Veuillez entrer un titre pour votre tweet.");    
+      return;    
+    }
+    if (inputNewTweetContent.current.value.trim() === "") {
+      alert("Veuillez entrer un contenu pour votre tweet.");  
+      return;  
+    }
+    
     const commentary = {
       commentaryOf: IdTweet,
       title: inputNewTweetTitle.current.value,

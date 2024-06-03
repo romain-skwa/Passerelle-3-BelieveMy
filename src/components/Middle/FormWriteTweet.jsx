@@ -37,6 +37,15 @@ export default function FormWriteTweet(props) {
   
   // Création nouveau tweet
   const createNewTweet = async () => {
+    if (inputNewTweetTitle.current.value.trim() === "") {
+      alert("Veuillez entrer un titre pour votre tweet.");    
+      return;    
+    }
+    if (inputNewTweetContent.current.value.trim() === "") {
+      alert("Veuillez entrer un contenu pour votre tweet.");  
+      return;  
+    }
+    
     const newTweet = {
       title: inputNewTweetTitle.current.value,
       content: inputNewTweetContent.current.value,

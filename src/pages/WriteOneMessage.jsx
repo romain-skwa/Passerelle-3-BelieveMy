@@ -92,6 +92,11 @@ const MessageBox = () => {
       return;
     }
 
+    if (inputContentMessage.trim() === '') {
+      alert("Votre message doit contenir quelque chose...");   
+      return;  
+    }
+
     const newMessage = {
       from: mailOfConnectedUser,
       to: mailInterlocutor,

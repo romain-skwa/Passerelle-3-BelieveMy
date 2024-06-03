@@ -161,18 +161,20 @@ export default function OneTweet(props) {
               {/* Cœur **** Commentaire **** Écrire ****** S'abonner ***** */}
               <div className="lineOfComponents">
 
-                <div className="like" /* CONTENANT */>
-                  <Liked tweet={tweet} requete={requete} /* Cœur */ />
-                  <span>{tweet.likedCounter /* COMPTEUR */}</span>
-                </div>
+                <section className="likeComments">
+                  <div className="like" /* CONTENANT */>
+                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                    <span>{tweet.likedCounter /* COMPTEUR */}</span>
+                  </div>
 
-                <div className="commentaryIconCounter">
-                  <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
-                  <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} setCommentaryCount={setCommentaryCount} />
-                </div> 
+                  <div className="commentaryIconCounter">
+                    <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
+                    <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} setCommentaryCount={setCommentaryCount} />
+                  </div>
+                </section>
 
-                  <Write  tweet={tweet} />
-                  <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
+                <Write  tweet={tweet} />
+                <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
 
               </div>
 

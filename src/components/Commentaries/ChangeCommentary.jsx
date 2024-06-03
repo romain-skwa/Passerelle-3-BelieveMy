@@ -12,6 +12,10 @@ export default function ChangeThisTweet(props) {
 
         // Modification du contenu du tweet --------------------------------------------------------------------
         const updateTweet = async () => {
+            if (newContentRef.current.value.trim() === "") {
+                alert("Veuillez entrer un contenu pour votre tweet.");  
+                return;  
+                }
             // Le tweet modifié est dans newTweet
                 // Le titre et l'auteur restent les mêmes. Seul le contenu va changer. D'où le useRef utilisé.
             const newTweet = {
