@@ -52,7 +52,7 @@ export default function ChangeThisTweet(props) {
                 name="inputNewTweetTitle"
                 id="inputNewTweetTitle"
                 ref={inputNewTweetTitle}
-                size="70"
+                size="75"
                 defaultValue={tweet.title}
                 style={{ margin: "15px auto", display: "block" }}
             />
@@ -60,7 +60,7 @@ export default function ChangeThisTweet(props) {
             <textarea 
                 name="contentTweet" 
                 id="contentTweet" 
-                cols="73" rows="5" 
+                cols="57" rows="5" 
                 ref={newContentRef}
                 defaultValue={tweet.content} // Le contenu intial est déjà présent à l'affichage et peut maintenant être modifié
             />

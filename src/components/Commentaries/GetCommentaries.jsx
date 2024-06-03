@@ -24,7 +24,7 @@ export default function GetCommentaries(props) {
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
-  const { IdTweet, listeCommentariesAdded,  }  = props;
+  const { IdTweet, listeCommentariesAdded, setCommentaryCount }  = props;
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -72,6 +72,7 @@ export default function GetCommentaries(props) {
 
     setListCommentary([...donneesTransformees]); // Mise à jour du state de listCommentary
     setLoading(false);
+    setCommentaryCount(true);
   };
 
   // Fonction pour mettre à jour l'état de frameChangeTweetState pour un tweet spécifique

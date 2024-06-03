@@ -29,7 +29,7 @@ export default function OneTweet(props) {
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
   
-  const [commentaryCount, setCommentaryCount] = useState(0); // Nombre de commentaires pour ce tweet. Il est calculé dans GetCommentaries
+  const [commentaryCount, setCommentaryCount] = useState(false); // Nombre de commentaires pour ce tweet. Il est calculé dans GetCommentaries
 
 // ------ Pour actualiser l'affichage des commentaires --------
 
@@ -168,7 +168,7 @@ export default function OneTweet(props) {
 
                 <div className="commentaryIconCounter">
                   <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
-                  <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} />
+                  <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} setCommentaryCount={setCommentaryCount} />
                 </div> 
 
                   <Write  tweet={tweet} />
