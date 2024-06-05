@@ -13,7 +13,7 @@ import { AuthContext } from "../store/AuthProvider";
 import FormCommentary from "../components/Commentaries/FormCommentary";
 import GetCommentaries from "../components/Commentaries/GetCommentaries";
 import Write from "../components/InsideTweet/Buttons/Write";
-import CommentariesCounter from "../components/InsideTweet/Buttons/CommentariesCounter";
+import CommentariesCounterOfOneTweet from "../components/InsideTweet/Buttons/CommentariesCounterOfOneTweet";
 
 // Nous sommes dans le parent de GetCommentaries qui récupère les commentaires d'un tweet et de 
 // FormCommentary le formulaire pour écrire les commentaires.
@@ -30,7 +30,13 @@ export default function OneTweet(props) {
   const { user } = useContext(AuthContext);
   
   const [commentaryCount, setCommentaryCount] = useState(false); // Nombre de commentaires pour ce tweet. Il est calculé dans GetCommentaries
-
+  
+  const onChangeLeCompteur = () => {
+    setCommentaryCount(true);
+  }
+  const onChangeEncoreLeCompteur = () => {
+    setCommentaryCount(false);
+  }
 // ------ Pour actualiser l'affichage des commentaires --------
 
   const [listeCommentariesAdded, setListeCommentariesAdded] = useState([]);
@@ -169,7 +175,7 @@ export default function OneTweet(props) {
 
                   <div className="commentaryIconCounter">
                     <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
-                    <CommentariesCounter tweet={tweet} commentaryCount={commentaryCount} setCommentaryCount={setCommentaryCount} />
+                    <CommentariesCounterOfOneTweet IdTweet={IdTweet}  commentaryCount={commentaryCount}  onChangeEncoreLeCompteur={onChangeEncoreLeCompteur} /> 
                   </div>
                 </section>
 
@@ -199,7 +205,7 @@ export default function OneTweet(props) {
         ))}
       </div>
         <section>
-        <GetCommentaries IdTweet={IdTweet} listeCommentariesAdded={listeCommentariesAdded} setCommentaryCount={setCommentaryCount} />
+        <GetCommentaries IdTweet={IdTweet} onChangeLeCompteur={onChangeLeCompteur} listeCommentariesAdded={listeCommentariesAdded}  />
         </section>
 
         <section>
