@@ -20,11 +20,12 @@ export default function AuthorPage() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
+  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
       navigate('/');
     }
   }, [user]);
+  
   //console.log("Ce qu'on récupère dans useParams " + authorId)
 
 /***************************************************************************************************** */

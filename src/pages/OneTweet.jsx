@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DeleteTweet from "../components/InsideTweet/DeleteTweet";
@@ -21,6 +22,7 @@ import CommentariesCounterOfOneTweet from "../components/InsideTweet/Buttons/Com
 export default function OneTweet(props) {
   // State
   const {IdTweet} = useParams();
+  const navigate = useNavigate();
   const [listeTweet, setListeTweet] = useState(); 
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
@@ -91,6 +93,13 @@ export default function OneTweet(props) {
 
   /*---------- USEEFFECT -------------------------------------------------------------------------------*/
   // Le useEffect en utilisé pour que la fonction requete ne soit exécutée que lorsqu'on le décide.
+
+  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
+
   useEffect(() => {
     requete();
   }, []); 

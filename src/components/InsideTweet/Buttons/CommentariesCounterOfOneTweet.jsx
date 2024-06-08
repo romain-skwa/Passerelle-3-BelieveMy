@@ -36,7 +36,7 @@ export default function CommentariesCounterOfOneTweet(props) {
 
     setCountCommentaries(Object.values(dataCommentaries).filter(commentary => commentary.commentaryOf === IdTweet).length);
     onChangeEncoreLeCompteur();
-    console.log("La requête getCommentariesOfThisTweet est bien lancée.");
+    //console.log("La requête getCommentariesOfThisTweet est bien lancée.");
   };
 
   useEffect(() => {

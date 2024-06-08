@@ -9,7 +9,7 @@ export default function MyProfile() {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
         if (!user) {
           navigate('/');
         }

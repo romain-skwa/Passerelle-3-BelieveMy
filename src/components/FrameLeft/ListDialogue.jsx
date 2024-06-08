@@ -4,14 +4,20 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/AuthProvider";
 import { GetAuthorTweet } from "../InsideTweet/GetAuthorTweet";
 import { Link } from "react-router-dom";
-// Encadré affichant les noms des interlocuteurs de l'utilisateur connecté
+// Encadré affichant les noms des interlocuteurs de l'utilisateur connecté à gauche
 
 export default function ListDialogue({ showOnlyUnread = false }) {
   const [conversationSection, setConversationSection] = useState([]);
   const [formattedDate, setFormattedDate] = useState("");
   const [formattedTime, setFormattedTime] = useState("");
   const [uniqueNames, setUniqueNames] = useState(new Set());
-  const { user, mailOfConnectedUser, setMailInterlocutor, setForUpdateMessageReadStatus } = useContext(AuthContext);
+  const {
+    user,
+    mailOfConnectedUser,
+    setMailInterlocutorFrameMiddle,
+    setForUpdateMessageReadStatus,
+    setFrameMiddleOpen,
+  } = useContext(AuthContext);
   const [unreadInterlocutors, setUnreadInterlocutors] = useState([]);
 
   useEffect(() => {
@@ -71,15 +77,21 @@ export default function ListDialogue({ showOnlyUnread = false }) {
     }
   };
 
-  const handleToTheMail = (theInterlocutorId) => {
-    setMailInterlocutor(theInterlocutorId);
+  const handlemailInterlocutor = (theInterlocutorId) => {
+    // Pour changer (dans le contexte) la donnée cible "mail du destinaire" afin de choisir quel dialogue va être affiché dans WriteOneMessage
+    setMailInterlocutorFrameMiddle(theInterlocutorId);
+    // Pour lancer updateMessageReadStatus dans AlertMessage. Ça change le status des messages de cet interlocuteur de "notYet" à "already"
     setForUpdateMessageReadStatus(theInterlocutorId);
   };
 
   // Filtrer les interlocuteurs affichés en fonction de la valeur de showOnlyUnread
   const displayedInterlocutors = showOnlyUnread
-  ? unreadInterlocutors.filter((interlocutor) => interlocutor !== mailOfConnectedUser)
-  : Array.from(uniqueNames).filter((interlocutor) => interlocutor !== mailOfConnectedUser);
+    ? unreadInterlocutors.filter(
+        (interlocutor) => interlocutor !== mailOfConnectedUser
+      )
+    : Array.from(uniqueNames).filter(
+        (interlocutor) => interlocutor !== mailOfConnectedUser
+      );
 
   return (
     <>
@@ -91,7 +103,7 @@ export default function ListDialogue({ showOnlyUnread = false }) {
               to={`/WriteOneMessage`}
               className="nameInterlocutor"
               key={theInterlocutorId}
-              onClick={() => handleToTheMail(theInterlocutorId)}
+              onClick={() => handlemailInterlocutor(theInterlocutorId)}
               style={{ cursor: "pointer" }}
             >
               <GetAuthorTweet
@@ -101,7 +113,9 @@ export default function ListDialogue({ showOnlyUnread = false }) {
             </Link>
           ))}
         </section>
-      ) : "Vous n'avez entamé aucune conversations."}
+      ) : (
+        "Vous n'avez entamé aucune conversations."
+      )}
     </>
   );
 }

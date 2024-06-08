@@ -35,14 +35,14 @@ export default function CommentariesCounter(props) {
     const dataCommentaries = await donneesRecueillies.json();
 
     setCountCommentaries(Object.values(dataCommentaries).filter(commentary => commentary.commentaryOf === tweet.id).length);
-    console.log("La requête getCommentariesOfThisTweet est bien lancée.");
+    //console.log("La requête getCommentariesOfThisTweet est bien lancée.");
   };
 
   useEffect(() => {
     getCommentariesOfThisTweet();
   }, []); 
 
-  console.log('getCommentariesOfThisTweet ', countCommentaries);      
+  //console.log('getCommentariesOfThisTweet ', countCommentaries);      
 
   return (
     <>

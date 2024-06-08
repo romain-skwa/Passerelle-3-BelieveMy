@@ -25,7 +25,7 @@ export default function MyFollowedAuthors() {
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
 
-  useEffect(() => {
+  useEffect(() => {// Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
       navigate('/');
     }

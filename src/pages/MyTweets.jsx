@@ -14,9 +14,9 @@ function Home() {
   const navigate = useNavigate();
   const [listeTweetUpdated, setListeTweetUpdated] = useState([]);
 
-  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette apge sans être connecté
+  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
-      navigate('/connexion');
+      navigate('/');
     }
   }, [user]);
 

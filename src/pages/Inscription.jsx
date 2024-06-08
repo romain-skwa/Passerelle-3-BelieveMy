@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../store/AuthProvider";
 
 export default function Home() {
  const [errorMessagePasswords, setErrorMessagePasswords] = useState();
@@ -13,8 +15,15 @@ export default function Home() {
   // handleSubmit sert à envoyer le contenu du formulaire
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   // Function
+  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
+
   const sendDataToFirebase = async (data) => {
 
     if (data.password !== data.passwordConfirm) {
@@ -44,7 +53,6 @@ export default function Home() {
         else{toast.error(message);}        
         setLoading(false);
       });
-
 
 /************************* Création d'un pseudonyme dans Realtime Database ********************************************************/
 /*
