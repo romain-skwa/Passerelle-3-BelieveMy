@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
   // Donnée qui désigne le destinaire lors de l'envoi d'un message
   const [mailInterlocutor, setMailInterlocutor] = useState("none"); // Destinataire
   const [frameRightOpen, setFrameRightOpen] = useState(false);
-  console.log(`frameRightOpen `, frameRightOpen);
+ // console.log(`frameRightOpen `, frameRightOpen);
 
 
   /* ----------------------------------------------------------------------------------------------
@@ -52,8 +52,6 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
     setPseudonymConnectedUser(p);
   };
   /*---------------------------------------------------------------------------------------------- */
-  /*---------------------------------------------------------------------------------------------- */
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);

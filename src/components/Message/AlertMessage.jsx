@@ -15,7 +15,7 @@ const AlertMessage = () => {
     setMailInterlocutorFrameMiddle, // le mail du destinataire, donnée utilisée dans WriteOneMessage, l'encadré dialogue au MILIEU de l'écran
     forUpdateMessageReadStatus, // pour lancer la fonction qui met à jour le status du message "dejà lu" à partir du composant ListDialogue
     setForUpdateMessageReadStatus,
-  } = useContext(AuthContext);
+   } = useContext(AuthContext);
 
   useEffect(() => {
     if (user) {
@@ -136,7 +136,7 @@ const AlertMessage = () => {
     <>
       {
         user && conversationSection.length > 0 ? ( // Si l'utilisateur est connecté. La liste de notifications pour les messages s'affiche
-          <div className="conversationAlert apparition">
+          <div className="conversationAlert">
             <img
               className="mailRed"
               src="../../../icone/envelope_icon_red_white.png"

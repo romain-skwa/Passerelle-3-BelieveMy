@@ -1,36 +1,39 @@
-import { auth } from "../../firebase";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/AuthProvider";
-import { onAuthStateChanged } from "firebase/auth";
 
 export function SayHello() {
   // Variable
   const { user } = useContext(AuthContext);
-  const {
-    pseudonymConnectedUser,
-  } = useContext(AuthContext);
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      //  console.log("L'utilisateur est connecté " + user.email);
-    } else {
-    //  console.log("euhhhhhhhhhhhhhhhhhh... pas connecté");
-    }
-  });
+  const {pseudonymConnectedUser,} = useContext(AuthContext);
+  const [hour, setHour] = useState(new Date().getHours()); // Nouvelle variable pour stocker l'heure actuelle
+
+  useEffect(() => {
+    setHour(new Date().getHours()); // Mettre à jour l'heure actuelle
+  }, []);
+
+  let greeting;
+
+  if (hour >= 18 || hour < 6) {
+    greeting = "Bonsoir";
+  } else {
+    greeting = "Bonjour";
+  }
+
   return (
-    <div className="apparition">
+    <>
       {user ? 
       (
         <div >
           {" "}
-          Bonjour <span style={{ textTransform: "uppercase" }}>{pseudonymConnectedUser}</span> {" "}
+          {greeting}  <span style={{ textTransform: "uppercase", borderImage: "none" }}>{pseudonymConnectedUser}</span> {" "}
         </div>
       ) 
         : 
       (
         <div>
-          Bonjour
+          {greeting}
         </div>
       )}
-    </div>
+    </>
   );
 }

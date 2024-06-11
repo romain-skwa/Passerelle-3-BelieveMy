@@ -17,13 +17,6 @@ export default function Home() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
-  // Function
-  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
-    if (!user) {
-      navigate('/');
-    }
-  }, [user]);
-
   const sendDataToFirebase = async (data) => {
 
     if (data.password !== data.passwordConfirm) {
@@ -82,14 +75,13 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
        // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
   };
   return (
-    <>
-      <div className="flex flex-col gap-10 justify-center items-center min-h-screen">
-        <div className="element lg:w-[400px] w-full">
-          <div className="text-center text-lg mb-5">
-            S&apos;inscrire
-          </div>
-{/*------------- Form -----------------------------------------------------------------------------------*/}
-          <form onSubmit={handleSubmit(sendDataToFirebase)}>
+      <div className="cadreInscription">
+        <span className="partOfcadreInscription">
+          S&apos;inscrire
+        </span>
+        {/*------------- Form -----------------------------------------------------------------*/}
+        <form onSubmit={handleSubmit(sendDataToFirebase)}>
+          <span className="partOfcadreInscription">
             <input
               style={errors.email && { background: "red" }}
               type="email"
@@ -108,11 +100,13 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
                 {errors.email.message}
               </p>
             )}
-{/*------------- Pseudonym -----------------------------------------------------------------------------------*/}
+          </span>
+          {/*------------- Pseudonym ----------------------------------------------------------------*/}
+          <span className="partOfcadreInscription">
             <input
               className={errors.pseudonymUser ? "invalid-input" : ""}
               type="text"
-              placeholder="Votre pseudonyme"
+              placeholder="Pseudonyme"
               name="pseudonymUser"
               {...register("pseudonymUser", {
                 required: true,
@@ -128,7 +122,9 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
                 {errors.pseudonymUser.message}
               </p>
             )}
-{/*------------- password ----------------------------------------------------------------------------------*/}
+          </span>
+          {/*------------- password ----------------------------------------------------------------*/}
+          <span className="partOfcadreInscription">
             <input
               className={errors.password ? "invalid-input" : ""}
               type="password"
@@ -147,8 +143,10 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
               <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>
                 {errors.password.message}
               </p>
-            )}            
-{/*------------- password confirm -----------------------------------------------------------------------------------*/}
+            )}
+            </span>    
+          {/*------------- password confirm -----------------------------------------------------------------*/}
+          <span className="partOfcadreInscription">
             <input
               className={errors.password ? "invalid-input" : ""}
               type="password"
@@ -168,11 +166,14 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
                 {errors.password.message}
               </p>
             )}
-{/*------------- Avatar -----------------------------------------------------------------------------------*/}
+          </span><br></br>
+          {/*------------- Avatar -------------------------------------------------------------------------*/}
+          <span className="partOfcadreInscription">Facultatif</span><br></br>
+          <span className="partOfcadreInscription">
             <input
               className={errors.avatar ? "invalid-input" : ""}
               type="text"
-              placeholder="Avatar Facultatif"
+              placeholder="Avatar : lien d'une image"
               name="avatar"
               {...register("avatar", {
                 required: false,
@@ -188,21 +189,17 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
                 {errors.avatar.message}
               </p>
             )}
-{/*------------- Bouton Inscription -----------------------------------------------------------------------------------*/}
-
+          </span>
+          {/*------------- Bouton Inscription --------------------------------------------------------------*/}
+          <span className="partOfcadreInscription">
             <button>S&apos;inscrire</button>
-            <div style={{ color: "red" }}>{errorMessagePasswords}</div>
+          </span>
+        </form>
 
-          </form>
-
-          {/* Pass */}
-          <div className="flex justify-center mt-5">
-            <div className="text-blue-facebook hover:text-blue-500 duration-150 cursor-pointer">
-              <Link to="/">Déjà un compte ?</Link>
-            </div>
+        {/* Pass */}
+          <div className="lastPartOfcadreInscription">
+            <Link to="/">Déjà un compte ?</Link>
           </div>
-        </div>
       </div>
-    </>
   )
 }

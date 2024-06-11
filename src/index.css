@@ -86,20 +86,43 @@ input, textarea{color: black;}
   align-items: center;
 }
 /******************** Encadré Bonjour & Connexion/Deconnexion Page d'Accueil *****/
-.codeco {
+.SayHelloCoDecoLink {
+  border-radius: 10px;
+  /*border: red solid 2px;*/
+  padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 10vw;
+  width: 15vw;  
 }
-.apparition:nth-of-type(1) {
-  margin-bottom: 1rem;
+.SayHelloCoDecoLink *{  
+  margin: 0.5rem 0;
+  padding-bottom: 0.3rem;
+  border-width: 10px;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(to right, #20081e,rgb(205, 216, 227)) 1;
 }
-
-.SayHelloCoDecoLink {
-  border-radius: 10px;
-  border: red solid 2px;
-  padding: 1rem;
+.SayHelloCoDecoLink *:hover{
+  border-image: linear-gradient(to right, transparent, transparent) 1;
+}
+.buttonsAnim {
+  position: relative; /* add this */
+}
+.buttonsAnim::before {
+  content: "";
+  display: block;
+  position: absolute; /* au lieu de relative */
+  top: 0;
+  left: 0%;
+  width: 200%;
+  height: 120%;
+  transform: translateX(-25%) translateY(-10%);
+  transition: background-color 0.3s; /* add this */
+  z-index: -1;
+}
+.buttonsAnim:hover::before{
+  background: rgb(32,8,30);
+  background: linear-gradient(90deg, rgba(32,8,30,0.29) 0%, rgba(0,0,0,1) 35%, rgba(0,0,0,1) 50%, rgba(32,8,30,0.2889356426164216) 100%);
 }
 /*************************** ShowListTweet ****************************************/
 .affichageListeTweet {
@@ -144,7 +167,58 @@ input, textarea{color: black;}
   padding: 0.5rem;
   width: 40vw;
 }
-/********************** FrameConection ********************************************/
+/**************************** cadreInscription *******************************************/
+
+.cadreInscription{  
+  width: 20vw;
+  margin: 36vh auto;
+  padding: 20px 10px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 0px black, inset 0px 0px 0px rgb(125, 122, 122);
+  animation: abracadabraFrame 1s forwards 2.7s;
+  position: relative;
+  text-align: center;
+}
+.cadreInscription input,  .cadreInscription div{
+  margin: 10px auto;
+  padding: 5px;
+  width: 75%;
+  box-sizing: border-box;
+  /*animation: abracadabra 1s forwards 1.75s;*/
+}
+
+.cadreInscription button{
+  margin: 10px auto;
+  padding: 4px;
+  width: 55%;
+  font-size: 18px;
+  box-sizing: border-box;
+  animation: abracadabra 1s forwards;
+  opacity: 0;
+}
+
+.partOfcadreInscription{
+  opacity: 0;
+  animation: opacity 0.4s forwards ;
+}
+.partOfcadreInscription:nth-of-type(1){  animation-delay: 1.5s;}
+.partOfcadreInscription:nth-of-type(2){  animation-delay: 1.7s;}
+.partOfcadreInscription:nth-of-type(3){  animation-delay: 1.9s;}
+.partOfcadreInscription:nth-of-type(4){  animation-delay: 2.1s;}
+.partOfcadreInscription:nth-of-type(5){  animation-delay: 2.3s;}
+.partOfcadreInscription:nth-of-type(6){  animation-delay: 2.4s;}
+.partOfcadreInscription:nth-of-type(7){  animation-delay: 2.6s;}
+.partOfcadreInscription:nth-of-type(8){  animation-delay: 2.8s; }
+
+@keyframes opacity {
+  from{opacity: 0;}
+  to{opacity: 1;}
+}
+.lastPartOfcadreInscription{
+  opacity: 0;
+  animation: opacity 0.4s forwards 3s;
+}
+/********************** frameConnection ********************************************/
 
 .frameConnection::before{
   position: absolute;
@@ -158,9 +232,9 @@ input, textarea{color: black;}
   transform-origin: 0% 0%;
 }
 @keyframes whiteSquare {
-  from {transform: scaleY(0);  transform-origin: 0% 0%; }
-  50%   {transform: scaleY(1);  transform-origin: 0% 00%; }
-  51%   {transform: scaleY(1);  transform-origin: 0% 100%; }
+  from {transform: scaleY(0);  transform-origin: 0%   0%; }
+  50%  {transform: scaleY(1);  transform-origin: 0%  00%; }
+  51%  {transform: scaleY(1);  transform-origin: 0% 100%; }
   to   {transform: scaleY(0);  transform-origin: 0% 100%; }
 }
 
@@ -203,17 +277,17 @@ input, textarea{color: black;}
 .insideFrameConnection button{animation-delay: 2.8s;}
 .insideFrameConnection div{animation-delay: 3.1s;}
 
-
-/************************************************************************************/
-
-
 /************************************************************************************************************/
 .lineOfComponents {
   display: flex;
   justify-content: space-between;
-  border: 1px black solid;
   align-items: center;
+  border-radius: 20px;
   margin: 10px 0;
+  padding: 5px;
+  border: 1px solid transparent; /* add a transparent border */
+  border-image:linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(205,255,227,0.8) 3%, rgba(205,255,227,0.3) 48%, rgba(205,255,227,0.8) 97%, rgba(0,212,255,0) 100%);
+  border-image-slice: 1;
 }
 
 .likeComments {
@@ -456,7 +530,7 @@ input, textarea{color: black;}
   background-color: #011332;
   box-shadow: 20px 10px 25px black, inset -3px -3px 5px black,
     inset 3px 3px 5px rgb(125, 122, 122);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: orange;
 }
 
@@ -517,6 +591,7 @@ input, textarea{color: black;}
 /****************************************************************************************/
 
 .dateOfTweet {
+  text-align: right;
   font-size: 0.8rem;
 }
 
@@ -529,18 +604,3 @@ input, textarea{color: black;}
   scale: 1.4;
 }
 
-.apparition {
-  opacity: 0;
-  animation: apparition 2s forwards;
-}
-@keyframes apparition {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.apparition:nth-of-type(2) {
-  animation-delay: 2s;
-}
