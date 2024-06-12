@@ -3,6 +3,7 @@ import AuthorTweets from "../components/Author/AuthorTweets";
 import {useEffect, useState, useContext} from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../store/AuthProvider";
+import DescriptionOfThisUser from "../components/DescriptionOfThisUser";
 
 /*
 Cette page sert à afficher les tweets d'un utilisateur précis. Pas celui qui est connecté ; un autre.
@@ -19,7 +20,7 @@ export default function AuthorPage() {
   const [idTarget, setIdTarget] = useState({ mailUser: "" });
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-
+    //console.log("idTarget ", idTarget);
   useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
       navigate('/');
@@ -50,7 +51,12 @@ const requete = async () => {
 
     const userData  = await getUserlist.json();
     // convertit la réponse HTTP en un objet JavaScript en analysant le corps de la réponse en JSON
-    setIdTarget({ mailUser: userData.mailUser, pseudonymUser: userData.pseudonymUser });
+    setIdTarget(
+      { mailUser: userData.mailUser, 
+        pseudonymUser: userData.pseudonymUser, 
+        description: userData.description, 
+        avatar: userData.avatar,
+      });
   }
 
   useEffect(() => {
@@ -60,6 +66,7 @@ const requete = async () => {
   return (
     <div>
       <h1>Tweets de l'auteur <span style={{textTransform: 'capitalize'}}>{idTarget.pseudonymUser}</span></h1>
+      <DescriptionOfThisUser idTarget={idTarget} />
       <AuthorTweets authorId={idTarget.mailUser} /> {/*Ce composant va afficher les tweets */}
     </div>
   );

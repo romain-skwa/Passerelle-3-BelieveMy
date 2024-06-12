@@ -123,6 +123,7 @@ export default function ListTweet(props) {
 
       {listeTweet &&
         listeTweet.map((tweet) => (
+          //console.log(tweet),
           <div key={tweet.id} className="cadreTweet ">
 
 {/*********** Avatar **** Titre ******************************************************************/}
