@@ -15,7 +15,7 @@ export default function FollowThisUser(props) {
     mailOfConnectedUser,
     followListOfConnectedUser,
     likedListOfConnectedUser,
-    avatartOfTheConnectedUser,
+    avatarOfTheConnectedUser,
   } = useContext(AuthContext);
   const [preventFollowList, setpreventFollowList] = useState(
     followListOfConnectedUser || []
@@ -38,7 +38,7 @@ export default function FollowThisUser(props) {
       const newDataFollowList = {
         followList: [...preventFollowList, tweet.author], // contenu précédent + auteur du tweet actuel
       };
-     // console.log("Données à envoyer à Firebase :", newDataFollowList);
+      // console.log("Données à envoyer à Firebase :", newDataFollowList);
 
       const change = await fetch(
         `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
@@ -74,32 +74,31 @@ export default function FollowThisUser(props) {
         // alors, on affiche le bouton "suivre" ou la mention "Abonné"
 
         // UTILISATEUR CONNECTÉ
-        user && mailOfConnectedUser !== tweet.author ? 
-        (
+        user && mailOfConnectedUser !== tweet.author ? (
           <>
             {preventFollowList.includes(tweet.author) ? ( // Si l'auteur du tweet est déjà dans la liste des auteurs suivi par l'utilisateur
-              <div style={{ display: "flex" }}>                
-                <UnfollowThisUser tweet={tweet} />{/* NE PLUS SUIVRE L'AUTEUR DU TWEET */}
+              <div style={{ display: "flex" }}>
+                <UnfollowThisUser tweet={tweet} />
+                {/* NE PLUS SUIVRE L'AUTEUR DU TWEET */}
               </div>
-                ) : (
-                  // Si l'utilisateur connecté n'est pas abonné, il peut cliquer sur le bouton suivant pour suivre l'auteur du tweet
-                  <div className="addFollow followButon" onClick={updateFollowList}>
-                    S&apos;abonner
-                  </div>
-                )}
-            </>
-          ) : // Si l'utiliseur connecté a son mail identique à celui de l'auteur du tweet. Cela signifie qu'il est l'auteur de ce tweet. Donc on n'affiche rien.
-              null 
-            }
+            ) : (
+              // Si l'utilisateur connecté n'est pas abonné, il peut cliquer sur le bouton suivant pour suivre l'auteur du tweet
+              <div className="addFollow followButon" onClick={updateFollowList}>
+                S&apos;abonner
+              </div>
+            )}
+          </>
+        ) : // Si l'utiliseur connecté a son mail identique à celui de l'auteur du tweet. Cela signifie qu'il est l'auteur de ce tweet. Donc on n'affiche rien.
+        null
+      }
 
       {/* UTILISATEUR CONNECTÉ */}
-      {!user ? 
-        <Link to="/connexion">{/* Si l'utilisateur n'est pas connecté mais qu'il clique, il arrivera sur la page de connexion*/}
-          <div className="addFollow followButon">
-            S&apos;abonner
-          </div>
-        </Link> : null
-      }
+      {!user ? (
+        <Link to="/connexion">
+          {/* Si l'utilisateur n'est pas connecté mais qu'il clique, il arrivera sur la page de connexion*/}
+          <div className="addFollow followButon">S&apos;abonner</div>
+        </Link>
+      ) : null}
     </>
   );
 }

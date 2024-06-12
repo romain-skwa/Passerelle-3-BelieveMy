@@ -83,7 +83,7 @@ export default function ListFollowed() {
           ))}
         </ul>
       ) : (
-        <p>Vous n&apos;êtes en train de suivre aucun auteur.</p>
+        <p>Vous ne suivez personne pour l'instant.</p>
       )}
     </section>
   );

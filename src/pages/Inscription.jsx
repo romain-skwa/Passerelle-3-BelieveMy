@@ -17,6 +17,7 @@ export default function Home() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
+  // CRÉATION DES DONNÉES D'UN NOUVEL UTILISATEUR
   const sendDataToFirebase = async (data) => {
 
     if (data.password !== data.passwordConfirm) {
@@ -47,13 +48,13 @@ export default function Home() {
         setLoading(false);
       });
 
-/************************* Création d'un pseudonyme dans Realtime Database ********************************************************/
+/************* Création des données concernant l'utilisateur dans Realtime Database *************************************/
 /*
 Ici, les données créées seront envoyées dans RealtimeDatabase.
-On y envoie l'adresse  mail qui servira d'identifiant permanent
+On y envoie l'adresse mail qui servira d'identifiant permanent
 Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe quand. C'est pour cette raison qu'il ne servira pas d'identifiant.
 */
-      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email, followList : [], avatar : data.avatar,}
+      const userData = {pseudonymUser : data.pseudonymUser, mailUser : data.email, followList : [], avatar : data.avatar, description : data.description}
 
       const newUser = await fetch(// Une nouvelle section  dans realtime database : userList.
         "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList.json",
@@ -150,7 +151,7 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
             <input
               className={errors.password ? "invalid-input" : ""}
               type="password"
-              placeholder="Mot de passe"
+              placeholder="Confirmation de Mot de passe"
               name="passwordConfirm"
               {...register("passwordConfirm", {
                 required: true,
@@ -180,11 +181,39 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
                 minLength: {
                   value: 10,
                   message:
-                    "Etes-vous certains d'avoir entré un lien vers l'image correct ?",
+                    "Etes-vous certain d'avoir entré un lien vers l'image correct ?",
                 },
               })}
             />
             {errors.avatar && (
+              <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>
+                {errors.avatar.message}
+              </p>
+            )}
+          </span>
+
+          <span className="partOfcadreInscription">
+            <textarea
+              className={errors.description ? "invalid-input" : ""}
+              cols="29"
+              rows="5"
+              type="text"
+              placeholder="Écrivez ici votre description"
+              name="description"
+              {...register("description", {
+                required: false,
+                minLength: {
+                  value: 10,
+                  message:
+                    "Votre description est dispensable mais si vous souhaiter en écrire une, il faut faire un effort",
+                },
+                maxLength:{
+                  value: 150,
+                  message: "La description est limitée 150 caractères.",
+                }
+              })}
+            />
+            {errors.description && (
               <p style={{ color: "red", fontSize: "12px", margin: "5px 0" }}>
                 {errors.avatar.message}
               </p>

@@ -11,7 +11,7 @@ export default function UnfollowThisUser(props) {
     mailOfConnectedUser,
     followListOfConnectedUser,
     likedListOfConnectedUser,
-    avatartOfTheConnectedUser,
+    avatarOfTheConnectedUser,
   } = useContext(AuthContext);
   const [preventFollowList, setpreventFollowList] = useState(
     followListOfConnectedUser || []
@@ -29,7 +29,8 @@ export default function UnfollowThisUser(props) {
   const deleteFollowList = async () => {
     if (preventFollowList.includes(tweet.author)) {
       // Filtrer l'auteur de la liste de suivi
-      const newFollowList = preventFollowList.filter(// La liste des auteurs suivis une fois que l'on a enlevé l'auteur choisi
+      const newFollowList = preventFollowList.filter(
+        // La liste des auteurs suivis une fois que l'on a enlevé l'auteur choisi
         (author) => author !== tweet.author
       );
 
@@ -42,7 +43,7 @@ export default function UnfollowThisUser(props) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            avatar: avatartOfTheConnectedUser,
+            avatar: avatarOfTheConnectedUser,
             mailUser: mailOfConnectedUser,
             pseudonymUser: pseudonymConnectedUser,
             followList: newFollowList,
@@ -51,8 +52,8 @@ export default function UnfollowThisUser(props) {
         }
       );
 
-      if (!change.ok) {        
-        actualiserListFollow(preventFollowList);// Restaurer la copie initiale de la liste d'abonnement en cas d'erreur
+      if (!change.ok) {
+        actualiserListFollow(preventFollowList); // Restaurer la copie initiale de la liste d'abonnement en cas d'erreur
         toast.error("Erreur !");
         return;
       }

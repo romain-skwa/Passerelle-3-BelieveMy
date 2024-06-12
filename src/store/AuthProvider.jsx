@@ -18,16 +18,21 @@ const AuthProvider = ({ children }) => {
   const [idOfConnectedUser, setIdOfConnectedUser] = useState(null);
   const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
   const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
-  const [followListOfConnectedUser, setFollowListOfConnectedUser] = useState(null);
-  const [likedListOfConnectedUser, setLikedListOfConnectedUser] = useState(null);
-  const [avatartOfTheConnectedUser, setAvatartOfTheConnectedUser] = useState([]);
-  const [mailInterlocutorFrameMiddle, setMailInterlocutorFrameMiddle] = useState(""); // Destinataire
-  const [forUpdateMessageReadStatus, setForUpdateMessageReadStatus] = useState();
+  const [followListOfConnectedUser, setFollowListOfConnectedUser] =
+    useState(null);
+  const [likedListOfConnectedUser, setLikedListOfConnectedUser] =
+    useState(null);
+  const [avatarOfTheConnectedUser, setAvatarOfTheConnectedUser] = useState([]);
+  const [mailInterlocutorFrameMiddle, setMailInterlocutorFrameMiddle] =
+    useState(""); // Destinataire
+  const [forUpdateMessageReadStatus, setForUpdateMessageReadStatus] =
+    useState();
+  const [descriptiontOfTheConnectedUser, setDescriptionOfTheConnectedUser] =
+    useState();
   // Donnée qui désigne le destinaire lors de l'envoi d'un message
   const [mailInterlocutor, setMailInterlocutor] = useState("none"); // Destinataire
   const [frameRightOpen, setFrameRightOpen] = useState(false);
- // console.log(`frameRightOpen `, frameRightOpen);
-
+  // console.log(`frameRightOpen `, frameRightOpen);
 
   /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
@@ -45,11 +50,15 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
   };
   /*---------------------------------------------------------------------------------------------- */
   const actualiserAvatar = (z) => {
-    setAvatartOfTheConnectedUser(z);
+    setAvatarOfTheConnectedUser(z);
   };
   /*---------------------------------------------------------------------------------------------- */
   const actualiserPseudo = (p) => {
     setPseudonymConnectedUser(p);
+  };
+  /*---------------------------------------------------------------------------------------------- */
+  const actualiserDescription = (d) => {
+    setDescriptionOfTheConnectedUser(d);
   };
   /*---------------------------------------------------------------------------------------------- */
   useEffect(() => {
@@ -114,7 +123,8 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
         setMailOfConnectedUser(userConnectedData.mailUser);
         setFollowListOfConnectedUser(userConnectedData.followList);
         setLikedListOfConnectedUser(userConnectedData.likedList);
-        setAvatartOfTheConnectedUser(userConnectedData.avatar);
+        setAvatarOfTheConnectedUser(userConnectedData.avatar);
+        setDescriptionOfTheConnectedUser(userConnectedData.description);
       } else {
         console.log(
           `La variable userConnectedData n'est pas définie. Voici les valeurs de user et userList :`,
@@ -155,7 +165,8 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
     mailOfConnectedUser,
     followListOfConnectedUser,
     likedListOfConnectedUser,
-    avatartOfTheConnectedUser,
+    avatarOfTheConnectedUser,
+    descriptiontOfTheConnectedUser,
     mailInterlocutor,
     mailInterlocutorFrameMiddle,
     forUpdateMessageReadStatus,
@@ -166,6 +177,7 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
     actualiserLikedList,
     actualiserAvatar,
     actualiserPseudo,
+    actualiserDescription,
     setForUpdateMessageReadStatus,
     setFrameRightOpen,
     logOut, // pour déconnecter notre utilisateur de n'importe où

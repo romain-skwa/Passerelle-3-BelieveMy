@@ -1,9 +1,11 @@
 import ChangeMyPseudo from "../components/MyProfile/ChangeMyPseudo";
 import ChangeMyAvatar from "../components/MyProfile/ChangeMyAvatar";
+import ChangeMyDescription from "../components/MyProfile/ChangeMyDescription";
 import { useContext, useEffect } from "react";
 
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../store/AuthProvider";
+// Changer mon profil
 
 export default function MyProfile() {
     const { user } = useContext(AuthContext);
@@ -19,6 +21,7 @@ export default function MyProfile() {
         <section className="MyProfile">
         <ChangeMyPseudo />
         <ChangeMyAvatar />
+        <ChangeMyDescription />
         </section>
     )
 }

@@ -21,14 +21,19 @@ export default function Main() {
 
   return (
     <main>
+      <div id="top"/* Ancre */></div>
       <FrameLeft 
-        /*  Bonjour/Liens 
+        /*  Bonjour/Liens -- Connexion/Déconnexion -- Page d'accueil -- Inscription
         --- nouveaux messages 
         --- Conversations déjà entamées 
         --- Liste des auteurs que vous suivez 
-        */ />
+        */ 
+      />
       <FrameRightMessage /* Fenêtre de dialogue située à droite */ />
-      <Outlet />      
+      <Outlet />
+      <a href="#top" className="scroll-to-top" /* Lien pour Ancre */>
+        <img src="../../icone/arrow-up-filled-circle-icon.png" alt="fleche-vers-le-haut" />
+      </a>
     </main>
   );
 }

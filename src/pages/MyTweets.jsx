@@ -3,7 +3,7 @@ import FormWriteTweet from "../components/Middle/FormWriteTweet";
 import MyOwnTweets from "../components/Middle/MyOwnTweets";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../store/AuthProvider";
-
+import Description from "../components/Description";
 // MyTweets dans lequel nous sommes est le composant parent de MyTweets et de FormWriteTweet
 // Il les contient.
 
@@ -27,6 +27,7 @@ function Home() {
   return (
     <div>
       <FormWriteTweet updateListeTweet={updateListeTweet} />
+      <Description />
       <MyOwnTweets listeTweetParent={listeTweetUpdated} />{" "}
       {/* Les tweets écrits par l'utilisateur connecté */}
     </div>
