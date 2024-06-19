@@ -140,20 +140,7 @@ input, textarea{color: black;}
   width: 30vw;
   margin: 0 auto;
 }
-.lightShadow {
-  animation: lightShadow 10s forwards;
-}
-@keyframes lightShadow {
-  from {
-    box-shadow: 00px 0px 10px blue, -00px 0px 10px blue;
-  }
-  50% {
-    box-shadow: 20px 0px 25px skyblue, -20px 0px 10px skyblue;
-  }
-  to {
-    box-shadow: 20px 0px 25px black, -5px 0px 10px rgb(125, 122, 122);
-  }
-}
+
 .cadreTweet {
   min-height: 100px;
   background-color: 11020b; /*<--------------------------------*/
@@ -641,4 +628,25 @@ a.scroll-to-top:hover {
   box-shadow: 20px 10px 25px black, inset -3px -3px 5px black, inset 3px 3px 5px rgb(125, 122, 122);
   position: relative;
   margin-top: 1rem;
+}
+.buttonAddFiveTweets{
+  border: 1px yellow dashed;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  width: 50%;
+  border-radius: 10px;
+  border-image: linear-gradient(90deg, rgba(2,0,36,0) 0%, rgba(205,255,227,0.8) 3%, rgba(205,255,227,0.3) 48%, rgba(205,255,227,0.8) 97%, rgba(0,212,255,0) 100%);
+  border-image-slice: 1;
+  transition: 0.2s;
+}
+.buttonAddFiveTweets:hover{
+  scale: 1.1;
+  font-size: 1.1rem;
+}
+
+.titleAuthorPage{
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 2rem;
 }

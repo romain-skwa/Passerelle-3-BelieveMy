@@ -19,21 +19,15 @@ import Write from "../InsideTweet/Buttons/Write";
 export default function ListTweet(props) {
   // props provenant de Home
   // State
+  const { user } = useContext(AuthContext);
   const [listeTweet, setListeTweet] = useState(props.listeTweetParent); // Liste des tweets provenant de Home grace au props
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState(
-    {}
-  ); /* sera changé dans la fonction handleFrameChangeTweet */
-  const { user } = useContext(AuthContext);
-  const [isLoggedIn, setIsLoggedIn] = useState("affichageListeTweet");
-
-  useEffect(() => {
-    setIsLoggedIn("affichageListeTweet lightShadow");
-  }, [user]);
-
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState( {} ); /* sera changé dans la fonction handleFrameChangeTweet */
+  const [fiveTweetsMore, setFiveTweetsMore] = useState(5);
+console.log(fiveTweetsMore);
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -118,11 +112,14 @@ export default function ListTweet(props) {
   }, [changethisTweetNow]);
 
   /********************************************************************************** */
+
+  const addFive = () => {
+    setFiveTweetsMore(fiveTweetsMore + 5);
+  }
   return (
     <div className="affichageListeTweet">
-
       {listeTweet &&
-        listeTweet.map((tweet) => (
+        [...listeTweet].reverse().slice(0, fiveTweetsMore).map((tweet) => (
           //console.log(tweet),
           <div key={tweet.id} className="cadreTweet ">
 
@@ -226,6 +223,16 @@ export default function ListTweet(props) {
             </div>
           </div>
         ))}
+
+      {listeTweet && fiveTweetsMore < listeTweet.length ? (
+      <div className="buttonAddFiveTweets" onClick={addFive}>
+        <span title="Cliquez pour afficher cinq tweets supplémentaires">5 tweets supplémentaires...</span>
+      </div>
+      ) : (
+      <div className="buttonAddFiveTweets">
+        <span>Tous les tweets sont affichés</span>
+      </div>
+      )}
     </div>
   );
 }
