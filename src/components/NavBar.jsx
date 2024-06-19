@@ -16,9 +16,10 @@ export function CoDecoLink() {
     await logOut();
     navigate("/home", { replace: true });
   };
+  const classNameSayHello = auth.currentUser? "SayHelloCoDecoLink withFrame" : "SayHelloCoDecoLink";
 
   return (
-    <div className="SayHelloCoDecoLink">
+    <div className={classNameSayHello}>
       <SayHello />
 
       {auth.currentUser ?

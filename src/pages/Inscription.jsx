@@ -168,6 +168,9 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
               </p>
             )}
           </span><br></br>
+
+          {/*------------- FACULTATIF ---------------------------------------------------------------------*/}
+          
           {/*------------- Avatar -------------------------------------------------------------------------*/}
           <span className="partOfcadreInscription">Facultatif</span><br></br>
           <span className="partOfcadreInscription">
@@ -191,14 +194,14 @@ Et le pseudo choisi par l'utilisateur. Ce pseudo pourra être changer n'importe 
               </p>
             )}
           </span>
-
+          {/*------------- Souhaitez-vous vous présenter ? ---------------------------------------------*/}
           <span className="partOfcadreInscription">
             <textarea
               className={errors.description ? "invalid-input" : ""}
               cols="29"
               rows="5"
               type="text"
-              placeholder="Écrivez ici votre description"
+              placeholder="Souhaitez-vous vous présenter ?"
               name="description"
               {...register("description", {
                 required: false,

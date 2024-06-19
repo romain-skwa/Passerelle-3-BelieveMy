@@ -18,22 +18,17 @@ const AuthProvider = ({ children }) => {
   const [idOfConnectedUser, setIdOfConnectedUser] = useState(null);
   const [pseudonymConnectedUser, setPseudonymConnectedUser] = useState(null);
   const [mailOfConnectedUser, setMailOfConnectedUser] = useState(null);
-  const [followListOfConnectedUser, setFollowListOfConnectedUser] =
-    useState(null);
-  const [likedListOfConnectedUser, setLikedListOfConnectedUser] =
-    useState(null);
+  const [followListOfConnectedUser, setFollowListOfConnectedUser] =  useState(null);
+  const [likedListOfConnectedUser, setLikedListOfConnectedUser] =  useState(null);
   const [avatarOfTheConnectedUser, setAvatarOfTheConnectedUser] = useState([]);
-  const [mailInterlocutorFrameMiddle, setMailInterlocutorFrameMiddle] =
-    useState(""); // Destinataire
-  const [forUpdateMessageReadStatus, setForUpdateMessageReadStatus] =
-    useState();
-  const [descriptiontOfTheConnectedUser, setDescriptionOfTheConnectedUser] =
-    useState();
+  const [mailInterlocutorFrameMiddle, setMailInterlocutorFrameMiddle] = useState(""); // Destinataire
+  const [forUpdateMessageReadStatus, setForUpdateMessageReadStatus] = useState();
+  const [descriptiontOfTheConnectedUser, setDescriptionOfTheConnectedUser] = useState();
   // Donnée qui désigne le destinaire lors de l'envoi d'un message
   const [mailInterlocutor, setMailInterlocutor] = useState("none"); // Destinataire
   const [frameRightOpen, setFrameRightOpen] = useState(false);
-  // console.log(`frameRightOpen `, frameRightOpen);
 
+  const [FormWriteTweetOpen, setFormWriteTweetOpen] = useState(false);
   /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
 Grace au contexte, cette fonction sera exécutée depuis le composant FollowThisUser
@@ -60,6 +55,10 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
   const actualiserDescription = (d) => {
     setDescriptionOfTheConnectedUser(d);
   };
+  /*---------------------------------------------------------------------------------------------- */
+  const ouvrirFermerFormulaire = (o) => {
+    setFormWriteTweetOpen(o)
+  }
   /*---------------------------------------------------------------------------------------------- */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -171,6 +170,7 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
     mailInterlocutorFrameMiddle,
     forUpdateMessageReadStatus,
     frameRightOpen,
+    FormWriteTweetOpen,
     setMailInterlocutorFrameMiddle,
     setMailInterlocutor,
     actualiserListFollow,
@@ -180,6 +180,7 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
     actualiserDescription,
     setForUpdateMessageReadStatus,
     setFrameRightOpen,
+    ouvrirFermerFormulaire,
     logOut, // pour déconnecter notre utilisateur de n'importe où
     loginUser,
   };

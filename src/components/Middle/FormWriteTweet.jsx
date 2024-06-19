@@ -28,7 +28,7 @@ const formattedTime = formatTime(now);
 
 /****************************** FORMULAIRE ********************************************************** */
 export default function FormWriteTweet(props) {
-  const { user } = useContext(AuthContext);
+  const { user, ouvrirFermerFormulaire, FormWriteTweetOpen } = useContext(AuthContext);
 
   // Variables
   const inputNewTweetTitle = useRef();
@@ -93,74 +93,83 @@ export default function FormWriteTweet(props) {
   return (
     <div>
       {user ? ( // Si un utilisateur est connecté, on affiche la section ci-dessous
-        <section className="formulaire">
-          {/* pourquoi ça ne marche pas quand j'écris form ? */}
-          <h3 style={{ textAlign: "center", margin: "5px auto 20px", }}>Ecrire un nouveau tweet</h3>
+        <>
+          {FormWriteTweetOpen ? // Si la valeur de FormWriteTweetOpen dans le contexte === true
+            <section className="formulaire">
+              {/* pourquoi ça ne marche pas quand j'écris form ? */}
+              <h3 style={{ textAlign: "center", margin: "5px auto 20px", }}>Ecrire un nouveau tweet</h3>
 
-          <label htmlFor="inputNewTweetTitle" style={{color:"yellow"}}>
-            <span style={{ display:"block", textAlign:"center"}}>
-              Titre
-            </span>
-          </label>
+              <label htmlFor="inputNewTweetTitle" style={{color:"yellow"}}>
+                <span style={{ display:"block", textAlign:"center"}}>
+                  Titre
+                </span>
+              </label>
 
-          <input // le inputNewTweetTitle de la const style-component. Ici, ça remplace le mot "input" dans la balise de début
-            type="text"
-            name="inputNewTweetTitle"
-            id="inputNewTweetTitle"
-            ref={inputNewTweetTitle}
-            size="67"
-            placeholder="Donnez un titre à votre tweet"
-            style={{ margin: "5px auto 20px", padding:"5px", outline:"none", display: "block" }}
-          />
-
-          <div>
-            <label htmlFor="inputNewImageContent">
-              <span style={{display:"block", textAlign:"center"}}>
-                Image
-              </span>
-            </label>
-            
-            <input
-             type="text"
-             name="inputNewImageContent"
-             id="inputNewImageContent"
-             ref={inputNewImageContent}
-             size="67"
-             placeholder="Coller le lien d'une image. ( Facultatif )"
-             style={{ margin: "5px auto 20px", padding:"5px", outline:" none", display: "block" }}
+              <input // le inputNewTweetTitle de la const style-component. Ici, ça remplace le mot "input" dans la balise de début
+                type="text"
+                name="inputNewTweetTitle"
+                id="inputNewTweetTitle"
+                ref={inputNewTweetTitle}
+                size="67"
+                placeholder="Donnez un titre à votre tweet"
+                style={{ margin: "5px auto 20px", padding:"5px", outline:"none", display: "block" }}
               />
-          </div>
-          
-          <div>
-            <label htmlFor="inputNewTweetContent">
-              <span style={{display:"block", textAlign:"center"}}>
-                Contenu du tweet
-              </span>
-            </label>
 
-            <textarea
-              cols="50"
-              rows="6"
-              name="inputNewTweetContent"
-              id="inputNewTweetContent"
-              ref={inputNewTweetContent}
-              placeholder="Écrivez votre nouveau tweet ici."
-              style={{ margin: "5px auto 20px", padding: "5px", outline:" none", display: "block" }}
-            />
-          </div>
+              <div>
+                <label htmlFor="inputNewImageContent">
+                  <span style={{display:"block", textAlign:"center"}}>
+                    Image
+                  </span>
+                </label>
+                
+                <input
+                type="text"
+                name="inputNewImageContent"
+                id="inputNewImageContent"
+                ref={inputNewImageContent}
+                size="67"
+                placeholder="Coller le lien d'une image. ( Facultatif )"
+                style={{ margin: "5px auto 20px", padding:"5px", outline:" none", display: "block" }}
+                  />
+              </div>
+              
+              <div>
+                <label htmlFor="inputNewTweetContent">
+                  <span style={{display:"block", textAlign:"center"}}>
+                    Contenu du tweet
+                  </span>
+                </label>
 
-          <div
-            style={{
-              // On ajoute ce bouton pour envoyer les infos seulement quand on clique
-              display: "flex",
-              justifyContent: "end",
-            }}
-            onClick={createNewTweet} // La fonction s'exécute quand on clique
-          >
-            <button>Nouveau tweet</button>
-          </div>
-        </section>
+                <textarea
+                  cols="50"
+                  rows="6"
+                  name="inputNewTweetContent"
+                  id="inputNewTweetContent"
+                  ref={inputNewTweetContent}
+                  placeholder="Écrivez votre nouveau tweet ici."
+                  style={{ margin: "5px auto 20px", padding: "5px", outline:" none", display: "block" }}
+                />
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className="sendNewTweet" onClick={createNewTweet}>Poster le nouveau tweet</div>
+              </div>
+              
+              <div style={{ display: "flex", justifyContent: "end" }} onClick={() => ouvrirFermerFormulaire(false)}>
+                Fermer
+              </div>
+            </section>
+
+          :  
+
+            // Et si la valeur de FormWriteTweetOpen dans le contexte === false
+            <section className="formulaire" onClick={() => ouvrirFermerFormulaire(true)} style={{textAlign:"center"}}>
+              Ecrire un nouveau tweet
+            </section>
+          }
+        </>
       ) : null}
     </div>
   );
 }
+// La fonction ouvrirFermerFormulaire change la valeur du useState FormWriteTweetOpen dans le contexte.

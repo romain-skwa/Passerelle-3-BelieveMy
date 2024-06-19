@@ -75,7 +75,7 @@ input, textarea{color: black;}
     border-radius: 5px;
   }
   .formulaire input:focus, .formulaire textarea:focus{
-    border: dashed 2px forestgreen;
+    border: solid 3px rgb(89, 112, 210);
   }
 .prochain {
   background-color: burlywood;
@@ -85,15 +85,26 @@ input, textarea{color: black;}
   justify-content: center;
   align-items: center;
 }
+.sendNewTweet{
+  border: 1px white solid;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-block;
+}
+
 /******************** Encadré Bonjour & Connexion/Deconnexion Page d'Accueil *****/
 .SayHelloCoDecoLink {
   border-radius: 10px;
   /*border: red solid 2px;*/
-  padding: 0 0.5rem;
+  padding: 2rem 1.5rem;
+  width: 15vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 15vw;  
+  }
+.withFrame{
+  width: 15vw;  box-shadow: 20px 0px 25px black, inset 4px 4px 10px rgb(125, 122, 122);
 }
 .SayHelloCoDecoLink *{  
   margin: 0.5rem 0;
@@ -182,7 +193,7 @@ input, textarea{color: black;}
 .cadreInscription input,  .cadreInscription div{
   margin: 10px auto;
   padding: 5px;
-  width: 75%;
+  width: 76%;
   box-sizing: border-box;
   /*animation: abracadabra 1s forwards 1.75s;*/
 }
@@ -199,7 +210,7 @@ input, textarea{color: black;}
 
 .partOfcadreInscription{
   opacity: 0;
-  animation: opacity 0.4s forwards ;
+  animation: opacity 0.4s forwards;
 }
 .partOfcadreInscription:nth-of-type(1){  animation-delay: 1.5s;}
 .partOfcadreInscription:nth-of-type(2){  animation-delay: 1.7s;}
@@ -509,7 +520,7 @@ input, textarea{color: black;}
 
 .framelistDialogue {
   position: fixed;
-  top: 10vh;
+  top: 5vh;
   left: 11vw;
 }
 
