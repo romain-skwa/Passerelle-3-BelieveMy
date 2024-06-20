@@ -26,8 +26,8 @@ export default function ListTweet(props) {
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
   const [frameChangeTweetState, setFrameChangeTweetState] = useState( {} ); /* sera changé dans la fonction handleFrameChangeTweet */
-  const [fiveTweetsMore, setFiveTweetsMore] = useState(5);
-console.log(fiveTweetsMore);
+  const [fiveTweetsMore, setFiveTweetsMore] = useState(5); 
+
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -224,15 +224,22 @@ console.log(fiveTweetsMore);
           </div>
         ))}
 
+      {/* Bouton pour afficher plus de de tweets ------------------------------------------------------*/}
       {listeTweet && fiveTweetsMore < listeTweet.length ? (
-      <div className="buttonAddFiveTweets" onClick={addFive}>
-        <span title="Cliquez pour afficher cinq tweets supplémentaires">5 tweets supplémentaires...</span>
-      </div>
+        fiveTweetsMore > listeTweet.length - 5 ?
+          <div className="buttonAddFiveTweets" onClick={addFive}>
+            <span title="Cliquez pour afficher cinq tweets supplémentaires">Quelques tweets supplémentaires...</span>
+          </div>
+          :
+          <div className="buttonAddFiveTweets" onClick={addFive}>
+            <span title="Cliquez pour afficher cinq tweets supplémentaires">5 tweets supplémentaires...</span>
+          </div>
       ) : (
       <div className="buttonAddFiveTweets">
         <span>Tous les tweets sont affichés</span>
       </div>
       )}
+      
     </div>
   );
 }

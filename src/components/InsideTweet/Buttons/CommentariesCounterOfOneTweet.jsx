@@ -43,7 +43,7 @@ export default function CommentariesCounterOfOneTweet(props) {
     getCommentariesOfThisTweet();
   }, [commentaryCount]); 
 
-  console.log('getCommentariesOfThisTweet ', countCommentaries);      
+  //console.log('getCommentariesOfThisTweet ', countCommentaries);      
 
   return (
     <>

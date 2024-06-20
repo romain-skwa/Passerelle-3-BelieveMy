@@ -25,6 +25,9 @@ export default function GetCommentaries(props) {
   const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
   const { IdTweet, listeCommentariesAdded, setCommentaryCount, onChangeLeCompteur }  = props;
+  const [fiveTweetsMore, setFiveTweetsMore] = useState(5); 
+  const [filteredCommentaryCount, setFilteredCommentaryCount] = useState(0);
+
   //----------- Fonction -----------------------------------------------------------------------------------
   const requete = async () => {
     // REQUETE pour obtenir les tweets (Les titres, les contenus, nom de l'auteur)
@@ -109,6 +112,15 @@ export default function GetCommentaries(props) {
   }, [changethisTweetNow]);
 
   /********************************************************************************** */
+  const addFive = () => {
+    setFiveTweetsMore(fiveTweetsMore + 5);
+  }
+
+  useEffect(() => {
+    const filteredCommentaries = listCommentary.filter((tweet) => tweet.commentaryOf && tweet.commentaryOf === IdTweet);  
+    setFilteredCommentaryCount(filteredCommentaries.length);  
+  }, [listCommentary, IdTweet]);
+
 //console.log(`IdTweet juste avant d'afficher`, IdTweet)
   return (
     <div className="affichageListeTweet">
@@ -116,8 +128,10 @@ export default function GetCommentaries(props) {
       {/* la variable listeTweet contient un tableau Ce tableau va être lu en boucle par .map */}
 
       {listCommentary &&
-        listCommentary
+        [...listCommentary]
           .filter((tweet) => tweet.commentaryOf && tweet.commentaryOf === IdTweet)
+          .reverse()
+          .slice(0, fiveTweetsMore)
           .map((tweet) => (
           <div key={tweet.id} className="cadreTweet">
 
@@ -193,6 +207,22 @@ export default function GetCommentaries(props) {
             </div>
           </div>
         ))}
+           
+      {/* Bouton pour afficher plus de de commentaires ------------------------------------------------------*/}
+      {listCommentary && fiveTweetsMore < filteredCommentaryCount  ? (
+        fiveTweetsMore > filteredCommentaryCount  - 5 ?
+          <div className="buttonAddFiveTweets" onClick={addFive}>
+            <span title="Cliquez pour afficher cinq tweets supplémentaires">Quelques commentaires supplémentaires...</span>
+          </div>
+          :
+          <div className="buttonAddFiveTweets" onClick={addFive}>
+            <span title="Cliquez pour afficher cinq tweets supplémentaires">5 commentaires supplémentaires...</span>
+          </div>
+      ) : (
+      <div className="buttonAddFiveTweets">
+        <span>Tous les commentaires sont affichés</span>
+      </div>
+      )}
     </div>
   );
 }

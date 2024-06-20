@@ -23,6 +23,7 @@ export default function AuthorTweets({ authorId }) {
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   const { user } = useContext(AuthContext);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
+  const [fiveTweetsMore, setFiveTweetsMore] = useState(5);
 
 
   //----------- Fonction -----------------------------------------------------------------------------------
@@ -95,13 +96,18 @@ export default function AuthorTweets({ authorId }) {
   // Pour obtenir authorTweets, on filtre listeTweet et on stocke tous les tweets ce l'auteur ciblé
   //console.log(`authorTweets `, authorTweets);
 
+  const addFive = () => {
+    setFiveTweetsMore(fiveTweetsMore + 5);
+  }
+
   useEffect(() => {
     requete();
   }, []);
   return (
     <div className="affichageListeTweet">
       <ul>
-        {authorTweets.map((tweet) => (// pour afficher un par un chaque tweetx
+      {authorTweets &&
+        [...authorTweets].reverse().slice(0, fiveTweetsMore).map((tweet) => (
           <div key={tweet.id} className="cadreTweet">
           {/*********** Avatar **** Titre ******************************************************************/}
 
@@ -202,6 +208,24 @@ export default function AuthorTweets({ authorId }) {
         </div>
         ))}
       </ul>
+
+
+      {/* Bouton pour afficher plus de de tweets ------------------------------------------------------*/}
+      {authorTweets && fiveTweetsMore < authorTweets.length ? (
+        fiveTweetsMore > authorTweets.length - 5 ?
+          <div className="buttonAddFiveTweets" onClick={addFive}>
+            <span title="Cliquez pour afficher cinq tweets supplémentaires">Quelques tweets supplémentaires...</span>
+          </div>
+          :
+          <div className="buttonAddFiveTweets" onClick={addFive}>
+            <span title="Cliquez pour afficher cinq tweets supplémentaires">5 tweets supplémentaires...</span>
+          </div>
+      ) : (
+      <div className="buttonAddFiveTweets">
+        <span>Tous les tweets sont affichés</span>
+      </div>
+      )}  
+
     </div>
   );
 }
