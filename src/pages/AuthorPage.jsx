@@ -19,7 +19,7 @@ export default function AuthorPage() {
   const { authorId } = useParams();
   const [idTarget, setIdTarget] = useState({ mailUser: "" });
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, changeAuthorPage, otherAuthorPage } = useContext(AuthContext);
     //console.log("idTarget ", idTarget);
   useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
@@ -61,13 +61,14 @@ const requete = async () => {
 
   useEffect(() => {
     requete();
-  }, []);
+    changeAuthorPage(false);
+  }, [otherAuthorPage]);
 
   return (
     <div>
       <div className="titleAuthorPage">Tweets de <span style={{textTransform: 'capitalize'}}>{idTarget.pseudonymUser}</span></div>
       <DescriptionOfThisUser idTarget={idTarget} />
-      <AuthorTweets authorId={idTarget.mailUser} /> {/*Ce composant va afficher les tweets */}
+      <AuthorTweets authorId={idTarget.mailUser} /> {/* Ce composant va afficher les tweets */}
     </div>
   );
 }

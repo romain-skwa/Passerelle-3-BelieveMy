@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 // Page où l'utilisateur peut voir tous les auteurs qu'il suit et les tweets de ces auteurs
 export default function ListFollowed() {
   // Variable
-  const { followListOfConnectedUser } = useContext(AuthContext);
+  const { followListOfConnectedUser, changeAuthorPage } = useContext(AuthContext);
   //console.log(`Contenu de followListOfConnectedUser `,followListOfConnectedUser);
   const [loading, setLoading] = useState(false);
   const [listeFollow, setListeFollow] = useState([]);
-  //console.log(`Contenu de listeFollow `, listeFollow);
+  //console.log(`Contenu de listeFollow `, listeFolldow);
 
   //----------- Fonction -----------------------------------------------------------------------------------
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function ListFollowed() {
               key={author.id}
               style={{ textTransform: "capitalize" }}
             >
-              <Link to={`/AuthorPage/${author.id}`} className="LinkListFollowed">
+              <Link to={`/AuthorPage/${author.id}`} onClick={() => changeAuthorPage(true)} className="LinkListFollowed">
                 {author.pseudonymUser}
               </Link>
             </li>

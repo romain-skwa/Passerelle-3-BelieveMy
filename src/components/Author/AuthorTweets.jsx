@@ -103,6 +103,7 @@ export default function AuthorTweets({ authorId }) {
   useEffect(() => {
     requete();
   }, []);
+  
   return (
     <div className="affichageListeTweet">
       <ul>

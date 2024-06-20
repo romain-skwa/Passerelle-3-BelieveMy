@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
   const [frameRightOpen, setFrameRightOpen] = useState(false);
 
   const [FormWriteTweetOpen, setFormWriteTweetOpen] = useState(false);
+  const [otherAuthorPage, setOtherAuthorPage] = useState(false);
   /* ----------------------------------------------------------------------------------------------
 actualiserListFollow est une fonction qui va actualiser followListOfConnectedUser 
 Grace au contexte, cette fonction sera exécutée depuis le composant FollowThisUser
@@ -58,6 +59,10 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
   /*---------------------------------------------------------------------------------------------- */
   const ouvrirFermerFormulaire = (o) => {
     setFormWriteTweetOpen(o)
+  }
+  /*---------------------------------------------------------------------------------------------- */
+  const changeAuthorPage = (t) => {
+    setOtherAuthorPage(t)
   }
   /*---------------------------------------------------------------------------------------------- */
   useEffect(() => {
@@ -171,6 +176,8 @@ Et à chaque fois, la liste des tweets sera réaffichée avec les éventuels cha
     forUpdateMessageReadStatus,
     frameRightOpen,
     FormWriteTweetOpen,
+    otherAuthorPage,
+    changeAuthorPage,
     setMailInterlocutorFrameMiddle,
     setMailInterlocutor,
     actualiserListFollow,
