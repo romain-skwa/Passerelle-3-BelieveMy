@@ -16,36 +16,41 @@ import GetCommentaries from "../components/Commentaries/GetCommentaries";
 import Write from "../components/InsideTweet/Buttons/Write";
 import CommentariesCounterOfOneTweet from "../components/InsideTweet/Buttons/CommentariesCounterOfOneTweet";
 
-// Nous sommes dans le parent de GetCommentaries qui récupère les commentaires d'un tweet et de 
+// Nous sommes dans le parent de GetCommentaries qui récupère les commentaires d'un tweet et de
 // FormCommentary le formulaire pour écrire les commentaires.
 
 export default function OneTweet(props) {
   // State
-  const {IdTweet} = useParams();
+  const { IdTweet } = useParams();
   const navigate = useNavigate();
-  const [listeTweet, setListeTweet] = useState(); 
+  const [listeTweet, setListeTweet] = useState();
   const [loading, setLoading] = useState(false);
   const [deleteNow, setDeleteNow] = useState(false); // sera changé quand on clique sur le bouton supprimer (dans le composant DeleteTweet)
   const [changethisTweetNow, setChangethisTweetNow] = useState(false); // sera changé quand on clique sur le bouton modifier (dans le composant ChangethisTweet)
   // Ce useState pour suivre l'état de chaque tweet (true - pour afficher ChangeThisTweet et false - pour afficher le bouton Modifier)
-  const [frameChangeTweetState, setFrameChangeTweetState] = useState({}); /* sera changé dans la fonction handleFrameChangeTweet */
+  const [frameChangeTweetState, setFrameChangeTweetState] = useState(
+    {}
+  ); /* sera changé dans la fonction handleFrameChangeTweet */
   const { user } = useContext(AuthContext);
-  
+
   const [commentaryCount, setCommentaryCount] = useState(false); // Nombre de commentaires pour ce tweet. Il est calculé dans GetCommentaries
-  
+
   const onChangeLeCompteur = () => {
     setCommentaryCount(true);
-  }
+  };
   const onChangeEncoreLeCompteur = () => {
     setCommentaryCount(false);
-  }
-// ------ Pour actualiser l'affichage des commentaires --------
+  };
+  // ------ Pour actualiser l'affichage des commentaires --------
 
   const [listeCommentariesAdded, setListeCommentariesAdded] = useState([]);
   const updateListeTweet = (newTweet) => {
-    setListeCommentariesAdded((prevListeTweet) => [...prevListeTweet, newTweet]);
+    setListeCommentariesAdded((prevListeTweet) => [
+      ...prevListeTweet,
+      newTweet,
+    ]);
   };
- // console.log('listeCommentariesAdded.... ', listeCommentariesAdded);      
+  // console.log('listeCommentariesAdded.... ', listeCommentariesAdded);
 
   // La liste de commentaires pourra être mise à jour grace à la fonction updateListeTweet qui sera exécutée à partir de FormCommentary,
   // Donc la liste de tweets sera être mise à jour quand sera écrit un nouveau commentaire.
@@ -60,17 +65,22 @@ export default function OneTweet(props) {
 
     // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
     const donneesRecueillies = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet}.json`,      
-        {      
-          method: "GET",      
-          headers: {      
-            "Content-Type": "application/json",      
-          },      
-        }      
-      ).catch(error => {      
-        console.error('Une erreur s\'est produite lors de la récupération des données :', error);      
-        toast.error('Une erreur s\'est produite lors de la récupération des données');      
-      });
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${IdTweet}.json`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).catch((error) => {
+      console.error(
+        "Une erreur s'est produite lors de la récupération des données :",
+        error
+      );
+      toast.error(
+        "Une erreur s'est produite lors de la récupération des données"
+      );
+    });
 
     if (!donneesRecueillies.ok) {
       toast.error("Une erreur est survenue dans OneTweet");
@@ -79,7 +89,7 @@ export default function OneTweet(props) {
 
     const donnees = await donneesRecueillies.json();
 
-    const tweet = {...donnees, id: IdTweet };
+    const tweet = { ...donnees, id: IdTweet };
     setListeTweet([tweet]); // Mise à jour du state de listeTweet
     setLoading(false);
   };
@@ -94,132 +104,142 @@ export default function OneTweet(props) {
   /*---------- USEEFFECT -------------------------------------------------------------------------------*/
   // Le useEffect en utilisé pour que la fonction requete ne soit exécutée que lorsqu'on le décide.
 
-  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
+  useEffect(() => {
+    // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
-      navigate('/');
+      navigate("/");
     }
   }, [user]);
 
   useEffect(() => {
     requete();
-  }, []); 
+  }, []);
 
   /************************************************************************************************/
-  
-  return(
+
+  return (
     <>
       <div className="affichageListeTweet">
-      {listeTweet &&
-        listeTweet.map((tweet) => (
-          <div key={tweet.id} className="cadreTweet">
-            {/*********** Avatar **** Titre ******************************************************************/}
+        {listeTweet &&
+          listeTweet.map((tweet) => (
+            <div key={tweet.id} className="cadreTweet">
+              {/*********** Avatar **** Titre ******************************************************************/}
 
-            <section style={{ display: "flex", paddingBottom: "1rem" }}>
-              <Avatar tweet={tweet} />
-              <div
+              <section style={{ display: "flex", paddingBottom: "1rem" }}>
+                <Avatar tweet={tweet} />
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {tweet.title /* TITRE */}
+                </div>
+              </section>
+
+              {/**** Image **********************************************************************************/}
+
+              <section
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  fontWeight: "bold",
+                  justifyContent: "center",
+                  paddingBottom: "1rem",
                 }}
               >
-                {tweet.title /* TITRE */}
-              </div>
-            </section>
-
-            {/**** Image **********************************************************************************/}
-
-            <section
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                paddingBottom: "1rem",
-              }}
-            >
-              {tweet.image && tweet.image !== "" ? (
-                <img
-                  style={{ maxWidth: "100%" }}
-                  src={tweet.image}
-                  alt="Image du tweet"
-                />
-              ) : null}
-            </section>
-
-            {/******** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
-
-            <div className="cadreTweetContent">
-              {tweet.content /* CONTENU */}
-            </div>
-
-            <div>
-
-              {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
-                Sinon c'est le bouton Modifier qui sera affiché */}
-              {frameChangeTweetState[tweet.id] ? (
-                <>
-                  <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
-                    tweet={tweet}
-                    changethisTweetNow={changethisTweetNow}
-                    setChangethisTweetNow={setChangethisTweetNow}
+                {tweet.image && tweet.image !== "" ? (
+                  <img
+                    style={{ maxWidth: "100%" }}
+                    src={tweet.image}
+                    alt="Image du tweet"
                   />
-                  <button onClick={() => handleFrameChangeTweet(tweet.id)}>
-                    Retour
-                  </button>
-                </>
-              ) : (
-                <CheckUserAuthor // BOUTON pour faire apparaitre le textarea et CHANGER le TWEET (seulement le bouton)
-                  tweet={tweet}
-                  handleFrameChangeTweet={handleFrameChangeTweet}
-                />
-              )}
+                ) : null}
+              </section>
 
-              {/* Cœur **** Commentaire **** Écrire ****** S'abonner ***** */}
-              <div className="lineOfComponents">
+              {/******** Contenu **** Modifier *** Cœur *** Like *** Date ****************************************/}
 
-                <section className="likeComments">
-                  <div className="like" /* CONTENANT */>
-                    <Liked tweet={tweet} requete={requete} /* Cœur */ />
-                    <span>{tweet.likedCounter /* COMPTEUR */}</span>
-                  </div>
-
-                  <div className="commentaryIconCounter">
-                    <img className="commentaire" src="../../../icone/commentaire.png" alt="Commentaire" />
-                    <CommentariesCounterOfOneTweet IdTweet={IdTweet}  commentaryCount={commentaryCount}  onChangeEncoreLeCompteur={onChangeEncoreLeCompteur} /> 
-                  </div>
-                </section>
-
-                <Write  tweet={tweet} />
-                <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
-
+              <div className="cadreTweetContent">
+                {tweet.content /* CONTENU */}
               </div>
 
               <div>
-                Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
-                {tweet.datePublication
-                  ? ", le " + tweet.datePublication
-                  : " Nous n'avons pas de date concernant ce tweet."}
-                {tweet.hourPublication ? " à " + tweet.hourPublication : null}.
-                {tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
-              </div>
+                {/* Si le frameChangeTweetState de CE tweet === true, on affiche ChangeThisTweet et le bouton Retour.
+                Sinon c'est le bouton Modifier qui sera affiché */}
+                {frameChangeTweetState[tweet.id] ? (
+                  <>
+                    <ChangeThisTweet // TEXTAREA dans lequel on écrit les modifications du tweet + BOUTON d'envoi
+                      tweet={tweet}
+                      changethisTweetNow={changethisTweetNow}
+                      setChangethisTweetNow={setChangethisTweetNow}
+                    />
+                    <button onClick={() => handleFrameChangeTweet(tweet.id)}>
+                      Retour
+                    </button>
+                  </>
+                ) : (
+                  <CheckUserAuthor // BOUTON pour faire apparaitre le textarea et CHANGER le TWEET (seulement le bouton)
+                    tweet={tweet}
+                    handleFrameChangeTweet={handleFrameChangeTweet}
+                  />
+                )}
 
-              {/* J'envoie les props, les propriétés dans ce composant.
+                {/* Cœur **** Commentaire **** Écrire ****** S'abonner ***** */}
+                <div className="lineOfComponents">
+                  <section className="likeComments">
+                    <div className="like" /* CONTENANT */>
+                      <Liked tweet={tweet} requete={requete} /* Cœur */ />
+                      <span>{tweet.likedCounter /* COMPTEUR */}</span>
+                    </div>
+
+                    <div className="commentaryIconCounter">
+                      <img
+                        className="commentaire"
+                        src="../../../icone/commentaire.png"
+                        alt="Commentaire"
+                      />
+                      <CommentariesCounterOfOneTweet
+                        IdTweet={IdTweet}
+                        commentaryCount={commentaryCount}
+                        onChangeEncoreLeCompteur={onChangeEncoreLeCompteur}
+                      />
+                    </div>
+                  </section>
+
+                  <Write tweet={tweet} />
+                  <FollowThisUser tweet={tweet} /* BOUTON S'ABONNER */ />
+                </div>
+
+                <div>
+                  Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
+                  {tweet.datePublication
+                    ? ", le " + tweet.datePublication
+                    : " Nous n'avons pas de date concernant ce tweet."}
+                  {tweet.hourPublication ? " à " + tweet.hourPublication : null}
+                  .{tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
+                </div>
+
+                {/* J'envoie les props, les propriétés dans ce composant.
               Ces props permettent d'utiliser les données à l'intérieur de ce composant DeleteTweet qui fait office 
               de bouton "supprimer" */}
-              <DeleteTweet
-                tweet={tweet}
-                setDeleteNow={setDeleteNow}
-              ></DeleteTweet>
+                <DeleteTweet
+                  tweet={tweet}
+                  setDeleteNow={setDeleteNow}
+                ></DeleteTweet>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
-        <section>
-        <GetCommentaries IdTweet={IdTweet} onChangeLeCompteur={onChangeLeCompteur} listeCommentariesAdded={listeCommentariesAdded}  />
-        </section>
+      <section>
+        <GetCommentaries
+          IdTweet={IdTweet}
+          onChangeLeCompteur={onChangeLeCompteur}
+          listeCommentariesAdded={listeCommentariesAdded}
+        />
+      </section>
 
-        <section>
-          <FormCommentary IdTweet={IdTweet} updateListeTweet={updateListeTweet} />
-        </section>
+      <section>
+        <FormCommentary IdTweet={IdTweet} updateListeTweet={updateListeTweet} />
+      </section>
     </>
   );
 }

@@ -6,7 +6,7 @@ import { AuthContext } from "../../store/AuthProvider";
 // Ce composant est dans la page MyProfile
 
 const API_URL =
-  "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app";
+  "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app";
 const DEFAULT_AVATAR_URL =
   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fst3.depositphotos.com%2F4111759%2F13425%2Fv%2F450%2Fdepositphotos_134255634-stock-illustration-avatar-icon-male-profile-gray.jpg&f=1&nofb=1&ipt=636e3fbcf805042aebb4a071ed67afbf5d79ecb83625d1111894c7832208d33d&ipo=images";
 

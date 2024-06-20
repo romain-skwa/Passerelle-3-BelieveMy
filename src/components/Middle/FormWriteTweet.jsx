@@ -28,24 +28,25 @@ const formattedTime = formatTime(now);
 
 /****************************** FORMULAIRE ********************************************************** */
 export default function FormWriteTweet(props) {
-  const { user, ouvrirFermerFormulaire, FormWriteTweetOpen } = useContext(AuthContext);
+  const { user, ouvrirFermerFormulaire, FormWriteTweetOpen } =
+    useContext(AuthContext);
 
   // Variables
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
   const inputNewImageContent = useRef();
-  
+
   // Création nouveau tweet
   const createNewTweet = async () => {
     if (inputNewTweetTitle.current.value.trim() === "") {
-      alert("Veuillez entrer un titre pour votre tweet.");    
-      return;    
+      alert("Veuillez entrer un titre pour votre tweet.");
+      return;
     }
     if (inputNewTweetContent.current.value.trim() === "") {
-      alert("Veuillez entrer un contenu pour votre tweet.");  
-      return;  
+      alert("Veuillez entrer un contenu pour votre tweet.");
+      return;
     }
-    
+
     const newTweet = {
       title: inputNewTweetTitle.current.value,
       content: inputNewTweetContent.current.value,
@@ -58,7 +59,7 @@ export default function FormWriteTweet(props) {
 
     // Ajouter dans firebase
     const response = await fetch(
-      "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json",
+      "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList.json",
       {
         method: "POST",
         headers: {
@@ -74,7 +75,7 @@ export default function FormWriteTweet(props) {
     }
 
     const { name: idRandom } = await response.json();
-   // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
+    // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
 
     // Appeler la fonction updateListeTweet pour mettre à jour l'état local listeTweet dans le composant parent Home.jsx
     // On exécute, dans l'élément Home, la fonction updateListeTweet avec newTweet en tant que paramètre
@@ -88,19 +89,19 @@ export default function FormWriteTweet(props) {
     inputNewImageContent.current.value = "";
   };
 
-
-
   return (
     <div>
       {user ? ( // Si un utilisateur est connecté, on affiche la section ci-dessous
         <>
-          {FormWriteTweetOpen ? // Si la valeur de FormWriteTweetOpen dans le contexte === true
+          {FormWriteTweetOpen ? ( // Si la valeur de FormWriteTweetOpen dans le contexte === true
             <section className="formulaire">
               {/* pourquoi ça ne marche pas quand j'écris form ? */}
-              <h3 style={{ textAlign: "center", margin: "5px auto 20px", }}>Ecrire un nouveau tweet</h3>
+              <h3 style={{ textAlign: "center", margin: "5px auto 20px" }}>
+                Ecrire un nouveau tweet
+              </h3>
 
-              <label htmlFor="inputNewTweetTitle" style={{color:"yellow"}}>
-                <span style={{ display:"block", textAlign:"center"}}>
+              <label htmlFor="inputNewTweetTitle" style={{ color: "yellow" }}>
+                <span style={{ display: "block", textAlign: "center" }}>
                   Titre
                 </span>
               </label>
@@ -112,30 +113,40 @@ export default function FormWriteTweet(props) {
                 ref={inputNewTweetTitle}
                 size="67"
                 placeholder="Donnez un titre à votre tweet"
-                style={{ margin: "5px auto 20px", padding:"5px", outline:"none", display: "block" }}
+                style={{
+                  margin: "5px auto 20px",
+                  padding: "5px",
+                  outline: "none",
+                  display: "block",
+                }}
               />
 
               <div>
                 <label htmlFor="inputNewImageContent">
-                  <span style={{display:"block", textAlign:"center"}}>
+                  <span style={{ display: "block", textAlign: "center" }}>
                     Image
                   </span>
                 </label>
-                
+
                 <input
-                type="text"
-                name="inputNewImageContent"
-                id="inputNewImageContent"
-                ref={inputNewImageContent}
-                size="67"
-                placeholder="Coller le lien d'une image. ( Facultatif )"
-                style={{ margin: "5px auto 20px", padding:"5px", outline:" none", display: "block" }}
-                  />
+                  type="text"
+                  name="inputNewImageContent"
+                  id="inputNewImageContent"
+                  ref={inputNewImageContent}
+                  size="67"
+                  placeholder="Coller le lien d'une image. ( Facultatif )"
+                  style={{
+                    margin: "5px auto 20px",
+                    padding: "5px",
+                    outline: " none",
+                    display: "block",
+                  }}
+                />
               </div>
-              
+
               <div>
                 <label htmlFor="inputNewTweetContent">
-                  <span style={{display:"block", textAlign:"center"}}>
+                  <span style={{ display: "block", textAlign: "center" }}>
                     Contenu du tweet
                   </span>
                 </label>
@@ -147,26 +158,38 @@ export default function FormWriteTweet(props) {
                   id="inputNewTweetContent"
                   ref={inputNewTweetContent}
                   placeholder="Écrivez votre nouveau tweet ici."
-                  style={{ margin: "5px auto 20px", padding: "5px", outline:" none", display: "block" }}
+                  style={{
+                    margin: "5px auto 20px",
+                    padding: "5px",
+                    outline: " none",
+                    display: "block",
+                  }}
                 />
               </div>
 
               <div style={{ display: "flex", justifyContent: "center" }}>
-                <div className="sendNewTweet" onClick={createNewTweet}>Poster le nouveau tweet</div>
+                <div className="sendNewTweet" onClick={createNewTweet}>
+                  Poster le nouveau tweet
+                </div>
               </div>
-              
-              <div style={{ display: "flex", justifyContent: "end" }} onClick={() => ouvrirFermerFormulaire(false)}>
+
+              <div
+                style={{ display: "flex", justifyContent: "end" }}
+                onClick={() => ouvrirFermerFormulaire(false)}
+              >
                 Fermer
               </div>
             </section>
-
-          :  
-
+          ) : (
             // Et si la valeur de FormWriteTweetOpen dans le contexte === false
-            <section className="formulaire" onClick={() => ouvrirFermerFormulaire(true)} style={{textAlign:"center"}}>
+            <section
+              className="formulaire"
+              onClick={() => ouvrirFermerFormulaire(true)}
+              style={{ textAlign: "center" }}
+            >
               Ecrire un nouveau tweet
             </section>
-          }
+          )}
         </>
       ) : null}
     </div>

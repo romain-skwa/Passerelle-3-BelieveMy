@@ -35,21 +35,18 @@ export default function FormWriteCommentary(props) {
   const inputNewTweetTitle = useRef();
   const inputNewTweetContent = useRef();
   const inputNewImageContent = useRef();
-  
-
 
   // Création nouveau tweet
   const createNewCommentary = async () => {
-
     if (inputNewTweetTitle.current.value.trim() === "") {
-      alert("Veuillez entrer un titre pour votre tweet.");    
-      return;    
+      alert("Veuillez entrer un titre pour votre tweet.");
+      return;
     }
     if (inputNewTweetContent.current.value.trim() === "") {
-      alert("Veuillez entrer un contenu pour votre tweet.");  
-      return;  
+      alert("Veuillez entrer un contenu pour votre tweet.");
+      return;
     }
-    
+
     const commentary = {
       commentaryOf: IdTweet,
       title: inputNewTweetTitle.current.value,
@@ -63,7 +60,7 @@ export default function FormWriteCommentary(props) {
 
     // Ajouter dans firebase
     const response = await fetch(
-      "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json",
+      "https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries.json",
       {
         method: "POST",
         headers: {
@@ -81,12 +78,12 @@ export default function FormWriteCommentary(props) {
 
     // const { name: idRandom } = await response.json();
     // console.log("Le data.name généré aléatoirement dans Firebase par FormWriteTweet " + idRandom);
-      
+
     // Réinitialiser la valeur de inputContentMessage pour que le textarea se vide juste après l'envoi du message
     inputNewTweetContent.current.value = "";
     inputNewTweetTitle.current.value = "";
     inputNewImageContent.current.value = "";
-   };
+  };
 
   return (
     <div>
@@ -94,7 +91,6 @@ export default function FormWriteCommentary(props) {
         <section className="formulaire">
           {/* pourquoi ça ne marche pas quand j'écris form ? */}
           <h3 style={{ textAlign: "center" }}>Commentez ce tweet</h3>
-          
 
           <input // le inputNewTweetTitle de la const style-component. Ici, ça remplace le mot "input" dans la balise de début
             type="text"
@@ -103,7 +99,7 @@ export default function FormWriteCommentary(props) {
             ref={inputNewTweetTitle}
             size="72"
             placeholder="Donnez un titre à votre commentaire"
-            style={{ margin: "15px auto", padding:"5px",display: "block" }}
+            style={{ margin: "15px auto", padding: "5px", display: "block" }}
           />
 
           <div>
@@ -120,14 +116,14 @@ export default function FormWriteCommentary(props) {
 
           <div>
             <input
-             type="text"
-             name="inputNewImageContent"
-             id="inputNewImageContent"
-             ref={inputNewImageContent}
-             size="72"
-             placeholder="Coller le lien d'une image."
-             style={{ margin: "10px auto", padding: "5px", display: "block" }}
-              />
+              type="text"
+              name="inputNewImageContent"
+              id="inputNewImageContent"
+              ref={inputNewImageContent}
+              size="72"
+              placeholder="Coller le lien d'une image."
+              style={{ margin: "10px auto", padding: "5px", display: "block" }}
+            />
           </div>
 
           <div

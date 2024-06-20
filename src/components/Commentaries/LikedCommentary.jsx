@@ -44,10 +44,10 @@ export default function Liked(props) {
         followList: followListOfConnectedUser,
         likedList: [...preventLikedList, tweet.id],
       };
-    //  console.log("Données à envoyer à Firebase depuis le composant Liked : ", newDataLikedList);
+      //  console.log("Données à envoyer à Firebase depuis le composant Liked : ", newDataLikedList);
 
       const change = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
           method: "PUT", // La méthode PUT pour POSER de nouvelles données
           headers: {
@@ -67,11 +67,11 @@ export default function Liked(props) {
     /* -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- */
     // PARTIE 2
 
-   // console.log("Fonction likeThisCommentary appelée pour le commentaire ", tweet.id);
+    // console.log("Fonction likeThisCommentary appelée pour le commentaire ", tweet.id);
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`
     );
     const currentLikedCounter = await response.json();
 
@@ -80,7 +80,7 @@ export default function Liked(props) {
 
     // Envoi de la requête PUT pour remplacer la valeur dans Firebase
     const putResponse = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
       {
         method: "PUT",
         headers: {
@@ -94,26 +94,35 @@ export default function Liked(props) {
       const errorBody = await putResponse.json();
       console.error("Error:", errorBody.error);
     } else {
-     // console.log("J'incrémente LikedCounter dans le tweet : " + tweet.title);
+      // console.log("J'incrémente LikedCounter dans le tweet : " + tweet.title);
     }
-      // Appelle la fonction requete() pour rafraîchir la liste des tweets
+    // Appelle la fonction requete() pour rafraîchir la liste des tweets
 
-      props.requete();
-        //  console.log("ça devrait mettre à jour le nombre de cœur.");
-
+    props.requete();
+    //  console.log("ça devrait mettre à jour le nombre de cœur.");
   };
   return (
     <>
       {user ? (
         <>
           {preventLikedList.includes(tweet.id) ? (
-            <GetOffLikeCommentary tweet={tweet} likeThisTweet={likeThisTweet} requete={requete} />
+            <GetOffLikeCommentary
+              tweet={tweet}
+              likeThisTweet={likeThisTweet}
+              requete={requete}
+            />
           ) : (
-        <img onClick={likeThisTweet} className="empty_like" src="../../../icone/empty_red.png" />
+            <img
+              onClick={likeThisTweet}
+              className="empty_like"
+              src="../../../icone/empty_red.png"
+            />
           )}
         </>
       ) : (
-        <Link to="/connexion"><img className="empty_like" src="../../../icone/empty_red.png" /></Link>
+        <Link to="/connexion">
+          <img className="empty_like" src="../../../icone/empty_red.png" />
+        </Link>
       )}
     </>
   );

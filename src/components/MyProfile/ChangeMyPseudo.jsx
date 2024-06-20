@@ -5,11 +5,8 @@ import { AuthContext } from "../../store/AuthProvider";
 export default function AboutThisUser() {
   // Variable
   const { user } = useContext(AuthContext);
-  const {
-    idOfConnectedUser,
-    pseudonymConnectedUser,
-    actualiserPseudo,
-  } = useContext(AuthContext);
+  const { idOfConnectedUser, pseudonymConnectedUser, actualiserPseudo } =
+    useContext(AuthContext);
 
   const [newPseudoUser, setNewPseudoUser] = useState(""); // Par défaut le champ contiendra le nom actuel. Voir le useEffect.
   const saveContent = pseudonymConnectedUser; // Pour sauvegarder une copie du pseudo de l'utilisateur.
@@ -60,7 +57,7 @@ export default function AboutThisUser() {
     };
 
     const change = await fetch(
-      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
       {
         method: "PATCH", // La méthode PUT pour POSER de nouvelles données
         headers: {
@@ -75,25 +72,26 @@ export default function AboutThisUser() {
       setNewPseudoUser(saveContent); // on rétablit les valeurs d'origine grace à la sauvegarde faite avant les modifications
       toast.error("Erreur !"); // Toast affiche un message d'erreur.
       return;
-    }/*
+    } /*
     console.log(
       "Cela devrait mettre à jour le pseudo de l'utilisateur connecté en remplaçant " +
         pseudonymConnectedUser +
         " par " +
         newPseudoUser
       );*/
-      
-     actualiserPseudo(newPseudoUser); // pour que l'affichage soit mis à jour automatiquement, on se sert du contexte
+
+    actualiserPseudo(newPseudoUser); // pour que l'affichage soit mis à jour automatiquement, on se sert du contexte
   };
 
-  const handleInputChange = (event) => {// pour mettre à jour la donnée newPseudoUser à chaque changement
+  const handleInputChange = (event) => {
+    // pour mettre à jour la donnée newPseudoUser à chaque changement
     setNewPseudoUser(event.target.value);
   };
   //console.log(`Le nouveau Pseudo qui vient d'être entré `, newPseudoUser);
   return (
     <section className="ChangePseudo">
       <div>
-        Votre pseudonyme actuel est : {" "}
+        Votre pseudonyme actuel est :{" "}
         {
           user &&
             pseudonymConnectedUser /* Si un utilisateur est connecté, alors le pseudo importé du contexte */
@@ -105,7 +103,9 @@ export default function AboutThisUser() {
         onChange={handleInputChange}
         style={{ width: "250px" }}
       />
-      <div style={{cursor:"pointer"}} onClick={updatePseudo}>Mettre à jour le pseudo</div>
+      <div style={{ cursor: "pointer" }} onClick={updatePseudo}>
+        Mettre à jour le pseudo
+      </div>
     </section>
   );
 }

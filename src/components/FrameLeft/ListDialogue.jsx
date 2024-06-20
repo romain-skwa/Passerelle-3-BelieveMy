@@ -29,7 +29,7 @@ export default function ListDialogue({ showOnlyUnread = false }) {
   const allTheConversations = async () => {
     try {
       const getAllConversations = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
           headers: {

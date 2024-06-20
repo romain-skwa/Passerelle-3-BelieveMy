@@ -487,6 +487,11 @@ input, textarea{color: black;}
   position: relative;
   margin-top: 1rem;
 }
+.conversationAlert div{
+  margin-bottom: 0.3rem;
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
 .mailRed {
   position: absolute;
   right: 50px;
@@ -506,7 +511,7 @@ input, textarea{color: black;}
 /*********************************************************************************************/
 
 .framelistDialogue {
-  position: fixed;
+  position: absolute;
   top: 5vh;
   left: 11vw;
 }
@@ -528,37 +533,41 @@ input, textarea{color: black;}
     inset 3px 3px 5px rgb(125, 122, 122);
   font-size: 0.9rem;
   color: orange;
+  width: 15vw;
 }
 
 .nameInterlocutor {
   display: block;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
+  padding: 0.3rem 1rem;
+  margin: 0.1rem 0;
   transition: 0.2s;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
+
 .GetAuthorTweet {
   text-transform: uppercase;
 }
 /******************** Rectangle avec liste des membres suivis **********************************************/
 .divAuthorFollowed {
-  margin: 1rem 0;
-  padding: 0.5rem;
+  margin: 0rem 0;
+  padding: 0.2rem;
   list-style-type: none;
   width: 200px;
+  font-size: 0.9rem;
 }
 
 .LinkListFollowed {
   text-transform: uppercase;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: cadetblue;
+  margin-left: 0.5rem;
 }
 
 /******************************* Mon PROFIL ************************************************/
 .MyProfile {
   width: 20vw; height: 70vh;
-  margin: 0 auto ;
+  margin: 0 auto;
 }
 .ChangePseudo{
   display: flex; flex-direction: column; align-items:  center;

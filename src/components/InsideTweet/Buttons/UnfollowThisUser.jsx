@@ -36,7 +36,7 @@ export default function UnfollowThisUser(props) {
 
       // Mettre à jour la liste de suivi dans Firebase
       const change = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
           method: "PUT",
           headers: {

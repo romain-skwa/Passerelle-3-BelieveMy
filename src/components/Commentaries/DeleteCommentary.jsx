@@ -14,13 +14,14 @@ export default function DeleteTweet({ tweet, deleteNow, setDeleteNow }) {
 
   const onDeleteThisTweet = async () => {
     // Delete
-    if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) { // Vérification
+    if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) {
+      // Vérification
       setLoading(true);
 
       // Supprimer cette donnée de la base de données Firebase
       const response = await fetch(
-// Les données tweet sont transmises par la props tweet plus haut. On utilise l'id inclus dans tweet pour identifer le tweet qui sera supprimé
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
+        // Les données tweet sont transmises par la props tweet plus haut. On utilise l'id inclus dans tweet pour identifer le tweet qui sera supprimé
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}.json`,
         {
           method: "DELETE", // Méthode pour supprimer le tweet sélectionné juste au dessus
           headers: {
@@ -45,12 +46,13 @@ export default function DeleteTweet({ tweet, deleteNow, setDeleteNow }) {
     }
   };
 
-  return(
+  return (
     <>
-          {user && user.email === tweet.author ? (
-    <button onClick={onDeleteThisTweet}>Supprimer le tweet : {tweet.id}</button>
-           ) : ( null)
-           }
+      {user && user.email === tweet.author ? (
+        <button onClick={onDeleteThisTweet}>
+          Supprimer le tweet : {tweet.id}
+        </button>
+      ) : null}
     </>
-  ) 
+  );
 }

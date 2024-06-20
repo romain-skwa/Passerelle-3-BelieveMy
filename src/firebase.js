@@ -10,21 +10,12 @@ import { getStorage } from "firebase/storage";// pour la base de données
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-
-  apiKey: "AIzaSyBeY4x5WY06XTFk2e-SpsXkfQBT4E4LZzg",
-
-  authDomain: "secours-belivemy-projet-3.firebaseapp.com",
-
-  databaseURL: "https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app",
-
-  projectId: "secours-belivemy-projet-3",
-
-  storageBucket: "secours-belivemy-projet-3.appspot.com",
-
-  messagingSenderId: "792699917009",
-
-  appId: "1:792699917009:web:391daf1697493f63e3ebf0"
-
+  apiKey: "AIzaSyCacqdQws-M1-Ki37tpvjr4soqb1B9x3h8",
+  authDomain: "projet-passerelle-3-believemy.firebaseapp.com",
+  projectId: "projet-passerelle-3-believemy",
+  storageBucket: "projet-passerelle-3-believemy.appspot.com",
+  messagingSenderId: "15396772773",
+  appId: "1:15396772773:web:a3039a92af85211ce2e64c"
 };
 
 

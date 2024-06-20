@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import AuthorTweets from "../components/Author/AuthorTweets";
-import {useEffect, useState, useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../store/AuthProvider";
 import DescriptionOfThisUser from "../components/DescriptionOfThisUser";
@@ -20,21 +20,22 @@ export default function AuthorPage() {
   const [idTarget, setIdTarget] = useState({ mailUser: "" });
   const navigate = useNavigate();
   const { user, changeAuthorPage, otherAuthorPage } = useContext(AuthContext);
-    //console.log("idTarget ", idTarget);
-  useEffect(() => { // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
+  //console.log("idTarget ", idTarget);
+  useEffect(() => {
+    // Sécurité : au cas où un utilisateur cherche à accéder directement à cette page sans être connecté
     if (!user) {
-      navigate('/');
+      navigate("/");
     }
   }, [user]);
-  
+
   //console.log("Ce qu'on récupère dans useParams " + authorId)
 
-/***************************************************************************************************** */
+  /***************************************************************************************************** */
 
-const requete = async () => {
-  // Dans la variable const userdata, on va stocker le contenu récupéré sur Firebase
-  const getUserlist = await fetch(
-      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${authorId}.json`,
+  const requete = async () => {
+    // Dans la variable const userdata, on va stocker le contenu récupéré sur Firebase
+    const getUserlist = await fetch(
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${authorId}.json`,
       // Avec cette requête, je récupère les informations stockées dans la partie userList concernant l'auteur que j'ai ciblé.
       {
         method: "GET",
@@ -45,19 +46,21 @@ const requete = async () => {
     );
 
     if (!getUserlist.ok) {
-      toast.error("Une erreur est survenue pendant la récupération des données");
+      toast.error(
+        "Une erreur est survenue pendant la récupération des données"
+      );
       return;
     }
 
-    const userData  = await getUserlist.json();
+    const userData = await getUserlist.json();
     // convertit la réponse HTTP en un objet JavaScript en analysant le corps de la réponse en JSON
-    setIdTarget(
-      { mailUser: userData.mailUser, 
-        pseudonymUser: userData.pseudonymUser, 
-        description: userData.description, 
-        avatar: userData.avatar,
-      });
-  }
+    setIdTarget({
+      mailUser: userData.mailUser,
+      pseudonymUser: userData.pseudonymUser,
+      description: userData.description,
+      avatar: userData.avatar,
+    });
+  };
 
   useEffect(() => {
     requete();
@@ -66,9 +69,15 @@ const requete = async () => {
 
   return (
     <div>
-      <div className="titleAuthorPage">Tweets de <span style={{textTransform: 'capitalize'}}>{idTarget.pseudonymUser}</span></div>
+      <div className="titleAuthorPage">
+        Tweets de{" "}
+        <span style={{ textTransform: "capitalize" }}>
+          {idTarget.pseudonymUser}
+        </span>
+      </div>
       <DescriptionOfThisUser idTarget={idTarget} />
-      <AuthorTweets authorId={idTarget.mailUser} /> {/* Ce composant va afficher les tweets */}
+      <AuthorTweets authorId={idTarget.mailUser} />{" "}
+      {/* Ce composant va afficher les tweets */}
     </div>
   );
 }

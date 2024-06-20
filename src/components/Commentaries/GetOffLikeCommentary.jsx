@@ -39,7 +39,7 @@ export default function Liked(props) {
   }, [likedListOfConnectedUser]);
 
   // PARTIE 1
-  const unlikeThisTweet  = async () => {
+  const unlikeThisTweet = async () => {
     if (preventLikedList.includes(tweet.id)) {
       // Vérifier que le tweet en question n'est pas déjà présent dans preventLikedList
       const GetOffLikeList = {
@@ -47,12 +47,12 @@ export default function Liked(props) {
         pseudonymUser: pseudonymConnectedUser,
         followList: followListOfConnectedUser,
         likedList: preventLikedList.filter((id) => id !== tweet.id),
-        };
+      };
 
-     // console.log("Données à envoyer à Firebase  depuis le composant GetOffLike : ", GetOffLikeList);
+      // console.log("Données à envoyer à Firebase  depuis le composant GetOffLike : ", GetOffLikeList);
 
       const change = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
           method: "PUT", // La méthode PUT pour POSER de nouvelles données
           headers: {
@@ -72,11 +72,11 @@ export default function Liked(props) {
     /* -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- */
     // PARTIE 2
 
-   // console.log("Fonction likeThisTweet appelée");
+    // console.log("Fonction likeThisTweet appelée");
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`
     );
     const currentLikedCounter = await response.json();
 
@@ -85,7 +85,7 @@ export default function Liked(props) {
 
     // Envoi de la requête PUT pour remplacer la valeur dans Firebase
     const putResponse = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/commentaries/${tweet.id}/likedCounter.json`,
       {
         method: "PUT",
         headers: {
@@ -99,10 +99,9 @@ export default function Liked(props) {
       const errorBody = await putResponse.json();
       console.error("Error:", errorBody.error);
     } else {
-     // console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
+      // console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
     }
     props.requete();
-
   };
   return (
     <>
@@ -111,11 +110,17 @@ export default function Liked(props) {
           {preventLikedList.includes(tweet.id) ? (
             <div onClick={unlikeThisTweet} className="red_like"></div>
           ) : (
-            <img onClick={likeThisTweet} className="empty_like" src="../../../icone/empty_red.png" />
+            <img
+              onClick={likeThisTweet}
+              className="empty_like"
+              src="../../../icone/empty_red.png"
+            />
           )}
         </>
       ) : (
-        <Link to="/connexion"><img className="empty_like" src="../../../icone/empty_red.png" /></Link>
+        <Link to="/connexion">
+          <img className="empty_like" src="../../../icone/empty_red.png" />
+        </Link>
       )}
     </>
   );

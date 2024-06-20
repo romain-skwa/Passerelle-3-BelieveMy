@@ -41,7 +41,7 @@ export default function FollowThisUser(props) {
       // console.log("Données à envoyer à Firebase :", newDataFollowList);
 
       const change = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
           method: "PATCH", // La méthode PUT pour POSER de nouvelles données
           headers: {

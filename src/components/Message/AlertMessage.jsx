@@ -15,7 +15,7 @@ const AlertMessage = () => {
     setMailInterlocutorFrameMiddle, // le mail du destinataire, donnée utilisée dans WriteOneMessage, l'encadré dialogue au MILIEU de l'écran
     forUpdateMessageReadStatus, // pour lancer la fonction qui met à jour le status du message "dejà lu" à partir du composant ListDialogue
     setForUpdateMessageReadStatus,
-   } = useContext(AuthContext);
+  } = useContext(AuthContext);
 
   useEffect(() => {
     if (user) {
@@ -28,7 +28,7 @@ const AlertMessage = () => {
   const allTheConversations = async () => {
     try {
       const getAllConversations = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation.json`,
         {
           method: "GET",
           headers: {
@@ -89,7 +89,7 @@ const AlertMessage = () => {
 
       const promises = updatedMessages.map(async ([id, conversation]) => {
         const response = await fetch(
-          `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation/${conversation.id}.json`,
+          `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation/${conversation.id}.json`,
           {
             method: "PATCH",
             headers: {
@@ -114,16 +114,18 @@ const AlertMessage = () => {
       allTheConversations(); // Actualiser la liste des conversations après la mise à jour de la lecture
     } catch (error) {
       console.error("Erreur dans updateMessageReadStatus : ", error);
-      toast.error("Une erreur est survenue lors de la mise à jour de la conversation.");
+      toast.error(
+        "Une erreur est survenue lors de la mise à jour de la conversation."
+      );
     }
   };
 
   const handlemailInterlocutor = (author) => {
-      setMailInterlocutorFrameMiddle(author); // Encadré du milieu
-      setMailInterlocutor(author); // Encadré de droite   
+    setMailInterlocutorFrameMiddle(author); // Encadré du milieu
+    setMailInterlocutor(author); // Encadré de droite
     updateMessageReadStatus(author);
     //console.log("On lance via handlemailInterlocutor la fonction updateMessageReadStatus  ");
-/* setMailInterlocutor pour définir dans le contexte l'adresse e-mail de l'auteur dont on veut lire les messages
+    /* setMailInterlocutor pour définir dans le contexte l'adresse e-mail de l'auteur dont on veut lire les messages
  et appeler la fonction updateMessageReadStatus pour marquer les messages comme lus*/
   };
 
@@ -142,7 +144,7 @@ const AlertMessage = () => {
               src="../../../icone/envelope_icon_red_white.png"
               alt="Enveloppe Rouge"
             />
-            <p>Nouveaux messages de :</p>
+            <p style={{marginBottom:"0.6rem"}}>Nouveaux messages de :</p>
             {authors.map(([author, messages]) => (
               <div key={author}>
                 <div>

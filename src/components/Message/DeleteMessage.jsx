@@ -7,19 +7,24 @@ import { AuthContext } from "../../store/AuthProvider";
 
 // Props { tweet } pour transmettre aux lignes ci-dessous les données venant du composant parent DeleteTweet
 // props setDeleteNow, on change la valeur de deleteNow ici et ça va déclencher un useEffect dans le composant parent ListTweet
-export default function DeleteMessage({ data, setDeleteNow}) {
+export default function DeleteMessage({ data, setDeleteNow }) {
   const [loading, setLoading] = useState(false); // Pour afficher l'icone de chargement
   const { user } = useContext(AuthContext);
 
-  const onDeleteThisTweet = async () => { console.log("Tu as cliqué sur la croix pour supprimer le message. Et l'identifiant de message est : ", data.id)
+  const onDeleteThisTweet = async () => {
+    console.log(
+      "Tu as cliqué sur la croix pour supprimer le message. Et l'identifiant de message est : ",
+      data.id
+    );
     // Delete
-    if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) { // Vérification
+    if (window.confirm("Voulez-vous vraiment supprimer ce tweet ?")) {
+      // Vérification
       setLoading(true);
 
       // Supprimer cette donnée de la base de données Firebase
       const response = await fetch(
-// Les données tweet sont transmises par la props tweet plus haut. On utilise l'id inclus dans tweet pour identifer le tweet qui sera supprimé
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/conversation/${data.id}.json`,
+        // Les données tweet sont transmises par la props tweet plus haut. On utilise l'id inclus dans tweet pour identifer le tweet qui sera supprimé
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/conversation/${data.id}.json`,
         {
           method: "DELETE", // Méthode pour supprimer le tweet sélectionné juste au dessus
           headers: {
@@ -39,16 +44,15 @@ export default function DeleteMessage({ data, setDeleteNow}) {
     }
     //console.log(`user.email `, user.email)
   };
-  return(
+  return (
     <>
-    <div>
+      <div>
         {user && user.email === data.from ? (
           <div className="buttonDeleteMessage" onClick={onDeleteThisTweet}>
             &#10006;
           </div>
-            ) : null 
-          }
+        ) : null}
       </div>
     </>
-  ) 
+  );
 }

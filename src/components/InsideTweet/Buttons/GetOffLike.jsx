@@ -50,7 +50,7 @@ export default function Liked(props) {
       };
 
       const change = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList/${idOfConnectedUser}.json`,
         {
           method: "PUT", // La méthode PUT pour POSER de nouvelles données
           headers: {
@@ -70,11 +70,11 @@ export default function Liked(props) {
     /* -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- -- --- -- */
     // PARTIE 2
 
-   // console.log("Fonction likeThisTweet appelée");
+    // console.log("Fonction likeThisTweet appelée");
 
     // Récupère la valeur de likedCounter dans Firebase
     const response = await fetch(
-      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}/likedCounter.json`
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}/likedCounter.json`
     );
     const currentLikedCounter = await response.json();
 
@@ -83,7 +83,7 @@ export default function Liked(props) {
 
     // Envoi de la requête PUT pour remplacer la valeur dans Firebase
     const putResponse = await fetch(
-      `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}/likedCounter.json`,
+      `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/tweetList/${tweet.id}/likedCounter.json`,
       {
         method: "PUT",
         headers: {
@@ -97,7 +97,7 @@ export default function Liked(props) {
       const errorBody = await putResponse.json();
       console.error("Error:", errorBody.error);
     } else {
-     // console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
+      // console.log("Je décrémente LikedCounter dans le tweet : " + tweet.title);
     }
     props.requete();
   };
@@ -106,12 +106,16 @@ export default function Liked(props) {
       {user ? (
         <>
           {preventLikedList.includes(tweet.id) ? (
-            <div onClick={unlikeThisTweet} className="red_like" title="Je n'aime plus ce tweet"></div>
+            <div
+              onClick={unlikeThisTweet}
+              className="red_like"
+              title="Je n'aime plus ce tweet"
+            ></div>
           ) : (
             <img
               onClick={likeThisTweet}
               className="empty_like"
-              src="../../../icone/empty_red.png"              
+              src="../../../icone/empty_red.png"
             />
           )}
         </>

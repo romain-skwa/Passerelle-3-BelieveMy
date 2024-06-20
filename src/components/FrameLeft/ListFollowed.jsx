@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 // Page où l'utilisateur peut voir tous les auteurs qu'il suit et les tweets de ces auteurs
 export default function ListFollowed() {
   // Variable
-  const { followListOfConnectedUser, changeAuthorPage } = useContext(AuthContext);
+  const { followListOfConnectedUser, changeAuthorPage } =
+    useContext(AuthContext);
   //console.log(`Contenu de followListOfConnectedUser `,followListOfConnectedUser);
   const [loading, setLoading] = useState(false);
   const [listeFollow, setListeFollow] = useState([]);
@@ -20,7 +21,7 @@ export default function ListFollowed() {
 
       // Dans la variable const donneesRecueillies, on va stocker le contenu récupéré sur Firebase
       const donneesRecueillies = await fetch(
-        `https://secours-belivemy-projet-3-default-rtdb.europe-west1.firebasedatabase.app/userList.json`,
+        `https://projet-passerelle-3-believemy-default-rtdb.europe-west1.firebasedatabase.app/userList.json`,
         {
           method: "GET",
           headers: {
@@ -66,7 +67,7 @@ export default function ListFollowed() {
 
   return (
     <section className="conversationWith">
-      Les auteurs que vous suivez :
+      <p style={{marginBottom:"0.5rem"}}>Les auteurs que vous suivez :</p>
       {/* Bloc pour afficher seulement les noms des auteurs suivis */}
       {tweetsAuteursSuivis && tweetsAuteursSuivis.length > 0 ? (
         <ul>
@@ -76,7 +77,11 @@ export default function ListFollowed() {
               key={author.id}
               style={{ textTransform: "capitalize" }}
             >
-              <Link to={`/AuthorPage/${author.id}`} onClick={() => changeAuthorPage(true)} className="LinkListFollowed">
+              <Link
+                to={`/AuthorPage/${author.id}`}
+                onClick={() => changeAuthorPage(true)}
+                className="LinkListFollowed"
+              >
                 {author.pseudonymUser}
               </Link>
             </li>
