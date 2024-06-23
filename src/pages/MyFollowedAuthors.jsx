@@ -198,7 +198,7 @@ export default function MyFollowedAuthors() {
                   </div>
 
                   {/************* Ecrit par ****************************/}
-                  <div>
+                  <div className="dateOfTweet">
                     Écrit par <GetAuthorTweet tweet={tweet} /* PSEUDONYME */ />
                     {tweet.datePublication
                       ? ", le " + tweet.datePublication

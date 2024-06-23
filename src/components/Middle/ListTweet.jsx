@@ -208,7 +208,7 @@ export default function ListTweet(props) {
                     ? ", le " + tweet.datePublication
                     : " Nous n'avons pas de date concernant ce tweet."}
                   {tweet.hourPublication ? " à " + tweet.hourPublication : null}
-                  .{tweet.modified /* MENTION "MODIFIÉE" éventuelle */}
+                  .{tweet.modified /* MENTION "MODIFIÉE" éventuellev */}
                 </div>
 
                 {/* J'envoie les props, les propriétés dans ce composant.
